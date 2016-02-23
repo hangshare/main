@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\User;
 use Yii;
 use yii\base\Model;
 
@@ -76,7 +77,7 @@ class LoginForm extends Model {
      */
     public function getUser() {
         if ($this->_user === false) {
-            $this->_user = \frontend\models\User::find()->select(['id', 'email', 'name', 'password_hash'])->where('email = :email', [':email' => strtolower($this->username)])->one();
+            $this->_user = User::find()->select(['id', 'email', 'name', 'password_hash'])->where('email = :email', [':email' => strtolower($this->username)])->one();
         }
 
         return $this->_user;
