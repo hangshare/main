@@ -1,6 +1,4 @@
 <?php
-$user = \app\models\User::find()->select(['plan'])->where('id = :id', [':id' => Yii::$app->user->id])->one();
-
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Url;
@@ -32,7 +30,7 @@ if (Yii::$app->user->isGuest) {
         'options' => ['class' => 'add-post']
     ];
 
-    if ($user->plan) {
+    if (Yii::$app->user->plan) {
         $menuItems_right[] = [
             'label' => '<span class="addd"><i class="glyphicon glyphicon-star userplan gold"></i>معلومات حسابك الذهبي </span>',
             'url' => '/user/gold',

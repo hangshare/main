@@ -39,8 +39,6 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => $canonical]);
         <link href="/assets/eb8da323/css/bootstrap.min.css" rel="stylesheet">
         <link href="/css/site.min.css" rel="stylesheet">
         <link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">-->
-      
-       
         <script>
             (function (i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;
@@ -56,7 +54,6 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => $canonical]);
 
             ga('create', 'UA-68983967-1', 'auto');
             ga('send', 'pageview');
-
         </script>
         <!-- Facebook Pixel Code -->
         <script>

@@ -1,6 +1,4 @@
-<?php
-use kartik\alert\Alert;
-?>
+<?php use kartik\alert\Alert; ?>
 <?php
 $this->beginContent('@app/views/layouts/htmlhead.php');
 $this->endContent();
@@ -9,7 +7,12 @@ $this->endContent();
 $this->beginContent('@app/views/layouts/header.php');
 $this->endContent();
 ?>
-<?= Alert::widget() ?>
+<?php
+
+if(count(Yii::$app->getSession()->getAllFlashes())> 0){
+    echo Alert::widget();
+}
+?>
 <div class="main">
     <?= $content ?>
 </div>

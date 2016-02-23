@@ -9,7 +9,11 @@ $this->endContent();
 $this->beginContent('@app/views/layouts/header.php');
 $this->endContent();
 ?>
-<?= Alert::widget() ?>
+<?php
+if(count(Yii::$app->getSession()->getAllFlashes())> 0) {
+    echo Alert::widget();
+}
+?>
 <div class="main">
     <?= $content ?>
 </div>

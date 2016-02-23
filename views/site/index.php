@@ -37,11 +37,11 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
         </div>
         <div class="signuppost">
             <?php
-            if (Yii::$app->user->isGuest) {
-                echo Html::a('سجل الآن', ['//site/plan'], ['class' => 'btn btn-success btn-big']);
-            } else {
-                echo Html::a('انشر موضوع', ['//explore/post'], ['class' => 'btn btn-success btn-big']);
-            }
+//            if (Yii::$app->user->isGuest) {
+//                echo Html::a('سجل الآن', ['//site/plan'], ['class' => 'btn btn-success btn-big']);
+//            } else {
+//                echo Html::a('انشر موضوع', ['//explore/post'], ['class' => 'btn btn-success btn-big']);
+//            }
             ?>
         </div>
 
@@ -56,7 +56,7 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
         <div class = "postsho">
             <?=
             ListView::widget([
-                'dataProvider' => $featured,
+                    'dataProvider' => $featured,
                 'itemView' => '_post',
                 'layout' => "{items}",
                 'options' => [

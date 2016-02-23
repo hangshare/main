@@ -4,9 +4,9 @@ use yii\helpers\Html;
 
 $width = 500;
 $height = 350;
-if (isset($model->post)) {
-    $model = $model->post;
-}
+//if (isset($model) && isset($model->post)) {
+//    $model = $model->post;
+//}
 if (Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index') {
     $home = true;
     $width = 400;
