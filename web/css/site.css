@@ -11,7 +11,6 @@ figcaption,
 figure,
 footer,
 header,
-hgroup,
 main,
 nav,
 section,
@@ -39,7 +38,7 @@ summary {
 }
 #quick-signup-post::before {
     content: "";
-    background-image: url("/static/img/aff-intro.jpg");    
+    background-image: url("../static/aff-intro.jpg");
     opacity: 0.35;
     top: 0;
     left: 0;
@@ -1083,7 +1082,6 @@ address {
 }
 
 code,
-kdb,
 pre,
 samp {
     font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
