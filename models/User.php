@@ -7,6 +7,7 @@ use app\models\UserSettings;
 use app\models\UserStats;
 use app\models\Country;
 use app\components\AwsEmail;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "user".
@@ -15,7 +16,6 @@ use app\components\AwsEmail;
  * @property string $name
  * @property string $email
  * @property string $image
- * @property string $paypal_email
  * @property string $password_hash
  * @property integer $gender
  * @property integer $country
@@ -28,7 +28,8 @@ use app\components\AwsEmail;
  * @property UserStats $userStats
  * @property UserTransactions[] $userTransactions
  */
-class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
+class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
+{
 
     public $password, $password_re, $password_old, $password_new, $year, $day, $month;
 
@@ -36,21 +37,20 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
     const STATUS_ACTIVE = 10;
 
     public $auth_key, $username;
-    private $_model;
-
-//    public $country;
 
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'user';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['name', 'email', 'gender', 'month', 'day', 'year', 'country'], 'required'],
             [['password'], 'required', 'on' => 'signup'],
@@ -59,22 +59,22 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
             [['gender', 'plan', 'country', 'transfer_type'], 'integer'],
             [['dob', 'created_at', 'phone', 'password', 'scId', 'bio', 'plan', 'country', 'transfer_type'], 'safe'],
             [['name', 'email'], 'string', 'max' => 50],
-            [['paypal_email'], 'email'],
+
             [['image', 'bio'], 'string', 'max' => 250],
-            [['email', 'paypal_email', 'password_hash'], 'unique', 'targetAttribute' => ['email', 'paypal_email', 'password_hash'], 'message' => 'The combination of Email, Paypal Email and Password Hash has already been taken.']
+            [['email', 'password_hash'], 'unique', 'targetAttribute' => ['email', 'password_hash'], 'message' => 'The combination of Email, Paypal Email and Password Hash has already been taken.']
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'الإسم'),
             'email' => Yii::t('app', 'البريد الإلكتروني'),
             'image' => Yii::t('app', 'الصورة الشخصية'),
-            'paypal_email' => Yii::t('app', ' البريد الالكتروني الخاص بحساب  Paypal'),
             'password_hash' => Yii::t('app', 'Password Hash'),
             'password' => 'كلمة المرور',
             'password_new' => 'كلمة المرور',
@@ -92,11 +92,12 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
         ];
     }
 
-    public function afterFind() {
+    public function afterFind()
+    {
         parent::afterFind();
         $time = strtotime($this->dob);
         $this->day = date('d', $time);
-        $this->month = (int) date('m', $time);
+        $this->month = (int)date('m', $time);
         $this->year = date('Y', $time);
         return true;
     }
@@ -104,14 +105,22 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
     /**
      * @inheritdoc
      */
-    public static function findIdentity($id) {
-        return static::findOne(['id' => $id]);
+    public static function findIdentity($id)
+    {
+        $model = Yii::$app->session->get('user-' . $id);
+        if ($model === false) {
+            $model = static::find()->where(['id' => $id])
+                ->select('id,plan,name,email,image,transfer_type,type, verification');
+            Yii::$app->session->set('user-' . $id, $model);
+        }
+        return $model;
     }
 
     /**
      * @inheritdoc
      */
-    public static function findIdentityByAccessToken($token, $type = null) {
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
         throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
     }
 
@@ -121,7 +130,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
      * @param string $username
      * @return static|null
      */
-    public static function findByUsername($username) {
+    public static function findByUsername($username)
+    {
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
     }
 
@@ -131,13 +141,14 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
      * @param string $token password reset token
      * @return static|null
      */
-    public static function findByPasswordResetToken($token) {
+    public static function findByPasswordResetToken($token)
+    {
         if (!static::isPasswordResetTokenValid($token)) {
             return null;
         }
 
         return static::findOne([
-                    'password_reset_token' => $token,
+            'password_reset_token' => $token,
         ]);
     }
 
@@ -147,34 +158,38 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
      * @param string $token password reset token
      * @return boolean
      */
-    public static function isPasswordResetTokenValid($token) {
+    public static function isPasswordResetTokenValid($token)
+    {
         if (empty($token)) {
             return false;
         }
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         $parts = explode('_', $token);
-        $timestamp = (int) end($parts);
+        $timestamp = (int)end($parts);
         return $timestamp + $expire >= time();
     }
 
     /**
      * @inheritdoc
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->getPrimaryKey();
     }
 
     /**
      * @inheritdoc
      */
-    public function getAuthKey() {
+    public function getAuthKey()
+    {
         return $this->auth_key;
     }
 
     /**
      * @inheritdoc
      */
-    public function validateAuthKey($authKey) {
+    public function validateAuthKey($authKey)
+    {
         return $this->getAuthKey() === $authKey;
     }
 
@@ -184,53 +199,59 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
      * @param string $password password to validate
      * @return boolean if password provided is valid for current user
      */
-    public function validatePassword($password) {
+    public function validatePassword($password)
+    {
         return Yii::$app->security->validatePassword($password, $this->password_hash);
-    }
-
-    /**
-     * Generates password hash from password and sets it to the model
-     *
-     * @param string $password
-     */
-    public function setPassword($password) {
-        //$this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
 
     /**
      * Generates "remember me" authentication key
      */
-    public function generateAuthKey() {
+    public function generateAuthKey()
+    {
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
 
     /**
      * Generates new password reset token
      */
-    public function generatePasswordResetToken() {
+    public function generatePasswordResetToken()
+    {
         $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
     }
 
     /**
      * Removes password reset token
      */
-    public function removePasswordResetToken() {
+    public function removePasswordResetToken()
+    {
         $this->password_reset_token = null;
     }
 
-    public function beforeSave($insert) {
+    public function beforeSave($insert)
+    {
         if ($insert) {
             $this->password_hash = sha1($this->password);
+
+            $this->transfer_type = 0;
+            $this->password_reset_token = sha1(time(). rand(2,200));
+            $this->scId = '';
+            $this->type = 1;
+            $this->plan = 0;
+
         }
+
         return parent::beforeSave($insert);
     }
 
-    public function afterSave($insert, $changedAttributes) {
+    public function afterSave($insert, $changedAttributes)
+    {
         if ($insert) {
             $settings = new UserSettings;
             $settings->userId = $this->id;
             $settings->newsletter = 1;
             $settings->key = md5(uniqid($this->id, true));
+            $settings->verified_email = 0;
             $settings->save();
             $stats = new UserStats;
             $stats->userId = $this->id;
@@ -239,6 +260,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
             $stats->total_amount = 0;
             $stats->available_amount = 0;
             $stats->cantake_amount = 0;
+            $stats->post_total_views = 0;
+            $stats->post_count = 0;
             $stats->save();
 
             AwsEmail::queueUser($this->id, 1, [
@@ -248,89 +271,54 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
         return parent::beforeSave($insert);
     }
 
-    function getFirstName() {
-        $user = $this->loadUser(Yii::app()->user->id);
-        return $user->firstname;
-    }
-
-    function getFullName() {
-        $user = $this->loadUser(Yii::app()->user->id);
-        return $user->fullName();
-    }
-
-    function getRole() {
-        $user = $this->loadUser(Yii::app()->user->id);
-        return $user->role;
-    }
-
-    function getPage() {
-        $user = $this->loadUser(Yii::app()->user->id);
-        return $user->pagination;
-    }
-
-    function getPasswordExpires() {
-        $user = $this->loadUser(Yii::app()->user->id);
-        return $user->checkExpiryDate();
-    }
-
-    function isAdmin() {
-        $user = $this->loadUser();
-        if ($user !== null)
-            return intval($user->role) == Users::ROLE_ADMIN;
-        else
-            return false;
-    }
-
-    protected function loadUser() {
-        if ($this->_model === null) {
-            if ($id !== null)
-                $this->_model = Users::model()->findByPk(Yii::app()->user->id);
-        }
-        return $this->_model;
-    }
-
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCurrentMethod() {
+    public function getCurrentMethod()
+    {
         return $this->hasOne(TransferMethod::className(), [
-                    'userId' => 'id',
-                    'type' => 'transfer_type'
+            'userId' => 'id',
+            'type' => 'transfer_type'
         ]);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPosts() {
-        return $this->hasMany(Post::className(), ['userId' => 'id']);
+    public function getPosts()
+    {
+        return $this->hasMany(Post::className(), ['userId' => 'id'])->select('id,title,cover');
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUserSettings() {
+    public function getUserSettings()
+    {
         return $this->hasOne(UserSettings::className(), ['userId' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUserStats() {
+    public function getUserStats()
+    {
         return $this->hasOne(UserStats::className(), ['userId' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getLocation() {
+    public function getLocation()
+    {
         return $this->hasOne(Country::className(), ['id' => 'country']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUserTransactions() {
+    public function getUserTransactions()
+    {
         return $this->hasMany(UserTransactions::className(), ['userId' => 'id']);
     }
 

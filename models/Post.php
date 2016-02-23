@@ -78,7 +78,8 @@ class Post extends \yii\db\ActiveRecord {
     public function beforeSave($insert) {
         if ($this->isNewRecord) {
             $this->userId = Yii::$app->user->id;
-            Yii::$app->db->createCommand('UPDATE `user_stats` SET `post_count`=`post_count`+1 WHERE `userId`=' . Yii::$app->user->identity->id)->query();
+
+            Yii::$app->db->createCommand('UPDATE `user_stats` SET `post_count`=`post_count`+1 WHERE `userId`=' . $this->userId)->query();
         }
         return true;
     }
@@ -216,7 +217,8 @@ class Post extends \yii\db\ActiveRecord {
         if ($featured === false) {
             $featured = Post::find()
                     ->where("type=0 AND cover <> '' AND featured = 1")
-                    ->orderBy('rand(),created_at desc')
+                    ->orderBy('sort desc')
+                    ->select('id,cover,title')
                     ->limit($limit)
                     ->all();
             Yii::$app->cache->set('featured-posts', $featured, 300);
@@ -230,6 +232,7 @@ class Post extends \yii\db\ActiveRecord {
             $most = Post::find()
                     ->where("cover <> ''")
                     ->joinWith(['postStats'])
+                    ->select('id,cover,title')
                     ->orderBy('post_stats.views desc')
                     ->limit($limit)
                     ->all();
@@ -242,14 +245,14 @@ class Post extends \yii\db\ActiveRecord {
      * @return \yii\db\ActiveQuery
      */
     public function getUser() {
-        return $this->hasOne(User::className(), ['id' => 'userId']);
+        return $this->hasOne(User::className(), ['id' => 'userId'])->select('id,name,image,bio');
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getPostBodies() {
-        return $this->hasMany(PostBody::className(), ['postId' => 'id']);
+        return $this->hasMany(PostBody::className(), ['postId' => 'id'])->select('body');
     }
 
     /**
