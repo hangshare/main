@@ -18,43 +18,43 @@ class AwsEmail extends Component {
     private static $__secretKey = '9AAYUIryfs/Z+z7v1GHWy5xuv9jnbh1qLQSYr7/W';
 
     public static function SendMail($to, $subject, $body, $from = 'info@hangshare.com') {
-//        var_dump($to, $subject, $body, $from);
-//        die();
-        $client = SesClient::factory(array(
-                    'credentials' => array(
-                        'key' => self::$__accessKey,
-                        'secret' => self::$__secretKey,
-                    ),
-                    'region' => 'us-east-1',
-                    'version' => '2010-12-01'
-        ));
-        try {
-            $client->sendEmail(array(
-                'Source' => "HangShare.com <info@hangshare.com>",
-                'Destination' => array(
-                    'ToAddresses' => array($to)
+        if(! YII_DEBUG) {
+            $client = SesClient::factory(array(
+                'credentials' => array(
+                    'key' => self::$__accessKey,
+                    'secret' => self::$__secretKey,
                 ),
-                'Message' => array(
-                    'Subject' => array(
-                        'Data' => $subject,
-                        'Charset' => 'UTF-8',
-                    ),
-                    'Body' => array(
-                        'Text' => array(
-                            'Data' => $body,
-                            'Charset' => 'UTF-8',
-                        ),
-                        'Html' => array(
-                            'Data' => $body,
-                            'Charset' => 'UTF-8',
-                        ),
-                    ),
-                ),
-                'ReplyToAddresses' => array($from),
-                'ReturnPath' => 'info@hangshare.com'
+                'region' => 'us-east-1',
+                'version' => '2010-12-01'
             ));
-        } catch (Exception $exc) {
-            print $exc->getTraceAsString() . chr(10);
+            try {
+                $client->sendEmail(array(
+                    'Source' => "HangShare.com <info@hangshare.com>",
+                    'Destination' => array(
+                        'ToAddresses' => array($to)
+                    ),
+                    'Message' => array(
+                        'Subject' => array(
+                            'Data' => $subject,
+                            'Charset' => 'UTF-8',
+                        ),
+                        'Body' => array(
+                            'Text' => array(
+                                'Data' => $body,
+                                'Charset' => 'UTF-8',
+                            ),
+                            'Html' => array(
+                                'Data' => $body,
+                                'Charset' => 'UTF-8',
+                            ),
+                        ),
+                    ),
+                    'ReplyToAddresses' => array($from),
+                    'ReturnPath' => 'info@hangshare.com'
+                ));
+            } catch (Exception $exc) {
+                print $exc->getTraceAsString() . chr(10);
+            }
         }
     }
 
@@ -74,6 +74,7 @@ class AwsEmail extends Component {
             $userEmail->userId = $userId;
             $userEmail->emailId = $type;
             $userEmail->key = $key;
+            $userEmail->opened_at = 0;
             $userEmail->save();
             $params['__user_name__ '] = $name;
             $body = strtr($email->body, $params);
