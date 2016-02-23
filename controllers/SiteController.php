@@ -151,11 +151,13 @@ class SiteController extends Controller {
 
     public function actionIndex() {
         $pageSize = 16;
-        $newpost = Yii::$app->cache->get('home-new-posts');
+        $newpost = Yii::$app->cache->get('home-new-postsa');
         if ($newpost === false) {
             $querypost = Post::find()
-                    ->where("type=0 AND cover <> ''")
-                    ->orderBy('id desc');
+                    ->where("post.type=0 AND post.cover <> ''")
+                    ->joinWith(['user'])
+                    ->select('post.id, cover,user.id as userId')
+                    ->orderBy('sort desc');
             $newpost = new ActiveDataProvider([
                 'query' => $querypost,
                 'pagination' => array(
@@ -184,15 +186,16 @@ class SiteController extends Controller {
             if ($featured === false) {
                 $queryfeatured = Post::find()
                         ->where("type=0 AND cover <> '' AND featured = 1")
+                        ->select('cover, title')
                         ->limit(21)
-                        ->orderBy('rand();');
+                        ->orderBy('sort desc');
                 $featured = new ActiveDataProvider([
                     'query' => $queryfeatured,
                     'pagination' => array('pageSize' => 21),
                 ]);
                 Yii::$app->cache->set('home-featured', $featured, 1500);
             }
-            $mostviewd = Post::mostViewed();
+            $mostviewd = Post::featured(4);
 
             return $this->render('index', [
                         'featured' => $featured,
@@ -201,38 +204,6 @@ class SiteController extends Controller {
             ]);
         }
     }
-
-//    public function actionDownload($id) {
-//        $country = array(
-//            'US', 'CN', 'JP', 'BR', 'DE', 'VN'
-//        );
-//
-//        $json = file_get_contents("http://ipinfo.io/{$_SERVER['REMOTE_ADDR']}");
-//        if (is_object($json)) {
-//            $details = json_decode($json);
-//            var_dump($details);
-//            die();
-//        }
-//        var_dump($json);
-//        die('asd');
-//
-//
-//        $imageFile = Yii::$app->basePath . '/../../media/user/';
-//        $users = User::find("scId != '' AND id > {$id}")
-//                ->orderBy('id desc')
-//                ->limit(30)
-//                ->all();
-//        foreach ($users as $user) {
-//            if (!is_file($imageFile . $user->image)) {
-//                $image = preg_replace('/(\d{4})-(\d{2})-(\d{2})$/', '', $user->name) . '.jpg';
-//                $imUrl = $imageFile . $image;
-//                $url = "http://graph.facebook.com/{$user->scId}/picture?type=large";
-//                $imagecontent = file_get_contents($url);
-//                $re = file_put_contents($imUrl, $imagecontent);
-//                echo $imUrl . '<br>';
-//            }
-//        }
-//    }
 
     public function actionFacebook() {
         session_start();
