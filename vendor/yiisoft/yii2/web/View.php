@@ -102,6 +102,8 @@ class View extends \yii\base\View
      * @see registerMetaTag()
      */
     public $metaTags;
+    public $description;
+    public $ogImage;
     /**
      * @var array the registered link tags.
      * @see registerLinkTag()
