@@ -90,6 +90,16 @@ class PHPExcel_Shared_String
 	 */
 	private static $_isIconvEnabled;
 
+	public static function buildCharacterSets()
+	{
+		if (empty(self::$_controlCharacters)) {
+			self::_buildControlCharacters();
+		}
+		if (empty(self::$_SYLKCharacters)) {
+			self::_buildSYLKCharacters();
+		}
+	}
+
 	/**
 	 * Build control characters array
 	 */
@@ -269,20 +279,63 @@ class PHPExcel_Shared_String
 	}
 
 	/**
-	 * Get whether mbstring extension is available
+	 * Convert from OpenXML escaped control character to PHP control character
 	 *
-	 * @return boolean
+	 * Excel 2007 team:
+	 * ----------------
+	 * That's correct, control characters are stored directly in the shared-strings table.
+	 * We do encode characters that cannot be represented in XML using the following escape sequence:
+	 * _xHHHH_ where H represents a hexadecimal character in the character's value...
+	 * So you could end up with something like _x0008_ in a string (either in a cell value (<v>)
+	 * element or in the shared string <t> element.
+	 *
+	 * @param    string $value Value to unescape
+	 * @return    string
 	 */
-	public static function getIsMbstringEnabled()
+	public static function ControlCharacterOOXML2PHP($value = '')
 	{
-		if (isset(self::$_isMbstringEnabled)) {
-			return self::$_isMbstringEnabled;
+		return str_replace(array_keys(self::$_controlCharacters), array_values(self::$_controlCharacters), $value);
+	}
+
+	/**
+	 * Convert from PHP control character to OpenXML escaped control character
+	 *
+	 * Excel 2007 team:
+	 * ----------------
+	 * That's correct, control characters are stored directly in the shared-strings table.
+	 * We do encode characters that cannot be represented in XML using the following escape sequence:
+	 * _xHHHH_ where H represents a hexadecimal character in the character's value...
+	 * So you could end up with something like _x0008_ in a string (either in a cell value (<v>)
+	 * element or in the shared string <t> element.
+	 *
+	 * @param    string $value Value to escape
+	 * @return    string
+	 */
+	public static function ControlCharacterPHP2OOXML($value = '')
+	{
+		return str_replace(array_values(self::$_controlCharacters), array_keys(self::$_controlCharacters), $value);
+	}
+
+	/**
+	 * Try to sanitize UTF8, stripping invalid byte sequences. Not perfect. Does not surrogate characters.
+	 *
+	 * @param string $value
+	 * @return string
+	 */
+	public static function SanitizeUTF8($value)
+	{
+		if (self::getIsIconvEnabled()) {
+			$value = @iconv('UTF-8', 'UTF-8', $value);
+			return $value;
 		}
 
-		self::$_isMbstringEnabled = function_exists('mb_convert_encoding') ?
-			true : false;
+		if (self::getIsMbstringEnabled()) {
+			$value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
+			return $value;
+		}
 
-		return self::$_isMbstringEnabled;
+		// else, no conversion
+		return $value;
 	}
 
 	/**
@@ -329,71 +382,21 @@ class PHPExcel_Shared_String
 		return true;
 	}
 
-	public static function buildCharacterSets() {
-		if(empty(self::$_controlCharacters)) {
-			self::_buildControlCharacters();
-		}
-		if(empty(self::$_SYLKCharacters)) {
-			self::_buildSYLKCharacters();
-		}
-	}
-
 	/**
-	 * Convert from OpenXML escaped control character to PHP control character
+	 * Get whether mbstring extension is available
 	 *
-	 * Excel 2007 team:
-	 * ----------------
-	 * That's correct, control characters are stored directly in the shared-strings table.
-	 * We do encode characters that cannot be represented in XML using the following escape sequence:
-	 * _xHHHH_ where H represents a hexadecimal character in the character's value...
-	 * So you could end up with something like _x0008_ in a string (either in a cell value (<v>)
-	 * element or in the shared string <t> element.
-	 *
-	 * @param 	string	$value	Value to unescape
-	 * @return 	string
+	 * @return boolean
 	 */
-	public static function ControlCharacterOOXML2PHP($value = '') {
-		return str_replace( array_keys(self::$_controlCharacters), array_values(self::$_controlCharacters), $value );
-	}
-
-	/**
-	 * Convert from PHP control character to OpenXML escaped control character
-	 *
-	 * Excel 2007 team:
-	 * ----------------
-	 * That's correct, control characters are stored directly in the shared-strings table.
-	 * We do encode characters that cannot be represented in XML using the following escape sequence:
-	 * _xHHHH_ where H represents a hexadecimal character in the character's value...
-	 * So you could end up with something like _x0008_ in a string (either in a cell value (<v>)
-	 * element or in the shared string <t> element.
-	 *
-	 * @param 	string	$value	Value to escape
-	 * @return 	string
-	 */
-	public static function ControlCharacterPHP2OOXML($value = '') {
-		return str_replace( array_values(self::$_controlCharacters), array_keys(self::$_controlCharacters), $value );
-	}
-
-	/**
-	 * Try to sanitize UTF8, stripping invalid byte sequences. Not perfect. Does not surrogate characters.
-	 *
-	 * @param string $value
-	 * @return string
-	 */
-	public static function SanitizeUTF8($value)
+	public static function getIsMbstringEnabled()
 	{
-		if (self::getIsIconvEnabled()) {
-			$value = @iconv('UTF-8', 'UTF-8', $value);
-			return $value;
+		if (isset(self::$_isMbstringEnabled)) {
+			return self::$_isMbstringEnabled;
 		}
 
-		if (self::getIsMbstringEnabled()) {
-			$value = mb_convert_encoding($value, 'UTF-8', 'UTF-8');
-			return $value;
-		}
+		self::$_isMbstringEnabled = function_exists('mb_convert_encoding') ?
+				true : false;
 
-		// else, no conversion
-		return $value;
+		return self::$_isMbstringEnabled;
 	}
 
 	/**
@@ -457,29 +460,24 @@ class PHPExcel_Shared_String
 	}
 
 	/**
-	 * Converts a UTF-8 string into BIFF8 Unicode string data (16-bit string length)
-	 * Writes the string using uncompressed notation, no rich text, no Asian phonetics
-	 * If mbstring extension is not available, ASCII is assumed, and compressed notation is used
-	 * although this will give wrong results for non-ASCII strings
-	 * see OpenOffice.org's Documentation of the Microsoft Excel File Format, sect. 2.5.3
+	 * Get character count. First try mbstring, then iconv, finally strlen
 	 *
-	 * @param string $value UTF-8 encoded string
-	 * @return string
+	 * @param string $value
+	 * @param string $enc Encoding
+	 * @return int Character count
 	 */
-	public static function UTF8toBIFF8UnicodeLong($value)
+	public static function CountCharacters($value, $enc = 'UTF-8')
 	{
-		// character count
-		$ln = self::CountCharacters($value, 'UTF-8');
+		if (self::getIsMbstringEnabled()) {
+			return mb_strlen($value, $enc);
+		}
 
-		// option flags
-		$opt = (self::getIsIconvEnabled() || self::getIsMbstringEnabled()) ?
-			0x0001 : 0x0000;
+		if (self::getIsIconvEnabled()) {
+			return iconv_strlen($value, $enc);
+		}
 
-		// characters
-		$chars = self::ConvertEncoding($value, 'UTF-16LE', 'UTF-8');
-
-		$data = pack('vC', $ln, $opt) . $chars;
-		return $data;
+		// else strlen
+		return strlen($value);
 	}
 
 	/**
@@ -541,24 +539,29 @@ class PHPExcel_Shared_String
 	}
 
 	/**
-	 * Get character count. First try mbstring, then iconv, finally strlen
+	 * Converts a UTF-8 string into BIFF8 Unicode string data (16-bit string length)
+	 * Writes the string using uncompressed notation, no rich text, no Asian phonetics
+	 * If mbstring extension is not available, ASCII is assumed, and compressed notation is used
+	 * although this will give wrong results for non-ASCII strings
+	 * see OpenOffice.org's Documentation of the Microsoft Excel File Format, sect. 2.5.3
 	 *
-	 * @param string $value
-	 * @param string $enc Encoding
-	 * @return int Character count
+	 * @param string $value UTF-8 encoded string
+	 * @return string
 	 */
-	public static function CountCharacters($value, $enc = 'UTF-8')
+	public static function UTF8toBIFF8UnicodeLong($value)
 	{
-		if (self::getIsMbstringEnabled()) {
-			return mb_strlen($value, $enc);
-		}
+		// character count
+		$ln = self::CountCharacters($value, 'UTF-8');
 
-		if (self::getIsIconvEnabled()) {
-			return iconv_strlen($value, $enc);
-		}
+		// option flags
+		$opt = (self::getIsIconvEnabled() || self::getIsMbstringEnabled()) ?
+				0x0001 : 0x0000;
 
-		// else strlen
-		return strlen($value);
+		// characters
+		$chars = self::ConvertEncoding($value, 'UTF-16LE', 'UTF-8');
+
+		$data = pack('vC', $ln, $opt) . $chars;
+		return $data;
 	}
 
 	/**
