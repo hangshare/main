@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use app\models\User;
 use Yii;
 use yii\base\Model;
 
@@ -52,33 +51,6 @@ class LoginForm extends Model
     }
 
     /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'username' => Yii::t('app', 'البريد الإلكتروني'),
-            'password' => Yii::t('app', 'كلمة المرور'),
-            'rememberMe' => Yii::t('app', 'تذكرني في المرة القادمة'),
-        ];
-    }
-
-
-    /**
-     * Logs in a user using the provided username and password.
-     *
-     * @return boolean whether the user is logged in successfully
-     */
-    public function login()
-    {
-        if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Finds user by [[username]]
      *
      * @return User|null
@@ -90,6 +62,32 @@ class LoginForm extends Model
         }
 
         return $this->_user;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => Yii::t('app', 'البريد الإلكتروني'),
+            'password' => Yii::t('app', 'كلمة المرور'),
+            'rememberMe' => Yii::t('app', 'تذكرني في المرة القادمة'),
+        ];
+    }
+
+    /**
+     * Logs in a user using the provided username and password.
+     *
+     * @return boolean whether the user is logged in successfully
+     */
+    public function login()
+    {
+        if ($this->validate()) {
+            return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
+        } else {
+            return false;
+        }
     }
 
 }

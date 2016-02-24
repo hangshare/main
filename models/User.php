@@ -2,12 +2,8 @@
 
 namespace app\models;
 
-use Yii;
-use app\models\UserSettings;
-use app\models\UserStats;
-use app\models\Country;
 use app\components\AwsEmail;
-use yii\web\IdentityInterface;
+use Yii;
 
 /**
  * This is the model class for table "user".
@@ -31,11 +27,13 @@ use yii\web\IdentityInterface;
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
-    public $password, $password_re, $password_old, $password_new, $year, $day, $month;
-
     const STATUS_DELETED = 0;
+//    public $enableSession = true;
+//    private static $users = [];
+//    private $_user = false;
+//    public $rememberMe = true;
     const STATUS_ACTIVE = 10;
-
+    public $password, $password_re, $password_old, $password_new, $year, $day, $month;
     public $auth_key, $username;
 
     /**
@@ -44,6 +42,73 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public static function tableName()
     {
         return 'user';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentity($id)
+    {
+        $model = Yii::$app->session->get('user-' . $id);
+        if ($model === false) {
+            $model = static::find()->where(['id' => $id])
+                ->select('id,plan,name,email,image,transfer_type,type, verification');
+            Yii::$app->session->set('user-' . $id, $model);
+        }
+        return new static($model);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+    }
+
+    /**
+     * Finds user by username
+     *
+     * @param string $username
+     * @return static|null
+     */
+    public static function findByUsername($username)
+    {
+        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    /**
+     * Finds user by password reset token
+     *
+     * @param string $token password reset token
+     * @return static|null
+     */
+    public static function findByPasswordResetToken($token)
+    {
+        if (!static::isPasswordResetTokenValid($token)) {
+            return null;
+        }
+
+        return static::findOne([
+            'password_reset_token' => $token,
+        ]);
+    }
+
+    /**
+     * Finds out if password reset token is valid
+     *
+     * @param string $token password reset token
+     * @return boolean
+     */
+    public static function isPasswordResetTokenValid($token)
+    {
+        if (empty($token)) {
+            return false;
+        }
+        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
+        $parts = explode('_', $token);
+        $timestamp = (int)end($parts);
+        return $timestamp + $expire >= time();
     }
 
     /**
@@ -105,73 +170,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     /**
      * @inheritdoc
      */
-    public static function findIdentity($id)
-    {
-        $model = Yii::$app->session->get('user-' . $id);
-        if ($model === false) {
-            $model = static::find()->where(['id' => $id])
-                ->select('id,plan,name,email,image,transfer_type,type, verification');
-            Yii::$app->session->set('user-' . $id, $model);
-        }
-        return $model;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
-    }
-
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
-    {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
-    }
-
-    /**
-     * Finds user by password reset token
-     *
-     * @param string $token password reset token
-     * @return static|null
-     */
-    public static function findByPasswordResetToken($token)
-    {
-        if (!static::isPasswordResetTokenValid($token)) {
-            return null;
-        }
-
-        return static::findOne([
-            'password_reset_token' => $token,
-        ]);
-    }
-
-    /**
-     * Finds out if password reset token is valid
-     *
-     * @param string $token password reset token
-     * @return boolean
-     */
-    public static function isPasswordResetTokenValid($token)
-    {
-        if (empty($token)) {
-            return false;
-        }
-        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
-        $parts = explode('_', $token);
-        $timestamp = (int)end($parts);
-        return $timestamp + $expire >= time();
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getId()
     {
         return $this->getPrimaryKey();
@@ -180,17 +178,17 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     /**
      * @inheritdoc
      */
-    public function getAuthKey()
+    public function validateAuthKey($authKey)
     {
-        return $this->auth_key;
+        return $this->getAuthKey() === $authKey;
     }
 
     /**
      * @inheritdoc
      */
-    public function validateAuthKey($authKey)
+    public function getAuthKey()
     {
-        return $this->getAuthKey() === $authKey;
+        return $this->auth_key;
     }
 
     /**
