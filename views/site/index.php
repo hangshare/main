@@ -20,7 +20,7 @@ use yii\widgets\ListView;
 use yii\data\ArrayDataProvider;
 
 $this->title = Yii::t('app', 'هانج - Share - شير مقالات واحصل على المال');
-$this->description =  'احصل على المال مقابل كل مشاهدة على المقالات التي تقوم بنشرها من خلال الباي بال ومشاركة مقالاتك عبر الفيسبوك ومواقع التواصل الأخرى.';
+$this->description = Yii::t('app', 'احصل على المال مقابل كل مشاهدة على المقالات التي تقوم بنشرها من خلال الباي بال ومشاركة مقالاتك عبر الفيسبوك ومواقع التواصل الأخرى.');
 ?>
 <section id="quick-signup-post">
     <div class="container">
