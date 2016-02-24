@@ -1,5 +1,4 @@
 ﻿<?php
-
 $params = require(__DIR__ . '/params.php');
 
 $config = [
@@ -46,19 +45,18 @@ $config = [
             ],
         ],
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'aswdsdcwwa',
+            'cookieValidationKey' => 'adsaew2343a',
         ],
-        'cache' => [
-            'class' => 'yii\caching\MemCache',
-            'servers' => [
-                [
-                    'host' => 'localhost',
-                    'port' => 11211,
-                    'weight' => 100,
-                ],
-            ],
-        ],
+//        'cache' => [
+//            'class' => 'yii\caching\MemCache',
+//            'servers' => [
+//                [
+//                    'host' => 'localhost',
+//                    'port' => 11212,
+//                    'weight' => 100,
+//                ],
+//            ],
+//        ],
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
@@ -80,13 +78,12 @@ $config = [
             'dsn' => 'mysql:host=main.cdb3bm2h7j5j.us-east-1.rds.amazonaws.com;port=3306;dbname=hangshare',
             'username' => 'hangshare',
             'password' => 'Khaled!23',
-
 //            'dsn' => 'mysql:host=127.0.0.1;port=3306;dbname=hangshare',
 //            'username' => 'root',
 //            'password' => '',
-            'enableSchemaCache' => true,
+//            'enableSchemaCache' => true,
 //            'schemaCache' => 'cache',
-            'schemaCacheDuration' => 3600,
+//            'schemaCacheDuration' => 3600,
             'charset' => 'utf8',
         ],
     ],
