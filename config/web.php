@@ -88,6 +88,7 @@ $config = [
 $config['bootstrap'][] = 'debug';
 $config['modules']['debug'] = [
     'class' => 'yii\debug\Module',
+    'allowedIPs' => ['127.0.0.1', $_SERVER['REMOTE_ADDR']]
 ];
 
 $config['bootstrap'][] = 'gii';
