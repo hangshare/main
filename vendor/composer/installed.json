@@ -1406,63 +1406,6 @@
         ]
     },
     {
-        "name": "facebook/php-sdk-v4",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/facebook/facebook-php-sdk-v4.git",
-            "reference": "4a57c249fdba2da26b3cebb00152791efb7d09fc"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/facebook/facebook-php-sdk-v4/zipball/4a57c249fdba2da26b3cebb00152791efb7d09fc",
-            "reference": "4a57c249fdba2da26b3cebb00152791efb7d09fc",
-            "shasum": ""
-        },
-        "require": {
-            "ext-mbstring": "*",
-            "php": ">=5.4.0"
-        },
-        "require-dev": {
-            "guzzlehttp/guzzle": "~5.0",
-            "mockery/mockery": "~0.8",
-            "phpunit/phpunit": "~4.0"
-        },
-        "suggest": {
-            "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client"
-        },
-        "time": "2016-01-22 20:42:27",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "5.x-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "Facebook\\": "src/Facebook/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Facebook Platform"
-        ],
-        "authors": [
-            {
-                "name": "Facebook",
-                "homepage": "https://github.com/facebook/facebook-php-sdk-v4/contributors"
-            }
-        ],
-        "description": "Facebook SDK for PHP",
-        "homepage": "https://github.com/facebook/facebook-php-sdk-v4",
-        "keywords": [
-            "facebook",
-            "sdk"
-        ]
-    },
-    {
         "name": "kartik-v/yii2-widget-alert",
         "version": "v1.1.0",
         "version_normalized": "1.1.0.0",
@@ -1512,6 +1455,63 @@
             "plugin",
             "widget",
             "yii2"
+        ]
+    },
+    {
+        "name": "facebook/php-sdk-v4",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/facebook/facebook-php-sdk-v4.git",
+            "reference": "4a57c249fdba2da26b3cebb00152791efb7d09fc"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/facebook/facebook-php-sdk-v4/zipball/4a57c249fdba2da26b3cebb00152791efb7d09fc",
+            "reference": "4a57c249fdba2da26b3cebb00152791efb7d09fc",
+            "shasum": ""
+        },
+        "require": {
+            "ext-mbstring": "*",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "guzzlehttp/guzzle": "~5.0",
+            "mockery/mockery": "~0.8",
+            "phpunit/phpunit": "~4.0"
+        },
+        "suggest": {
+            "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client"
+        },
+        "time": "2016-01-22 20:42:27",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "5.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Facebook\\": "src/Facebook/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Facebook Platform"
+        ],
+        "authors": [
+            {
+                "name": "Facebook",
+                "homepage": "https://github.com/facebook/facebook-php-sdk-v4/contributors"
+            }
+        ],
+        "description": "Facebook SDK for PHP",
+        "homepage": "https://github.com/facebook/facebook-php-sdk-v4",
+        "keywords": [
+            "facebook",
+            "sdk"
         ]
     }
 ]

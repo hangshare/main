@@ -17,7 +17,6 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    '<strong>Note:</strong> Please use an updated browser to view comments.' => '',
     'Download' => '',
     'Follow' => '',
     'Fork' => '',
@@ -25,10 +24,21 @@ return [
     'Please enable JavaScript on your browser to view the Facebook {pluginName} plugin correctly on this site.' => '',
     'Please enable JavaScript on your browser to view the Google {pluginName} plugin correctly on this site.' => '',
     'Please enable JavaScript on your browser to view the Twitter {pluginName} plugin correctly on this site.' => '',
-    'Please enable JavaScript on your browser to view the VKontakte {pluginName} plugin correctly on this site.' => '',
     'Please enable JavaScript to view the {pluginLink}.' => '',
     'Star' => '',
     'Watch' => '',
     'You must enable Javascript on your browser for the site to work optimally and display sections completely.' => '',
     'comments powered by Disqus' => '',
+    'Please enable JavaScript to view the {pluginLink}' => '@@@@',
+    'activity' => '@@@@',
+    'comments' => '@@@@',
+    'facepile' => '@@@@',
+    'follow' => '@@@@',
+    'like' => '@@@@',
+    'like-box' => '@@@@',
+    'post' => '@@@@',
+    'recommendations' => '@@@@',
+    'recommendations-bar' => '@@@@',
+    'send' => '@@@@',
+    'share-button' => '@@@@',
 ];

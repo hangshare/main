@@ -14,7 +14,7 @@ be parsed as a ICU date pattern. In order to pass a PHP Date format - prepend yo
 
 ## Why Date Control?
 
-> Version 1.9.2 has been released. Refer [CHANGE LOG](https://github.com/kartik-v/yii2-datecontrol/blob/master/CHANGE.md) for details.
+> Version 1.9.4 has been released. Refer [CHANGE LOG](https://github.com/kartik-v/yii2-datecontrol/blob/master/CHANGE.md) for details.
 
 When working with the great Yii Framework, one of the most common observations I had was the need to have a proper control on the date settings. The date settings for each 
 Yii application, are unique to each application and region. Most Yii developers or users almost always need an option of displaying date and time in ONE specific format, 
@@ -139,16 +139,16 @@ Read this [web tip /wiki](http://webtips.krajee.com/setting-composer-minimum-sta
 Either run
 
 ```
-$ php composer.phar require kartik-v/yii2-datecontrol "dev-master"
+$ php composer.phar require kartik-v/yii2-datecontrol "@dev"
 ```
 
 or add
 
 ```
-"kartik-v/yii2-datecontrol": "dev-master"
+"kartik-v/yii2-datecontrol": "@dev"
 ```
 
-to the ```require``` section of your `composer.json` file.
+to the `require` section of your `composer.json` file.
 
 ## Usage
 ```php
