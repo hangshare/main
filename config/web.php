@@ -52,8 +52,8 @@ $config = [
             'servers' => [
                 [
                     'host' => 'localhost',
-                    'port' => 11212,
-                    'weight' => 100,
+                    'port' => 11211,
+                    'weight' => 50,
                 ],
             ],
         ],
