@@ -2,6 +2,7 @@
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Url;
+
 ?>
 <?php
 $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current(['src' => null], true)]);
@@ -30,7 +31,7 @@ if (Yii::$app->user->isGuest) {
         'options' => ['class' => 'add-post']
     ];
 
-    if (Yii::$app->user->plan) {
+    if (isset(Yii::$app->user->plan) && Yii::$app->user->plan) {
         $menuItems_right[] = [
             'label' => '<span class="addd"><i class="glyphicon glyphicon-star userplan gold"></i>معلومات حسابك الذهبي </span>',
             'url' => '/user/gold',
