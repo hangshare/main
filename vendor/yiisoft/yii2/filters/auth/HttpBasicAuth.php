@@ -41,7 +41,7 @@ class HttpBasicAuth extends AuthMethod
      *
      * ```php
      * function ($username, $password) {
-     *     return \frontend\models\User::findOne([
+     *     return \app\models\User::findOne([
      *         'username' => $username,
      *         'password' => $password,
      *     ]);
