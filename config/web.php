@@ -22,7 +22,6 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                
                 '/' => 'site/index',
                 'sitemap.xml' => 'site/xml',
                 'مقالات' => 'explore/all',
@@ -38,7 +37,6 @@ $config = [
                 'نبذة-عنا' => 'site/privacy',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 'مقالات/<id:\d+>/<title:[^*]+>' => 'explore/view',
                 '<controller:\w+>s' => '<controller>/index',
@@ -49,6 +47,12 @@ $config = [
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
+        ],
+        'session' => [
+            'class' => 'yii\web\Session',
+            'cookieParams' => ['httponly' => true, 'lifetime' => 5184000],
+            'timeout' => 5184000,
+            'useCookies' => true,
         ],
         'user' => [
             'identityClass' => 'app\models\User',
@@ -74,9 +78,9 @@ $config = [
 //            'dsn' => 'mysql:host=127.0.0.1;port=3306;dbname=hangshare',
 //            'username' => 'root',
 //            'password' => '',
-//            'enableSchemaCache' => true,
-//            'schemaCache' => 'cache',
-//            'schemaCacheDuration' => 3600,
+            'enableSchemaCache' => true,
+            'schemaCache' => 'cache',
+            'schemaCacheDuration' => 3600,
             'charset' => 'utf8',
         ],
     ],

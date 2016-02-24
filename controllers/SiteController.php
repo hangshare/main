@@ -4,24 +4,22 @@ namespace app\controllers;
 
 require_once __DIR__ . '/../vendor/facebook/php-sdk-v4/src/Facebook/autoload.php';
 
-use Yii;
+use app\components\AwsEmail;
+use app\models\ContactForm;
 use app\models\LoginForm;
 use app\models\PasswordResetRequestForm;
+use app\models\Post;
 use app\models\ResetPasswordForm;
-use app\models\ContactForm;
+use app\models\User;
+use app\models\UserPayment;
+use Facebook;
+use Yii;
 use yii\base\InvalidParamException;
+use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use app\models\PostSearch;
-use app\models\User;
-use app\models\Post;
-use app\models\PostTag;
-use app\models\UserPayment;
-use app\components\AwsEmail;
-use yii\data\ActiveDataProvider;
-use Facebook;
 
 /**
  * Site controller
@@ -150,6 +148,10 @@ class SiteController extends Controller {
     }
 
     public function actionIndex() {
+//        var_dump(Yii::$app->user->identity);die();
+//        var_dump(Yii::$app->user->identity->id);
+//        var_dump(Yii::$app->user->isGuest);
+//        die();
         $pageSize = 16;
         $newpost = Yii::$app->cache->get('home-new-postsa');
         if ($newpost === false) {

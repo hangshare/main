@@ -2,15 +2,15 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\models\Post;
 use app\models\PostSearch;
+use Yii;
+use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
-use yii\filters\AccessControl;
-use yii\data\ActiveDataProvider;
 
 /**
  * PostController implements the CRUD actions for Post model.
@@ -303,8 +303,10 @@ class ExploreController extends Controller {
      * @return mixed
      */
     public function actionView($id) {
+
+//        var_dump(Yii::$app->user->id);die();
+
         $model = $this->findModel($id);
-//        Yii::$app->hitcounter->addHit($model->id, $model->userId, $model->user->plan);
         $mostviewd = Post::mostViewed();
         $this->view->params['next'] = Yii::$app->cache->get('next-' . $id);
         if ($this->view->params['next'] == false) {
@@ -332,11 +334,33 @@ class ExploreController extends Controller {
     }
 
     /**
+     * Finds the Post model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Post the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        $model = Yii::$app->cache->get('postView-' . $id);
+        if ($model === false) {
+            $qu = Post::find()->joinWith(['user', 'postBodies', 'postTags', 'postStats']);
+            $model = $qu->where(['post.id' => $id])->one();
+            Yii::$app->cache->set('postView-' . $id, $model, 3000);
+        }
+        if (!isset($model)) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        return $model;
+    }
+
+    /**
      * Creates a new Post model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionPost($id = '') {
+    public function actionPost($id = '')
+    {
 
         if (empty($id)) {
             $model = new Post();
@@ -377,14 +401,15 @@ class ExploreController extends Controller {
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id) {
+    public function actionUpdate($id)
+    {
         Yii::$app->cache->delete('postView-' . $id);
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
-                        'model' => $model,
+                'model' => $model,
             ]);
         }
     }
@@ -395,7 +420,8 @@ class ExploreController extends Controller {
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id) {
+    public function actionDelete($id)
+    {
         $model = $this->findModel($id);
         if (Yii::$app->user->id != $model->userId) {
             throw new Exception('غير مسموح.', '403');
@@ -405,26 +431,6 @@ class ExploreController extends Controller {
             'message' => 'تم حذف الموضوع بنجاح.',
         ]);
         return $this->redirect('/user/' . $model->userId);
-    }
-
-    /**
-     * Finds the Post model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Post the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id) {
-        $model = Yii::$app->cache->get('postView-' . $id);
-        if ($model === false) {
-            $qu = Post::find()->joinWith(['user', 'postBodies', 'postTags', 'postStats']);
-            $model = $qu->where(['post.id' => $id])->one();
-            Yii::$app->cache->set('postView-' . $id, $model, 3000);
-        }
-        if (!isset($model)) {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-        return $model;
     }
 
 }
