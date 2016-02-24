@@ -47,16 +47,16 @@ $config = [
         'request' => [
             'cookieValidationKey' => 'adsaew2343a',
         ],
-//        'cache' => [
-//            'class' => 'yii\caching\MemCache',
-//            'servers' => [
-//                [
-//                    'host' => 'localhost',
-//                    'port' => 11212,
-//                    'weight' => 100,
-//                ],
-//            ],
-//        ],
+        'cache' => [
+            'class' => 'yii\caching\MemCache',
+            'servers' => [
+                [
+                    'host' => 'localhost',
+                    'port' => 11212,
+                    'weight' => 100,
+                ],
+            ],
+        ],
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
