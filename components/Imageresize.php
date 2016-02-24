@@ -4,9 +4,9 @@ namespace app\components;
 
 use Yii;
 use yii\base\Component;
-use yii\helpers\Url;
 
-class Imageresize extends Component {
+class Imageresize extends Component
+{
 
     private $file = '';
     private $width = 200;
@@ -15,11 +15,29 @@ class Imageresize extends Component {
     private $mediaFile = '/web/media';
     private $quality = 100;
 
-    public function __construct($config = array()) {
+    public function __construct($config = array())
+    {
         $this->mediaFile = Yii::$app->basePath . $this->mediaFile;
     }
 
-    protected function resize() {
+    public function thump($file, $width, $height, $method)
+    {
+        $this->file = $file;
+        $this->width = $width;
+        $this->height = $height;
+        $this->method = $method;
+        if (empty($this->file) || $this->file === 0 || !is_file($this->mediaFile . '/' . $this->file)) {
+            $this->file = 'other/no-profile-image.jpg';
+        }
+        try {
+            return @$this->resize();
+        } catch (Exception $ex) {
+
+        }
+    }
+
+    protected function resize()
+    {
 
         $filethump = $this->width . 'x' . $this->height . '-' . $this->method;
         $fileExtract = explode('/', $this->file);
@@ -71,40 +89,30 @@ class Imageresize extends Component {
             $im->clear();
             $im->destroy();
         }
-        return Url::home(true) . 'media/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
+        //Url::home(true)
+        return 'https://s3-eu-west-1.amazonaws.com/hangshare.media/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
     }
 
-    public function thump($file, $width, $height, $method) {
-        $this->file = $file;
-        $this->width = $width;
-        $this->height = $height;
-        $this->method = $method;
-        if (empty($this->file) || $this->file === 0 || !is_file($this->mediaFile . '/' . $this->file)) {
-            $this->file = 'other/no-profile-image.jpg';
-        }
-        try {
-            return @$this->resize();
-        } catch (Exception $ex) {
-            
-        }
-    }
-
-    public function setMethod($method) {
+    public function setMethod($method)
+    {
         $this->method = $method;
         return $this;
     }
 
-    public function setHeight($height) {
+    public function setHeight($height)
+    {
         $this->height = $height;
         return $this;
     }
 
-    public function setWidth($width) {
+    public function setWidth($width)
+    {
         $this->width = $width;
         return $this;
     }
 
-    public function setFile($file) {
+    public function setFile($file)
+    {
         $this->file = $file;
         return $this;
     }
