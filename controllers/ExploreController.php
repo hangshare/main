@@ -341,11 +341,12 @@ class ExploreController extends Controller {
      */
     protected function findModel($id)
     {
-        $model = Yii::$app->cache->get('apostView-' . $id);
+        $model = Yii::$app->cache->get('postView-' . $id);
         if ($model === false) {
-            $qu = Post::find()->joinWith(['user', 'postBodies', 'postTags', 'postTags.tags', 'postStats']);
+            $qu = Post::find()->joinWith(['user', 'postTags', 'postTags.tags']);
+
             $model = $qu->where(['post.id' => $id])->one();
-            Yii::$app->cache->set('apostView-' . $id, $model, 3000);
+            Yii::$app->cache->set('postView-' . $id, $model, 3000);
         }
         if (!isset($model)) {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -402,9 +403,11 @@ class ExploreController extends Controller {
      */
     public function actionUpdate($id)
     {
-        Yii::$app->cache->delete('postView-' . $id);
+
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->cache->delete('postView-' . $id);
+            Yii::$app->cache->delete('post-body-' . $id);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

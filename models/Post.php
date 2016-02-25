@@ -2,9 +2,7 @@
 
 namespace app\models;
 
-use yii\web\UploadedFile;
 use Yii;
-use \app\models\PostBody;
 
 /**
  * This is the model class for table "post".
@@ -29,6 +27,37 @@ class Post extends \yii\db\ActiveRecord {
      */
     public static function tableName() {
         return 'post';
+    }
+
+    public static function featured($limit = 8)
+    {
+        $featured = Yii::$app->cache->get('featured-posts');
+        if ($featured === false) {
+            $featured = Post::find()
+                ->where("type=0 AND cover <> '' AND featured = 1")
+                ->orderBy('sort desc')
+                ->select('id,cover,title')
+                ->limit($limit)
+                ->all();
+            Yii::$app->cache->set('featured-posts', $featured, 300);
+        }
+        return $featured;
+    }
+
+    public static function mostViewed($limit = 5)
+    {
+        $most = Yii::$app->cache->get('mostViewed');
+        if ($most === false) {
+            $most = Post::find()
+                ->where("cover <> ''")
+                ->joinWith(['postStats'])
+                ->select('id,cover,title')
+                ->orderBy('post_stats.views desc')
+                ->limit($limit)
+                ->all();
+            Yii::$app->cache->set('mostViewed', $most, 300);
+        }
+        return $most;
     }
 
     /**
@@ -169,7 +198,7 @@ class Post extends \yii\db\ActiveRecord {
         if (!empty($this->tags)) {
             $insertrow = '';
             foreach ($this->tags as $tag) {
-                $insertrow.="('{$this->id}','{$tag}'),";
+                $insertrow .= "('{$this->id}','{$tag}'),";
             }
             $insertrow = rtrim($insertrow, ",");
             Yii::$app->db->createCommand("INSERT INTO post_tag (postId, tag) VALUES $insertrow")->query();
@@ -184,7 +213,7 @@ class Post extends \yii\db\ActiveRecord {
                         $keywords = $nu->id;
                     }
                 }
-                $insertrow.="('{$this->id}','{$keywords}'),";
+                $insertrow .= "('{$this->id}','{$keywords}'),";
             }
             $insertrow = rtrim($insertrow, ",");
             Yii::$app->db->createCommand("INSERT INTO post_tag (postId, tag) VALUES $insertrow")->query();
@@ -197,7 +226,8 @@ class Post extends \yii\db\ActiveRecord {
         }
     }
 
-    public function upload() {
+    public function upload()
+    {
         if ($this->validate() && isset($this->cover_file)) {
             $this->cover = date('Ydm');
             if (!is_dir(Yii::$app->basePath . '/../../media/' . $this->cover)) {
@@ -210,35 +240,6 @@ class Post extends \yii\db\ActiveRecord {
             return TRUE;
         }
         return false;
-    }
-
-    public static function featured($limit = 8) {
-        $featured = Yii::$app->cache->get('featured-posts');
-        if ($featured === false) {
-            $featured = Post::find()
-                    ->where("type=0 AND cover <> '' AND featured = 1")
-                    ->orderBy('sort desc')
-                    ->select('id,cover,title')
-                    ->limit($limit)
-                    ->all();
-            Yii::$app->cache->set('featured-posts', $featured, 300);
-        }
-        return $featured;
-    }
-
-    public static function mostViewed($limit = 5) {
-        $most = Yii::$app->cache->get('mostViewed');
-        if ($most === false) {
-            $most = Post::find()
-                    ->where("cover <> ''")
-                    ->joinWith(['postStats'])
-                    ->select('id,cover,title')
-                    ->orderBy('post_stats.views desc')
-                    ->limit($limit)
-                    ->all();
-            Yii::$app->cache->set('mostViewed', $most, 300);
-        }
-        return $most;
     }
 
     /**
@@ -259,7 +260,7 @@ class Post extends \yii\db\ActiveRecord {
      * @return \yii\db\ActiveQuery
      */
     public function getPostStats() {
-        return $this->hasOne(PostStats::className(), ['postId' => 'id']);
+        return $this->hasOne(PostStats::className(), ['postId' => 'id'])->select('views');
     }
 
     /**
