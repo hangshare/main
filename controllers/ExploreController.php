@@ -127,7 +127,7 @@ class ExploreController extends Controller {
     public function actionVideo($tag = '') {
         $pageSize = 14;
         $query = Post::find();
-
+        $query->joinWith(['user', 'postBodies']);
         $query->orderBy('created_at DESC');
         $query->where('post.type = 1');
         $query->andWhere(['<>', 'cover', '']);
@@ -218,6 +218,7 @@ class ExploreController extends Controller {
     public function actionAll() {
         $pageSize = 14;
         $query = Post::find();
+        $query->joinWith(['user', 'postBodies']);
         $query->orderBy('created_at DESC');
         $query->where("post.deleted=0");
         $query->andWhere(['<>', 'cover', '']);
@@ -304,8 +305,6 @@ class ExploreController extends Controller {
      */
     public function actionView($id) {
 
-//        var_dump(Yii::$app->user->id);die();
-
         $model = $this->findModel($id);
         $mostviewd = Post::mostViewed();
         $this->view->params['next'] = Yii::$app->cache->get('next-' . $id);
@@ -342,11 +341,11 @@ class ExploreController extends Controller {
      */
     protected function findModel($id)
     {
-        $model = Yii::$app->cache->get('postView-' . $id);
+        $model = Yii::$app->cache->get('apostView-' . $id);
         if ($model === false) {
-            $qu = Post::find()->joinWith(['user', 'postBodies', 'postTags', 'postStats']);
+            $qu = Post::find()->joinWith(['user', 'postBodies', 'postTags', 'postTags.tags', 'postStats']);
             $model = $qu->where(['post.id' => $id])->one();
-            Yii::$app->cache->set('postView-' . $id, $model, 3000);
+            Yii::$app->cache->set('apostView-' . $id, $model, 3000);
         }
         if (!isset($model)) {
             throw new NotFoundHttpException('The requested page does not exist.');

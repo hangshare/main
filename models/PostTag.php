@@ -59,6 +59,6 @@ class PostTag extends \yii\db\ActiveRecord
      * @return \yii\db\ActiveQuery
      */
     public function getTags() {
-        return $this->hasOne(Tags::className(), ['id' => 'tag']);
+        return $this->hasOne(Tags::className(), ['id' => 'tag'])->select('id,name');
     }
 }
