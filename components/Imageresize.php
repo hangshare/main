@@ -26,14 +26,6 @@ class Imageresize extends Component
         $this->width = $width;
         $this->height = $height;
         $this->method = $method;
-
-        $filethump = $this->width . 'x' . $this->height . '-' . $this->method;
-        $fileExtract = explode('/', $this->file);
-
-        if ((empty($this->file) || $this->file === 0) && isset($fileExtract[0]) && isset($fileExtract[1])) {
-            return 'https://s3-eu-west-1.amazonaws.com/hangshare.media/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
-        }
-
         if (empty($this->file) || $this->file === 0 || !is_file($this->mediaFile . '/' . $this->file)) {
             $this->file = 'other/no-profile-image.jpg';
         }
@@ -51,8 +43,8 @@ class Imageresize extends Component
         $path_info = pathinfo($this->file);
         $ext = $path_info['extension']; // "bill"
         $path = Yii::$app->basePath . '/web/media/' . $fileExtract[0] . '/' . $filethump;
-
         $thumppath = $path . '/' . $fileExtract[1];
+//        @unlink($thumppath);
         if (!is_file($thumppath)) {
             if (!is_dir($path)) {
                 mkdir($path, 0777, true);
@@ -95,6 +87,7 @@ class Imageresize extends Component
             $im->destroy();
         }
         //Url::home(true)
+        return 'https://s3-eu-west-1.amazonaws.com/hangshare.media/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
     }
 
     public function setMethod($method)
