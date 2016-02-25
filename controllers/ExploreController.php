@@ -259,7 +259,7 @@ class ExploreController extends Controller {
         $pageSize = 14;
         $query = Post::find();
         $query->orderBy('created_at DESC');
-        $query->joinWith(['postTags', 'postTags.tags', 'user']);
+        $query->joinWith(['postTags', 'postTags.tags', 'user', 'PostBodies']);
         $query->where('post.type = 0 AND post.deleted=0');
         $query->andWhere(['<>', 'cover', '']);
         if (!empty($tag)) {
