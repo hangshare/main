@@ -27,11 +27,10 @@ class Imageresize extends Component
         $this->height = $height;
         $this->method = $method;
 
-        if (empty($this->file) || $this->file === 0 && isset($fileExtract[0])) {
-            $filethump = $this->width . 'x' . $this->height . '-' . $this->method;
-            $fileExtract = explode('/', $this->file);
-            var_dump($fileExtract);
-            die();
+        $filethump = $this->width . 'x' . $this->height . '-' . $this->method;
+        $fileExtract = explode('/', $this->file);
+
+        if ((empty($this->file) || $this->file === 0) && isset($fileExtract[0]) && isset($fileExtract[1])) {
             return 'https://s3-eu-west-1.amazonaws.com/hangshare.media/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
         }
 
