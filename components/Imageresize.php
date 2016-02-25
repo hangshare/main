@@ -27,10 +27,11 @@ class Imageresize extends Component
         $this->height = $height;
         $this->method = $method;
 
-        $filethump = $this->width . 'x' . $this->height . '-' . $this->method;
-        $fileExtract = explode('/', $this->file);
-        return 'https://s3-eu-west-1.amazonaws.com/hangshare.media/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
-
+        if (empty($this->file) || $this->file === 0) {
+            $filethump = $this->width . 'x' . $this->height . '-' . $this->method;
+            $fileExtract = explode('/', $this->file);
+            return 'https://s3-eu-west-1.amazonaws.com/hangshare.media/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
+        }
 
         if (empty($this->file) || $this->file === 0 || !is_file($this->mediaFile . '/' . $this->file)) {
             $this->file = 'other/no-profile-image.jpg';
@@ -40,30 +41,6 @@ class Imageresize extends Component
         } catch (Exception $ex) {
 
         }
-    }
-
-    public function setMethod($method)
-    {
-        $this->method = $method;
-        return $this;
-    }
-
-    public function setHeight($height)
-    {
-        $this->height = $height;
-        return $this;
-    }
-
-    public function setWidth($width)
-    {
-        $this->width = $width;
-        return $this;
-    }
-
-    public function setFile($file)
-    {
-        $this->file = $file;
-        return $this;
     }
 
     protected function resize()
@@ -117,6 +94,30 @@ class Imageresize extends Component
             $im->destroy();
         }
         //Url::home(true)
+    }
+
+    public function setMethod($method)
+    {
+        $this->method = $method;
+        return $this;
+    }
+
+    public function setHeight($height)
+    {
+        $this->height = $height;
+        return $this;
+    }
+
+    public function setWidth($width)
+    {
+        $this->width = $width;
+        return $this;
+    }
+
+    public function setFile($file)
+    {
+        $this->file = $file;
+        return $this;
     }
 
 }
