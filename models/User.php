@@ -49,7 +49,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findIdentity($id)
     {
-        $model = Yii::$app->session->get('user-' . $id);
+        $model = static::findOne($id);
+        return new static($model);
+
+        $model = Yii::$app->session->get('auser-' . $id);
         if ($model === false) {
             $model = static::find()->where(['id' => $id])
                 ->select('id,plan,name,email,image,transfer_type,type, verification');
@@ -232,7 +235,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             $this->password_hash = sha1($this->password);
 
             $this->transfer_type = 0;
-            $this->password_reset_token = sha1(time(). rand(2,200));
+            $this->password_reset_token = sha1(time() . rand(2, 200));
             $this->scId = '';
             $this->type = 1;
             $this->plan = 0;

@@ -45,12 +45,10 @@ if (Yii::$app->user->isGuest) {
         ];
     }
 
-
-
     $menuItems_right[] = [
         'label' => '<span class="img-options"><img src="' . Yii::$app->imageresize->thump(Yii::$app->user->identity->image, 50, 50, 'crop') . '" /></span>',
         'items' => [
-            ['label' => '<i class="fa fa-fw fa-user hidden-xs"></i> الصفحة الشخصية', 'url' => ['/user/view', 'id' => Yii::$app->user->identity->id]],
+            ['label' => '<i class="fa fa-fw fa-user hidden-xs"></i> الصفحة الشخصية', 'url' => ['/user/view', 'id' => Yii::$app->user->id]],
             ['label' => '<i class="fa fa-fw fa-gear hidden-xs"></i> الإعدادات', 'url' => ['/user/manage']],
             ['label' => '<i class="fa fa-fw fa-gear hidden-xs"></i> طرق تحويل النقود', 'url' => ['/user/transfer']],
             ['label' => '<li class="divider">'],
