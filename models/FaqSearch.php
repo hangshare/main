@@ -5,7 +5,6 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Faq;
 
 /**
  * FaqSearch represents the model behind the search form about `app\models\Faq`.
@@ -38,7 +37,7 @@ class FaqSearch extends Faq {
      * @return ActiveDataProvider
      */
     public function search($params) {
-        $query = Faq::find();
+        $query = Faq::find()->select('id,question,answer,categoryId');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
