@@ -38,12 +38,9 @@ class Imageresize extends Component
 
     protected function resize()
     {
-
         $filethump = $this->width . 'x' . $this->height . '-' . $this->method;
         $fileExtract = explode('/', $this->file);
-
         $path_info = pathinfo($this->file);
-
         $ext = $path_info['extension']; // "bill"
         $path = Yii::$app->basePath . '/web/media/' . $fileExtract[0] . '/' . $filethump;
         $thumppath = $path . '/' . $fileExtract[1];
