@@ -14,6 +14,11 @@ use yii\console\Controller;
 class CronController extends Controller
 {
 
+    public function actionT()
+    {
+        echo 'Test ';
+    }
+
 
     public function actionFix()
     {
