@@ -28,6 +28,7 @@ $config = [
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                'site/facebook/?<code:\w+>' => 'site/facebook',
                 'مقالات/مقاطع-فيديو' => 'explore/video',
                 'مقالات/مقالات-متنوعة' => 'explore/index',
                 'مقالات/مقالات-متنوعة/<tag:[^*]+>' => 'explore/index',
