@@ -2,10 +2,13 @@
 $params = require(__DIR__ . '/params.php');
 
 $config = [
-    'id' => 'test',
+    'id' => 'hangshare-live',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log','init'],
     'components' => [
+        'init' => [
+            'class' => 'app\components\Init',
+        ],
         'imageresize' => [
             'class' => 'app\components\Imageresize',
         ],
