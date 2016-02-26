@@ -4,9 +4,26 @@ namespace app\components;
 
 use Yii;
 use yii\base\Component;
-use yii\helpers\Url;
 
 class Helper extends Component {
+
+    public function urlTitle($title)
+    {
+        if (empty($title))
+            die('Error 1');
+//        $string = strtolower($title); // Error
+        $string = strip_tags($title);
+        $string = preg_replace('/(?=\P{Nd})\P{L}/u', '-', $string);
+        $string = preg_replace('/[\s-]{2,}/u', '-', $string);
+        $string = trim($string);
+        if (substr($string, 0, 1) == '-')
+            $string = ltrim($string, '-');
+        if (substr($string, -1) == '-')
+            $string = trim($string, "-");
+        if (empty($string))
+            return 'مقالات-موقع-هانج-شير';
+        return $string;
+    }
 
     public function isMobile() {
         if (isset($_SERVER['HTTP_USER_AGENT'])) {

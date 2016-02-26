@@ -17,10 +17,11 @@ use Yii;
  * @property PostBody[] $postBodies
  * @property PostStats $postStats
  * @property PostTag[] $postTags
+ * @property string urlTitle
  */
 class Post extends \yii\db\ActiveRecord {
 
-    public $body, $tags, $cover_file, $q, $keywords, $ylink, $vidId, $vidType;
+    public $body, $tags, $cover_file, $q, $keywords, $ylink, $vidId, $vidType, $url;
 
     /**
      * @inheritdoc
@@ -66,7 +67,7 @@ class Post extends \yii\db\ActiveRecord {
     public function rules() {
         return [
             [['title', 'tags', 'body'], 'required'],
-            [['title'], 'unique'],
+            [['title', 'urlTitle'], 'unique'],
             [['cover_file', 'ylink'], 'either'],
             ['ylink', 'match', 'pattern' => '/^https?:\/\/(?:.*?)\.?(youtube|vimeo)\.com\/(watch\?[^#]*v=([\w-]+)|(\d+)).*$/'],
             [['cover_file'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'gif','jpeg'],
@@ -74,6 +75,7 @@ class Post extends \yii\db\ActiveRecord {
             [['userId', 'type', 'deleted'], 'integer'],
             [['created_at', 'body', 'featured', 'deleted', 'tags', 'keywords', 'cover_file', 'q', 'type', 'ylink', 'vidId', 'vidType'], 'safe'],
             [['cover'], 'string', 'max' => 100],
+            [['urlTitle'], 'string', 'max' => 200],
             [['title'], 'string', 'max' => 50],
             [['body'], 'string', 'min' => 150],
         ];
@@ -107,11 +109,12 @@ class Post extends \yii\db\ActiveRecord {
     public function beforeSave($insert) {
         if ($this->isNewRecord) {
             $this->userId = Yii::$app->user->id;
-
             Yii::$app->db->createCommand('UPDATE `user_stats` SET `post_count`=`post_count`+1 WHERE `userId`=' . $this->userId)->query();
+            $this->urlTitle = Yii::$app->helper->urlTitle($this->title);
         }
         return true;
     }
+
 
     public function saveExternal($image) {
         $imageLink = $this->cover;
@@ -165,6 +168,7 @@ class Post extends \yii\db\ActiveRecord {
                 }
             }
         }
+        $this->url = Yii::$app->urlManager->createAbsoluteUrl(["/{$this->urlTitle}"]);
         return TRUE;
     }
 

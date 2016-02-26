@@ -303,28 +303,29 @@ class ExploreController extends Controller {
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id) {
+    public function actionView($slug)
+    {
 
-        $model = $this->findModel($id);
+        $model = $this->findModel($slug);
         $mostviewd = Post::mostViewed();
-        $this->view->params['next'] = Yii::$app->cache->get('next-' . $id);
+        $this->view->params['next'] = Yii::$app->cache->get('next-' . $model->id);
         if ($this->view->params['next'] == false) {
             $this->view->params['next'] = Post::find()
-                    ->where(['and', "id>$id"])
+                ->where(['and', "id>$model->id"])
                     ->select('id,title')
                     ->orderBy('id desc')
                     ->one();
 
-            Yii::$app->cache->set('next-' . $id, $this->view->params['next'], 300);
+            Yii::$app->cache->set('next-' . $model->id, $this->view->params['next'], 300);
         }
-        $this->view->params['prev'] = Yii::$app->cache->get('prev-' . $id);
+        $this->view->params['prev'] = Yii::$app->cache->get('prev-' . $model->id);
         if ($this->view->params['prev'] == false) {
             $this->view->params['prev'] = Post::find()
-                    ->where(['and', "id<$id"])
+                ->where(['and', "id<$model->id"])
                     ->select('id,title')
                     ->orderBy('id desc')
                     ->one();
-            Yii::$app->cache->set('prev-' . $id, $this->view->params['prev'], 300);
+            Yii::$app->cache->set('prev-' . $model->id, $this->view->params['prev'], 300);
         }
         return $this->render('view', [
                     'model' => $model,
@@ -341,12 +342,12 @@ class ExploreController extends Controller {
      */
     protected function findModel($id)
     {
-        $model = Yii::$app->cache->get('postView-' . $id);
+        $model = Yii::$app->cache->get($id);
         if ($model === false) {
             $qu = Post::find()->joinWith(['user', 'postTags', 'postTags.tags']);
 
-            $model = $qu->where(['post.id' => $id])->one();
-            Yii::$app->cache->set('postView-' . $id, $model, 3000);
+            $model = $qu->where(['post.urlTitle' => $id])->one();
+            Yii::$app->cache->set($id, $model, 3000);
         }
         if (!isset($model)) {
             throw new NotFoundHttpException('The requested page does not exist.');
