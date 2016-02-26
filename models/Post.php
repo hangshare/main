@@ -144,7 +144,7 @@ class Post extends \yii\db\ActiveRecord
                 if ($urlResopnse == '200') {
                     $url = file_get_contents($JSonurl);
                     $url_json = json_decode($url);
-                    $path = Yii::$app->basePath . "/media/{$typeid}/$vidId.jpg";
+                    $path = Yii::$app->basePath . "/web/media/{$typeid}/$vidId.jpg";
                     $imageLink = "{$typeid}/$vidId.jpg";
                     Yii::$app->helper->downloadFromUrl($url_json[0]->thumbnail_large, $path);
                 }
@@ -154,7 +154,7 @@ class Post extends \yii\db\ActiveRecord
             $vidId = Yii::$app->helper->youtubeId($this->ylink);
             if ($image) {
                 $imageLink = "{$typeid}/$vidId.jpg";
-                $path = Yii::$app->basePath . "/media/{$typeid}/$vidId.jpg";
+                $path = Yii::$app->basePath . "/web/media/{$typeid}/$vidId.jpg";
                 Yii::$app->helper->downloadFromUrl("http://img.youtube.com/vi/{$vidId}/0.jpg", $path);
             }
         }
@@ -249,15 +249,21 @@ class Post extends \yii\db\ActiveRecord
 
     public function upload()
     {
+        Yii::$app->controller->enableCsrfValidation = false;
         if ($this->validate() && isset($this->cover_file)) {
+
             $this->cover = date('Ydm');
-            if (!is_dir(Yii::$app->basePath . '/media/' . $this->cover)) {
-                mkdir(Yii::$app->basePath . '/media/' . $this->cover, 0777, true);
+            if (!is_dir(Yii::$app->basePath . '/web/media/' . $this->cover)) {
+                mkdir(Yii::$app->basePath . '/web/media/' . $this->cover, 0777, true);
             }
             $filename = rand(1, 100) . '-' . preg_replace("/[^A-Za-z0-9?!]/", '-', $this->cover_file->baseName) . '.' . $this->cover_file->extension;
             $this->cover = $this->cover . '/' . $filename;
             try {
-                $re = $this->cover_file->saveAs(Yii::$app->basePath . '/media/' . $this->cover);
+
+                $re = $this->cover_file->saveAs(Yii::$app->basePath . '/web/media/' . $this->cover);
+                var_dump(Yii::$app->basePath . '/web/media/' . $this->cover);
+                var_dump($re);
+                die();
             } catch (Exception $e) {
 
             }
