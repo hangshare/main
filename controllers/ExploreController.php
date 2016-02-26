@@ -362,8 +362,7 @@ class ExploreController extends Controller {
      */
     public function actionPost($id = '')
     {
-        var_dump($_POST);
-        die();
+
         if (empty($id)) {
             $model = new Post();
         } else {
@@ -372,6 +371,9 @@ class ExploreController extends Controller {
                 throw new NotFoundHttpException('The requested page does not exist.');
             }
         }
+        var_dump($_POST);
+        die();
+
         if ($model->load(Yii::$app->request->post())) {
             $model->cover_file = UploadedFile::getInstance($model, 'cover_file');
             if (!empty($model->ylink)) {
