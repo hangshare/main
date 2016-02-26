@@ -1,10 +1,9 @@
 <?php
 use app\models\Tags;
+use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
-//use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Post */
@@ -73,19 +72,19 @@ foreach ($model->postBodies as $data) {
 
             <label>التصنيفات الاضافية</label>
             <?php
-            //            echo Select2::widget([
-            //                'name' => 'Post[keywords]',
-            //                'value' => $keywords,
-            //                'data' => ArrayHelper::map(Tags::find()
-            //                    ->where('type=0')
-            //                    ->orderBy('name')
-            //                    ->all(), 'id', 'name'),
-            //                'options' => ['multiple' => true, 'placeholder' => 'اضف الكلمات المناسبة'],
-            //                'pluginOptions' => [
-            //                    'tags' => true,
-            //                    'maximumInputLength' => 10
-            //                ],
-            //            ]);
+            echo Select2::widget([
+                'name' => 'Post[keywords]',
+                'value' => $keywords,
+                'data' => ArrayHelper::map(Tags::find()
+                    ->where('type=0')
+                    ->orderBy('name')
+                    ->all(), 'id', 'name'),
+                'options' => ['multiple' => true, 'placeholder' => 'اضف الكلمات المناسبة'],
+                'pluginOptions' => [
+                    'tags' => true,
+                    'maximumInputLength' => 10
+                ],
+            ]);
             ?>
             <div class="form-group m-t-25">
                 <?php
