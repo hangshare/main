@@ -363,7 +363,7 @@ class ExploreController extends Controller {
      */
     public function actionPost($id = '')
     {
-
+        Yii::app()->request->enableCsrfValidation = false;
         if (empty($id)) {
             $model = new Post();
         } else {
