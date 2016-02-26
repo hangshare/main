@@ -71,7 +71,7 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'tags', 'body'], 'required'],
-            [['title', 'urlTitle'], 'unique'],
+            [['urlTitle'], 'unique'],
             [['cover_file', 'ylink'], 'either'],
             ['ylink', 'match', 'pattern' => '/^https?:\/\/(?:.*?)\.?(youtube|vimeo)\.com\/(watch\?[^#]*v=([\w-]+)|(\d+)).*$/'],
             [['cover_file'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'gif', 'jpeg'],
@@ -121,7 +121,7 @@ class Post extends \yii\db\ActiveRecord
             $url = Yii::$app->helper->urlTitle($this->title);
             $exist = Yii::$app->db->createCommand("SELECT id FROM post WHERE urlTitle = '{$url}' LIMIT 1")->queryOne();
             if ($exist) {
-                $rand = $exist['id'] * random_int(2, 5);
+                $rand = $exist['id'] * rand(2, 5);
                 $url .= "-{$rand}";
             }
             $this->urlTitle = $url;
