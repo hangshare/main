@@ -1,10 +1,8 @@
 <?php
-
 use yii\helpers\Html;
 
 $this->title = $model->title;
 $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize');
-$url = Yii::$app->urlManager->createAbsoluteUrl(['//explore/view', 'id' => $model->id, 'title' => $model->title]);
 ?>
 <div class="col-md-9">
     <div class="row">
@@ -39,12 +37,13 @@ $url = Yii::$app->urlManager->createAbsoluteUrl(['//explore/view', 'id' => $mode
                         </p>
                         <ul class="list-inline shareer" style="margin: 18px 7px 0;">
                             <li><a class="btn btn-primary js-share js-share-fasebook" href="javascript:void(0);"
-                                   post-url="<?= $url; ?>"><i style="margin: 3px;" class="fa fa-fw fa-facebook"></i>انشر
+                                   post-url="<?= $model->url; ?>"><i style="margin: 3px;"
+                                                                     class="fa fa-fw fa-facebook"></i>انشر
                                     هذا الموضوع على صفحة الفيسبوك</a></li>
-                            <li><a class="btn js-share js-share-twitter" post-url="<?= $url; ?>"
+                            <li><a class="btn js-share js-share-twitter" post-url="<?= $model->url; ?>"
                                    href="javascript:void(0);" style="color: #fff; background-color: #3E4347;"><i
                                         style="margin: 3px;" class="fa fa-twitter"></i>غرد على موقع تويتر</a></li>
-                            <li><a class="btn js-share js-share-gpuls" post-url="<?= $url; ?>"
+                            <li><a class="btn js-share js-share-gpuls" post-url="<?= $model->url; ?>"
                                    href="javascript:void(0);" style="color: #fff; background-color: #e51717;"><i
                                         style="margin: 3px;" class="fa fa-google-plus"></i> انشر على موقع جوجل</a></li>
                         </ul>
@@ -85,14 +84,14 @@ $url = Yii::$app->urlManager->createAbsoluteUrl(['//explore/view', 'id' => $mode
                                 </div>
                                 <ul class="list-inline shareer" style="margin: 18px 7px 20px;">
                                     <li><a class="btn btn-primary js-share js-share-fasebook" href="javascript:void(0);"
-                                           post-url="<?= $url; ?>"><i style="margin: 3px;"
-                                                                      class="fa fa-fw fa-facebook"></i>انشر هذا الموضوع
+                                           post-url="<?= $model->url; ?>"><i style="margin: 3px;"
+                                                                             class="fa fa-fw fa-facebook"></i>انشر هذا الموضوع
                                             على صفحة الفيسبوك</a></li>
-                                    <li><a class="btn js-share js-share-twitter" post-url="<?= $url; ?>"
+                                    <li><a class="btn js-share js-share-twitter" post-url="<?= $model->url; ?>"
                                            href="javascript:void(0);" style="color: #fff; background-color: #3E4347;"><i
                                                 style="margin: 3px;" class="fa fa-twitter"></i>غرد على موقع تويتر</a>
                                     </li>
-                                    <li><a class="btn js-share js-share-gpuls" post-url="<?= $url; ?>"
+                                    <li><a class="btn js-share js-share-gpuls" post-url="<?= $model->url; ?>"
                                            href="javascript:void(0);" style="color: #fff; background-color: #e51717;"><i
                                                 style="margin: 3px;" class="fa fa-google-plus"></i> انشر على موقع
                                             جوجل</a></li>
@@ -139,10 +138,8 @@ $url = Yii::$app->urlManager->createAbsoluteUrl(['//explore/view', 'id' => $mode
                             <div class="row">
                                 <div class="pull-left m-l-30">
                                     <?php
-                                    if (isset($this->params['next'])) :
-                                        $urll = Yii::$app->urlManager->createAbsoluteUrl(['//explore/view', 'id' => $this->params['next']->id, 'title' => $this->params['next']->title]);
-                                        ?>
-                                        <a rel="next" href="<?= $urll ?>">
+                                    if (isset($this->params['next'])) : ?>
+                                        <a rel="next" href="<?= $this->params['next']->url ?>">
                                             <h4>
                                                 <i class="glyphicon glyphicon-arrow-right"></i> <?php echo $this->params['next']->title; ?>
                                             </h4>
@@ -151,10 +148,8 @@ $url = Yii::$app->urlManager->createAbsoluteUrl(['//explore/view', 'id' => $mode
                                 </div>
                                 <div class="pull-right  m-r-30">
                                     <?php
-                                    if (isset($this->params['prev'])) :
-                                        $urll = Yii::$app->urlManager->createAbsoluteUrl(['//explore/view', 'id' => $this->params['prev']->id, 'title' => $this->params['prev']->title]);
-                                        ?>
-                                        <a href="<?= $urll ?>">
+                                    if (isset($this->params['prev'])) : ?>
+                                        <a href="<?= $this->params['prev']->url ?>">
                                             <h4><?php echo $this->params['prev']->title; ?> <i
                                                     class="glyphicon glyphicon-arrow-left"></i></h4>
                                         </a>
@@ -181,7 +176,7 @@ $url = Yii::$app->urlManager->createAbsoluteUrl(['//explore/view', 'id' => $mode
                     js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1024611190883720";
                     fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));</script>
-            <div class="fb-comments" data-href="<?= $url ?>" data-numposts="5" data-width="100%"></div>
+            <div class="fb-comments" data-href="<?= $model->url ?>" data-numposts="5" data-width="100%"></div>
         </div>
     </div>
 </div>
@@ -290,12 +285,13 @@ if (!Yii::$app->user->isGuest):
                         <h4 class="text-center">شارك هذا الموضوع مع اصدقائك</h4>
                         <ul class="list-inline text-center shareer">
                             <li><a class="btn btn-primary js-share js-share-fasebook" href="javascript:void(0);"
-                                   post-url="<?= $url; ?>"><i style="margin: 3px;" class="fa fa-fw fa-facebook"></i>انشر
+                                   post-url="<?= $model->url; ?>"><i style="margin: 3px;"
+                                                                     class="fa fa-fw fa-facebook"></i>انشر
                                     على صفحة الفيسبوك</a></li>
-                            <li><a class="btn js-share js-share-twitter" post-url="<?= $url; ?>"
+                            <li><a class="btn js-share js-share-twitter" post-url="<?= $model->url; ?>"
                                    href="javascript:void(0);" style="color: #fff; background-color: #3E4347;"><i
                                         style="margin: 3px;" class="fa fa-twitter"></i>غرد على موقع تويتر</a></li>
-                            <li><a class="btn js-share js-share-gpuls" post-url="<?= $url; ?>"
+                            <li><a class="btn js-share js-share-gpuls" post-url="<?= $model->url; ?>"
                                    href="javascript:void(0);" style="color: #fff; background-color: #e51717;"><i
                                         style="margin: 3px;" class="fa fa-google-plus"></i> انشر على موقع google+</a>
                             </li>
