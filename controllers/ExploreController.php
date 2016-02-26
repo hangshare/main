@@ -420,7 +420,7 @@ class ExploreController extends Controller
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
+        $model = Post::findOne(['id'=>$id]);
         if (Yii::$app->user->id != $model->userId) {
             throw new Exception('غير مسموح.', '403');
         }
@@ -428,7 +428,7 @@ class ExploreController extends Controller
         Yii::$app->getSession()->setFlash('success', [
             'message' => 'تم حذف الموضوع بنجاح.',
         ]);
-        return $this->redirect('/user/' . $model->userId);
+        return $this->redirect(['/user/'. $model->userId]);
     }
 
 }
