@@ -1,10 +1,9 @@
 <?php
 
-use yii\widgets\ListView;
 use app\models\Post;
-use \app\models\Tags;
+use app\models\Tags;
 use yii\helpers\Html;
-use yii\widgets\Pjax;
+use yii\widgets\ListView;
 
 $q = '';
 $title = 'مقالات متنوعة';
@@ -51,15 +50,30 @@ $this->description = Yii::t('app', "مقالات متنوعة $q ، انشر م�
             </div>
             <div class="row m-t-20">
                 <div style="position: relative">
+                    <div class="m-t-25">
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- MPU - Category Right -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:300px;height:250px"
+                             data-ad-client="ca-pub-6288640194310142"
+                             data-ad-slot="9922641319"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="m-t-20">
+                <div style="position: relative">
                     <div class="row m-t-25 fixad" rel="2800">
                         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <!-- faq ad -->
+                        <!-- Wide Skyscraper - Category Right -->
                         <ins class="adsbygoogle"
-                             style="display:inline-block;width:336px;height:280px"
+                             style="display:inline-block;width:160px;height:600px"
                              data-ad-client="ca-pub-6288640194310142"
-                             data-ad-slot="4022492110"></ins>
+                             data-ad-slot="2399374518"></ins>
                         <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
+                            (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
                     </div>
                 </div>
@@ -75,18 +89,18 @@ $this->description = Yii::t('app', "مقالات متنوعة $q ، انشر م�
                      data-ad-slot="8394999319"
                      data-ad-format="auto"></ins>
                 <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
+                    (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             <?php else : ?>
                 <div class="white text-center">
                     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- categeroy -->
+                    <!-- Leaderboard - Category Upper -->
                     <ins class="adsbygoogle"
                          style="display:inline-block;width:728px;height:90px"
                          data-ad-client="ca-pub-6288640194310142"
-                         data-ad-slot="1011333310"></ins>
+                         data-ad-slot="6969174910"></ins>
                     <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
                 </div>
             <?php endif ?>
@@ -125,44 +139,32 @@ $this->description = Yii::t('app', "مقالات متنوعة $q ، انشر م�
                     </li>
                 <?php endforeach; ?>
             </ul>
+
             <div class="row m-t-25">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- Responsive -->
+                <!-- MPU - Category Left -->
                 <ins class="adsbygoogle"
-                     style="display:block"
+                     style="display:inline-block;width:300px;height:250px"
                      data-ad-client="ca-pub-6288640194310142"
-                     data-ad-slot="2078098512"
-                     data-ad-format="auto"></ins>
+                     data-ad-slot="3876107710"></ins>
                 <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
-            <div class="row m-b-20">
+            <div class="m-b-20">
                 <div style="position: relative">
                     <div class="row m-t-25 fixad" rel="2800">
                         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <!-- Responsive -->
+                        <!-- Wide Skyscraper - Category Left -->
                         <ins class="adsbygoogle"
-                             style="display:block"
+                             style="display:inline-block;width:160px;height:600px"
                              data-ad-client="ca-pub-6288640194310142"
-                             data-ad-slot="2078098512"
-                             data-ad-format="auto"></ins>
+                             data-ad-slot="5352840915"></ins>
                         <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
+                            (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
                     </div>
                 </div>
-            </div>
-            <div class="row m-t-20">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- faq ad -->
-                <ins class="adsbygoogle"
-                     style="display:inline-block;width:336px;height:280px"
-                     data-ad-client="ca-pub-6288640194310142"
-                     data-ad-slot="4022492110"></ins>
-                <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
             </div>
         </div>
     </div>
