@@ -25,7 +25,7 @@ class CronController extends Controller
             $url = Yii::$app->helper->urlTitle($item['title']);
             $exist = Yii::$app->db->createCommand("SELECT id FROM post WHERE urlTitle = '{$url}' LIMIT 1")->queryOne();
             if ($exist) {
-                $url .= "-{$exist['id']}";
+                $url .= "-{$item['id']}";
             }
             $re = Yii::$app->db->createCommand("UPDATE post SET urlTitle='{$url}' WHERE id={$item['id']}")->query();
             echo chr(10);
