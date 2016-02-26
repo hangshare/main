@@ -35,9 +35,11 @@
 
 AddDefaultCharset UTF-8
 RewriteEngine on
+
 RewriteCond %{HTTP_HOST} !^www\.
 RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
 
+#Add Trailing Slash at the end
 RewriteCond %{REQUEST_URI}  !\.(php|html?|jpg|gif)$
 RewriteRule ^(.*)([^/])$ http://%{HTTP_HOST}/$1$2/ [L,R=301]
 
