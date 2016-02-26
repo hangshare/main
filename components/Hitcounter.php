@@ -131,7 +131,7 @@ class Hitcounter extends Component
         $hashId = self::UniqueHit($id);
         $pricear = self::VIEW_PRICE;
         if (!isset($pricear[$plan])) {
-            $pricear[0];
+            $price = $pricear[$plan];
         } else {
             $price = $pricear[$plan];
         }
