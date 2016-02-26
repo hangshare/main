@@ -13,12 +13,14 @@ use yii\web\UploadedFile;
 /**
  * PostController implements the CRUD actions for Post model.
  */
-class ExploreController extends Controller {
+class ExploreController extends Controller
+{
 
     public $next;
     public $enableCsrfValidation = false;
 
-    public function actionRelated() {
+    public function actionRelated()
+    {
         $this->layout = false;
 //        $id = $_POST['id'];
 //        $ids = Yii::$app->db->createCommand("
@@ -52,12 +54,15 @@ class ExploreController extends Controller {
         echo '</ul>';
     }
 
-    public function actionCountcheck() {
+    public function actionCountcheck()
+    {
         session_write_close();
-        Yii::$app->hitcounter->addHit($_POST['id'], $_POST['userid'], $_POST['plan']);
+        if (isset($_POST['id']))
+            Yii::$app->hitcounter->addHit($_POST['id'], $_POST['userid'], $_POST['plan']);
     }
 
-    public function actionUpload() {
+    public function actionUpload()
+    {
 //        header('Content-Type: application/json');
 
         if (isset($_FILES['file']) && !empty($_FILES['file']['name'])) {
@@ -80,14 +85,15 @@ class ExploreController extends Controller {
      * Lists all Post models.
      * @return mixed
      */
-    public function actionFun($tag = 'ترفيه') {
+    public function actionFun($tag = 'ترفيه')
+    {
 
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $tag);
 
         return $this->render('index', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -95,7 +101,8 @@ class ExploreController extends Controller {
      * Lists all Post models.
      * @return mixed
      */
-    public function actionVideo($tag = '') {
+    public function actionVideo($tag = '')
+    {
         $pageSize = 14;
         $query = Post::find();
         $query->joinWith(['user', 'postBodies']);
@@ -122,7 +129,7 @@ class ExploreController extends Controller {
             $html = '';
             $models = $dataProvider->getModels();
             foreach ($models as $data) {
-                $html.= $this->render('_view', ['model' => $data]);
+                $html .= $this->render('_view', ['model' => $data]);
             }
             echo json_encode(['html' => $html,
                 'total' => $dataProvider->getTotalCount(),
@@ -131,7 +138,7 @@ class ExploreController extends Controller {
             Yii::$app->end();
         } else {
             return $this->render('index', [
-                        'dataProvider' => $dataProvider,
+                'dataProvider' => $dataProvider,
             ]);
         }
     }
@@ -140,7 +147,8 @@ class ExploreController extends Controller {
      * Lists all Post models.
      * @return mixed
      */
-    public function actionSearch($q) {
+    public function actionSearch($q)
+    {
         $pageSize = 14;
         $search = filter_input(INPUT_POST | INPUT_GET, 'q', FILTER_SANITIZE_SPECIAL_CHARS);
 
@@ -168,7 +176,7 @@ class ExploreController extends Controller {
             $html = '';
             $models = $dataProvider->getModels();
             foreach ($models as $data) {
-                $html.= $this->render('_view', ['model' => $data]);
+                $html .= $this->render('_view', ['model' => $data]);
             }
             echo json_encode(['html' => $html,
                 'total' => $dataProvider->getTotalCount(),
@@ -177,7 +185,7 @@ class ExploreController extends Controller {
             Yii::$app->end();
         } else {
             return $this->render('index', [
-                        'dataProvider' => $dataProvider,
+                'dataProvider' => $dataProvider,
             ]);
         }
     }
@@ -186,7 +194,8 @@ class ExploreController extends Controller {
      * Lists all Post models.
      * @return mixed
      */
-    public function actionAll() {
+    public function actionAll()
+    {
         $pageSize = 14;
         $query = Post::find();
         $query->joinWith(['user', 'postBodies']);
@@ -209,7 +218,7 @@ class ExploreController extends Controller {
             $html = '';
             $models = $dataProvider->getModels();
             foreach ($models as $data) {
-                $html.= $this->render('_view', ['model' => $data]);
+                $html .= $this->render('_view', ['model' => $data]);
             }
             echo json_encode(['html' => $html,
                 'total' => $dataProvider->getTotalCount(),
@@ -218,7 +227,7 @@ class ExploreController extends Controller {
             Yii::$app->end();
         } else {
             return $this->render('index', [
-                        'dataProvider' => $dataProvider,
+                'dataProvider' => $dataProvider,
             ]);
         }
     }
@@ -227,7 +236,8 @@ class ExploreController extends Controller {
      * Lists all Post models.
      * @return mixed
      */
-    public function actionIndex($tag = '') {
+    public function actionIndex($tag = '')
+    {
         $pageSize = 14;
         $query = Post::find();
         $query->orderBy('created_at DESC');
@@ -255,7 +265,7 @@ class ExploreController extends Controller {
             $html = '';
             $models = $dataProvider->getModels();
             foreach ($models as $data) {
-                $html.= $this->render('_view', ['model' => $data]);
+                $html .= $this->render('_view', ['model' => $data]);
             }
             echo json_encode(['html' => $html,
                 'total' => $dataProvider->getTotalCount(),
@@ -264,14 +274,15 @@ class ExploreController extends Controller {
             Yii::$app->end();
         } else {
             return $this->render('index', [
-                        'dataProvider' => $dataProvider,
+                'dataProvider' => $dataProvider,
             ]);
         }
     }
 
-    public function actionRed($id){
+    public function actionRed($id)
+    {
         $post = Post::findOne(['id' => $id]);
-        if(!isset($post)){
+        if (!isset($post)) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
         header("HTTP/1.1 301 Moved Permanently");
@@ -293,8 +304,8 @@ class ExploreController extends Controller {
             $this->view->params['next'] = Post::find()
                 ->where(['and', "id>$model->id"])
                 ->select('id,title, urlTitle')
-                    ->orderBy('id desc')
-                    ->one();
+                ->orderBy('id desc')
+                ->one();
 
             Yii::$app->cache->set('next-' . $model->id, $this->view->params['next'], 300);
         }
@@ -303,13 +314,13 @@ class ExploreController extends Controller {
             $this->view->params['prev'] = Post::find()
                 ->where(['and', "id<$model->id"])
                 ->select('id,title, urlTitle')
-                    ->orderBy('id desc')
-                    ->one();
+                ->orderBy('id desc')
+                ->one();
             Yii::$app->cache->set('prev-' . $model->id, $this->view->params['prev'], 300);
         }
         return $this->render('view', [
-                    'model' => $model,
-                    'mostviewd' => $mostviewd
+            'model' => $model,
+            'mostviewd' => $mostviewd
         ]);
     }
 
@@ -371,7 +382,7 @@ class ExploreController extends Controller {
             return $this->redirect(["/{$model->urlTitle}"]);
         } else {
             return $this->render('post', [
-                        'model' => $model,
+                'model' => $model,
             ]);
         }
     }
