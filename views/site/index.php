@@ -17,7 +17,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ListView;
-use yii\data\ArrayDataProvider;
 
 $this->title = Yii::t('app', 'هانج - Share - شير مقالات واحصل على المال');
 $this->description = Yii::t('app', 'احصل على المال مقابل كل مشاهدة على المقالات التي تقوم بنشرها من خلال الباي بال ومشاركة مقالاتك عبر الفيسبوك ومواقع التواصل الأخرى.');
@@ -44,7 +43,6 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
 //            }
             ?>
         </div>
-
         <h4 style="color: #fff; text-align: center; margin-bottom: 80px; margin-top: -80px;"> انشر مواضيع   > شاركها على مواقع التواصل  > احصل على المال مقابل كل مشاهدة</h4>
     </div>
 </section>
@@ -74,11 +72,11 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
             <div class="col-md-9 nopadding">
                 <div class="col-md-12 m-t-25 m-b-20">
                     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- 1 -->
+                    <!-- Responsive - Home Page Upper -->
                     <ins class="adsbygoogle"
                          style="display:block"
                          data-ad-client="ca-pub-6288640194310142"
-                         data-ad-slot="2078098512"
+                         data-ad-slot="7108775712"
                          data-ad-format="auto"></ins>
                     <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});
@@ -114,11 +112,11 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
                     </div>
                     <div class="row m-t-25">
                         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <!-- faq ad -->
+                        <!-- Wide Skyscraper - Home Page Upper -->
                         <ins class="adsbygoogle"
-                             style="display:inline-block;width:336px;height:280px"
+                             style="display:inline-block;width:160px;height:600px"
                              data-ad-client="ca-pub-6288640194310142"
-                             data-ad-slot="4022492110"></ins>
+                             data-ad-slot="8585508919"></ins>
                         <script>
                             (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
@@ -173,12 +171,11 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
                     </div>
                     <div class="row m-t-25">
                         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <!-- Responsive -->
+                        <!-- MPU - Home Page Bottom -->
                         <ins class="adsbygoogle"
-                             style="display:block"
+                             style="display:inline-block;width:300px;height:250px"
                              data-ad-client="ca-pub-6288640194310142"
-                             data-ad-slot="2078098512"
-                             data-ad-format="auto"></ins>
+                             data-ad-slot="1062242110"></ins>
                         <script>
                             (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
