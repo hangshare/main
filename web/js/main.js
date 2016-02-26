@@ -46,7 +46,7 @@ $(function () {
             mediaManager: false,
             language: 'ar',
             direction: 'rtl',
-            imageUploadURL: '/explore/upload',
+            imageUploadURL: '/explore/upload/',
             minHeight: 200,
             maxHeight: 800
         });
