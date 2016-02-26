@@ -371,9 +371,6 @@ class ExploreController extends Controller {
                 throw new NotFoundHttpException('The requested page does not exist.');
             }
         }
-        var_dump($_POST);
-        die();
-
         if ($model->load(Yii::$app->request->post())) {
             $model->cover_file = UploadedFile::getInstance($model, 'cover_file');
             if (!empty($model->ylink)) {
@@ -385,10 +382,14 @@ class ExploreController extends Controller {
             } else if ($model->type) { // get cover image from youtube or vimeo
                 $model->saveExternal(true);
             }
-            if (!$model->save(false)) {
+            if (!$model->save()) {
                 var_dump($model->getErrors());
                 die();
             }
+
+            var_dump($_POST);
+            die();
+
             return $this->redirect(["/{$model->urlTitle}"]);
         } else {
             return $this->render('post', [
