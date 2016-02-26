@@ -269,6 +269,16 @@ class ExploreController extends Controller {
         }
     }
 
+    public function actionRed($id){
+        $post = Post::findOne(['id' => $id]);
+        if(!isset($post)){
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        header("HTTP/1.1 301 Moved Permanently");
+        header("Location: {$post->url}");
+        exit(0);
+    }
+
     /**
      * Displays a single Post model.
      * @param integer $id
