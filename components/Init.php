@@ -19,13 +19,6 @@ class Init extends Component {
             header("Location: {$post->url}");
             exit(0);
         }
-        $need_to_add_trailing_slash = preg_match('~^http?://[^/]+$~', Yii::$app->request->url);
-        var_dump($need_to_add_trailing_slash);die();
-        if($need_to_add_trailing_slash){
-            header("HTTP/1.1 301 Moved Permanently");
-            header("Location: {$url}/");
-        }
-
         parent::init();
     }
 
