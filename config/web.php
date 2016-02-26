@@ -56,7 +56,7 @@ $config = [
         ],
         'session' => [
             'class' => 'yii\web\Session',
-            'cookieParams' => ['httponly' => true, 'lifetime' => 5184000],
+//            'cookieParams' => ['httponly' => true, 'lifetime' => 5184000],
             'timeout' => 5184000,
             'useCookies' => true,
         ],
