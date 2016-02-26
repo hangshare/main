@@ -87,8 +87,6 @@ $config = [
     ],
     'params' => $params,
 ];
-
-
 // configuration adjustments for 'dev' environment
 //$config['bootstrap'][] = 'debug';
 //$config['modules']['debug'] = [
@@ -101,6 +99,4 @@ $config = [
 //    'class' => 'yii\gii\Module',
 //    'allowedIPs' => ['127.0.0.1', $_SERVER['REMOTE_ADDR']]
 //];
-
-
 return $config;
