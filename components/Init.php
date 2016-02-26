@@ -12,9 +12,18 @@ class Init extends Component {
         if (strpos(Yii::$app->request->url, 'explore/') !== false && strpos(Yii::$app->request->url, 'title') !== false) {
             $id = $this->get_string_between(Yii::$app->request->url, 'explore/', '?title=');
             $post = Post::findOne(['id' => $id]);
-
+            if(!isset($post)){
+                throw new NotFoundHttpException('The requested page does not exist.');
+            }
+            header("HTTP/1.1 301 Moved Permanently");
             header("Location: {$post->url}");
             exit(0);
+        }
+        $need_to_add_trailing_slash = preg_match('~^http?://[^/]+$~', Yii::$app->request->url);
+        var_dump($need_to_add_trailing_slash);die();
+        if($need_to_add_trailing_slash){
+            header("HTTP/1.1 301 Moved Permanently");
+            header("Location: {$url}/");
         }
 
         parent::init();
