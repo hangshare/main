@@ -96,7 +96,7 @@ class ExploreController extends Controller {
             $file_ext = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
             $filebase_name = str_replace('.' . $file_ext, '', $filebase_name);
             $filename = rand(1, 100) . '-' . preg_replace("/[^A-Za-z0-9?!]/", '-', $filebase_name) . '.' . $file_ext;
-            move_uploaded_file($_FILES['file']['tmp_name'], Yii::$app->basePath . '/../../media/' . $file_path . '/' . $filename);
+            move_uploaded_file($_FILES['file']['tmp_name'], Yii::$app->basePath . '/media/' . $file_path . '/' . $filename);
 
             $file_url = Yii::$app->imageresize->thump($file_path . '/' . $filename, 1000, 1000, 'resize');
 

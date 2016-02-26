@@ -2,19 +2,19 @@
 
 namespace app\controllers;
 
-use Yii;
-use app\models\User;
-use app\models\UserSearch;
+use app\components\AwsEmail;
 use app\models\Post;
+use app\models\TransferMethod;
+use app\models\User;
+use app\models\UserPayment;
+use app\models\UserSearch;
+use app\models\UserTransactions;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use app\models\UserTransactions;
-use app\models\UserPayment;
-use app\models\TransferMethod;
-use yii\filters\AccessControl;
-use app\components\AwsEmail;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -56,6 +56,22 @@ class UserController extends Controller {
         echo json_encode($responce);
     }
 
+    /**
+     * Finds the User model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return User the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
     public function actionVerify($key) {
         $userSettings = \app\models\UserSettings::find()->where(['key' => $key])->one();
         if (isset($userSettings)) {
@@ -79,7 +95,7 @@ class UserController extends Controller {
         if ($data = Yii::$app->request->post()) {
             if (isset($data['PayPal'])) {
                 $model = TransferMethod::find()->where(
-                                'userId = ' . Yii::$app->user->identity->id . " AND 
+                    'userId = ' . Yii::$app->user->identity->id . " AND
                             type = 1 ")->one();
                 if (!isset($model)) {
                     $model = new TransferMethod;
@@ -92,7 +108,7 @@ class UserController extends Controller {
             }
             if (isset($data['BankTransfer'])) {
                 $model = TransferMethod::find()->where(
-                                'userId = ' . Yii::$app->user->identity->id . " AND 
+                    'userId = ' . Yii::$app->user->identity->id . " AND
                             type = 2 ")->one();
                 if (!isset($model)) {
                     $model = new TransferMethod;
@@ -104,7 +120,7 @@ class UserController extends Controller {
             }
             if (isset($data['CashierTransfer'])) {
                 $model = TransferMethod::find()->where(
-                                'userId = ' . Yii::$app->user->identity->id . " AND 
+                    'userId = ' . Yii::$app->user->identity->id . " AND
                             type = 3 ")->one();
                 if (!isset($model)) {
                     $model = new TransferMethod;
@@ -116,7 +132,7 @@ class UserController extends Controller {
             }
             if (isset($data['Vodafone'])) {
                 $model = TransferMethod::find()->where(
-                                'userId = ' . Yii::$app->user->identity->id . " AND 
+                    'userId = ' . Yii::$app->user->identity->id . " AND
                             type = 4 ")->one();
                 if (!isset($model)) {
                     $model = new TransferMethod;
@@ -152,7 +168,7 @@ class UserController extends Controller {
             } else {
                 $image = 'user/' . time() . '-' . Yii::$app->user->identity->name . '-' . strtolower($_FILES['image']['name']);
             }
-            move_uploaded_file($_FILES['image']['tmp_name'], Yii::$app->basePath . '/../../media/' . $image);
+            move_uploaded_file($_FILES['image']['tmp_name'], Yii::$app->basePath . '/media/' . $image);
             $re['url'] = Yii::$app->imageresize->thump($image, 50, 50, 'crop');
             $re['name'] = $image;
             echo json_encode($re);
@@ -183,12 +199,12 @@ class UserController extends Controller {
             '__price__' => "{$model->userStats->cantake_amount}$"
         ]);
         AwsEmail::SendMail('info@hangshare.com', 'Money Request', "
-            User Id : {$transaction->userId} , 
-                Amount : {$model->userStats->cantake_amount} , 
+            User Id : {$transaction->userId} ,
+                Amount : {$model->userStats->cantake_amount} ,
             Transaction id : {$transaction->id}");
-        AwsEmail::SendMail('hasania.khaled@gmail.com', 'Money Request', " 
-            User Id : {$transaction->userId} , 
-                Amount : {$model->userStats->cantake_amount} , 
+        AwsEmail::SendMail('hasania.khaled@gmail.com', 'Money Request', "
+            User Id : {$transaction->userId} ,
+                Amount : {$model->userStats->cantake_amount} ,
             Transaction id : {$transaction->id}");
         return $this->redirect(['success', 'id' => $transaction->id]);
     }
@@ -203,13 +219,14 @@ class UserController extends Controller {
      * Lists all User models.
      * @return mixed
      */
-    public function actionIndex() {
+    public function actionIndex()
+    {
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -218,7 +235,8 @@ class UserController extends Controller {
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id) {
+    public function actionView($id)
+    {
 
         if (!isset($_COOKIE["hangprofile-$id"])) {
             Yii::$app->db->createCommand('UPDATE `user_stats` SET `profile_views`=`profile_views`+1 WHERE `userId`=' . $id)->query();
@@ -240,8 +258,8 @@ class UserController extends Controller {
             $view = 'view';
         }
         return $this->render($view, [
-                    'model' => $model,
-                    'dataProvider' => $dataProvider
+            'model' => $model,
+            'dataProvider' => $dataProvider
         ]);
     }
 
@@ -250,14 +268,15 @@ class UserController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate() {
+    public function actionCreate()
+    {
         $model = new User();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
-                        'model' => $model,
+                'model' => $model,
             ]);
         }
     }
@@ -268,7 +287,8 @@ class UserController extends Controller {
      * @param integer $id
      * @return mixed
      */
-    public function actionManage() {
+    public function actionManage()
+    {
         $this->layout = 'usermanage';
         $model = $this->view->params['user'] = $this->findModel(Yii::$app->user->identity->id);
 
@@ -285,7 +305,7 @@ class UserController extends Controller {
             die();
         }
         return $this->render('update', [
-                    'model' => $model,
+            'model' => $model,
         ]);
     }
 
@@ -295,25 +315,11 @@ class UserController extends Controller {
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id) {
+    public function actionDelete($id)
+    {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the User model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return User the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id) {
-        if (($model = User::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
     }
 
 }

@@ -277,7 +277,7 @@ class SiteController extends Controller {
                 if (isset($model) && ($model->created_at + 300 > time())) {
                     $url = "http://graph.facebook.com/{$user_profile->getId()}/picture?type=large";
                     $imagecontent = file_get_contents($url);
-                    $imageFile = Yii::$app->basePath . '/../../media/' . $model->image;
+                    $imageFile = Yii::$app->basePath . '/media/' . $model->image;
                     file_put_contents($imageFile, $imagecontent);
                     Yii::$app->getSession()->setFlash('success', [
                         'message' => '، يرجى منك اكمال تعبئة المعلومات في الأسفل لكي نستطيع تحويل لك النقود في المستقبل. <strong>تمت عملية التسجيل بنجاح</strong>',
