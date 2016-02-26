@@ -1,3 +1,8 @@
+AuthType Basic
+AuthName "Password Protected Area"
+AuthUserFile /etc/apache2/.htpassword
+Require valid-user
+
 <IfModule mod_headers.c>
     RewriteCond "%{HTTP:Accept-encoding}" "gzip"
     RewriteCond "%{REQUEST_FILENAME}\.gz" -s
