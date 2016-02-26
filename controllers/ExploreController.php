@@ -86,6 +86,7 @@ class ExploreController extends Controller {
     }
 
     public function actionUpload() {
+        Yii::app()->request->enableCsrfValidation = false;
         header('Content-Type: application/json');
         if (isset($_FILES['file']) && !empty($_FILES['file']['name'])) {
             $file_path = date('Ydm');
