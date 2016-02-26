@@ -19,14 +19,16 @@ use Yii;
  * @property PostTag[] $postTags
  * @property string urlTitle
  */
-class Post extends \yii\db\ActiveRecord {
+class Post extends \yii\db\ActiveRecord
+{
 
     public $body, $tags, $cover_file, $q, $keywords, $ylink, $vidId, $vidType, $url;
 
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'post';
     }
 
@@ -64,13 +66,14 @@ class Post extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['title', 'tags', 'body'], 'required'],
             [['title', 'urlTitle'], 'unique'],
             [['cover_file', 'ylink'], 'either'],
             ['ylink', 'match', 'pattern' => '/^https?:\/\/(?:.*?)\.?(youtube|vimeo)\.com\/(watch\?[^#]*v=([\w-]+)|(\d+)).*$/'],
-            [['cover_file'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'gif','jpeg'],
+            [['cover_file'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'gif', 'jpeg'],
                 'maxSize' => 1024 * 1024 * 4],
             [['userId', 'type', 'deleted'], 'integer'],
             [['created_at', 'body', 'featured', 'deleted', 'tags', 'keywords', 'cover_file', 'q', 'type', 'ylink', 'vidId', 'vidType'], 'safe'],
@@ -81,7 +84,8 @@ class Post extends \yii\db\ActiveRecord {
         ];
     }
 
-    public function either($attribute_name, $params) {
+    public function either($attribute_name, $params)
+    {
         if (!empty($this->ylink) || $this->cover_file) {
             return true;
         }
@@ -92,7 +96,8 @@ class Post extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id' => Yii::t('app', 'ID'),
             'userId' => Yii::t('app', 'User ID'),
@@ -106,17 +111,26 @@ class Post extends \yii\db\ActiveRecord {
         ];
     }
 
-    public function beforeSave($insert) {
+    public function beforeSave($insert)
+    {
         if ($this->isNewRecord) {
             $this->userId = Yii::$app->user->id;
             Yii::$app->db->createCommand('UPDATE `user_stats` SET `post_count`=`post_count`+1 WHERE `userId`=' . $this->userId)->query();
-            $this->urlTitle = Yii::$app->helper->urlTitle($this->title);
+
+            $url = Yii::$app->helper->urlTitle($this->title);
+            $exist = Yii::$app->db->createCommand("SELECT id FROM post WHERE urlTitle = '{$url}' LIMIT 1")->queryOne();
+            if ($exist) {
+                $rand = $exist['id'] * random_int(2, 5);
+                $url .= "-{$rand}";
+            }
+            $this->urlTitle = $url;
         }
         return true;
     }
 
 
-    public function saveExternal($image) {
+    public function saveExternal($image)
+    {
         $imageLink = $this->cover;
 
         if (preg_match("/https?:\/\/(?:www\.)?vimeo\.com\/\d+/", $this->ylink)) {
@@ -154,7 +168,8 @@ class Post extends \yii\db\ActiveRecord {
         }
     }
 
-    public function afterFind() {
+    public function afterFind()
+    {
         if ($this->type) {
             $obj = json_decode($this->cover);
             if (isset($obj)) {
@@ -172,7 +187,8 @@ class Post extends \yii\db\ActiveRecord {
         return TRUE;
     }
 
-    public function afterSave($insert, $changedAttributes) {
+    public function afterSave($insert, $changedAttributes)
+    {
         parent::afterSave($insert, $changedAttributes);
 
         if ($insert) {
@@ -249,28 +265,32 @@ class Post extends \yii\db\ActiveRecord {
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser() {
+    public function getUser()
+    {
         return $this->hasOne(User::className(), ['id' => 'userId'])->select('id,name,image,bio');
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPostBodies() {
+    public function getPostBodies()
+    {
         return $this->hasMany(PostBody::className(), ['postId' => 'id'])->select('body');
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPostStats() {
+    public function getPostStats()
+    {
         return $this->hasOne(PostStats::className(), ['postId' => 'id'])->select('views');
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPostTags() {
+    public function getPostTags()
+    {
         return $this->hasMany(PostTag::className(), ['postId' => 'id'])->limit(30);
     }
 
