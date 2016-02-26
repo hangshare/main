@@ -18,7 +18,7 @@ use yii\helpers\Html;
 <?php endif; ?>
 <footer style="position: relative">
     <ul class="list-inline pull-left" style="width: 100%;padding-right: 70px;">
-        <li><?= Html::a('الرئيسية', ['/']) ?></li>
+        <li><?= Html::a('الرئيسية', 'http://www.hangshare.com/') ?></li>
         <li class="divider"></li>
         <li><?= Html::a('تصفح', ['//مقالات/مقالات-متنوعة']) ?></li>
         <li class="divider"></li>
