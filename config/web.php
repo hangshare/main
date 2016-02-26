@@ -31,6 +31,7 @@ $config = [
                 'مقالات' => 'explore/all',
 
                 'user/<id:\d+>' => 'user/view',
+                'explore/<id:\d+>' => 'explore/red',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
