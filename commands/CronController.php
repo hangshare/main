@@ -14,15 +14,13 @@ use yii\console\Controller;
 class CronController extends Controller
 {
 
-    public function actionT()
-    {
-        echo 'Test ';
-    }
 
 
     public function actionFix()
     {
         $model = Yii::$app->db->createCommand("SELECT id, title FROM post WHERE urlTitle = '' LIMIT 10000")->queryAll();
+
+        print 'Count ' . count($model) . chr(10);
         foreach ($model as $item) {
             print ' Processing id : ' . $item['id'] . chr(10);
             $url = Yii::$app->helper->urlTitle($item['title']);
