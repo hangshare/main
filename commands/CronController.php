@@ -23,6 +23,10 @@ class CronController extends Controller
         foreach ($model as $item) {
             print ' Processing id : ' . $item['id'] . chr(10);
             $url = Yii::$app->helper->urlTitle($item['title']);
+            $exist = Yii::$app->db->createCommand("SELECT id FROM post WHERE urlTitle = '{$url}' LIMIT 1")->queryOne();
+            if ($exist) {
+                $url .= "-{$exist['id']}";
+            }
             $re = Yii::$app->db->createCommand("UPDATE post SET urlTitle='{$url}' WHERE id={$item['id']}")->query();
             echo chr(10);
         }
