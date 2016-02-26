@@ -19,12 +19,16 @@ $config = [
             'class' => 'app\components\AwsEmail',
         ],
         'urlManager' => [
+            'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
                 '/' => 'site/index',
-                'sitemap.xml' => 'site/xml',
                 'مقالات' => 'explore/all',
+
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 'مقالات/مقاطع-فيديو' => 'explore/video',
                 'مقالات/مقالات-متنوعة' => 'explore/index',
                 'مقالات/مقالات-متنوعة/<tag:[^*]+>' => 'explore/index',
@@ -35,11 +39,8 @@ $config = [
                 'تواصل-معنا' => 'site/contact',
                 'شروط-الموقع' => 'site/privacy',
                 'نبذة-عنا' => 'site/privacy',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                'مقالات/<id:\d+>/<title:[^*]+>' => 'explore/view',
-                '<controller:\w+>s' => '<controller>/index',
+                'sitemap.xml' => 'site/xml',
+                '<slug:.*?>' => 'explore/view',
             ],
         ],
         'request' => [
