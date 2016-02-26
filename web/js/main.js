@@ -2,6 +2,7 @@ $(function () {
     if ((location.hash == "#_=_" || location.href.slice(-1) == "#_=_")) {
         removeHash();
     }
+    $('[data-toggle="tooltip"]').tooltip();
     function removeHash() {
         var scrollV, scrollH, loc = window.location;
         if ('replaceState' in history) {
@@ -135,7 +136,7 @@ $(function () {
 
     $(document).on('submit', '#add-post', function (e) {
         if ($('.has-error').length > 0) {
-            return;
+
         } else {
             $(this).prop('disabled', true);
             $('body').append("<div class='black_overlay'></div><div class='white_content'>الرجاء الإنتظار</div>");
@@ -167,7 +168,7 @@ $(function () {
     });
     $(document).on('click', '.js-share', function (e) {
         e.preventDefault();
-        var title = document.title
+        var title = document.title;
         var url = document.URL;
         var urlpost = $(this).attr('post-url');
         if (urlpost.length) {
@@ -287,7 +288,7 @@ $(function () {
         scrollup: function () {
             if (!this.cssfixedsupport) //if control is positioned using JavaScript
                 this.$control.css({opacity: 0}); //hide control immediately after clicking it
-            var dest = isNaN(this.setting.scrollto) ? this.setting.scrollto : parseInt(this.setting.scrollto)
+            var dest = isNaN(this.setting.scrollto) ? this.setting.scrollto : parseInt(this.setting.scrollto);
             if (typeof dest == "string" && jQuery('#' + dest).length == 1) //check element set by string exists
                 dest = jQuery('#' + dest).offset().top;
             else
@@ -296,15 +297,15 @@ $(function () {
         },
         keepfixed: function () {
             var $window = jQuery(window);
-            var controlx = $window.scrollLeft() + $window.width() - this.$control.width() - this.controlattrs.offsetx
-            var controly = $window.scrollTop() + $window.height() - this.$control.height() - this.controlattrs.offsety
+            var controlx = $window.scrollLeft() + $window.width() - this.$control.width() - this.controlattrs.offsetx;
+            var controly = $window.scrollTop() + $window.height() - this.$control.height() - this.controlattrs.offsety;
             this.$control.css({left: controlx + 'px', top: controly + 'px'})
         },
         togglecontrol: function () {
             var scrolltop = jQuery(window).scrollTop();
             if (!this.cssfixedsupport)
                 this.keepfixed();
-            this.state.shouldvisible = (scrolltop >= this.setting.startline) ? true : false
+            this.state.shouldvisible = (scrolltop >= this.setting.startline) ? true : false;
             if (this.state.shouldvisible && !this.state.isvisible) {
                 this.$control.stop().animate({opacity: 1}, this.setting.fadeduration[0]);
                 this.state.isvisible = true
@@ -328,7 +329,7 @@ $(function () {
                             return false
                         }).appendTo('body');
                 if (document.all && !window.XMLHttpRequest && mainobj.$control.text() != '') //loose check for IE6 and below, plus whether control contains any text
-                    mainobj.$control.css({width: mainobj.$control.width()}) //IE6- seems to require an explicit width on a DIV containing text
+                    mainobj.$control.css({width: mainobj.$control.width()}); //IE6- seems to require an explicit width on a DIV containing text
                 mainobj.togglecontrol();
                 $('a[href="' + mainobj.anchorkeyword + '"]').click(function () {
                     mainobj.scrollup();
