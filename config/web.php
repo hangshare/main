@@ -19,7 +19,6 @@ $config = [
             'class' => 'app\components\AwsEmail',
         ],
         'urlManager' => [
-            'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
