@@ -37,7 +37,7 @@ class Post extends \yii\db\ActiveRecord {
             $featured = Post::find()
                 ->where("type=0 AND cover <> '' AND featured = 1")
                 ->orderBy('sort desc')
-                ->select('id,cover,title')
+                ->select('id,cover,title, urlTitle')
                 ->limit($limit)
                 ->all();
             Yii::$app->cache->set('featured-posts', $featured, 300);
@@ -52,7 +52,7 @@ class Post extends \yii\db\ActiveRecord {
             $most = Post::find()
                 ->where("cover <> ''")
                 ->joinWith(['postStats'])
-                ->select('id,cover,title')
+                ->select('id,cover,title, urlTitle')
                 ->orderBy('post_stats.views desc')
                 ->limit($limit)
                 ->all();
