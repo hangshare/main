@@ -157,7 +157,7 @@ class SiteController extends Controller {
                     ->where("post.type=0 AND post.cover <> ''")
                     ->joinWith(['user'])
                     ->select('post.id, cover,user.id as userId')
-                    ->orderBy('sort desc');
+                ->orderBy('id desc');
             $newpost = new ActiveDataProvider([
                 'query' => $querypost,
                 'pagination' => array(
@@ -188,7 +188,7 @@ class SiteController extends Controller {
                         ->where("type=0 AND cover <> '' AND featured = 1")
                         ->select('cover, title')
                         ->limit(21)
-                        ->orderBy('sort desc');
+                    ->orderBy('id desc');
                 $featured = new ActiveDataProvider([
                     'query' => $queryfeatured,
                     'pagination' => array('pageSize' => 21),
