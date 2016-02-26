@@ -143,6 +143,7 @@ class Hitcounter extends Component
             return false;
         }
 
+
         if (Yii::$app->user->isGuest || $post_user_id != Yii::$app->user->identity->id) {
             Yii::$app->db->createCommand("UPDATE `post_stats` SET `views`=`views`+1 WHERE `postId`= {$id}")->query();
             Yii::$app->db->createCommand("UPDATE `user_stats` SET `post_total_views`=`post_total_views`+1, `post_views`=`post_views`+1, `available_amount`=`available_amount`+{$price}, `total_amount`=`total_amount`+ {$price} WHERE `userId`= {$post_user_id}")->query();
