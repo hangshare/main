@@ -73,12 +73,10 @@ class SiteController extends Controller {
         ];
     }
 
-    public function actionEmail($id) {
-        $time = time();
-        $id = str_replace("'", "\'", $id);
-        Yii::$app->db->createCommand("UPDATE `user_email` SET `opened_at`=`{$time}` WHERE key LIKE `{$id}`")->query();
-        header('Content-Type: image/gif');
-        readfile('https://d1n0d3bhtasuj5.cloudfront.net/grey.gif');
+    public function actionTeste()
+    {
+        AwsEmail::SendMail('hasania.khaled@gmail.com', 'aewhrueihi8', 'adasdsdasdsa');
+        echo 'test';
     }
 
     public function actionFlush() {
