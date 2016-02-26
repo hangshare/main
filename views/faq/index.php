@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use app\models\Faq;
+use yii\helpers\Html;
 use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
@@ -27,11 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <div style="margin-right: -30px;">
                         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <!-- faq ad -->
+                        <!-- Responsive - Faq Right -->
                         <ins class="adsbygoogle"
-                             style="display:inline-block;width:336px;height:280px"
+                             style="display:block"
                              data-ad-client="ca-pub-6288640194310142"
-                             data-ad-slot="4022492110"></ins>
+                             data-ad-slot="8394999319"
+                             data-ad-format="auto"></ins>
                         <script>
                             (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
