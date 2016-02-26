@@ -40,7 +40,7 @@ RewriteCond %{HTTP_HOST} !^www\.
 RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
 
 #Add Trailing Slash at the end
-RewriteCond %{REQUEST_URI}  !\.(php|html?|jpg|gif|css|js|png|woff2|ico|ttf)$
+RewriteCond %{REQUEST_URI}  !\.(php|html?|jpg|JPG|gif|GIF|css|js|png|PNG|woff2|ico|ICO|ttf|TTF)$
 RewriteRule ^(.*)([^/])$ http://%{HTTP_HOST}/$1$2/ [L,R=301]
 
 RewriteCond %{REQUEST_FILENAME} !-f
