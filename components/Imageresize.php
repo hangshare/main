@@ -4,6 +4,7 @@ namespace app\components;
 
 use Yii;
 use yii\base\Component;
+use yii\helpers\Url;
 
 class Imageresize extends Component
 {
@@ -62,14 +63,12 @@ class Imageresize extends Component
                     $im = new \Imagick($this->mediaFile . '/' . $this->file);
                     $im->scaleimage(0, $this->height);
                     $im->writeimage($thumppath);
-
                     $bkim = new \Imagick($this->mediaFile . '/' . $this->file);
                     $bkim->evaluateImage(\Imagick::EVALUATE_MULTIPLY, 0.3, \Imagick::CHANNEL_ALPHA);
                     $bkim->cropThumbnailImage($this->width, $this->height);
                     $bkim->blurimage(25, 15);
                     $bkim->setImageFormat('png');
                     $bkim->setImageCompression(\Imagick::COMPRESSION_LOSSLESSJPEG);
-
                     //$im->cropThumbnailImage($this->width / 2, $this->height + $this->height / 3);
                     $im->resizeImage($this->width / 2, $this->height / 2, \Imagick::FILTER_LANCZOS, 0.9, true);
                     $shadow = $im->clone();
@@ -86,8 +85,7 @@ class Imageresize extends Component
             $im->clear();
             $im->destroy();
         }
-        //Url::home(true)
-        return 'https://s3-eu-west-1.amazonaws.com/hangshare.media/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
+        return Url::home(true) . 'media/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
     }
 
     public function setMethod($method)
@@ -113,5 +111,4 @@ class Imageresize extends Component
         $this->file = $file;
         return $this;
     }
-
 }
