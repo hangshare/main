@@ -10,7 +10,7 @@ $this->endContent();
 <?php
 
 if(count(Yii::$app->getSession()->getAllFlashes())> 0){
-    echo Alert::widget();
+//    echo Alert::widget();
 }
 ?>
 <div class="main">
