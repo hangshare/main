@@ -156,7 +156,7 @@ class SiteController extends Controller {
             $querypost = Post::find()
                     ->where("post.type=0 AND post.cover <> ''")
                     ->joinWith(['user'])
-                    ->select('post.id, cover,user.id as userId')
+                ->select('post.id,post.title , cover,user.id as userId')
                 ->orderBy('id desc');
             $newpost = new ActiveDataProvider([
                 'query' => $querypost,
@@ -186,7 +186,7 @@ class SiteController extends Controller {
             if ($featured === false) {
                 $queryfeatured = Post::find()
                         ->where("type=0 AND cover <> '' AND featured = 1")
-                        ->select('cover, title')
+                    ->select('id, cover, title')
                         ->limit(21)
                     ->orderBy('id desc');
                 $featured = new ActiveDataProvider([
