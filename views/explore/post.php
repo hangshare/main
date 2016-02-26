@@ -64,6 +64,9 @@ foreach ($model->postBodies as $data) {
             $form->field($model, 'tags')->checkboxList(ArrayHelper::map(
                             Tags::find()
                                     ->where('type=1')
+                                ->select('id, name')
+                                ->orderBy('id desc')
+                                ->limit(50)
                                     ->all(), 'id', 'name'))
             ?>
 
