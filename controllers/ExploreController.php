@@ -89,8 +89,8 @@ class ExploreController extends Controller {
         header('Content-Type: application/json');
         if (isset($_FILES['file']) && !empty($_FILES['file']['name'])) {
             $file_path = date('Ydm');
-            if (!is_dir(Yii::$app->basePath . '/../../media/' . $file_path)) {
-                mkdir(Yii::$app->basePath . '/../../media/' . $file_path, 0777, true);
+            if (!is_dir(Yii::$app->basePath . '/media/' . $file_path)) {
+                mkdir(Yii::$app->basePath . '/media/' . $file_path, 0777, true);
             }
             $filebase_name = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_BASENAME));
             $file_ext = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
