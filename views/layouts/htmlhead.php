@@ -26,7 +26,6 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => $canonical]);
         <!-- Facebook meta tags -->
         <meta property="og:title" content="<?= Html::encode($this->title) ?>" />
         <meta property="og:site_name" content="hangshare"/>
-        <meta property="og:url" content="<?= $canonical ?>" />
         <meta property="og:description" content="<?= $this->description; ?>" />
         <meta property="fb:app_id" content="1024611190883720" />
         <meta property="og:image" content="<?= $this->ogImage; ?>" />
@@ -35,10 +34,6 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => $canonical]);
         <meta property="article:publisher" content="http://www.hangshare.com" />
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
-<!--        <link href="<?= $canonical ?>" rel="alternate" hreflang="ar">
-        <link href="/assets/eb8da323/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/css/site.min.css" rel="stylesheet">
-        <link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">-->
         <script>
             (function (i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;
