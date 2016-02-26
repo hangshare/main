@@ -251,7 +251,6 @@ class Post extends \yii\db\ActiveRecord
     {
         Yii::$app->controller->enableCsrfValidation = false;
         if ($this->validate() && isset($this->cover_file)) {
-
             $this->cover = date('Ydm');
             if (!is_dir(Yii::$app->basePath . '/web/media/' . $this->cover)) {
                 mkdir(Yii::$app->basePath . '/web/media/' . $this->cover, 0777, true);
