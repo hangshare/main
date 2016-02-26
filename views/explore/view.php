@@ -121,7 +121,7 @@ $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize'
                                                 ?>
                                                 <li>
                                                     <?php $ttaUrl = Yii::$app->helper->urlTitle($tags->tags->name); ?>
-                                                    <a href="<?= Yii::$app->urlManager->createUrl(["//مقالات/{$category}/{$ttaUrl}"]) ?>"><label
+                                                    <a href="<?= Yii::$app->urlManager->createUrl(["مقالات/{$category}/{$ttaUrl}"]) ?>"><label
                                                             class="label label-default"><?php echo $tags->tags->name; ?></label></a>
                                                 </li>
                                                 <?php
