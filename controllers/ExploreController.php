@@ -362,6 +362,8 @@ class ExploreController extends Controller {
      */
     public function actionPost($id = '')
     {
+        var_dump($_POST);
+        die();
         if (empty($id)) {
             $model = new Post();
         } else {
