@@ -312,7 +312,7 @@ class ExploreController extends Controller {
         if ($this->view->params['next'] == false) {
             $this->view->params['next'] = Post::find()
                 ->where(['and', "id>$model->id"])
-                    ->select('id,title')
+                ->select('id,title, urlTitle')
                     ->orderBy('id desc')
                     ->one();
 
@@ -322,7 +322,7 @@ class ExploreController extends Controller {
         if ($this->view->params['prev'] == false) {
             $this->view->params['prev'] = Post::find()
                 ->where(['and', "id<$model->id"])
-                    ->select('id,title')
+                ->select('id,title, urlTitle')
                     ->orderBy('id desc')
                     ->one();
             Yii::$app->cache->set('prev-' . $model->id, $this->view->params['prev'], 300);
@@ -362,7 +362,6 @@ class ExploreController extends Controller {
      */
     public function actionPost($id = '')
     {
-
         if (empty($id)) {
             $model = new Post();
         } else {
@@ -371,7 +370,6 @@ class ExploreController extends Controller {
                 throw new NotFoundHttpException('The requested page does not exist.');
             }
         }
-
         if ($model->load(Yii::$app->request->post())) {
             $model->cover_file = UploadedFile::getInstance($model, 'cover_file');
             if (!empty($model->ylink)) {
@@ -383,12 +381,11 @@ class ExploreController extends Controller {
             } else if ($model->type) { // get cover image from youtube or vimeo
                 $model->saveExternal(true);
             }
-
             if (!$model->save(false)) {
                 var_dump($model->getErrors());
                 die();
             }
-            return $this->redirect(['view', 'id' => $model->id, 'title' => $model->title]);
+            return $this->redirect(["/{$model->urlTitle}"]);
         } else {
             return $this->render('post', [
                         'model' => $model,

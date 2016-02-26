@@ -288,7 +288,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public function getPosts()
     {
-        return $this->hasMany(Post::className(), ['userId' => 'id'])->select('id,title,cover');
+        return $this->hasMany(Post::className(), ['userId' => 'id'])->select('id,title,cover, urlTitle');
     }
 
     /**
