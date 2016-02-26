@@ -13,7 +13,6 @@ if (empty($this->ogImage)) {
     $this->ogImage = 'https://s3.amazonaws.com/hangshare.static/Screenshot+from+2016-02-05+03%3A38%3A33.png';
 }
 $canonical = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-$this->registerLinkTag(['rel' => 'canonical', 'href' => $canonical]);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -26,6 +25,7 @@ $this->registerLinkTag(['rel' => 'canonical', 'href' => $canonical]);
         <!-- Facebook meta tags -->
         <meta property="og:title" content="<?= Html::encode($this->title) ?>" />
         <meta property="og:site_name" content="hangshare"/>
+        <meta property="og:url" content="<?= $canonical ?>" />
         <meta property="og:description" content="<?= $this->description; ?>" />
         <meta property="fb:app_id" content="1024611190883720" />
         <meta property="og:image" content="<?= $this->ogImage; ?>" />
