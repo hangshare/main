@@ -18,7 +18,7 @@ class CronController extends Controller
 
     public function actionFix()
     {
-        $model = Yii::$app->db->createCommand("SELECT id, title FROM post WHERE urlTitle = '' OR is  urlTitle IS Null LIMIT 10000")->queryAll();
+        $model = Yii::$app->db->createCommand("SELECT id, title FROM post WHERE urlTitle = '' OR urlTitle is null LIMIT 10000")->queryAll();
         print 'Count ' . count($model) . chr(10);
         foreach ($model as $item) {
             print ' Processing id : ' . $item['id'] . chr(10);
