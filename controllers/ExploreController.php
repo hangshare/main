@@ -6,8 +6,6 @@ use app\models\Post;
 use app\models\PostSearch;
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
@@ -18,33 +16,7 @@ use yii\web\UploadedFile;
 class ExploreController extends Controller {
 
     public $next;
-
-    public function behaviors() {
-        return [
-            [
-                'class' => 'yii\filters\HttpCache',
-                'only' => ['index', 'view'],
-                'cacheControlHeader' => function ($action, $params) {
-            return 'public, max-age=3600';
-        },
-            ],
-            'access' => [
-                'class' => AccessControl::classname(),
-                'only' => ['Post', 'Delete'],
-                'rules' => [[
-                'allow' => true,
-                'roles' => ['@']
-                    ]]
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                    'checkhit' => ['post'],
-                ],
-            ],
-        ];
-    }
+    public $enableCsrfValidation = false;
 
     public function actionRelated() {
         $this->layout = false;
@@ -86,21 +58,19 @@ class ExploreController extends Controller {
     }
 
     public function actionUpload() {
-        Yii::$app->request->enableCsrfValidation = false;
-        header('Content-Type: application/json');
+//        header('Content-Type: application/json');
+
         if (isset($_FILES['file']) && !empty($_FILES['file']['name'])) {
             $file_path = date('Ydm');
-            if (!is_dir(Yii::$app->basePath . '/media/' . $file_path)) {
-                mkdir(Yii::$app->basePath . '/media/' . $file_path, 0777, true);
+            if (!is_dir(Yii::$app->basePath . '/web/media/' . $file_path)) {
+                mkdir(Yii::$app->basePath . '/web/media/' . $file_path, 0777, true);
             }
             $filebase_name = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_BASENAME));
             $file_ext = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
             $filebase_name = str_replace('.' . $file_ext, '', $filebase_name);
             $filename = rand(1, 100) . '-' . preg_replace("/[^A-Za-z0-9?!]/", '-', $filebase_name) . '.' . $file_ext;
-            move_uploaded_file($_FILES['file']['tmp_name'], Yii::$app->basePath . '/media/' . $file_path . '/' . $filename);
-
+            move_uploaded_file($_FILES['file']['tmp_name'], Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename);
             $file_url = Yii::$app->imageresize->thump($file_path . '/' . $filename, 1000, 1000, 'resize');
-
             echo json_encode(array('link' => $file_url));
             Yii::$app->end();
         }
@@ -363,7 +333,7 @@ class ExploreController extends Controller {
      */
     public function actionPost($id = '')
     {
-        Yii::$app->request->enableCsrfValidation = false;
+
         if (empty($id)) {
             $model = new Post();
         } else {
