@@ -86,7 +86,7 @@ class ExploreController extends Controller {
     }
 
     public function actionUpload() {
-        Yii::app()->request->enableCsrfValidation = false;
+        Yii::$app->request->enableCsrfValidation = false;
         header('Content-Type: application/json');
         if (isset($_FILES['file']) && !empty($_FILES['file']['name'])) {
             $file_path = date('Ydm');
@@ -363,7 +363,7 @@ class ExploreController extends Controller {
      */
     public function actionPost($id = '')
     {
-        Yii::app()->request->enableCsrfValidation = false;
+        Yii::$app->request->enableCsrfValidation = false;
         if (empty($id)) {
             $model = new Post();
         } else {
