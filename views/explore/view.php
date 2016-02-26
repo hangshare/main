@@ -52,12 +52,11 @@ $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize'
                                 <div class="col-md-12 m-b-20">
                                     <script async
                                             src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                                    <!-- 1 -->
+                                    <!-- Leaderboard - Post Upper -->
                                     <ins class="adsbygoogle"
-                                         style="display:block"
+                                         style="display:inline-block;width:728px;height:90px"
                                          data-ad-client="ca-pub-6288640194310142"
-                                         data-ad-slot="2078098512"
-                                         data-ad-format="auto"></ins>
+                                         data-ad-slot="1011333310"></ins>
                                     <script>
                                         (adsbygoogle = window.adsbygoogle || []).push({});
                                     </script>
@@ -81,6 +80,18 @@ $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize'
                                     $this->description = Yii::$app->helper->metabody($bodys);
                                     echo $bodys;
                                     ?>
+                                    <div class="m-b-20">
+                                        <script async
+                                                src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                        <!-- Leaderboard - Post Bottom -->
+                                        <ins class="adsbygoogle"
+                                             style="display:inline-block;width:728px;height:90px"
+                                             data-ad-client="ca-pub-6288640194310142"
+                                             data-ad-slot="1341443712"></ins>
+                                        <script>
+                                            (adsbygoogle = window.adsbygoogle || []).push({});
+                                        </script>
+                                    </div>
                                 </div>
                                 <ul class="list-inline shareer" style="margin: 18px 7px 20px;">
                                     <li><a class="btn btn-primary js-share js-share-fasebook" href="javascript:void(0);"
@@ -118,21 +129,6 @@ $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize'
                                         ?>
                                     </ul>
                                 </div>
-                                <?php if (!Yii::$app->helper->isMobile()): ?>
-                                    <div class="col-md-12 m-b-20">
-                                        <script async
-                                                src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                                        <!-- 1 -->
-                                        <ins class="adsbygoogle"
-                                             style="display:block"
-                                             data-ad-client="ca-pub-6288640194310142"
-                                             data-ad-slot="2078098512"
-                                             data-ad-format="auto"></ins>
-                                        <script>
-                                            (adsbygoogle = window.adsbygoogle || []).push({});
-                                        </script>
-                                    </div>
-                                <?php endif; ?>
                             </div>
                             <hr class="row">
                             <div class="row">
@@ -201,26 +197,25 @@ $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize'
             </div>
         <?php endif; ?>
         <?php if (!Yii::$app->helper->isMobile()): ?>
+
             <div class="row m-t-25 m-b-20">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- Responsive -->
+                <!-- MPU - Post Upper -->
                 <ins class="adsbygoogle"
-                     style="display:block"
+                     style="display:inline-block;width:300px;height:250px"
                      data-ad-client="ca-pub-6288640194310142"
-                     data-ad-slot="2078098512"
-                     data-ad-format="auto"></ins>
+                     data-ad-slot="2818176918"></ins>
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             </div>
             <div class="row m-t-25">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- 1 -->
+                <!-- Wide Skyscraper - Post Upper -->
                 <ins class="adsbygoogle"
-                     style="display:block"
+                     style="display:inline-block;width:160px;height:600px"
                      data-ad-client="ca-pub-6288640194310142"
-                     data-ad-slot="2078098512"
-                     data-ad-format="auto"></ins>
+                     data-ad-slot="4294910115"></ins>
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
@@ -239,15 +234,16 @@ $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize'
                 <div class="fb-like-box m-t-20" data-href="https://www.facebook.com/Hangshare" data-colorscheme="light"
                      data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
             </div>
+
         <?php endif; ?>
         <div style="position: relative">
             <div id="fixad" class="row m-t-25" rel="2318">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- faq ad -->
+                <!-- MPU - Post Bottom -->
                 <ins class="adsbygoogle"
-                     style="display:inline-block;width:336px;height:280px"
+                     style="display:inline-block;width:300px;height:250px"
                      data-ad-client="ca-pub-6288640194310142"
-                     data-ad-slot="4022492110"></ins>
+                     data-ad-slot="5771643312"></ins>
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
@@ -255,12 +251,11 @@ $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize'
         </div>
         <div class="row m-t-25">
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- 1 -->
+            <!-- Wide Skyscraper - Post Bottom -->
             <ins class="adsbygoogle"
-                 style="display:block"
+                 style="display:inline-block;width:160px;height:600px"
                  data-ad-client="ca-pub-6288640194310142"
-                 data-ad-slot="2078098512"
-                 data-ad-format="auto"></ins>
+                 data-ad-slot="7248376513"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
