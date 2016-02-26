@@ -6,7 +6,8 @@ use Yii;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 
-class Hitcounter extends Component {
+class Hitcounter extends Component
+{
 
     const HIT_OLD_AFTER_SECONDS = 260000; // 3 days.
     const IGNORE_SEARCH_BOTS = true;
@@ -25,15 +26,17 @@ class Hitcounter extends Component {
         'OM', 'QA', 'SD', 'YE', 'IL', 'MR', 'DJ', 'LB', 'DZ', 'TN', 'PS', 'TR', 'IQ'
     );
 
-    public static function get_http_response_code($url) {
+    public static function get_http_response_code($url)
+    {
         $headers = get_headers($url);
         return substr($headers[0], 9, 3);
     }
 
-    public static function ip_details() {
+    public static function ip_details()
+    {
         $details = '';
         $reip = self::getRemoteIPAddress();
-        $co_key='hangusercountrycode';
+        $co_key = 'hangusercountrycode';
         if (isset($_COOKIE[$co_key])) {
             return $_COOKIE[$co_key];
         }
@@ -66,21 +69,23 @@ class Hitcounter extends Component {
         if (isset($details->country)) {
             $country_code = $details->country;
         }
-        if(!isset($country_code)){
+        if (!isset($country_code)) {
             return false;
         }
         setcookie($co_key, $country_code, time() + self::HIT_OLD_AFTER_SECONDS * 150, "/");
         return $country_code;
     }
 
-    public static function getRemoteIPAddress() {
+    public static function getRemoteIPAddress()
+    {
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))
             return $_SERVER['HTTP_X_FORWARDED_FOR'];
 
         return $_SERVER['REMOTE_ADDR'];
     }
 
-    public function AddHit($pageID, $post_user_id, $plan) {
+    public function AddHit($pageID, $post_user_id, $plan)
+    {
         if (self::IGNORE_SEARCH_BOTS && self::IsSearchBot())
             return false;
         if (in_array(self::getRemoteIPAddress(), self::$IP_IGNORE_LIST))
@@ -99,7 +104,8 @@ class Hitcounter extends Component {
         return self::CreateCountsIfNotPresent($pageID, $post_user_id, $plan);
     }
 
-    private static function IsSearchBot() {
+    private static function IsSearchBot()
+    {
         $keywords = array(
             'bot', 'spider', 'spyder', 'crawlwer', 'walker', 'search', 'holmes',
             'htdig', 'archive', 'tineye', 'yacy', 'yeti',
@@ -115,14 +121,20 @@ class Hitcounter extends Component {
         return false;
     }
 
-    private static function UniqueHit($pageID) {
+    private static function UniqueHit($pageID)
+    {
         return hash("SHA256", $pageID . self::getRemoteIPAddress());
     }
 
-    private static function CreateCountsIfNotPresent($id, $post_user_id, $plan) {
+    private static function CreateCountsIfNotPresent($id, $post_user_id, $plan)
+    {
         $hashId = self::UniqueHit($id);
         $pricear = self::VIEW_PRICE;
-        $price = $pricear[$plan];
+        if (!isset($pricear[$plan])) {
+            $pricear[0];
+        } else {
+            $price = $pricear[$plan];
+        }
         if (isset($_COOKIE[$hashId]) || isset($_COOKIE["hangView-$id"])) {
             return false;
         }
@@ -144,7 +156,8 @@ class Hitcounter extends Component {
         return true;
     }
 
-    private static function logView($id, $price) {
+    private static function logView($id, $price)
+    {
         $ip = self::getRemoteIPAddress();
         $hashId = self::UniqueHit($id);
         $userId = 0;
