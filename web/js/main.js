@@ -214,7 +214,7 @@ $(function () {
         var Dat = $('article').data();
         $.ajax({
             method: "POST",
-            url: "/explore/countcheck?qt=" + random(),
+            url: "/explore/countcheck/?qt=" + random(),
             data: Dat
         });
     }
@@ -223,7 +223,7 @@ $(function () {
         var Dat = $('article').data();
         $.ajax({
             method: "POST",
-            url: "/explore/related?qt=" + random(),
+            url: "/explore/related/?qt=" + random(),
             data: Dat,
             success: function (data, textStatus, jqXHR) {
                 $('#related-posts').append(data);
