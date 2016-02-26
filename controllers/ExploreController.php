@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\AwsEmail;
 use app\models\Post;
 use app\models\PostSearch;
 use Yii;
@@ -57,8 +58,11 @@ class ExploreController extends Controller
     public function actionCountcheck()
     {
         session_write_close();
-        if (isset($_POST['id']))
+        if (isset($_POST['id']) && isset($_POST['userid']) && isset($_POST['plan'])) {
             Yii::$app->hitcounter->addHit($_POST['id'], $_POST['userid'], $_POST['plan']);
+        } else {
+            AwsEmail::SendMail('hasania.khaled@gmail.com', '61', json_encode($_SERVER));
+        }
     }
 
     public function actionUpload()
