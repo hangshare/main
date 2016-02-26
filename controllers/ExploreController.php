@@ -278,7 +278,6 @@ class ExploreController extends Controller {
      */
     public function actionView($slug)
     {
-
         $model = $this->findModel($slug);
         $mostviewd = Post::mostViewed();
         $this->view->params['next'] = Yii::$app->cache->get('next-' . $model->id);
