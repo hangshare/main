@@ -269,6 +269,8 @@ class ExploreController extends Controller {
         }
     }
 
+
+
     /**
      * Displays a single Post model.
      * @param integer $id
