@@ -10,7 +10,6 @@ $this->endContent();
 $this->beginContent('@app/views/layouts/header.php');
 $this->endContent();
 ?>
-<?= Alert::widget() ?>
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 <div class="main">
     <div class="container">
