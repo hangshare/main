@@ -378,11 +378,6 @@ class ExploreController extends Controller {
             }
             $upload_result = $model->upload();
             if ($upload_result && $model->type) { //get cover image from file
-
-                var_dump($_POST);
-                die();
-
-
                 $model->saveExternal(false);
             } else if ($model->type) { // get cover image from youtube or vimeo
                 $model->saveExternal(true);
