@@ -78,7 +78,7 @@ class Post extends \yii\db\ActiveRecord
                 'maxSize' => 1024 * 1024 * 4],
             [['userId', 'type', 'deleted'], 'integer'],
             [['created_at', 'body', 'featured', 'deleted', 'tags', 'keywords', 'cover_file', 'q', 'type', 'ylink', 'vidId', 'vidType'], 'safe'],
-            [['cover'], 'string', 'max' => 100],
+            [['cover'], 'string', 'max' => 500],
             [['urlTitle'], 'string', 'max' => 200],
             [['title'], 'string', 'max' => 50],
             [['body'], 'string', 'min' => 150],
