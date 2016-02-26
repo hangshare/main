@@ -21,6 +21,7 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'suffix' => '/',
             'rules' => [
                 '/' => 'site/index',
                 'مقالات' => 'explore/all',
