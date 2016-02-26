@@ -27,11 +27,13 @@ $config = [
                 '/' => 'site/index',
                 'مقالات' => 'explore/all',
 
+                'user/<id:\d+>' => 'user/view',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<id:\d+>/<title:[^*]+>' => '<controller>/view',
-
+                '<controller:\w+>s' => '<controller>/index',
 
                 'مقالات/مقاطع-فيديو' => 'explore/video',
                 'مقالات/مقالات-متنوعة' => 'explore/index',
@@ -45,7 +47,9 @@ $config = [
 
                 'مقالات/مقالات-متنوعة/<tag:[^*]+>' => 'explore/index',
                 'مقالات/مقاطع-فيديو/<tag:[^*]+>' => 'explore/video',
+
                 '<slug:.*?>' => 'explore/view',
+
             ],
         ],
         'request' => [
