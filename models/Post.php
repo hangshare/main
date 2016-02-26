@@ -259,16 +259,10 @@ class Post extends \yii\db\ActiveRecord
             $filename = rand(1, 100) . '-' . preg_replace("/[^A-Za-z0-9?!]/", '-', $this->cover_file->baseName) . '.' . $this->cover_file->extension;
             $this->cover = $this->cover . '/' . $filename;
             try {
-
                 $re = $this->cover_file->saveAs(Yii::$app->basePath . '/web/media/' . $this->cover);
-                var_dump(Yii::$app->basePath . '/web/media/' . $this->cover);
-                var_dump($re);
-                die();
             } catch (Exception $e) {
 
             }
-
-
             $this->cover_file = NULL;
             return TRUE;
         }
