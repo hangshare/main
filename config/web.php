@@ -23,24 +23,27 @@ $config = [
             'showScriptName' => false,
             'suffix' => '/',
             'rules' => [
+
                 '/' => 'site/index',
                 'مقالات' => 'explore/all',
 
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                'site/facebook/?<code:\w+>' => 'site/facebook',
+
+
                 'مقالات/مقاطع-فيديو' => 'explore/video',
                 'مقالات/مقالات-متنوعة' => 'explore/index',
-                'مقالات/مقالات-متنوعة/<tag:[^*]+>' => 'explore/index',
-                'مقالات/مقاطع-فيديو/<tag:[^*]+>' => 'explore/video',
-                'الأسئلة-الشائعة' => 'faq/index',
                 'الأسئلة-الشائعة/<category:[^*]+>' => 'faq/index',
+                'الأسئلة-الشائعة' => 'faq/index',
                 'خريطة-الموقع' => 'site/sitemap',
                 'تواصل-معنا' => 'site/contact',
                 'شروط-الموقع' => 'site/privacy',
                 'نبذة-عنا' => 'site/privacy',
                 'sitemap.xml' => 'site/xml',
+
+                'مقالات/مقالات-متنوعة/<tag:[^*]+>' => 'explore/index',
+                'مقالات/مقاطع-فيديو/<tag:[^*]+>' => 'explore/video',
                 '<slug:.*?>' => 'explore/view',
             ],
         ],
