@@ -19,9 +19,14 @@ class Init extends Component {
             header("Location: {$post->url}");
             exit(0);
         }
-        if(strpos(Yii::$app->request->url,'explore/view')){
+        if(strpos(Yii::$app->request->url,'explore/view') !== false){
             header("HTTP/1.1 301 Moved Permanently");
             header("Location: http://www.hangshare.com/%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA/");
+            exit(0);
+        }
+        if(strpos(Yii::$app->request->url,'site/index') !== false){
+            header("HTTP/1.1 301 Moved Permanently");
+            header("Location: http://www.hangshare.com/");
             exit(0);
         }
         parent::init();
