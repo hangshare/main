@@ -33,11 +33,11 @@ $thump = Yii::$app->imageresize->thump($model->image, 80, 80, 'crop');
                             <?php
                             $dollar_available = floor($model->userStats->available_amount);
                             $cent_available = $model->userStats->available_amount - $dollar_available;
-                            $cent_available = floatval(str_replace(',', '.', str_replace('.', '', $cent_available)));
+                            $cent_available = number_format(floatval(str_replace(',', '.', str_replace('.', '', $cent_available))), 2);
 
                             $dollar_cantake_amount = floor($model->userStats->cantake_amount);
                             $cent_cantake_amount = $model->userStats->cantake_amount - $dollar_cantake_amount;
-                            $cent_cantake_amount = floatval(str_replace(',', '.', str_replace('.', '', $cent_cantake_amount)));
+                            $cent_cantake_amount = number_format(floatval(str_replace(',', '.', str_replace('.', '', $cent_cantake_amount))), 2);
                             ?>
 
                             <div class="col-sm-6 clr-greenflat text-center " data-toggle="tooltip"
