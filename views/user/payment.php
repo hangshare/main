@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 $cantak = 100;
-if ($model->plan == 1) {
+if ($model->plan == '1') {
     $cantak = 50;
 }
 ?>
