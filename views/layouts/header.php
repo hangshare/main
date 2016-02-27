@@ -31,10 +31,10 @@ if (Yii::$app->user->isGuest) {
         'options' => ['class' => 'add-post']
     ];
 
-    if (isset(Yii::$app->user->plan) && Yii::$app->user->plan) {
+    if (Yii::$app->user->identity->plan) {
         $menuItems_right[] = [
             'label' => '<span class="addd"><i class="glyphicon glyphicon-star userplan gold"></i>معلومات حسابك الذهبي </span>',
-            'url' => '/user/gold',
+            'url' => ['//user/gold'],
             'options' => ['class' => 'planholder']
         ];
     } else {
