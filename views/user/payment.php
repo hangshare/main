@@ -15,12 +15,12 @@ if ($model->plan == 1) {
         <?php else : ?>
             <?php if ($model->userStats->cantake_amount > 0) : ?>
                 <p class="red">لديك <?php echo number_format($model->userStats->cantake_amount, 2) . '$'; ?> دولار قابلة للسحب الآن.</p>
-                <p>عند الضغط على طلب ارسال المبلغ الى حساب  سوف نقوم بتحويل المبلغ اليك باستخدام معلومات تحويل النقوج المذكورة ادناه.   </p>
+                <p>عند الضغط على طلب ارسال المبلغ الى حساب  سوف نقوم بتحويل المبلغ اليك باستخدام معلومات تحويل التقود المذكورة ادناه.   </p>
 
                 <h3>يرجى مراجعة معلومات حسابك</h3>
                 <?php
                 if ($model->transfer_type == 0) {
-                    echo Html::a('تحديث معلومات الدفع', 'transfer', ['class' => 'btn btn-primary']);
+                    echo Html::a('تحديث معلومات الدفع', ['//user/transfer'], ['class' => 'btn btn-primary']);
                 } else {
                     $obj = json_decode($model->currentMethod->info);
                     echo '<ul class="list-unstyled well">';
