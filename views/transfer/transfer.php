@@ -19,7 +19,7 @@ $this->title = 'طريقة تحويل النقود';
         <li><a id="paypal" href="javascript:void(0);" class="btn <?php echo ($this->params['user']->transfer_type == 1 || $this->params['user']->transfer_type == 0) ? 'btn-warning' : 'btn-default'; ?> showclick">PayPal</a></li>
         <li><a id="bank" href="javascript:void(0);" class="btn <?php echo $this->params['user']->transfer_type == 2 ? 'btn-warning' : 'btn-default'; ?> showclick">حوالة بنكية</a></li>
         <li><a id="moneychanger" href="javascript:void(0);" class="btn <?php echo $this->params['user']->transfer_type == 3 ? 'btn-warning' : 'btn-default'; ?> showclick">حوالة شخصية (من خلال صراف)</a></li>
-        <li><a id="vodafone" href="javascript:void(0);" class="btn <?php echo $this->params['user']->transfer_type == 4 ? 'btn-warning' : 'btn-default'; ?> showclick">رصيد فودافون</a></li>
+<!--        <li><a id="vodafone" href="javascript:void(0);" class="btn --><?php //echo $this->params['user']->transfer_type == 4 ? 'btn-warning' : 'btn-default'; ?><!-- showclick">رصيد فودافون</a></li>-->
     </ul>
     <br>
     <?php
