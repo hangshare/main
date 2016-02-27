@@ -61,7 +61,7 @@ class ExploreController extends Controller
         if (isset($_POST['id']) && isset($_POST['userid']) && isset($_POST['plan'])) {
             Yii::$app->hitcounter->addHit($_POST['id'], $_POST['userid'], $_POST['plan']);
         } else {
-            AwsEmail::SendMail('hasania.khaled@gmail.com', '61', json_encode($_SERVER));
+//            AwsEmail::SendMail('hasania.khaled@gmail.com', '61', json_encode($_SERVER));
         }
     }
 
