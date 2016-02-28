@@ -26,6 +26,8 @@ $config = [
             'showScriptName' => false,
             'suffix' => '/',
             'rules' => [
+                'مقالات/مقالات-متنوعة/<tag:[^*]+>' => 'explore/index',
+                'مقالات/مقاطع-فيديو/<tag:[^*]+>' => 'explore/video',
                 '/' => 'site/index',
                 'مقالات' => 'explore/all',
                 'user/<id:\d+>' => 'user/view',
@@ -44,9 +46,9 @@ $config = [
                 'تواصل-معنا' => 'site/contact',
                 'شروط-الموقع' => 'site/privacy',
                 'نبذة-عنا' => 'site/privacy',
-                'مقالات/ مقالات-متنوعة/<tag:[^*]+>' => 'explore/index',
-                'مقالات/مقاطع-فيديو/<tag:[^*]+>' => 'explore/video',
+
                 '<slug:.*?>' => 'explore/view',
+
             ],
         ],
         'request' => [
@@ -101,7 +103,7 @@ $config = [
 //    'class' => 'yii\debug\Module',
 //    'allowedIPs' => ['127.0.0.1', $_SERVER['REMOTE_ADDR']]
 //];
-
+//
 //$config['bootstrap'][] = 'gii';
 //$config['modules']['gii'] = [
 //    'class' => 'yii\gii\Module',
