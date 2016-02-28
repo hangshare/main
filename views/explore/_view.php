@@ -18,7 +18,7 @@ $userthump = Yii::$app->imageresize->thump($model->user->image, 25, 25, 'crop');
 ?>
 <li>
     <div class="ex-all">
-        <a href="<?= $model->url ?>">
+        <a href="<?= $model->url ?>" cover="<?= $model->cover ?>">
             <?php echo Html::img($thump, ['class' => 'img-responsive zoom-tilt']); ?>
         </a>
         <div class="shareblogsimi">
