@@ -26,10 +26,8 @@ $config = [
             'showScriptName' => false,
             'suffix' => '/',
             'rules' => [
-
                 '/' => 'site/index',
                 'مقالات' => 'explore/all',
-
                 'user/<id:\d+>' => 'user/view',
                 'explore/<id:\d+>' => 'explore/red',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
@@ -38,7 +36,6 @@ $config = [
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<id:\d+>/<title:[^*]+>' => '<controller>/view',
                 '<controller:\w+>s' => '<controller>/index',
-
                 'مقالات/مقاطع-فيديو' => 'explore/video',
                 'مقالات/مقالات-متنوعة' => 'explore/index',
                 'الأسئلة-الشائعة/<category:[^*]+>' => 'faq/index',
@@ -47,13 +44,9 @@ $config = [
                 'تواصل-معنا' => 'site/contact',
                 'شروط-الموقع' => 'site/privacy',
                 'نبذة-عنا' => 'site/privacy',
-                'sitemap.xml' => 'site/xml',
-
-                'مقالات/مقالات-متنوعة/<tag:[^*]+>' => 'explore/index',
+                'مقالات/ مقالات-متنوعة/<tag:[^*]+>' => 'explore/index',
                 'مقالات/مقاطع-فيديو/<tag:[^*]+>' => 'explore/video',
-
                 '<slug:.*?>' => 'explore/view',
-
             ],
         ],
         'request' => [
@@ -86,12 +79,12 @@ $config = [
         ],
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=main.cdb3bm2h7j5j.us-east-1.rds.amazonaws.com;port=3306;dbname=hangshare',
-            'username' => 'hangshare',
-            'password' => 'Khaled!23',
-//            'dsn' => 'mysql:host=127.0.0.1;port=3306;dbname=hangshare',
-//            'username' => 'root',
-//            'password' => '',
+//            'dsn' => 'mysql:host=main.cdb3bm2h7j5j.us-east-1.rds.amazonaws.com;port=3306;dbname=hangshare',
+//            'username' => 'hangshare',
+//            'password' => 'Khaled!23',
+            'dsn' => 'mysql:host=127.0.0.1;port=3306;dbname=hangshare',
+            'username' => 'root',
+            'password' => '',
             'enableSchemaCache' => true,
             'schemaCache' => 'cache',
             'schemaCacheDuration' => 3600,
