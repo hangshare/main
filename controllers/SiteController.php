@@ -84,67 +84,6 @@ class SiteController extends Controller {
         $this->redirect('http://hangadmin.hangshare.com');
     }
 
-    public function actionXml() {
-        header('Content-type: text/xml; charset=UTF-8');
-        $users = User::find()->orderBy('id desc')->all();
-        $posts = Post::find()->orderBy('id desc')->all();
-
-        $sitemap = new \DomDocument('1.0', 'UTF-8');
-        $sitemap->preserveWhiteSpace = false;
-        $sitemap->formatOutput = true;
-        $root = $sitemap->createElement("urlset");
-        $sitemap->appendChild($root);
-        $root_attr = $sitemap->createAttribute('xmlns');
-        $root->appendChild($root_attr);
-        $root_attr_text = $sitemap->createTextNode('http://www.sitemaps.org/schemas/sitemap/0.9');
-        $root_attr->appendChild($root_attr_text);
-
-        foreach ($posts as $post) {
-            $link = Yii::$app->urlManager->createAbsoluteUrl(['//explore/view', 'id' => $post->id, 'title' => $post->title]);
-            $url = $sitemap->createElement('url');
-            $root->appendChild($url);
-
-            $loc = $sitemap->createElement("loc");
-            $lastmod = $sitemap->createElement("lastmod");
-            $changefreq = $sitemap->createElement("changefreq");
-
-            $url->appendChild($loc);
-            $url_text = $sitemap->createTextNode($link);
-            $loc->appendChild($url_text);
-
-            $url->appendChild($lastmod);
-            $lastmod_text = $sitemap->createTextNode(date("Y-m-d", strtotime($post->created_at)));
-            $lastmod->appendChild($lastmod_text);
-
-            $url->appendChild($changefreq);
-            $changefreq_text = $sitemap->createTextNode("weekly");
-            $changefreq->appendChild($changefreq_text);
-        }
-
-        foreach ($users as $user) {
-            $link = Yii::$app->urlManager->createAbsoluteUrl(['//user/view', 'id' => $user->id]);
-            $url = $sitemap->createElement('url');
-            $root->appendChild($url);
-
-            $loc = $sitemap->createElement("loc");
-            $lastmod = $sitemap->createElement("lastmod");
-            $changefreq = $sitemap->createElement("changefreq");
-
-            $url->appendChild($loc);
-            $url_text = $sitemap->createTextNode($link);
-            $loc->appendChild($url_text);
-
-            $url->appendChild($lastmod);
-            $lastmod_text = $sitemap->createTextNode(date("Y-m-d", strtotime($user->created_at)));
-            $lastmod->appendChild($lastmod_text);
-
-            $url->appendChild($changefreq);
-            $changefreq_text = $sitemap->createTextNode("weekly");
-            $changefreq->appendChild($changefreq_text);
-        }
-        echo $sitemap->saveXML() . "\n";
-    }
-
     public function actionIndex() {
         $pageSize = 16;
         $newpost = Yii::$app->cache->get('home-new-postsa');
@@ -472,7 +411,7 @@ class SiteController extends Controller {
                 mail('hasania.khaled@gmail.com', 'paypal Error', $payment_status);
             }
         } else {
-            mail('hasania.khaled@gmail.com', 'paypal Error', $payment_status);
+            mail('hasania.khaled@gmail.com', 'paypal Error', '1111');
         }
         mail('hasania.khaled@gmail.com', 'paypal END', 'END ' . date('Y-m-d h:i:s'));
     }
