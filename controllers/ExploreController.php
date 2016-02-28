@@ -114,6 +114,7 @@ class ExploreController extends Controller
         $query->where('post.type = 1');
         $query->andWhere(['<>', 'cover', '']);
         if (!empty($tag)) {
+            $tag = str_replace('-',' ', $tag);
             $query->joinWith(['postTags', 'postTags.tags']);
             $query->andFilterWhere(['like', 'tags.name', $tag]);
         }
@@ -249,6 +250,7 @@ class ExploreController extends Controller
         $query->where('post.type = 0 AND post.deleted=0');
         $query->andWhere(['<>', 'cover', '']);
         if (!empty($tag)) {
+            $tag = str_replace('-',' ',$tag);
             $query->andFilterWhere(['like', 'tags.name', $tag]);
         }
         $currentPage = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
