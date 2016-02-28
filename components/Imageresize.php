@@ -23,7 +23,13 @@ class Imageresize extends Component
 
     public function thump($file, $width, $height, $method)
     {
+    if($json = $this->isJson($file)){
+        $this->file = $json->image;
+    }else{
         $this->file = $file;
+    }
+
+
         $this->width = $width;
         $this->height = $height;
         $this->method = $method;
@@ -35,6 +41,12 @@ class Imageresize extends Component
         } catch (Exception $ex) {
 
         }
+    }
+
+    public function isJson($string)
+    {
+        $json = json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE) ? $json : false;
     }
 
     protected function resize()
