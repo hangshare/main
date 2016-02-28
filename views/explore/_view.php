@@ -17,7 +17,7 @@ $thump = Yii::$app->imageresize->thump($model->cover, $width, $height, 'crop');
 $userthump = Yii::$app->imageresize->thump($model->user->image, 25, 25, 'crop');
 ?>
 <li>
-    <div class="ex-all">
+    <div class="ex-all" cover="<?= $model->cover; ?>">
         <a href="<?= $model->url ?>">
             <?php echo Html::img($thump, ['class' => 'img-responsive zoom-tilt']); ?>
         </a>
