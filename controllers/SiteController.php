@@ -89,7 +89,7 @@ class SiteController extends Controller {
         $newpost = Yii::$app->cache->get('home-new-postsa');
         if ($newpost === false) {
             $querypost = Post::find()
-                    ->where("post.type=0 AND post.cover <> ''")
+                    ->where("post.deleted=0 AND post.cover <> ''")
                     ->joinWith(['user'])
                 ->select('post.id,post.title , cover,user.id as userId, post.urlTitle')
                 ->orderBy('id desc');
