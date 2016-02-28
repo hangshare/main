@@ -91,7 +91,7 @@ class SiteController extends Controller {
             $querypost = Post::find()
                     ->where("post.deleted=0 AND post.cover <> ''")
                     ->joinWith(['user'])
-                ->select('post.id,post.title , cover,user.id as userId, post.urlTitle')
+                ->select('post.id,post.title , post.cover ,user.id as userId, post.urlTitle')
                 ->orderBy('id desc');
             $newpost = new ActiveDataProvider([
                 'query' => $querypost,
