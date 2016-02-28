@@ -111,7 +111,7 @@ class ExploreController extends Controller
         $query = Post::find();
         $query->joinWith(['user', 'postBodies']);
         $query->orderBy('created_at DESC');
-        $query->where('post.type = 1');
+        $query->where('post.type = 1 AND post.deleted = 0');
         $query->andWhere(['<>', 'cover', '']);
         if (!empty($tag)) {
             $tag = str_replace('-',' ', $tag);
@@ -247,7 +247,7 @@ class ExploreController extends Controller
         $query = Post::find();
         $query->orderBy('created_at DESC');
         $query->joinWith(['postTags', 'postTags.tags', 'user', 'postBodies']);
-        $query->where('post.type = 0 AND post.deleted=0');
+        $query->where('post.type = 0 AND post.deleted = 0 AND post.deleted=0');
         $query->andWhere(['<>', 'cover', '']);
         if (!empty($tag)) {
             $tag = str_replace('-',' ',$tag);
