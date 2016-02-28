@@ -50,16 +50,30 @@ $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize'
                         <div class="post-body">
                             <div class="row chebody">
                                 <div class="col-md-12 m-b-20">
-                                    <script async
-                                            src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                                    <!-- Leaderboard - Post Upper -->
-                                    <ins class="adsbygoogle"
-                                         style="display:inline-block;width:728px;height:90px"
-                                         data-ad-client="ca-pub-6288640194310142"
-                                         data-ad-slot="1011333310"></ins>
-                                    <script>
-                                        (adsbygoogle = window.adsbygoogle || []).push({});
-                                    </script>
+                                    <?php if (Yii::$app->helper->isMobile()) : ?>
+                                        <script async
+                                                src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                        <!-- Responsive - Mobile Post Upper -->
+                                        <ins class="adsbygoogle"
+                                             style="display:block"
+                                             data-ad-client="ca-pub-6288640194310142"
+                                             data-ad-slot="6756705310"
+                                             data-ad-format="auto"></ins>
+                                        <script>
+                                            (adsbygoogle = window.adsbygoogle || []).push({});
+                                        </script>
+                                    <?php else : ?>
+                                        <script async
+                                                src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                        <!-- Leaderboard - Post Upper -->
+                                        <ins class="adsbygoogle"
+                                             style="display:inline-block;width:728px;height:90px"
+                                             data-ad-client="ca-pub-6288640194310142"
+                                             data-ad-slot="1011333310"></ins>
+                                        <script>
+                                            (adsbygoogle = window.adsbygoogle || []).push({});
+                                        </script>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="col-md-12" style="margin: 50px 0;">
                                     <?php
@@ -81,22 +95,37 @@ $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize'
                                     echo $bodys;
                                     ?>
                                     <div class="m-b-20">
-                                        <script async
-                                                src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                                        <!-- Leaderboard - Post Bottom -->
-                                        <ins class="adsbygoogle"
-                                             style="display:inline-block;width:728px;height:90px"
-                                             data-ad-client="ca-pub-6288640194310142"
-                                             data-ad-slot="1341443712"></ins>
-                                        <script>
-                                            (adsbygoogle = window.adsbygoogle || []).push({});
-                                        </script>
+                                        <?php if (Yii::$app->helper->isMobile()) : ?>
+                                            <script async
+                                                    src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                            <!-- Responsive - Mobile Post Bottom -->
+                                            <ins class="adsbygoogle"
+                                                 style="display:block"
+                                                 data-ad-client="ca-pub-6288640194310142"
+                                                 data-ad-slot="9710171716"
+                                                 data-ad-format="auto"></ins>
+                                            <script>
+                                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                            </script>
+                                        <?php else : ?>
+                                            <script async
+                                                    src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                            <!-- Leaderboard - Post Bottom -->
+                                            <ins class="adsbygoogle"
+                                                 style="display:inline-block;width:728px;height:90px"
+                                                 data-ad-client="ca-pub-6288640194310142"
+                                                 data-ad-slot="1341443712"></ins>
+                                            <script>
+                                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                            </script>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <ul class="list-inline shareer" style="margin: 18px 7px 20px;">
                                     <li><a class="btn btn-primary js-share js-share-fasebook" href="javascript:void(0);"
                                            post-url="<?= $model->url; ?>"><i style="margin: 3px;"
-                                                                             class="fa fa-fw fa-facebook"></i>انشر هذا الموضوع
+                                                                             class="fa fa-fw fa-facebook"></i>انشر هذا
+                                            الموضوع
                                             على صفحة الفيسبوك</a></li>
                                     <li><a class="btn js-share js-share-twitter" post-url="<?= $model->url; ?>"
                                            href="javascript:void(0);" style="color: #fff; background-color: #3E4347;"><i
