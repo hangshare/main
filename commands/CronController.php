@@ -46,7 +46,7 @@ class CronController extends Controller
         $root_attr_text = $sitemap->createTextNode('http://www.sitemaps.org/schemas/sitemap/0.9');
         $root_attr->appendChild($root_attr_text);
         foreach ($posts as $post) {
-            $link = "www.hangshare.com/{$post['urlTitle']}/";
+            $link = "http://www.hangshare.com/{$post['urlTitle']}/";
             $url = $sitemap->createElement('url');
             $root->appendChild($url);
             $loc = $sitemap->createElement("loc");
@@ -64,7 +64,7 @@ class CronController extends Controller
         }
         $users= Yii::$app->db->createCommand("SELECT t.id, t.created_at, t.name FROM user t WHERE 1 ORDER BY t.id DESC;")->queryAll();
         foreach ($users as $user) {
-            $link = "www.hangshare.com/user/{$user['id']}/";
+            $link = "http://www.hangshare.com/user/{$user['id']}/";
             $url = $sitemap->createElement('url');
             $root->appendChild($url);
 
