@@ -94,6 +94,7 @@ $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize'
                                     $this->description = Yii::$app->helper->metabody($bodys);
                                     echo $bodys;
                                     ?>
+
                                     <div class="m-b-20">
                                         <?php if (Yii::$app->helper->isMobile()) : ?>
                                             <script async
