@@ -73,11 +73,6 @@ class SiteController extends Controller {
         ];
     }
 
-    public function actionTeste()
-    {
-        AwsEmail::SendMail('hasania.khaled@gmail.com', 'aewhrueihi8', 'adasdsdasdsa');
-        echo 'test';
-    }
 
     public function actionFlush() {
         Yii::$app->cache->flush();
@@ -85,6 +80,10 @@ class SiteController extends Controller {
     }
 
     public function actionIndex() {
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
+
         $pageSize = 16;
         $newpost = Yii::$app->cache->get('home-new-postsa');
         if ($newpost === false) {
@@ -142,7 +141,6 @@ class SiteController extends Controller {
 
     public function actionFacebook() {
         session_start();
-
         $fb = new Facebook\Facebook([
             'app_id' => '1024611190883720',
             'app_secret' => '0df74c464dc8e58424481fb4cb3bb13c',
@@ -245,6 +243,10 @@ class SiteController extends Controller {
     }
 
     public function actionLogin() {
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
+
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -288,21 +290,6 @@ class SiteController extends Controller {
 
     public function actionPrivacy() {
         return $this->render('privacy');
-    }
-
-    public function actionSitemap() {
-        $userProvider = new ActiveDataProvider([
-            'query' => User::find()->orderBy('id desc'),
-            'pagination' => array('pageSize' => 100),
-        ]);
-        $postProvider = new ActiveDataProvider([
-            'query' => Post::find()->orderBy('id desc'),
-            'pagination' => array('pageSize' => 100),
-        ]);
-        return $this->render('sitemap', [
-                    'userProvider' => $userProvider,
-                    'postProvider' => $postProvider
-        ]);
     }
 
     public function actionCancel() {
@@ -508,7 +495,6 @@ class SiteController extends Controller {
                     'model' => $model,
         ]);
     }
-
     public function actionResetPassword($token) {
         try {
             $model = new ResetPasswordForm($token);
@@ -523,5 +509,4 @@ class SiteController extends Controller {
                     'model' => $model,
         ]);
     }
-
 }
