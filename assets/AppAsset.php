@@ -28,7 +28,7 @@ class AppAsset extends AssetBundle
     public $js = [
 //        '/css/lazyload/jquery.lazyload.min.js',
 //        '/css/lazyload/jquery.scrollstop.min.js',
-        YII_DEBUG ? 'js/main.js' : '/js/main.min.js'
+        YII_DEBUG ? 'js/main.js' : '/js/main.1.1.min.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
@@ -45,7 +45,7 @@ class AppAsset extends AssetBundle
                 'css/editor/js/langs/ar.js',
                 'css/editor/js/plugins/char_counter.min.js',
                 'css/editor/js/plugins/video.min.js',
-                YII_DEBUG ? 'js/main.js' : 'js/main.min.js'
+                YII_DEBUG ? 'js/main.js' : 'js/main.1.1.min.js'
             ];
         }
     }
