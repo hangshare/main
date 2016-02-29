@@ -61,10 +61,10 @@ class FaqController extends Controller
         $model->load(Yii::$app->request->post());
         if (!Yii::$app->user->isGuest)
             $model->userId = Yii::$app->user->id;
-        $model->save();
-
-        AwsEmail::SendMail('info@hangshare.com', 'New Frequently Asked Questions', $model->question);
-        AwsEmail::SendMail('hasania.khaled@gmail.com', 'New Frequently Asked Questions', $model->question);
+        if ($model->save()) {
+            AwsEmail::SendMail('info@hangshare.com', 'New Frequently Asked Questions', $model->question);
+            AwsEmail::SendMail('hasania.khaled@gmail.com', 'New Frequently Asked Questions', $model->question);
+        }
         Yii::$app->getSession()->setFlash('success', [
             'message' => 'تمت اضافة سؤالك بنجاح ، سوف يقوم فريقنا بالرد على سؤالكم واعلامكم.',
         ]);
