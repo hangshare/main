@@ -15,6 +15,12 @@ class Init extends Component {
             if(!is_numeric($id)){
                 $id = $this->get_string_between(Yii::$app->request->url, 'id=', '?title=');
             }
+            if(!is_numeric($id)){
+                $id = $this->get_string_between(Yii::$app->request->url, 'explore/', '/?');
+            }
+            if(!is_numeric($id)){
+                $id = $this->get_string_between(Yii::$app->request->url, 'explore/', '?title');
+            }
             $post = Post::findOne(['id' => $id]);
             if(!isset($post)){
                 header("Location: http://www.hangshare.com/%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA/");
