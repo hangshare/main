@@ -115,9 +115,10 @@ class Post extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         if ($this->isNewRecord) {
-            $this->userId = Yii::$app->user->id;
-            Yii::$app->db->createCommand('UPDATE `user_stats` SET `post_count`=`post_count`+1 WHERE `userId`=' . $this->userId)->query();
-
+            $this->userId = Yii::$app->user->identity->id;
+            if (!empty($this->userId)){
+                Yii::$app->db->createCommand('UPDATE `user_stats` SET `post_count`=`post_count`+1 WHERE `userId`=' . $this->userId)->query();
+            }
             $url = Yii::$app->helper->urlTitle($this->title);
             $exist = Yii::$app->db->createCommand("SELECT id FROM post WHERE urlTitle = '{$url}' LIMIT 1")->queryOne();
             if ($exist) {
