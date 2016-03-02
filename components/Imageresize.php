@@ -8,7 +8,6 @@ use yii\helpers\Url;
 
 class Imageresize extends Component
 {
-
     private $file = '';
     private $width = 200;
     private $height = 200;
@@ -23,13 +22,11 @@ class Imageresize extends Component
 
     public function thump($file, $width, $height, $method)
     {
-    if($json = $this->isJson($file)){
-        $this->file = $json->image;
-    }else{
-        $this->file = $file;
-    }
-
-
+        if ($json = $this->isJson($file)) {
+            $this->file = $json->image;
+        } else {
+            $this->file = $file;
+        }
         $this->width = $width;
         $this->height = $height;
         $this->method = $method;
@@ -54,9 +51,11 @@ class Imageresize extends Component
         $filethump = $this->width . 'x' . $this->height . '-' . $this->method;
         $fileExtract = explode('/', $this->file);
         $path_info = pathinfo($this->file);
-        $ext = $path_info['extension']; // "bill"
+        $ext = $path_info['extension'];
         $path = Yii::$app->basePath . '/web/media/' . $fileExtract[0] . '/' . $filethump;
         $thumppath = $path . '/' . $fileExtract[1];
+
+
 //        @unlink($thumppath);
         if (!is_file($thumppath)) {
             if (!is_dir($path)) {
@@ -97,7 +96,13 @@ class Imageresize extends Component
             $im->clear();
             $im->destroy();
         }
-        return Url::home(true) . 'media/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
+
+        if (filemtime($thumppath) < (time() - 5000)) {
+            return 'https://dw4xox9sj1rhd.cloudfront.net/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
+        } else {
+            return Url::home(true) . 'media/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
+        }
+
     }
 
     public function setMethod($method)
