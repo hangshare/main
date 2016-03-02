@@ -16,7 +16,7 @@ class FixController extends Controller
     public function actionS3post()
     {
         $time = time() - 4000;
-        $lastId =2209;
+        $lastId =1;
         $posts = Yii::$app->db->createCommand("SELECT t.id, body.body FROM post t
             LEFT JOIN post_body body on(t.id = body.postId)
             WHERE UNIX_TIMESTAMP(t.created_at) < $time AND  t.id > $lastId  LIMIT 4000")->queryAll();
