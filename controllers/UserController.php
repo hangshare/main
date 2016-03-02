@@ -19,17 +19,19 @@ use yii\web\NotFoundHttpException;
 /**
  * UserController implements the CRUD actions for User model.
  */
-class UserController extends Controller {
+class UserController extends Controller
+{
 
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'access' => [
                 'class' => AccessControl::classname(),
                 'only' => ['transfer'],
                 'rules' => [[
-                'allow' => true,
-                'roles' => ['@']
-                    ]]
+                    'allow' => true,
+                    'roles' => ['@']
+                ]]
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -40,7 +42,8 @@ class UserController extends Controller {
         ];
     }
 
-    public function actionChangepass() {
+    public function actionChangepass()
+    {
         if (isset($_POST['password']) && isset($_POST['old'])) {
             $old = $_POST['old'];
             $newPass = $_POST['password'];
@@ -72,7 +75,8 @@ class UserController extends Controller {
         }
     }
 
-    public function actionVerify($key) {
+    public function actionVerify($key)
+    {
         $userSettings = \app\models\UserSettings::find()->where(['key' => $key])->one();
         if (isset($userSettings)) {
             $userSettings->verified_email = 1;
@@ -89,7 +93,8 @@ class UserController extends Controller {
         return $this->redirect(['//تواصل-معنا']);
     }
 
-    public function actionTransfer() {
+    public function actionTransfer()
+    {
         $this->layout = 'usermanage';
         $this->view->params['user'] = $this->findModel(Yii::$app->user->identity->id);
         if ($data = Yii::$app->request->post()) {
@@ -150,7 +155,8 @@ class UserController extends Controller {
         return $this->render('//transfer/transfer', ['model' => $model, 'user' => $this->user]);
     }
 
-    public function actionGold() {
+    public function actionGold()
+    {
         $this->layout = 'usermanage';
         $this->view->params['user'] = $this->findModel(Yii::$app->user->identity->id);
         $model = UserPayment::find()->where('userId = ' . Yii::$app->user->id)->one();
@@ -160,7 +166,8 @@ class UserController extends Controller {
         return $this->render('gold', ['model' => $model]);
     }
 
-    public function actionImage() {
+    public function actionImage()
+    {
         $re = [];
         if (isset($_FILES['image']) && !empty($_FILES['image']['name'])) {
             if (Yii::$app->user->isGuest) {
@@ -175,11 +182,13 @@ class UserController extends Controller {
         }
     }
 
-    public function actionSuccess($id) {
+    public function actionSuccess($id)
+    {
         return $this->render('success');
     }
 
-    public function actionRequest() {
+    public function actionRequest()
+    {
 
         $model = $this->findModel(Yii::$app->user->identity->id);
         $transaction = new UserTransactions;
@@ -209,7 +218,8 @@ class UserController extends Controller {
         return $this->redirect(['success', 'id' => $transaction->id]);
     }
 
-    public function actionPayment() {
+    public function actionPayment()
+    {
         $chkTransaction = Yii::$app->db->createCommand('SELECT 1 FROM `user_transactions` WHERE status = 0 AND userId = ' . Yii::$app->user->identity->id)->queryScalar();
         $model = $this->findModel(Yii::$app->user->identity->id);
         return $this->render('payment', ['model' => $model, 'chkTransaction' => $chkTransaction]);
@@ -289,6 +299,9 @@ class UserController extends Controller {
      */
     public function actionManage()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['/']);
+        }
         $this->layout = 'usermanage';
         $model = $this->view->params['user'] = $this->findModel(Yii::$app->user->identity->id);
 
