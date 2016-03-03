@@ -28,6 +28,32 @@ $this->description = Yii::t('app', "مقالات متنوعة $q ، انشر م�
 ?>
 <div class="container m-t-25">
     <div class="row">
+        <?php if (Yii::$app->helper->isMobile()) : ?>
+            <script async src = "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- left right responsive categery -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-6288640194310142"
+                 data-ad-slot="8394999319"
+                 data-ad-format="auto"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        <?php else : ?>
+            <div class="white text-center">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- Leaderboard - Category Upper -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:728px;height:90px"
+                     data-ad-client="ca-pub-6288640194310142"
+                     data-ad-slot="6969174910"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        <?php endif ?>
+    </div>
+    <div class="row">
         <div class="col-md-3  res-hidden">
             <h3 class="m-t-25">البحث</h3>
             <hr class="nomargin"> 
@@ -80,30 +106,6 @@ $this->description = Yii::t('app', "مقالات متنوعة $q ، انشر م�
             </div>
         </div>
         <div class="col-md-6">
-            <?php if (Yii::$app->helper->isMobile()) : ?>
-                <script async src = "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- left right responsive categery -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-6288640194310142"
-                     data-ad-slot="8394999319"
-                     data-ad-format="auto"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            <?php else : ?>
-                <div class="white text-center">
-                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- Leaderboard - Category Upper -->
-                    <ins class="adsbygoogle"
-                         style="display:inline-block;width:728px;height:90px"
-                         data-ad-client="ca-pub-6288640194310142"
-                         data-ad-slot="6969174910"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-            <?php endif ?>
             <div class="row">
                 <h1 class="normal"><?= $title ?></h1>
             </div>
