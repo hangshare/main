@@ -40,7 +40,7 @@ $this->description = Yii::t('app', "مقالات متنوعة $q ، انشر م�
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
         <?php else : ?>
-            <div class="white text-center">
+            <div class="white">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- Leaderboard - Category Upper -->
                 <ins class="adsbygoogle"
