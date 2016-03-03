@@ -2,19 +2,19 @@
 
 use yii\helpers\Html;
 ?>
-<?php if (Yii::$app->helper->isMobile()): ?>
+<?php //if (!Yii::$app->helper->isMobile()): ?>
     <div class="footads">
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- Mobile Banner - All Pages -->
+        <!-- Large mobile Banner - Mobile Post Upper -->
         <ins class="adsbygoogle"
-             style="display:inline-block;width:320px;height:50px"
+             style="display:inline-block;width:320px;height:100px"
              data-ad-client="ca-pub-6288640194310142"
-             data-ad-slot="4216551313"></ins>
+             data-ad-slot="5787356113"></ins>
         <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     </div>
-<?php endif; ?>
+<?php //endif; ?>
 <footer style="position: relative">
     <ul class="list-inline pull-left" style="width: 100%;padding-right: 70px;">
         <li><?= Html::a('الرئيسية', 'http://www.hangshare.com/') ?></li>
