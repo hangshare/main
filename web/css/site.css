@@ -23,9 +23,8 @@ summary {
 }
 .footads{
     width: 100%;
-    height: 80px;
     position: fixed;
-    bottom: -0px;
+    bottom: -9px;
     display: none;
 }
 .spacer{content: ""; margin-bottom: 160px;}
