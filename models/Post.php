@@ -80,8 +80,8 @@ class Post extends \yii\db\ActiveRecord
             [['created_at', 'body', 'featured', 'deleted', 'tags', 'keywords', 'cover_file', 'q', 'type', 'ylink', 'vidId', 'vidType'], 'safe'],
             [['cover'], 'string', 'max' => 500],
             [['urlTitle'], 'string', 'max' => 200],
-            [['title'], 'string', 'max' => 50],
-            [['body'], 'string', 'min' => 150],
+            [['title'], 'string', 'max' => 100],
+            [['body'], 'string', 'min' => 100],
         ];
     }
 
@@ -122,7 +122,7 @@ class Post extends \yii\db\ActiveRecord
             $url = Yii::$app->helper->urlTitle($this->title);
             $exist = Yii::$app->db->createCommand("SELECT id FROM post WHERE urlTitle = '{$url}' LIMIT 1")->queryOne();
             if ($exist) {
-                $rand = $exist['id'] * rand(2, 5);
+                $rand = uniqid(rand(), true);
                 $url .= "-{$rand}";
             }
             $this->urlTitle = $url;
