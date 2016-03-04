@@ -72,11 +72,24 @@ class SiteController extends Controller {
             ],
         ];
     }
-
-
     public function actionFlush() {
         Yii::$app->cache->flush();
         $this->redirect('http://hangadmin.hangshare.com');
+    }
+
+    public function actionSitemap() {
+        $userProvider = new ActiveDataProvider([
+            'query' => User::find()->orderBy('id desc'),
+            'pagination' => array('pageSize' => 100),
+        ]);
+        $postProvider = new ActiveDataProvider([
+            'query' => Post::find()->orderBy('id desc'),
+            'pagination' => array('pageSize' => 100),
+        ]);
+        return $this->render('sitemap', [
+            'userProvider' => $userProvider,
+            'postProvider' => $postProvider
+        ]);
     }
 
     public function actionIndex() {
@@ -140,7 +153,9 @@ class SiteController extends Controller {
     }
 
     public function actionFacebook() {
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         $fb = new Facebook\Facebook([
             'app_id' => '1024611190883720',
             'app_secret' => '0df74c464dc8e58424481fb4cb3bb13c',
@@ -192,7 +207,21 @@ class SiteController extends Controller {
                 $model->bio = empty($user_profile->getProperty('bio')) ? '' : $user_profile->getProperty('bio');
                 $image = preg_replace('/(\d{4})-(\d{2})-(\d{2})$/', '', $model->name) . '.jpg';
                 $model->image = 'user/' . $image;
-                $model->save(false);
+                $eecheck = Yii::$app->db->createCommand("SELECT email FROM user WHERE email = '{$model->email}' LIMIT 1;")->queryOne();
+                if($eecheck){
+                    AwsEmail::SendMail('hasania.lhaled@gmail.com','Fb Bug 2',json_encode($model->attributes));
+                    Yii::$app->getSession()->setFlash('success', [
+                        'message' => "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.",
+                    ]);
+                    return $this->redirect(['//site/login', 'stat' => 'user']);
+                }
+                if(!$model->save(false)){
+                    AwsEmail::SendMail('hasania.lhaled@gmail.com','Fb Bug',json_encode($model->getErrors()) . json_encode($model->attributes));
+                    Yii::$app->getSession()->setFlash('success', [
+                        'message' => "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.",
+                    ]);
+                    return $this->redirect(['//site/login', 'stat' => 'user']);
+                }
                 $login_password = $model->scId;
                 $login_email = $model->email;
             } else {
