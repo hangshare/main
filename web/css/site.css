@@ -197,7 +197,7 @@ html {
 }
 body {
     margin: 0;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 a {
     background: transparent;
