@@ -13,10 +13,94 @@ use yii\console\Controller;
 use app\commands\User;
 use app\commands\Post;
 
+
 class CronController extends Controller
 {
 
+    public function actionGoldend(){
+        $time = time();
+        $users = Yii::$app->db->createCommand("
+        SELECT userId FROM user_payment
+        LEFT OUTER JOIN user on (user.id = user_payment.userId)
+        WHERE end_date <= {$time} AND user.plan = 1;")->queryAll();
+        $u_ar = [];
+        foreach ($users as $user) {
+            $u_ar[] = $user['userId'];
+        }
+        $st = implode(',', $u_ar);
+        if (!empty($st))
+            Yii::$app->db->createCommand("UPDATE user SET plan = 0 WHERE id IN ({$st});")->query();
+    }
 
+
+    public function actionCounter()
+    {
+        $memcached = new \Memcache();
+        $memcached->addserver('127.0.0.1');
+        $results = $memcached->get('hang_mem_views');
+//        $memcached->delete('hang_mem_views');
+        if (is_array($results)) {
+            foreach ($results as $id => $views) {
+                $country = [];
+                $total_views = 0;
+                foreach ($views as $hash => $view) {
+                    $vie = Yii::$app->db->createCommand("SELECT 1 FROM `post_view` WHERE hash = '{$hash}'")->queryScalar();
+                    if (!$vie) {
+                        if (!isset($country["{$view['country_code']}"])) {
+                            $country["{$view['country_code']}"] = 0;
+                        }
+                        $country["{$view['country_code']}"] += 1;
+                        $total_views++;
+
+
+                        $ins[] = "(0, {$view['userId']}, {$id}, '{$view['ip']}','{$view['ip_info']}', '{$hash}', '{$view['userAgent']}')";
+                    }
+                }
+                if (isset($ins)) {
+                    $qar = implode(', ', $ins);
+                    Yii::$app->db->createCommand("
+            INSERT INTO `hangshare`.`post_view` (`price` , `userId` , `postId` , `ip` ,`ip_info` , `hash` , `user_agent`)
+                    VALUES {$qar} ;")->query();
+                }
+                $total_price = 0;
+                foreach ($country as $key => $num) {
+                    $country_price = $memcached->get('country_price_' . $key);
+                    if ($country_price != false) {
+                        $country_price = Yii::$app->db->createCommand("SELECT id ,code, price, regionId FROM `country` WHERE code = '{$key}'")->queryOne();
+                        $memcached->set('country_price_' . $key, $country_price);
+                    }
+                    if ($country_price['price'] == '-1') { // Default
+                        $default_price = Yii::$app->db->createCommand("SELECT value FROM `sys_values` WHERE key = 'default_view_price'")->queryScalar();
+                        $cu_pr = $num * $default_price;
+                    } elseif ($country_price['price'] == '-2') { // Region
+                        $region_price = Yii::$app->db->createCommand("SELECT price FROM `region` WHERE id = '{$country_price['regionId']}'")->queryScalar();
+                        $cu_pr = $num * $region_price;
+                    } else {
+                        $cu_pr = $num * $country_price['price'];
+                    }
+
+                    $total_price += $cu_pr;
+
+                    $ins[] = "({$id}, {$country_price['id']}, views+{$num}, income+{$cu_pr})";
+                }
+                if (isset($ins)) {
+                    $qar = implode(', ', $ins);
+                    Yii::$app->db->createCommand("
+            INSERT INTO post_view_country (`postId` , `countryId` , `views` , `income`)
+                    VALUES {$qar} ;")->query();
+                }
+                if ($view['plan']) {
+                    $gold_price = Yii::$app->db->createCommand("SELECT value FROM `sys_values` WHERE key = 'gold_view_price'")->queryScalar();
+                    $total_price *= $gold_price;
+                }
+                Yii::$app->db->createCommand("UPDATE `post_stats` SET `views`=`views`+{$total_views} WHERE `postId`= {$id}")->query();
+                Yii::$app->db->createCommand("UPDATE `user_stats` SET `post_total_views`=`post_total_views`+{$total_views}, `post_views`=`post_views`+{$total_views},
+              `available_amount`=`available_amount`+{$total_price}, `total_amount`=`total_amount`+ {$total_price} WHERE `userId`= {$view['post_user_id']}")->query();
+            }
+        }
+
+        print 'Done ...' . chr(10);
+    }
 
     public function actionFix()
     {
@@ -34,8 +118,9 @@ class CronController extends Controller
         }
     }
 
-    public function actionSitemap(){
-        $posts= Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle, t.created_at FROM  post t WHERE t.deleted = 0 ORDER BY t.id DESC;")->queryAll();
+    public function actionSitemap()
+    {
+        $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle, t.created_at FROM  post t WHERE t.deleted = 0 ORDER BY t.id DESC;")->queryAll();
         $sitemap = new \DomDocument('1.0', 'UTF-8');
         $sitemap->preserveWhiteSpace = false;
         $sitemap->formatOutput = true;
@@ -62,7 +147,7 @@ class CronController extends Controller
             $changefreq_text = $sitemap->createTextNode("weekly");
             $changefreq->appendChild($changefreq_text);
         }
-        $users= Yii::$app->db->createCommand("SELECT t.id, t.created_at, t.name FROM user t WHERE 1 ORDER BY t.id DESC;")->queryAll();
+        $users = Yii::$app->db->createCommand("SELECT t.id, t.created_at, t.name FROM user t WHERE 1 ORDER BY t.id DESC;")->queryAll();
         foreach ($users as $user) {
             $link = "http://www.hangshare.com/user/{$user['id']}/";
             $url = $sitemap->createElement('url');
