@@ -11,7 +11,7 @@ $this->title = 'تمت عملية طلب النقود بنجاح';
         <br>
         <br>
         <div class="text-center">
-            <?= Html::a('العودة الى الصفحة الرئيسية', ['/'], ['class' => 'btn btn-default btn-lg']); ?>
+            <?= Html::a('العودة الى الصفحة الرئيسية', 'http://www.hangshare.com/', ['class' => 'btn btn-default btn-lg']); ?>
         </div>
     </div>
 </div>
