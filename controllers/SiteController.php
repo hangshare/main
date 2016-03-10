@@ -24,14 +24,16 @@ use yii\web\Controller;
 /**
  * Site controller
  */
-class SiteController extends Controller {
+class SiteController extends Controller
+{
 
     public $description;
 
     /**
      * @inheritdoc
      */
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'access' => [
                 'class' => AccessControl::className(),
@@ -61,7 +63,8 @@ class SiteController extends Controller {
     /**
      * @inheritdoc
      */
-    public function actions() {
+    public function actions()
+    {
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -72,12 +75,15 @@ class SiteController extends Controller {
             ],
         ];
     }
-    public function actionFlush() {
+
+    public function actionFlush()
+    {
         Yii::$app->cache->flush();
         $this->redirect('http://hangadmin.hangshare.com');
     }
 
-    public function actionSitemap() {
+    public function actionSitemap()
+    {
         $userProvider = new ActiveDataProvider([
             'query' => User::find()->orderBy('id desc'),
             'pagination' => array('pageSize' => 100),
@@ -92,7 +98,8 @@ class SiteController extends Controller {
         ]);
     }
 
-    public function actionIndex() {
+    public function actionIndex()
+    {
         header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
         header("Cache-Control: post-check=0, pre-check=0", false);
         header("Pragma: no-cache");
@@ -101,8 +108,8 @@ class SiteController extends Controller {
         $newpost = Yii::$app->cache->get('home-new-postsa');
         if ($newpost === false) {
             $querypost = Post::find()
-                    ->where("post.deleted=0 AND post.cover <> ''")
-                    ->joinWith(['user'])
+                ->where("post.deleted=0 AND post.cover <> ''")
+                ->joinWith(['user'])
                 ->select('post.id,post.title , post.cover ,user.id as userId, post.urlTitle')
                 ->orderBy('id desc');
             $newpost = new ActiveDataProvider([
@@ -119,7 +126,7 @@ class SiteController extends Controller {
             $this->layout = false;
             $html = '';
             foreach ($newpost->getModels() as $data) {
-                $html.= $this->render('//explore/_view', ['model' => $data]);
+                $html .= $this->render('//explore/_view', ['model' => $data]);
             }
             echo json_encode(['html' => $html,
                 'total' => $newpost->getTotalCount(),
@@ -132,9 +139,9 @@ class SiteController extends Controller {
             $featured = Yii::$app->cache->get('home-featured');
             if ($featured === false) {
                 $queryfeatured = Post::find()
-                        ->where("type=0 AND cover <> '' AND featured = 1")
+                    ->where("type=0 AND cover <> '' AND featured = 1")
                     ->select('id, cover, title, urlTitle')
-                        ->limit(21)
+                    ->limit(21)
                     ->orderBy('id desc');
                 $featured = new ActiveDataProvider([
                     'query' => $queryfeatured,
@@ -145,14 +152,15 @@ class SiteController extends Controller {
             $mostviewd = Post::featured(4);
 
             return $this->render('index', [
-                        'featured' => $featured,
-                        'mostviewd' => $mostviewd,
-                        'newpost' => $newpost
+                'featured' => $featured,
+                'mostviewd' => $mostviewd,
+                'newpost' => $newpost
             ]);
         }
     }
 
-    public function actionFacebook() {
+    public function actionFacebook()
+    {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
@@ -177,7 +185,7 @@ class SiteController extends Controller {
             exit;
         }
         if (isset($accessToken)) {
-            $_SESSION['facebook_access_token'] = (string) $accessToken;
+            $_SESSION['facebook_access_token'] = (string)$accessToken;
             try {
                 $fb->setDefaultAccessToken($accessToken);
                 $response = $fb->get('/me?fields=id,name,email,about,age_range,bio,birthday,gender,hometown,location');
@@ -208,15 +216,15 @@ class SiteController extends Controller {
                 $image = preg_replace('/(\d{4})-(\d{2})-(\d{2})$/', '', $model->name) . '.jpg';
                 $model->image = 'user/' . $image;
                 $eecheck = Yii::$app->db->createCommand("SELECT email FROM user WHERE email = '{$model->email}' LIMIT 1;")->queryOne();
-                if($eecheck){
-                    AwsEmail::SendMail('hasania.lhaled@gmail.com','Fb Bug 2',json_encode($model->attributes));
+                if ($eecheck) {
+                    AwsEmail::SendMail('hasania.lhaled@gmail.com', 'Fb Bug 2', json_encode($model->attributes));
                     Yii::$app->getSession()->setFlash('success', [
                         'message' => "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.",
                     ]);
                     return $this->redirect(['//site/login', 'stat' => 'user']);
                 }
-                if(!$model->save(false)){
-                    AwsEmail::SendMail('hasania.lhaled@gmail.com','Fb Bug',json_encode($model->getErrors()) . json_encode($model->attributes));
+                if (!$model->save(false)) {
+                    AwsEmail::SendMail('hasania.lhaled@gmail.com', 'Fb Bug', json_encode($model->getErrors()) . json_encode($model->attributes));
                     Yii::$app->getSession()->setFlash('success', [
                         'message' => "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.",
                     ]);
@@ -271,7 +279,8 @@ class SiteController extends Controller {
         }
     }
 
-    public function actionLogin() {
+    public function actionLogin()
+    {
         header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
         header("Cache-Control: post-check=0, pre-check=0", false);
         header("Pragma: no-cache");
@@ -284,23 +293,25 @@ class SiteController extends Controller {
             return $this->goBack();
         } else {
             return $this->render('login', [
-                        'model' => $model,
+                'model' => $model,
             ]);
         }
     }
 
-    public function actionLogout() {
+    public function actionLogout()
+    {
         Yii::$app->user->logout();
         return $this->goHome();
     }
 
-    public function actionContact() {
+    public function actionContact()
+    {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post())) {
             $message = '<table>'
-                    . '<tr><td><b>Name : </b></td><td>' . $model->name . '</td></tr>'
-                    . '<tr><td><b>Email : </b></td><td>' . $model->email . '</td></tr>'
-                    . '</table>' . $model->body;
+                . '<tr><td><b>Name : </b></td><td>' . $model->name . '</td></tr>'
+                . '<tr><td><b>Email : </b></td><td>' . $model->email . '</td></tr>'
+                . '</table>' . $model->body;
 
             AwsEmail::SendMail('info@hangshare.com', $model->subject, $message, $model->email);
             AwsEmail::SendMail('hasania.khaled@gmail.com', $model->subject, $message, $model->email);
@@ -308,24 +319,28 @@ class SiteController extends Controller {
             return $this->refresh();
         } else {
             return $this->render('contact', [
-                        'model' => $model,
+                'model' => $model,
             ]);
         }
     }
 
-    public function actionPlan() {
+    public function actionPlan()
+    {
         return $this->render('plan');
     }
 
-    public function actionPrivacy() {
+    public function actionPrivacy()
+    {
         return $this->render('privacy');
     }
 
-    public function actionCancel() {
+    public function actionCancel()
+    {
         return $this->render('cancel');
     }
 
-    public function actionSuccess() {
+    public function actionSuccess()
+    {
         if (Yii::$app->user->isGuest)
             return $this->redirect($this->goBack());
 
@@ -339,12 +354,14 @@ class SiteController extends Controller {
         return $this->render('success', ['start' => $start, 'end' => $end]);
     }
 
-    public function actionAbout() {
+    public function actionAbout()
+    {
         return $this->render('about');
     }
 
-    public function actionPostback() {
-        mail('hasania.khaled@gmail.com', 'Start paypal', 'Start ' . date('Y-m-d h:i::s'));
+    public function actionPostback()
+    {
+        AwsEmail::SendMail('hasania.khaled@gmail.com', 'Start paypal', 'Start ' . date('Y-m-d h:i::s'));
         $raw_post_data = file_get_contents('php://input');
         $raw_post_array = explode('&', $raw_post_data);
         $myPost = array();
@@ -389,16 +406,18 @@ class SiteController extends Controller {
             $payment_amount = isset($_POST['mc_gross']) ? $_POST['mc_gross'] : '-1';
             $payment_status = isset($_POST['payment_status']) ? $_POST['payment_status'] : 'fa';
             $custom = isset($_POST['custom']) ? $_POST['custom'] : 'Error';
-            mail('hasania.khaled@gmail.com', 'paypal', 'Status ' .
-                    $item_id . ' ' .
-                    $payment_currency . ' ' .
-                    $txn_id . ' ' .
-                    $receiver_email . ' ' .
-                    $payer_email . ' ' .
-                    $payment_amount . ' ' .
-                    $payment_status . ' ' .
-                    $custom
-            );
+
+
+            AwsEmail::SendMail('hasania.khaled@gmail.com', 'paypal', 'Status ' .
+                $item_id . ' ' .
+                $payment_currency . ' ' .
+                $txn_id . ' ' .
+                $receiver_email . ' ' .
+                $payer_email . ' ' .
+                $payment_amount . ' ' .
+                $payment_status . ' ' .
+                $custom);
+
             if ($payment_status == 'Completed' && $receiver_email == 'info@hangshare.com') {
                 $custom = json_decode($custom);
                 switch ($custom->type) {
@@ -424,19 +443,21 @@ class SiteController extends Controller {
                 $payment->transactionId = $txn_id;
                 $payment->save(false);
             } else {
-                mail('hasania.khaled@gmail.com', 'paypal Error', $payment_status);
+                AwsEmail::SendMail('hasania.khaled@gmail.com', 'paypal Error', $payment_status);
             }
         } else {
-            mail('hasania.khaled@gmail.com', 'paypal Error', '1111');
+            AwsEmail::SendMail('hasania.khaled@gmail.com', 'paypal Error', '1111');
         }
-        mail('hasania.khaled@gmail.com', 'paypal END', 'END ' . date('Y-m-d h:i:s'));
+        AwsEmail::SendMail('hasania.khaled@gmail.com', 'paypal END', 'END ' . date('Y-m-d h:i:s'));
     }
 
-    public function actionPlangold() {
+    public function actionPlangold()
+    {
         return $this->redirect(['//site/paypal', 'id' => Yii::$app->user->id, 'plan' => $_POST['plan']]);
     }
 
-    public function actionPaypal($id, $plan) {
+    public function actionPaypal($id, $plan)
+    {
         $option = [
             'b' => [
                 'price' => '10.00',
@@ -469,15 +490,18 @@ class SiteController extends Controller {
         return $this->redirect("https://www.paypal.com/ae/cgi-bin/webscr?{$query_string}");
     }
 
-    public function actionWelcome() {
+    public function actionWelcome()
+    {
         return $this->render('welcome');
     }
 
-    public function actionTest() {
+    public function actionTest()
+    {
         return $this->redirect(['//site/welcome']);
     }
 
-    public function actionSignup($id = '') {
+    public function actionSignup($id = '')
+    {
         if (!empty($id)) {
             $model = User::findModel($id);
         } else {
@@ -504,12 +528,13 @@ class SiteController extends Controller {
             }
         }
         return $this->render('signup', [
-                    'model' => $model,
-                    'plan' => $plan
+            'model' => $model,
+            'plan' => $plan
         ]);
     }
 
-    public function actionRequestPasswordReset() {
+    public function actionRequestPasswordReset()
+    {
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
@@ -521,10 +546,12 @@ class SiteController extends Controller {
             }
         }
         return $this->render('requestPasswordResetToken', [
-                    'model' => $model,
+            'model' => $model,
         ]);
     }
-    public function actionResetPassword($token) {
+
+    public function actionResetPassword($token)
+    {
         try {
             $model = new ResetPasswordForm($token);
         } catch (InvalidParamException $e) {
@@ -535,7 +562,7 @@ class SiteController extends Controller {
             return $this->goHome();
         }
         return $this->render('resetPassword', [
-                    'model' => $model,
+            'model' => $model,
         ]);
     }
 }
