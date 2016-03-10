@@ -48,7 +48,7 @@ if ($model->plan == '1') {
                         echo '</ul></li>';
                     }
                     echo '</ul>';
-                    echo Html::a('طلب ارسال المبلغ ', 'request', ['class' => 'btn btn-primary']);
+                    echo Html::a('طلب ارسال المبلغ ', ['request'], ['class' => 'btn btn-primary']);
                 }
                 ?>
 
