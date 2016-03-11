@@ -65,6 +65,7 @@ class Imageresize extends Component
             $im->setImageCompression(\Imagick::COMPRESSION_LOSSLESSJPEG);
             $im->setImageFormat($ext);
             $im->setImageCompressionQuality($this->quality);
+            $im->stripImage();
 
             if ($this->method == 'resize') {
                 $im->resizeImage($this->width, $this->height, \Imagick::FILTER_LANCZOS, 0.9, true);
