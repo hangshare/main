@@ -20,7 +20,7 @@ class CronController extends Controller
     public function actionGoldend(){
         $time = time();
         $users = Yii::$app->db->createCommand("
-        SELECT t.id ,user.userId FROM user_payment as t
+        SELECT t.id ,t.userId FROM user_payment as t
         LEFT OUTER JOIN user as user on (user.id = t.userId)
         WHERE t.end_date <= {$time} AND user.plan = 1 AND t.active = 1;")->queryAll();
         $u_ar = [];
