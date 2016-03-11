@@ -13,7 +13,7 @@ class Imageresize extends Component
     private $height = 200;
     private $method = 'resize';
     private $mediaFile = '/web/media';
-    private $quality = 100;
+    private $quality = 75;
 
     public function __construct($config = array())
     {
