@@ -359,6 +359,11 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
+    public function beforeAction($action) {
+        $this->enableCsrfValidation = false;
+        return parent::beforeAction($action);
+    }
+
     public function actionPostback()
     {
         AwsEmail::SendMail('hasania.khaled@gmail.com', 'Start paypal', 'Start ' . date('Y-m-d h:i::s'));
