@@ -22,8 +22,8 @@ class AppAsset extends AssetBundle
     public $css = [
         YII_DEBUG ? 'css/site.css' : 'css/site.min.css',
         'css/font-awesome/css/font-awesome.min.css',
-        "css/editor/css/froala_editor.min.css",
-        "css/editor/css/froala_style.min.css"
+//        "css/editor/css/froala_editor.min.css",
+//        "css/editor/css/froala_style.min.css"
     ];
     public $js = [
 //        '/css/lazyload/jquery.lazyload.min.js',
@@ -46,6 +46,12 @@ class AppAsset extends AssetBundle
                 'css/editor/js/plugins/char_counter.min.js',
                 'css/editor/js/plugins/video.min.js',
                 YII_DEBUG ? 'js/main.js' : 'js/main.1.1.min.js'
+            ];
+            $this->css = [
+                YII_DEBUG ? 'css/site.css' : 'css/site.min.css',
+                'css/font-awesome/css/font-awesome.min.css',
+                "css/editor/css/froala_editor.min.css",
+                "css/editor/css/froala_style.min.css"
             ];
         }
     }
