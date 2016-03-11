@@ -4,7 +4,7 @@ $start = date('Y-m-d h:i:s', $model->start_date);
 $end = date('Y-m-d h:i:s', $model->end_date);
 
 $diff = $model->end_date - time();
-$time = number_format($diff / ( 60 * 60 ));
+$time = number_format($diff / (60*60));
 if ($time > 24) {
     $time = number_format($diff / ( 60 * 60 * 24)) . ' يوم';
 } else {
