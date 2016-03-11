@@ -15,6 +15,8 @@ use yii\helpers\Html;
         </script>
     </div>
 <?php endif; ?>
+
+<?php if (!Yii::$app->helper->isMobile()): ?>
 <footer style="position: relative">
     <ul class="list-inline pull-left" style="width: 100%;padding-right: 70px;">
         <li><?= Html::a('الرئيسية', 'http://www.hangshare.com/') ?></li>
@@ -37,6 +39,7 @@ use yii\helpers\Html;
         <li class="pull-right"><a class="btn" href="https://www.google.com/Hangshare" target="_blank" style="color: #fff; background-color: #e51717;"><i style="margin: 3px;" class="fa fa-google-plus"></i></a></li>
     </ul>
 </footer>
+<?php endif; ?>
 </body>
 </html>
 <?php $this->endBody() ?>
