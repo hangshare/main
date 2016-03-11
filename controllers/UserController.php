@@ -159,7 +159,7 @@ class UserController extends Controller
     {
         $this->layout = 'usermanage';
         $this->view->params['user'] = $this->findModel(Yii::$app->user->identity->id);
-        $model = UserPayment::find()->where('userId = ' . Yii::$app->user->id)->one();
+        $model = UserPayment::find()->where('active=1 AND userId = ' . Yii::$app->user->id)->one();
         if (!isset($model))
             throw new NotFoundHttpException('The requested page does not exist.');
 
