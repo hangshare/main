@@ -43,7 +43,7 @@ class CronController extends Controller
         $memcached = new \Memcache();
         $memcached->addserver('127.0.0.1');
         $results = $memcached->get('hang_mem_views');
-//        $memcached->delete('hang_mem_views');
+        $memcached->delete('hang_mem_views');
         if (is_array($results)) {
             foreach ($results as $id => $views) {
                 $country = [];
@@ -56,7 +56,6 @@ class CronController extends Controller
                         }
                         $country["{$view['country_code']}"] += 1;
                         $total_views++;
-
 
                         $ins[] = "(0, {$view['userId']}, {$id}, '{$view['ip']}','{$view['ip_info']}', '{$hash}', '{$view['userAgent']}')";
                     }
@@ -85,11 +84,16 @@ class CronController extends Controller
                     }
 
                     $total_price += $cu_pr;
-
-                    $ins[] = "({$id}, {$country_price['id']}, views+{$num}, income+{$cu_pr})";
+                    if(empty($country_price['id'])){
+                        $countryId = '1';
+                    }else{
+                        $countryId = $country_price['id'];
+                    }
+                    $insq[] = "({$id}, {$countryId}, views+{$num}, income+{$cu_pr})";
                 }
                 if (isset($ins)) {
-                    $qar = implode(', ', $ins);
+                    $qar = implode(', ', $insq);
+
                     Yii::$app->db->createCommand("
             INSERT INTO post_view_country (`postId` , `countryId` , `views` , `income`)
                     VALUES {$qar} ;")->query();
