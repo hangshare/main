@@ -95,10 +95,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         </ul>
                     </div>
                     <div class="form-group">
-                        <lable class="control-label" for="user-country" >مكان الإقامة</lable>
-                        <?=
-                        $form->field($model, 'country')->dropDownList(ArrayHelper::map(Country:: find()->all(), 'id', 'name_ar')
-                                , ['prompt' => 'مكان الإقامة', 'class' => ''])->label(false);
+                        <lable style="font-weight: bold; margin-bottom: 10px;display: block;" for="user-country" >مكان الإقامة</lable>
+
+                        <?= $form->field($model, 'country')->dropDownList(ArrayHelper::map(Country:: find()->where("published = 1")->all(), 'id', 'name_ar')
+                                , ['prompt' => 'مكان الإقامة', 'class' => '', 'rel'=>'autoload'])->label(false);
                         ?>
                     </div>
                     <?= $form->field($model, 'phone') ?>
