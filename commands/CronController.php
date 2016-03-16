@@ -74,7 +74,7 @@ class CronController extends Controller
                         $memcached->set('country_price_' . $key, $country_price);
                     }
                     if ($country_price['price'] == '-1') { // Default
-                        $default_price = Yii::$app->db->createCommand("SELECT value FROM `sys_values` WHERE key = 'default_view_price'")->queryScalar();
+                        $default_price = Yii::$app->db->createCommand("SELECT `value` FROM `sys_values` t WHERE t.`key` = 'default_view_price'")->queryScalar();
                         $cu_pr = $num * $default_price;
                     } elseif ($country_price['price'] == '-2') { // Region
                         $region_price = Yii::$app->db->createCommand("SELECT price FROM `region` WHERE id = '{$country_price['regionId']}'")->queryScalar();
