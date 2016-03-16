@@ -5,11 +5,12 @@ namespace app\components;
 use Yii;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
+use Memcached;
 
 class Hitcounter extends Component
 {
 
-    const HIT_OLD_AFTER_SECONDS = 260000; // 3 days.
+    const HIT_OLD_AFTER_SECONDS = 80000; // 1 day.
     const IGNORE_SEARCH_BOTS = true;
     const HONOR_DO_NOT_TRACK = false;
     const VIEW_PRICE = [
@@ -52,6 +53,11 @@ class Hitcounter extends Component
         }
         $json = @file_get_contents($url);
         self::$ip_info = $json;
+
+        if (!isset($_COOKIE['ip_info'])) {
+            setcookie('ip_info', $json, time() + self::HIT_OLD_AFTER_SECONDS, "/");
+        }
+
         $details = json_decode($json);
 
         if (isset($details->countryCode)) {
@@ -72,7 +78,7 @@ class Hitcounter extends Component
         if (!isset($country_code)) {
             return false;
         }
-        setcookie($co_key, $country_code, time() + self::HIT_OLD_AFTER_SECONDS * 150, "/");
+        setcookie($co_key, $country_code, time() + self::HIT_OLD_AFTER_SECONDS, "/");
         return $country_code;
     }
 
@@ -90,16 +96,10 @@ class Hitcounter extends Component
             return false;
         if (in_array(self::getRemoteIPAddress(), self::$IP_IGNORE_LIST))
             return false;
-        if (self::HONOR_DO_NOT_TRACK && isset($_SERVER['HTTP_DNT']) && $_SERVER['HTTP_DNT'] == "1") {
+        if (self::HONOR_DO_NOT_TRACK && isset($_SERVER['HTTP_DNT']) && $_SERVER['HTTP_DNT'] == "1")
             return false;
-        }
-        if ($id_details = self::ip_details()) {
-            if (!in_array($id_details, self::$COUNTRY_CODE)) {
-                return false;
-            }
-        } else {
+        if (!Yii::$app->user->isGuest && Yii::$app->user->id == $post_user_id)
             return false;
-        }
 
         return self::CreateCountsIfNotPresent($pageID, $post_user_id, $plan);
     }
@@ -129,48 +129,25 @@ class Hitcounter extends Component
     private static function CreateCountsIfNotPresent($id, $post_user_id, $plan)
     {
         $hashId = self::UniqueHit($id);
-        $pricear = self::VIEW_PRICE;
-        if (!isset($pricear[$plan])) {
-            $price = $pricear[$plan];
-        } else {
-            $price = $pricear[$plan];
-        }
         if (isset($_COOKIE[$hashId]) || isset($_COOKIE["hangView-$id"])) {
             return false;
         }
-        $vie = Yii::$app->db->createCommand("SELECT 1 FROM `post_view` WHERE hash = '{$hashId}'")->queryScalar();
-        if ($vie) {
-            return false;
-        }
+        $memcached = new \Memcache();
+        $memcached->addserver('127.0.0.1');
+        $res = $memcached->get('hang_mem_views');
+        $res[$id][$hashId] = [
+            'country_code' => self::ip_details(),
+            'ip' => self::getRemoteIPAddress(),
+            'post_user_id' => $post_user_id,
+            'plan' => $plan,
+            'userAgent' => json_encode($_SERVER),
+            'userId' => Yii::$app->user->isGuest ? 0 : Yii::$app->user->identity->id,
+            'ip_info' => isset($_COOKIE['ip_info']) ? $_COOKIE['ip_info'] : ''
 
+        ];
+        $memcached->set('hang_mem_views', $res);
 
-        if (Yii::$app->user->isGuest || $post_user_id != Yii::$app->user->identity->id) {
-            Yii::$app->db->createCommand("UPDATE `post_stats` SET `views`=`views`+1 WHERE `postId`= {$id}")->query();
-            Yii::$app->db->createCommand("UPDATE `user_stats` SET `post_total_views`=`post_total_views`+1, `post_views`=`post_views`+1, `available_amount`=`available_amount`+{$price}, `total_amount`=`total_amount`+ {$price} WHERE `userId`= {$post_user_id}")->query();
-            self::logView($id, $price);
-            setcookie($hashId, true, time() + self::HIT_OLD_AFTER_SECONDS, "/");
-            return true;
-        } else {
-            return false;
-        }
-
-        return true;
-    }
-
-    private static function logView($id, $price)
-    {
-        $ip = self::getRemoteIPAddress();
-        $hashId = self::UniqueHit($id);
-        $userId = 0;
-        $userAgent = json_encode($_SERVER);
-        if (!Yii::$app->user->isGuest)
-            $userId = Yii::$app->user->identity->id;
-        Yii::$app->db->createCommand("
-            INSERT INTO `hangshare`.`post_view` (`price` , `userId` , `postId` , `ip` ,`ip_info` , `hash` , `user_agent`)
-                    VALUES ({$price}, {$userId}, {$id}, '{$ip}',:ipinfo, '{$hashId}', '{$userAgent}');
-                ", [
-            ':ipinfo' => self::$ip_info
-        ])->query();
+        setcookie($hashId, true, time() + self::HIT_OLD_AFTER_SECONDS, "/");
         return true;
     }
 
