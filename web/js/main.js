@@ -19,6 +19,7 @@ $(function () {
             document.body.scrollLeft = scrollH;
         }
     }
+
     var stickyHeaderTop = $('#w0').offset().top;
     var stiky = $('.stiky');
     var a1 = $('#1a');
@@ -39,7 +40,7 @@ $(function () {
             }
         }
     });
-    if ( $.isFunction($.fn.editable) ) {
+    if ($.isFunction($.fn.editable)) {
         $('.froala-edit').editable({
             inlineMode: false,
             toolbarFixed: true,
@@ -107,6 +108,20 @@ $(function () {
         });
     }
 
+    if ($("#user-country").length) {
+        rel_c = $("#user-country").attr('rel');
+        if (rel_c === 'autoload') {
+            $.ajax({
+                url: "/user/getcountry/",
+                method: "POST",
+                dataType: "json",
+                success: function (data) {
+                    $('#user-country').val(data.id);
+                }
+            });
+        }
+    }
+
     $(document).on('click', '#js_edpix', function (e) {
         e.preventDefault();
         $('#post-cover_file').click();
@@ -131,7 +146,6 @@ $(function () {
 
         $('#ProfileImage').submit();
     });
-
 
 
     $(document).on('submit', '#add-post', function (e) {
@@ -164,7 +178,8 @@ $(function () {
                     alert('تم تغيير كلمة المرور بنجاح.');
                     $(".modal").modal('hide');
                 }
-            }});
+            }
+        });
     });
     $(document).on('click', '.js-share', function (e) {
         e.preventDefault();
@@ -184,8 +199,8 @@ $(function () {
             popup_url = 'https://plus.google.com/share?url="' + url + '"';
         }
         var popUp = window.open(popup_url,
-                'popupwindow',
-                'scrollbars=yes,width=600,height=400');
+            'popupwindow',
+            'scrollbars=yes,width=600,height=400');
         popUp.focus();
     });
 
@@ -322,12 +337,18 @@ $(function () {
                 mainobj.cssfixedsupport = !iebrws || iebrws && document.compatMode == "CSS1Compat" && window.XMLHttpRequest; //not IE or IE7+ browsers in standards mode
                 mainobj.$body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
                 mainobj.$control = $('<div id="topcontrol">' + mainobj.controlHTML + '</div>')
-                        .css({position: mainobj.cssfixedsupport ? 'fixed' : 'absolute', bottom: mainobj.controlattrs.offsety, right: mainobj.controlattrs.offsetx, opacity: 0, cursor: 'pointer'})
-                        .attr({title: 'Scroll Back to Top'})
-                        .click(function () {
-                            mainobj.scrollup();
-                            return false
-                        }).appendTo('body');
+                    .css({
+                        position: mainobj.cssfixedsupport ? 'fixed' : 'absolute',
+                        bottom: mainobj.controlattrs.offsety,
+                        right: mainobj.controlattrs.offsetx,
+                        opacity: 0,
+                        cursor: 'pointer'
+                    })
+                    .attr({title: 'Scroll Back to Top'})
+                    .click(function () {
+                        mainobj.scrollup();
+                        return false
+                    }).appendTo('body');
                 if (document.all && !window.XMLHttpRequest && mainobj.$control.text() != '') //loose check for IE6 and below, plus whether control contains any text
                     mainobj.$control.css({width: mainobj.$control.width()}); //IE6- seems to require an explicit width on a DIV containing text
                 mainobj.togglecontrol();
