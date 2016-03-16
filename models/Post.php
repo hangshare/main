@@ -115,7 +115,7 @@ class Post extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         if ($this->isNewRecord) {
-            $this->userId = Yii::$app->user->identity->id;
+            $this->userId = Yii::$app->user->id;
             if (!empty($this->userId)){
                 Yii::$app->db->createCommand('UPDATE `user_stats` SET `post_count`=`post_count`+1 WHERE `userId`=' . $this->userId)->query();
             }

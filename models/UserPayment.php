@@ -13,6 +13,7 @@ use Yii;
  * @property integer $end_date
  * @property integer $planId
  * @property User $user
+ * @property string transactionId
  */
 class UserPayment extends \yii\db\ActiveRecord {
 
