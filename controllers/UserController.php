@@ -157,7 +157,7 @@ class UserController extends Controller
 
     public function actionGetcountry(){
         $countryCode = Yii::$app->hitcounter->ip_details();
-        $countryId = Yii::$app->db->createCommand("SELECT id FROM country WHERE code= {$countryCode}")->queryScalar();
+        $countryId = Yii::$app->db->createCommand("SELECT id FROM country WHERE code= '{$countryCode}'")->queryScalar();
         echo json_encode(['id'=>$countryId]);
     }
 
