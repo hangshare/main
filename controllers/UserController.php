@@ -155,6 +155,12 @@ class UserController extends Controller
         return $this->render('//transfer/transfer', ['model' => $model, 'user' => $this->user]);
     }
 
+    public function actionGetcountry(){
+        $countryCode = Yii::$app->hitcounter->ip_details();
+        $countryId = Yii::$app->db->createCommand("SELECT id FROM country WHERE code= {$countryCode}")->queryScalar();
+        echo json_encode(['id'=>$countryId]);
+    }
+
     public function actionGold()
     {
         $this->layout = 'usermanage';
