@@ -258,7 +258,7 @@ $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize'
 <!--                                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1024611190883720";-->
 <!--                                fjs.parentNode.insertBefore(js, fjs);-->
 <!--                            }(document, 'script', 'facebook-jssdk'));</script>-->
-<!--                        <div class="fb-comments" data-href="--><?= $model->url ?><!--" data-numposts="5"-->
+<!--                        <div class="fb-comments" data-href="--><?php //echo $model->url ?><!--" data-numposts="5"-->
 <!--                             data-width="100%"></div>-->
 <!--                    </div>-->
 <!--                </div>-->
