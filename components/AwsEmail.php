@@ -11,7 +11,8 @@ use yii\base\Component;
 
 require Yii::$app->vendorPath . '/autoload.php';
 
-class AwsEmail extends Component {
+class AwsEmail extends Component
+{
 
     private static $__accessKey = 'AKIAJ3JZA2TENDIDQTBQ';
     private static $__secretKey = '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';
@@ -42,7 +43,14 @@ class AwsEmail extends Component {
         }
     }
 
-    public static function SendMail($to, $subject, $body, $from = 'info@hangshare.com') {
+    public static function getDomainFromEmail($email)
+    {
+        $domain = substr(strrchr($email, "@"), 1);
+        return strtolower($domain);
+    }
+
+    public static function SendMail($to, $subject, $body, $from = 'info@hangshare.com')
+    {
         if (!YII_DEBUG || $to = 'hasania.khaled@gmail.com') {
             $client = SesClient::factory(array(
                 'credentials' => array(
@@ -52,7 +60,11 @@ class AwsEmail extends Component {
                 'region' => 'us-east-1',
                 'version' => '2010-12-01'
             ));
+            $allowed_domians = ['hotmail.com', 'yahoo.com', 'gmail.com', 'outlook.com', 'live.com'];
             try {
+                if (!filter_var($to, FILTER_VALIDATE_EMAIL) || !in_array(self::getDomainFromEmail($to), $allowed_domians)){
+                    return false;
+                }
                 $client->sendEmail(array(
                     'Source' => "HangShare.com <info@hangshare.com>",
                     'Destination' => array(
