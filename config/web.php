@@ -4,8 +4,17 @@ $params = require(__DIR__ . '/params.php');
 $config = [
     'id' => 'hangshare-live',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log','init'],
+    'bootstrap' => ['log', 'init'],
     'components' => [
+//        'assetsAutoCompress' => [
+//            'class' => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
+//            'enabled' => true,
+//            'jsCompress' => true,
+//            'cssFileCompile' => true,
+//            'jsFileCompile' => true,
+//        ],
+
+
         'init' => [
             'class' => 'app\components\Init',
         ],
@@ -46,7 +55,7 @@ $config = [
                 'تواصل-معنا' => 'site/contact',
                 'شروط-الموقع' => 'site/privacy',
                 'نبذة-عنا' => 'site/privacy',
-
+                'request-password-reset' => 'site/reset',
                 '<slug:.*?>' => 'explore/view',
 
             ],
@@ -54,18 +63,25 @@ $config = [
         'request' => [
             'cookieValidationKey' => 'adsaew2343a',
         ],
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
-        ],
+        'cache' => array(
+            'class' => 'yii\caching\MemCache',
+            'servers' => array(
+                array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 60),
+                array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 40),
+            ),
+        ),
         'session' => [
             'class' => 'yii\web\Session',
             'cookieParams' => ['httponly' => true, 'lifetime' => 5184000],
             'timeout' => 5184000,
             'useCookies' => true,
+            'name' => 'POSssjkOPj'
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+//            'enableAutoLogin' => true,
+            'enableSession' => true,
+            'authTimeout' => 600,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -81,12 +97,12 @@ $config = [
         ],
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=main.cdb3bm2h7j5j.us-east-1.rds.amazonaws.com;port=3306;dbname=hangshare',
+                    'dsn' => 'mysql:host=main.cdb3bm2h7j5j.us-east-1.rds.amazonaws.com;port=3306;dbname=hangshare',
             'username' => 'hangshare',
             'password' => 'Khaled!23',
-//            'dsn' => 'mysql:host=127.0.0.1;port=3306;dbname=hangshare',
+//            'dsn' => 'mysql:host=127.0.0.1;dbname=hangshare',
 //            'username' => 'root',
-//            'password' => '',
+//            'password' => '123456',
             'enableSchemaCache' => true,
             'schemaCache' => 'cache',
             'schemaCacheDuration' => 3600,
