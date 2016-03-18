@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'password')->passwordInput() ?>
                     <?= $form->field($model, 'rememberMe')->checkbox() ?>
                     <div class="pull-right">
-                        <?= Html::a('هل نسيت كلمة المرور ؟', ['site/request-password-reset']) ?>    
+                        <?= Html::a('هل نسيت كلمة المرور ؟', ['//request-password-reset']) ?>
                     </div>
 
                     <div class="form-group">
