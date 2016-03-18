@@ -538,7 +538,7 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionRequestPasswordReset()
+    public function actionReset()
     {
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
