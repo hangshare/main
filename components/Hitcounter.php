@@ -55,6 +55,7 @@ class Hitcounter extends Component
         self::$ip_info = $json;
 
         if (!isset($_COOKIE['ip_info'])) {
+            var_dump($json);
             setcookie('ip_info', $json, time() + 99999999, "/");
         }
 
