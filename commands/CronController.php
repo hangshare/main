@@ -104,7 +104,7 @@ class CronController extends Controller
                     $gold_price = Yii::$app->db->createCommand("SELECT `value` FROM `sys_values` WHERE `key` = 'gold_view_price'")->queryScalar();
                     $total_price *= $gold_price;
                 }
-                Yii::$app->db->createCommand("UPDATE `post_stats` SET `views`=`views`+{$total_views} WHERE `postId`= {$id}")->query();
+                Yii::$app->db->createCommand("UPDATE `post_stats` SET `views`=`views`+{$total_views}, `profit` = `profit` + {$total_price} WHERE `postId`= {$id}")->query();
                 Yii::$app->db->createCommand("UPDATE `user_stats` SET `post_total_views`=`post_total_views`+{$total_views}, `post_views`=`post_views`+{$total_views},
               `available_amount`=`available_amount`+{$total_price}, `total_amount`=`total_amount`+ {$total_price} WHERE `userId`= {$view['post_user_id']}")->query();
             }
