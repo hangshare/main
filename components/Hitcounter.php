@@ -55,7 +55,7 @@ class Hitcounter extends Component
         self::$ip_info = $json;
 
         if (!isset($_COOKIE['ip_info'])) {
-            setcookie('ip_info', $json, time() + self::HIT_OLD_AFTER_SECONDS, "/");
+            setcookie('ip_info', $json, time() + 99999999, "/");
         }
 
         $details = json_decode($json);
@@ -78,7 +78,7 @@ class Hitcounter extends Component
         if (!isset($country_code)) {
             return false;
         }
-        setcookie($co_key, $country_code, time() + self::HIT_OLD_AFTER_SECONDS, "/");
+        setcookie($co_key, $country_code, time() + 99999999, "/");
         return $country_code;
     }
 
@@ -143,7 +143,6 @@ class Hitcounter extends Component
             'userAgent' => json_encode($_SERVER),
             'userId' => Yii::$app->user->isGuest ? 0 : Yii::$app->user->identity->id,
             'ip_info' => isset($_COOKIE['ip_info']) ? $_COOKIE['ip_info'] : ''
-
         ];
         $memcached->set('hang_mem_views', $res);
 
