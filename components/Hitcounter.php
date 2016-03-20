@@ -146,7 +146,6 @@ class Hitcounter extends Component
             'ip_info' => isset($_COOKIE['ip_info']) ? $_COOKIE['ip_info'] : ''
         ];
         $memcached->set('hang_mem_views', $res);
-        var_dump($_COOKIE['ip_info']);
         setcookie($hashId, true, time() + self::HIT_OLD_AFTER_SECONDS, "/");
         return true;
     }
