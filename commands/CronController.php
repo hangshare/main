@@ -17,7 +17,8 @@ use app\commands\Post;
 class CronController extends Controller
 {
 
-    public function actionGoldend(){
+    public function actionGoldend()
+    {
         $time = time();
         $users = Yii::$app->db->createCommand("
         SELECT t.id ,t.userId FROM user_payment as t
@@ -44,6 +45,7 @@ class CronController extends Controller
         $memcached->addserver('127.0.0.1');
         $results = $memcached->get('hang_mem_views');
         $memcached->delete('hang_mem_views');
+        var_dump($results);
         if (is_array($results)) {
             foreach ($results as $id => $views) {
                 $country = [];
@@ -84,9 +86,9 @@ class CronController extends Controller
                     }
 
                     $total_price += $cu_pr;
-                    if(empty($country_price['id'])){
+                    if (empty($country_price['id'])) {
                         $countryId = '1';
-                    }else{
+                    } else {
                         $countryId = $country_price['id'];
                     }
                     $insq[] = "({$id}, {$countryId}, views+{$num}, income+{$cu_pr})";
