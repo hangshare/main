@@ -144,7 +144,7 @@ class Hitcounter extends Component
             'userId' => Yii::$app->user->isGuest ? 0 : Yii::$app->user->identity->id,
             'ip_info' => isset($_COOKIE['ip_info']) ? $_COOKIE['ip_info'] : ''
         ];
-//        var_dump($_COOKIE);
+        var_dump($_COOKIE);
 
         $memcached->set('hang_mem_views', $res);
 
