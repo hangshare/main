@@ -56,6 +56,7 @@ class Hitcounter extends Component
 
         if (!isset($_COOKIE['ip_info'])) {
             setcookie('ip_info', $json, time() + 99999999, "/");
+            $_COOKIE['ip_info'] = $json;
         }
 
         $details = json_decode($json);
@@ -144,9 +145,9 @@ class Hitcounter extends Component
             'userId' => Yii::$app->user->isGuest ? 0 : Yii::$app->user->identity->id,
             'ip_info' => isset($_COOKIE['ip_info']) ? $_COOKIE['ip_info'] : ''
         ];
-        var_dump($_COOKIE);
-
         $memcached->set('hang_mem_views', $res);
+
+        var_dump($res);
 
         setcookie($hashId, true, time() + self::HIT_OLD_AFTER_SECONDS, "/");
         return true;
