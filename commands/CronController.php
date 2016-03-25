@@ -9,6 +9,7 @@
 namespace app\commands;
 
 use Yii;
+use yii\base\Exception;
 use yii\console\Controller;
 use app\commands\User;
 use app\commands\Post;
@@ -59,14 +60,17 @@ class CronController extends Controller
                         $country["{$view['country_code']}"] += 1;
                         $total_views++;
 
-                        $ins[] = "(0, {$view['userId']}, {$id}, '{$view['ip']}','{$view['ip_info']}', '{$hash}', '{$view['userAgent']}')";
+                        $ins[] = "({$view['userId']}, {$id}, '{$view['ip']}', '{$hash}')";
                     }
                 }
                 if (isset($ins)) {
                     $qar = implode(', ', $ins);
-                    Yii::$app->db->createCommand("
-            INSERT INTO `hangshare`.`post_view` (`price` , `userId` , `postId` , `ip` ,`ip_info` , `hash` , `user_agent`)
-                    VALUES {$qar} ;")->query();
+                    try{
+                        Yii::$app->db->createCommand("INSERT INTO `hangshare`.`post_view` (`userId` , `postId` , `ip` , `hash`)
+                                VALUES {$qar} ;")->query();
+                    }catch (Exception $e){
+
+                    }
                 }
                 $total_price = 0;
                 foreach ($country as $key => $num) {
