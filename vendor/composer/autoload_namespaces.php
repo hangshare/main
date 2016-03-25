@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'PHPExcel' => array($vendorDir . '/phpoffice/phpexcel/Classes'),
+    'JShrink' => array($vendorDir . '/tedivm/jshrink/src'),
     'HTMLPurifier' => array($vendorDir . '/ezyang/htmlpurifier/library'),
     'Diff' => array($vendorDir . '/phpspec/php-diff/lib'),
 );

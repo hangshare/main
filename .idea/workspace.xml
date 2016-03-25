@@ -1,0 +1,1147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f9ce9491-80d9-4725-94f3-9721cfe5d6d7" name="Default" comment="SIMPLE CODE">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/kartik-v/yii2-export" afterPath="$PROJECT_DIR$/vendor/kartik-v/yii2-export" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/console.php" afterPath="$PROJECT_DIR$/config/console.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/installed.json" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/phpexcel/PHPExcel/Shared/String.php" afterPath="$PROJECT_DIR$/vendor/phpexcel/PHPExcel/Shared/String.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/yiisoft/extensions.php" afterPath="$PROJECT_DIR$/vendor/yiisoft/extensions.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/.htaccess" afterPath="$PROJECT_DIR$/web/.htaccess" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/index.php" afterPath="$PROJECT_DIR$/web/index.php" />
+    </list>
+    <ignored path="hangshare.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="C:\Bitnami\wampstack\apache2\htdocs\hangshare" />
+  </component>
+  <component name="DatabaseView">
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="hangshare" />
+    <favorites_list name="hangshare global variables">
+      <favorite_root url="file://$PROJECT_DIR$/vendor/yiisoft/yii2/web/View.php" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+      <favorite_root url="file://$PROJECT_DIR$/config/web.php" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+      <favorite_root url="file://$PROJECT_DIR$/vendor/yiisoft/yii2/web/Controller.php" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+      <favorite_root url="file://$PROJECT_DIR$/composer.json" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+      <favorite_root url="file://$PROJECT_DIR$/views/site/index.php" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+      <favorite_root url="file://$PROJECT_DIR$/views/layouts/htmlhead.php" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+      <favorite_root url="file://$PROJECT_DIR$/../hanglive/app/composer.json" type="psiFile" klass="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
+    </favorites_list>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="CronController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/commands/CronController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.28295255">
+              <caret line="64" column="30" selection-start-line="64" selection-start-column="30" selection-end-line="64" selection-end-column="30" />
+              <folding>
+                <marker date="1458439178613" expanded="true" signature="365:541" placeholder="SELECT t.id ..user_payment..." />
+                <marker date="1458439178613" expanded="true" signature="858:913" placeholder="UPDATE user_..." />
+                <marker date="1458439178613" expanded="true" signature="969:1013" placeholder="UPDATE user ..." />
+                <marker date="1458439178613" expanded="true" signature="1556:1604" placeholder="SELECT 1 FRO..post_view..." />
+                <marker date="1458439178613" expanded="true" signature="2258:2395" placeholder="INSERT INTO `hangshare`.`post_view`..." />
+                <marker date="1458439178613" expanded="true" signature="2722:2791" placeholder="SELECT id ,c..country..." />
+                <marker date="1458439178613" expanded="true" signature="3052:3123" placeholder="SELECT `valu..sys_values..." />
+                <marker date="1458439178613" expanded="true" signature="3343:3411" placeholder="SELECT price..region..." />
+                <marker date="1458439178613" expanded="true" signature="4105:4208" placeholder="INSERT INTO post_view_country..." />
+                <marker date="1458439178613" expanded="true" signature="4348:4412" placeholder="SELECT value..sys_values..." />
+                <marker date="1458439178613" expanded="true" signature="4544:4653" placeholder="UPDATE `post..." />
+                <marker date="1458439178613" expanded="true" signature="4717:4967" placeholder="UPDATE `user..." />
+                <marker date="1458439178613" expanded="true" signature="5156:5252" placeholder="SELECT id, t..post..." />
+                <marker date="1458439178613" expanded="true" signature="5532:5585" placeholder="SELECT id FR..post..." />
+                <marker date="1458439178613" expanded="true" signature="5731:5774" placeholder="UPDATE post ..." />
+                <marker date="1458439178613" expanded="true" signature="5932:6030" placeholder="SELECT t.id,..post..." />
+                <marker date="1458439178613" expanded="true" signature="7441:7513" placeholder="SELECT t.id,..user..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Hitcounter.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/Hitcounter.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+              <folding>
+                <element signature="e#34#42#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controllers/UserController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="159" column="101" selection-start-line="159" selection-start-column="101" selection-end-line="159" selection-end-column="101" />
+              <folding>
+                <marker date="1458170665532" expanded="true" signature="5751:5786" placeholder="SELECT id FR..country..." />
+                <marker date="1458170665532" expanded="true" signature="5751:5787" placeholder="SELECT id FR..country..." />
+                <marker date="1458170665532" expanded="true" signature="5751:5802" placeholder="SELECT id FR..country..." />
+                <marker date="1458170665532" expanded="true" signature="7659:7717" placeholder="UPDATE `user..." />
+                <marker date="1458170665532" expanded="true" signature="8527:8591" placeholder="SELECT 1 FRO..user_transactions..." />
+                <marker date="1458170665532" expanded="true" signature="9425:9498" placeholder="UPDATE `user..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="PUSH_TAGS">
+      <GitPushTagMode />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/models/LoginForm.php" />
+        <option value="$PROJECT_DIR$/models/FaqSearch.php" />
+        <option value="$PROJECT_DIR$/models/PostTag.php" />
+        <option value="$PROJECT_DIR$/components/Helper.php" />
+        <option value="$PROJECT_DIR$/views/explore/_most.php" />
+        <option value="$PROJECT_DIR$/views/explore/_related.php" />
+        <option value="$PROJECT_DIR$/views/faq/index.php" />
+        <option value="$PROJECT_DIR$/views/site/index.php" />
+        <option value="$PROJECT_DIR$/views/site/_post.php" />
+        <option value="$PROJECT_DIR$/models/User.php" />
+        <option value="$PROJECT_DIR$/web/css/site.min.css" />
+        <option value="$PROJECT_DIR$/web/index.php" />
+        <option value="$PROJECT_DIR$/views/user/_post.php" />
+        <option value="$PROJECT_DIR$/views/explore/post.php" />
+        <option value="$PROJECT_DIR$/web/js/main.min.js" />
+        <option value="$PROJECT_DIR$/views/layouts/usermanage.php" />
+        <option value="$PROJECT_DIR$/vendor/yiisoft/yii2/web/Controller.php" />
+        <option value="$PROJECT_DIR$/views/layouts/htmlhead.php" />
+        <option value="$PROJECT_DIR$/views/layouts/homepage.php" />
+        <option value="$PROJECT_DIR$/views/layouts/main.php" />
+        <option value="$PROJECT_DIR$/views/user/view.php" />
+        <option value="$PROJECT_DIR$/views/transfer/transfer.php" />
+        <option value="$PROJECT_DIR$/views/layouts/header.php" />
+        <option value="$PROJECT_DIR$/web/.htaccess" />
+        <option value="$PROJECT_DIR$/views/explore/_view.php" />
+        <option value="$PROJECT_DIR$/controllers/FaqController.php" />
+        <option value="$PROJECT_DIR$/web/index_man.php" />
+        <option value="$PROJECT_DIR$/commands/FixController.php" />
+        <option value="$PROJECT_DIR$/views/explore/index.php" />
+        <option value="$PROJECT_DIR$/models/Post.php" />
+        <option value="$PROJECT_DIR$/config/console.php" />
+        <option value="$PROJECT_DIR$/views/user/payment.php" />
+        <option value="$PROJECT_DIR$/views/user/success.php" />
+        <option value="$PROJECT_DIR$/models/UserPayment.php" />
+        <option value="$PROJECT_DIR$/views/user/gold.php" />
+        <option value="$PROJECT_DIR$/web/css/site.css" />
+        <option value="$PROJECT_DIR$/components/Imageresize.php" />
+        <option value="$PROJECT_DIR$/assets/AppAsset.php" />
+        <option value="$PROJECT_DIR$/views/layouts/footer.php" />
+        <option value="$PROJECT_DIR$/views/site/signup.php" />
+        <option value="$PROJECT_DIR$/web/js/main.js" />
+        <option value="$PROJECT_DIR$/controllers/ExploreController.php" />
+        <option value="$PROJECT_DIR$/controllers/UserController.php" />
+        <option value="$PROJECT_DIR$/components/AwsEmail.php" />
+        <option value="$PROJECT_DIR$/controllers/SiteController.php" />
+        <option value="$PROJECT_DIR$/views/site/login.php" />
+        <option value="$PROJECT_DIR$/config/web.php" />
+        <option value="$PROJECT_DIR$/components/Init.php" />
+        <option value="$PROJECT_DIR$/views/explore/view.php" />
+        <option value="$PROJECT_DIR$/components/Hitcounter.php" />
+        <option value="$PROJECT_DIR$/commands/CronController.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBuildToolPackageJson" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP">
+    <include_path>
+      <path value="" />
+    </include_path>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="754" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hangshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hangshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hangshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hangshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hangshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tme" />
+    <property name="settings.editor.selected.configurable" value="preferences.externalTools" />
+    <property name="settings.editor.splitter.proportion" value="0.2182377" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="134" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="152" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="158" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="837" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="156" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="144" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="151" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="830" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\hangshare\commands" />
+      <recent name="C:\xampp\htdocs\hangshare\web\js" />
+      <recent name="C:\xampp\htdocs\hangshare\components" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <envs />
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f9ce9491-80d9-4725-94f3-9721cfe5d6d7" name="Default" comment="" />
+      <created>1456196038485</created>
+      <option name="number" value="Default" />
+      <updated>1456196038485</updated>
+    </task>
+    <task id="LOCAL-00209" summary="Gold User ENded cron">
+      <created>1457634106064</created>
+      <option name="number" value="00209" />
+      <option name="project" value="LOCAL" />
+      <updated>1457634106064</updated>
+    </task>
+    <task id="LOCAL-00210" summary="Notify Email Paypal">
+      <created>1457642840855</created>
+      <option name="number" value="00210" />
+      <option name="project" value="LOCAL" />
+      <updated>1457642840855</updated>
+    </task>
+    <task id="LOCAL-00211" summary="SIMPLE CODE">
+      <created>1457642869770</created>
+      <option name="number" value="00211" />
+      <option name="project" value="LOCAL" />
+      <updated>1457642869770</updated>
+    </task>
+    <task id="LOCAL-00212" summary="Paypal Bug">
+      <created>1457655125303</created>
+      <option name="number" value="00212" />
+      <option name="project" value="LOCAL" />
+      <updated>1457655125303</updated>
+    </task>
+    <task id="LOCAL-00213" summary="Payment user cron check">
+      <created>1457696229039</created>
+      <option name="number" value="00213" />
+      <option name="project" value="LOCAL" />
+      <updated>1457696229039</updated>
+    </task>
+    <task id="LOCAL-00214" summary="SIMPLE CODE">
+      <created>1457696329619</created>
+      <option name="number" value="00214" />
+      <option name="project" value="LOCAL" />
+      <updated>1457696329619</updated>
+    </task>
+    <task id="LOCAL-00215" summary="SIMPLE CODE">
+      <created>1457696377591</created>
+      <option name="number" value="00215" />
+      <option name="project" value="LOCAL" />
+      <updated>1457696377591</updated>
+    </task>
+    <task id="LOCAL-00216" summary="Payment">
+      <created>1457697306789</created>
+      <option name="number" value="00216" />
+      <option name="project" value="LOCAL" />
+      <updated>1457697306789</updated>
+    </task>
+    <task id="LOCAL-00217" summary="SIMPLE CODE">
+      <created>1457697327138</created>
+      <option name="number" value="00217" />
+      <option name="project" value="LOCAL" />
+      <updated>1457697327138</updated>
+    </task>
+    <task id="LOCAL-00218" summary="SIMPLE CODE">
+      <created>1457697613056</created>
+      <option name="number" value="00218" />
+      <option name="project" value="LOCAL" />
+      <updated>1457697613056</updated>
+    </task>
+    <task id="LOCAL-00219" summary="SIMPLE CODE">
+      <created>1457697740432</created>
+      <option name="number" value="00219" />
+      <option name="project" value="LOCAL" />
+      <updated>1457697740432</updated>
+    </task>
+    <task id="LOCAL-00220" summary="SIMPLE CODE">
+      <created>1457736220798</created>
+      <option name="number" value="00220" />
+      <option name="project" value="LOCAL" />
+      <updated>1457736220798</updated>
+    </task>
+    <task id="LOCAL-00221" summary="SIMPLE CODE">
+      <created>1457736235715</created>
+      <option name="number" value="00221" />
+      <option name="project" value="LOCAL" />
+      <updated>1457736235715</updated>
+    </task>
+    <task id="LOCAL-00222" summary="SIMPLE CODE">
+      <created>1457736853927</created>
+      <option name="number" value="00222" />
+      <option name="project" value="LOCAL" />
+      <updated>1457736853927</updated>
+    </task>
+    <task id="LOCAL-00223" summary="SIMPLE CODE">
+      <created>1457739613742</created>
+      <option name="number" value="00223" />
+      <option name="project" value="LOCAL" />
+      <updated>1457739613742</updated>
+    </task>
+    <task id="LOCAL-00224" summary="New Hit counter">
+      <created>1458167928892</created>
+      <option name="number" value="00224" />
+      <option name="project" value="LOCAL" />
+      <updated>1458167928892</updated>
+    </task>
+    <task id="LOCAL-00225" summary="SIMPLE CODE">
+      <created>1458167983248</created>
+      <option name="number" value="00225" />
+      <option name="project" value="LOCAL" />
+      <updated>1458167983248</updated>
+    </task>
+    <task id="LOCAL-00226" summary="SIMPLE CODE">
+      <created>1458168282340</created>
+      <option name="number" value="00226" />
+      <option name="project" value="LOCAL" />
+      <updated>1458168282340</updated>
+    </task>
+    <task id="LOCAL-00227" summary="SIMPLE CODE">
+      <created>1458168301952</created>
+      <option name="number" value="00227" />
+      <option name="project" value="LOCAL" />
+      <updated>1458168301952</updated>
+    </task>
+    <task id="LOCAL-00228" summary="SIMPLE CODE">
+      <created>1458168335421</created>
+      <option name="number" value="00228" />
+      <option name="project" value="LOCAL" />
+      <updated>1458168335421</updated>
+    </task>
+    <task id="LOCAL-00229" summary="SIMPLE CODE">
+      <created>1458168387264</created>
+      <option name="number" value="00229" />
+      <option name="project" value="LOCAL" />
+      <updated>1458168387264</updated>
+    </task>
+    <task id="LOCAL-00230" summary="SIMPLE CODE">
+      <created>1458168449179</created>
+      <option name="number" value="00230" />
+      <option name="project" value="LOCAL" />
+      <updated>1458168449179</updated>
+    </task>
+    <task id="LOCAL-00231" summary="SIMPLE CODE">
+      <created>1458168949064</created>
+      <option name="number" value="00231" />
+      <option name="project" value="LOCAL" />
+      <updated>1458168949064</updated>
+    </task>
+    <task id="LOCAL-00232" summary="SIMPLE CODE">
+      <created>1458170204757</created>
+      <option name="number" value="00232" />
+      <option name="project" value="LOCAL" />
+      <updated>1458170204757</updated>
+    </task>
+    <task id="LOCAL-00233" summary="SIMPLE CODE">
+      <created>1458170357653</created>
+      <option name="number" value="00233" />
+      <option name="project" value="LOCAL" />
+      <updated>1458170357653</updated>
+    </task>
+    <task id="LOCAL-00234" summary="SIMPLE CODE">
+      <created>1458170668887</created>
+      <option name="number" value="00234" />
+      <option name="project" value="LOCAL" />
+      <updated>1458170668887</updated>
+    </task>
+    <task id="LOCAL-00235" summary="SIMPLE CODE">
+      <created>1458171498006</created>
+      <option name="number" value="00235" />
+      <option name="project" value="LOCAL" />
+      <updated>1458171498006</updated>
+    </task>
+    <task id="LOCAL-00236" summary="SIMPLE CODE">
+      <created>1458172164847</created>
+      <option name="number" value="00236" />
+      <option name="project" value="LOCAL" />
+      <updated>1458172164847</updated>
+    </task>
+    <task id="LOCAL-00237" summary="SIMPLE CODE">
+      <created>1458172387195</created>
+      <option name="number" value="00237" />
+      <option name="project" value="LOCAL" />
+      <updated>1458172387195</updated>
+    </task>
+    <task id="LOCAL-00238" summary="Email Bounce Rate">
+      <created>1458311772259</created>
+      <option name="number" value="00238" />
+      <option name="project" value="LOCAL" />
+      <updated>1458311772259</updated>
+    </task>
+    <task id="LOCAL-00239" summary="Bug">
+      <created>1458312577061</created>
+      <option name="number" value="00239" />
+      <option name="project" value="LOCAL" />
+      <updated>1458312577061</updated>
+    </task>
+    <task id="LOCAL-00240" summary="SIMPLE CODE">
+      <created>1458312638798</created>
+      <option name="number" value="00240" />
+      <option name="project" value="LOCAL" />
+      <updated>1458312638798</updated>
+    </task>
+    <task id="LOCAL-00241" summary="SIMPLE CODE">
+      <created>1458312734055</created>
+      <option name="number" value="00241" />
+      <option name="project" value="LOCAL" />
+      <updated>1458312734055</updated>
+    </task>
+    <task id="LOCAL-00242" summary="SIMPLE CODE">
+      <created>1458312743682</created>
+      <option name="number" value="00242" />
+      <option name="project" value="LOCAL" />
+      <updated>1458312743682</updated>
+    </task>
+    <task id="LOCAL-00243" summary="SIMPLE CODE">
+      <created>1458313131948</created>
+      <option name="number" value="00243" />
+      <option name="project" value="LOCAL" />
+      <updated>1458313131948</updated>
+    </task>
+    <task id="LOCAL-00244" summary="SIMPLE CODE">
+      <created>1458313211121</created>
+      <option name="number" value="00244" />
+      <option name="project" value="LOCAL" />
+      <updated>1458313211121</updated>
+    </task>
+    <task id="LOCAL-00245" summary="SIMPLE CODE">
+      <created>1458313426165</created>
+      <option name="number" value="00245" />
+      <option name="project" value="LOCAL" />
+      <updated>1458313426165</updated>
+    </task>
+    <task id="LOCAL-00246" summary="SIMPLE CODE">
+      <created>1458434504892</created>
+      <option name="number" value="00246" />
+      <option name="project" value="LOCAL" />
+      <updated>1458434504892</updated>
+    </task>
+    <task id="LOCAL-00247" summary="SIMPLE CODE">
+      <created>1458434639998</created>
+      <option name="number" value="00247" />
+      <option name="project" value="LOCAL" />
+      <updated>1458434639998</updated>
+    </task>
+    <task id="LOCAL-00248" summary="SIMPLE CODE">
+      <created>1458436284216</created>
+      <option name="number" value="00248" />
+      <option name="project" value="LOCAL" />
+      <updated>1458436284216</updated>
+    </task>
+    <task id="LOCAL-00249" summary="SIMPLE CODE">
+      <created>1458436924379</created>
+      <option name="number" value="00249" />
+      <option name="project" value="LOCAL" />
+      <updated>1458436924379</updated>
+    </task>
+    <task id="LOCAL-00250" summary="SIMPLE CODE">
+      <created>1458437028062</created>
+      <option name="number" value="00250" />
+      <option name="project" value="LOCAL" />
+      <updated>1458437028063</updated>
+    </task>
+    <task id="LOCAL-00251" summary="SIMPLE CODE">
+      <created>1458437145371</created>
+      <option name="number" value="00251" />
+      <option name="project" value="LOCAL" />
+      <updated>1458437145371</updated>
+    </task>
+    <task id="LOCAL-00252" summary="SIMPLE CODE">
+      <created>1458437213581</created>
+      <option name="number" value="00252" />
+      <option name="project" value="LOCAL" />
+      <updated>1458437213581</updated>
+    </task>
+    <task id="LOCAL-00253" summary="SIMPLE CODE">
+      <created>1458437480662</created>
+      <option name="number" value="00253" />
+      <option name="project" value="LOCAL" />
+      <updated>1458437480662</updated>
+    </task>
+    <task id="LOCAL-00254" summary="SIMPLE CODE">
+      <created>1458437602511</created>
+      <option name="number" value="00254" />
+      <option name="project" value="LOCAL" />
+      <updated>1458437602511</updated>
+    </task>
+    <task id="LOCAL-00255" summary="SIMPLE CODE">
+      <created>1458437632666</created>
+      <option name="number" value="00255" />
+      <option name="project" value="LOCAL" />
+      <updated>1458437632667</updated>
+    </task>
+    <task id="LOCAL-00256" summary="SIMPLE CODE">
+      <created>1458437704143</created>
+      <option name="number" value="00256" />
+      <option name="project" value="LOCAL" />
+      <updated>1458437704144</updated>
+    </task>
+    <task id="LOCAL-00257" summary="SIMPLE CODE">
+      <created>1458439182411</created>
+      <option name="number" value="00257" />
+      <option name="project" value="LOCAL" />
+      <updated>1458439182411</updated>
+    </task>
+    <option name="localTasksCounter" value="258" />
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930514" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2326284" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279483" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930514" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36392915" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279483" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3634895" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279483" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3252818" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279483" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279483" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3634895" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3279483" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.58615136" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930514" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34592146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930514" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3263328" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Fix Bugs" />
+    <MESSAGE value="S3" />
+    <MESSAGE value="Change Mobile Ads" />
+    <MESSAGE value="Bugs" />
+    <MESSAGE value="BUGs" />
+    <MESSAGE value="New Ads" />
+    <MESSAGE value="Chnage Design" />
+    <MESSAGE value="BuG" />
+    <MESSAGE value="FB Bug Check" />
+    <MESSAGE value="FB BUG CHECK" />
+    <MESSAGE value="design and ads" />
+    <MESSAGE value="Design and ads" />
+    <MESSAGE value="Css" />
+    <MESSAGE value="Fix Bug" />
+    <MESSAGE value="Url FIx" />
+    <MESSAGE value="Gold User ENded cron" />
+    <MESSAGE value="Notify Email Paypal" />
+    <MESSAGE value="Paypal Bug" />
+    <MESSAGE value="Payment user cron check" />
+    <MESSAGE value="Payment" />
+    <MESSAGE value="New Hit counter" />
+    <MESSAGE value="Email Bounce Rate" />
+    <MESSAGE value="Bug" />
+    <MESSAGE value="SIMPLE CODE" />
+    <option name="LAST_COMMIT_MESSAGE" value="SIMPLE CODE" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="2" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/config/console.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="10" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="216" column="19" selection-start-line="216" selection-start-column="19" selection-end-line="216" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="216" column="19" selection-start-line="216" selection-start-column="19" selection-end-line="216" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/faq/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.615385">
+          <caret line="40" column="18" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/site/_post.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.576923">
+          <caret line="7" column="28" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.576923">
+          <caret line="297" column="5" selection-start-line="297" selection-start-column="5" selection-end-line="297" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.08994709">
+          <caret line="3" column="47" selection-start-line="3" selection-start-column="47" selection-end-line="3" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/user/_post.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.81146026">
+          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/yiisoft/yii2/base/Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3474427">
+          <caret line="334" column="20" selection-start-line="334" selection-start-column="20" selection-end-line="334" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/explore/post.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.65384614">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/yiisoft/yii2/web/Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27171904">
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/layouts/usermanage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8201058">
+          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/AuthController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/user/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/layouts/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40273973">
+          <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/layouts/homepage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6821918">
+          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/layouts/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029982364">
+          <caret line="63" column="18" selection-start-line="63" selection-start-column="18" selection-end-line="63" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/layouts/htmlhead.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029982364">
+          <caret line="14" column="63" selection-start-line="14" selection-start-column="63" selection-end-line="14" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/transfer/transfer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1904762">
+          <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/user/view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029982364">
+          <caret line="40" column="30" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/explore/_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7513812">
+          <caret line="19" column="48" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/site/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.20442">
+          <caret line="191" column="32" selection-start-line="191" selection-start-column="32" selection-end-line="191" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/params.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/index_man.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8201058">
+          <caret line="78" column="7" selection-start-line="78" selection-start-column="7" selection-end-line="78" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/FaqController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25044093">
+          <caret line="71" column="5" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/commands/FixController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31040564">
+          <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/explore/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7195767">
+          <caret line="27" column="2" selection-start-line="27" selection-start-column="2" selection-end-line="27" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/Post.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="121" column="18" selection-start-line="121" selection-start-column="18" selection-end-line="121" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/user/payment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.8461537">
+          <caret line="56" column="63" selection-start-line="56" selection-start-column="63" selection-end-line="56" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/UserPayment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34797892">
+          <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/user/gold.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17989418">
+          <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/site.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5212569">
+          <caret line="4344" column="1" selection-start-line="4344" selection-start-column="1" selection-end-line="4344" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/Imageresize.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.52865064">
+          <caret line="67" column="30" selection-start-line="67" selection-start-column="30" selection-end-line="67" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/layouts/footer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.88007057">
+          <caret line="41" column="15" selection-start-line="41" selection-start-column="15" selection-end-line="41" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/user/success.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23985891">
+          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/AppAsset.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39556378">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/console.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.08">
+          <caret line="49" column="52" selection-start-line="49" selection-start-column="52" selection-end-line="49" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/site/signup.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.51675487">
+          <caret line="104" column="29" selection-start-line="104" selection-start-column="29" selection-end-line="104" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/ExploreController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="9.26455">
+          <caret line="316" column="9" selection-start-line="316" selection-start-column="9" selection-end-line="316" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="159" column="101" selection-start-line="159" selection-start-column="101" selection-end-line="159" selection-end-column="101" />
+          <folding>
+            <marker date="1458170665532" expanded="true" signature="5751:5786" placeholder="SELECT id FR..country..." />
+            <marker date="1458170665532" expanded="true" signature="5751:5787" placeholder="SELECT id FR..country..." />
+            <marker date="1458170665532" expanded="true" signature="5751:5802" placeholder="SELECT id FR..country..." />
+            <marker date="1458170665532" expanded="true" signature="7659:7717" placeholder="UPDATE `user..." />
+            <marker date="1458170665532" expanded="true" signature="8527:8591" placeholder="SELECT 1 FRO..user_transactions..." />
+            <marker date="1458170665532" expanded="true" signature="9425:9498" placeholder="UPDATE `user..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/runtime/logs/app.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3819242">
+          <caret line="51985" column="20" selection-start-line="51985" selection-start-column="20" selection-end-line="51985" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/explore/view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.52196836">
+          <caret line="260" column="75" selection-start-line="260" selection-start-column="75" selection-end-line="260" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/SiteController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029876977">
+          <caret line="540" column="26" selection-start-line="540" selection-start-column="26" selection-end-line="540" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.028571429">
+          <caret line="117" column="26" selection-start-line="117" selection-start-column="26" selection-end-line="117" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/site/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029876977">
+          <caret line="29" column="39" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/Init.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31282952">
+          <caret line="49" column="20" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029876977">
+          <caret line="36" column="10" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/AwsEmail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029876977">
+          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="66" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5781513">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="39" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/Hitcounter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+          <folding>
+            <element signature="e#34#42#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/commands/CronController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28295255">
+          <caret line="64" column="30" selection-start-line="64" selection-start-column="30" selection-end-line="64" selection-end-column="30" />
+          <folding>
+            <marker date="1458439178613" expanded="true" signature="365:541" placeholder="SELECT t.id ..user_payment..." />
+            <marker date="1458439178613" expanded="true" signature="858:913" placeholder="UPDATE user_..." />
+            <marker date="1458439178613" expanded="true" signature="969:1013" placeholder="UPDATE user ..." />
+            <marker date="1458439178613" expanded="true" signature="1556:1604" placeholder="SELECT 1 FRO..post_view..." />
+            <marker date="1458439178613" expanded="true" signature="2258:2395" placeholder="INSERT INTO `hangshare`.`post_view`..." />
+            <marker date="1458439178613" expanded="true" signature="2722:2791" placeholder="SELECT id ,c..country..." />
+            <marker date="1458439178613" expanded="true" signature="3052:3123" placeholder="SELECT `valu..sys_values..." />
+            <marker date="1458439178613" expanded="true" signature="3343:3411" placeholder="SELECT price..region..." />
+            <marker date="1458439178613" expanded="true" signature="4105:4208" placeholder="INSERT INTO post_view_country..." />
+            <marker date="1458439178613" expanded="true" signature="4348:4412" placeholder="SELECT value..sys_values..." />
+            <marker date="1458439178613" expanded="true" signature="4544:4653" placeholder="UPDATE `post..." />
+            <marker date="1458439178613" expanded="true" signature="4717:4967" placeholder="UPDATE `user..." />
+            <marker date="1458439178613" expanded="true" signature="5156:5252" placeholder="SELECT id, t..post..." />
+            <marker date="1458439178613" expanded="true" signature="5532:5585" placeholder="SELECT id FR..post..." />
+            <marker date="1458439178613" expanded="true" signature="5731:5774" placeholder="UPDATE post ..." />
+            <marker date="1458439178613" expanded="true" signature="5932:6030" placeholder="SELECT t.id,..post..." />
+            <marker date="1458439178613" expanded="true" signature="7441:7513" placeholder="SELECT t.id,..user..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

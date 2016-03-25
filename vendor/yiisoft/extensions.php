@@ -93,4 +93,22 @@ return array (
       '@kartik/export' => $vendorDir . '/kartik-v/yii2-export',
     ),
   ),
+  'kartik-v/yii2-widget-select2' => 
+  array (
+    'name' => 'kartik-v/yii2-widget-select2',
+    'version' => '9999999-dev',
+    'alias' => 
+    array (
+      '@kartik/select2' => $vendorDir . '/kartik-v/yii2-widget-select2',
+    ),
+  ),
+  'skeeks/yii2-assets-auto-compress' => 
+  array (
+    'name' => 'skeeks/yii2-assets-auto-compress',
+    'version' => '1.1.1.0',
+    'alias' => 
+    array (
+      '@skeeks/yii2/assetsAuto' => $vendorDir . '/skeeks/yii2-assets-auto-compress',
+    ),
+  ),
 );

@@ -1518,5 +1518,292 @@
             "s3",
             "sdk"
         ]
+    },
+    {
+        "name": "codeception/verify",
+        "version": "0.3.0",
+        "version_normalized": "0.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Codeception/Verify.git",
+            "reference": "d3721cfc668d96b41acbda3ecd01d3499381db64"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Codeception/Verify/zipball/d3721cfc668d96b41acbda3ecd01d3499381db64",
+            "reference": "d3721cfc668d96b41acbda3ecd01d3499381db64",
+            "shasum": ""
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0"
+        },
+        "time": "2015-11-26 23:23:25",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "files": [
+                "src/Codeception/function.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "authors": [
+            {
+                "name": "Michael Bodnarchuk",
+                "email": "davert.php@mailican.com"
+            }
+        ],
+        "description": "BDD assertion library for PHPUnit"
+    },
+    {
+        "name": "kartik-v/yii2-widget-select2",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kartik-v/yii2-widget-select2.git",
+            "reference": "4d03239c1e28ef8d3b96ab7fe360f5cbda34fb69"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/4d03239c1e28ef8d3b96ab7fe360f5cbda34fb69",
+            "reference": "4d03239c1e28ef8d3b96ab7fe360f5cbda34fb69",
+            "shasum": ""
+        },
+        "require": {
+            "kartik-v/yii2-krajee-base": "~1.7"
+        },
+        "time": "2016-02-17 11:49:30",
+        "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "kartik\\select2\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Kartik Visweswaran",
+                "email": "kartikv2@gmail.com",
+                "homepage": "http://www.krajee.com/"
+            }
+        ],
+        "description": "Enhanced Yii2 wrapper for the Select2 jQuery plugin (sub repo split from yii2-widgets).",
+        "homepage": "https://github.com/kartik-v/yii2-widget-select2",
+        "keywords": [
+            "dropdown",
+            "extension",
+            "form",
+            "jquery",
+            "plugin",
+            "select2",
+            "widget",
+            "yii2"
+        ]
+    },
+    {
+        "name": "mrclay/minify",
+        "version": "2.2.1",
+        "version_normalized": "2.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/mrclay/minify.git",
+            "reference": "3c11ba8232a2155a1a29552aafc528be5fb0a662"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/mrclay/minify/zipball/3c11ba8232a2155a1a29552aafc528be5fb0a662",
+            "reference": "3c11ba8232a2155a1a29552aafc528be5fb0a662",
+            "shasum": ""
+        },
+        "require": {
+            "ext-pcre": "*",
+            "php": ">=5.2.1"
+        },
+        "require-dev": {
+            "tubalmartin/cssmin": "~2.4.8"
+        },
+        "suggest": {
+            "tubalmartin/cssmin": "Support minify with CSSMin (YUI PHP port)"
+        },
+        "time": "2014-10-30 22:58:02",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "min/lib/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Stephen Clay",
+                "email": "steve@mrclay.org",
+                "role": "Developer"
+            }
+        ],
+        "description": "Minify is a PHP5 app that helps you follow several rules for client-side performance. It combines multiple CSS or Javascript files, removes unnecessary whitespace and comments, and serves them with gzip encoding and optimal client-side cache headers",
+        "homepage": "http://code.google.com/p/minify/"
+    },
+    {
+        "name": "natxet/CssMin",
+        "version": "v3.0.4",
+        "version_normalized": "3.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/natxet/CssMin.git",
+            "reference": "92de3fe3ccb4f8298d31952490ef7d5395855c39"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/natxet/CssMin/zipball/92de3fe3ccb4f8298d31952490ef7d5395855c39",
+            "reference": "92de3fe3ccb4f8298d31952490ef7d5395855c39",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.0"
+        },
+        "time": "2015-09-25 11:13:11",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.0-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Joe Scylla",
+                "email": "joe.scylla@gmail.com",
+                "homepage": "https://profiles.google.com/joe.scylla"
+            }
+        ],
+        "description": "Minifying CSS",
+        "homepage": "http://code.google.com/p/cssmin/",
+        "keywords": [
+            "css",
+            "minify"
+        ]
+    },
+    {
+        "name": "tedivm/jshrink",
+        "version": "v1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/tedious/JShrink.git",
+            "reference": "688527a2e854d7935f24f24c7d5eb1b604742bf9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/tedious/JShrink/zipball/688527a2e854d7935f24f24c7d5eb1b604742bf9",
+            "reference": "688527a2e854d7935f24f24c7d5eb1b604742bf9",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "fabpot/php-cs-fixer": "0.4.0",
+            "phpunit/phpunit": "4.0.*",
+            "satooshi/php-coveralls": "dev-master"
+        },
+        "time": "2015-07-04 07:35:09",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "JShrink": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Robert Hafner",
+                "email": "tedivm@tedivm.com"
+            }
+        ],
+        "description": "Javascript Minifier built in PHP",
+        "homepage": "http://github.com/tedious/JShrink",
+        "keywords": [
+            "javascript",
+            "minifier"
+        ]
+    },
+    {
+        "name": "skeeks/yii2-assets-auto-compress",
+        "version": "1.1.1",
+        "version_normalized": "1.1.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/skeeks-semenov/yii2-assets-auto-compress.git",
+            "reference": "00bdd8d7a89fdee8933ee28f172f9057b73945af"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/skeeks-semenov/yii2-assets-auto-compress/zipball/00bdd8d7a89fdee8933ee28f172f9057b73945af",
+            "reference": "00bdd8d7a89fdee8933ee28f172f9057b73945af",
+            "shasum": ""
+        },
+        "require": {
+            "mrclay/minify": "*",
+            "natxet/cssmin": "*",
+            "tedivm/jshrink": "*",
+            "yiisoft/yii2": "*"
+        },
+        "time": "2016-02-11 15:27:08",
+        "type": "yii2-extension",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "skeeks\\yii2\\assetsAuto\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Semenov Alexander",
+                "email": "semenov@skeeks.com"
+            }
+        ],
+        "description": "Automatically compile and merge files js + css",
+        "homepage": "http://www.skeeks.com/",
+        "keywords": [
+            "JS",
+            "Sx",
+            "app",
+            "assets",
+            "auto assets",
+            "css",
+            "framework",
+            "skeeks",
+            "yii"
+        ]
     }
 ]

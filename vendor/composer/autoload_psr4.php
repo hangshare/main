@@ -13,6 +13,8 @@ return array(
     'yii\\codeception\\' => array($vendorDir . '/yiisoft/yii2-codeception'),
     'yii\\bootstrap\\' => array($vendorDir . '/yiisoft/yii2-bootstrap'),
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
+    'skeeks\\yii2\\assetsAuto\\' => array($vendorDir . '/skeeks/yii2-assets-auto-compress'),
+    'kartik\\select2\\' => array($vendorDir . '/kartik-v/yii2-widget-select2'),
     'kartik\\grid\\' => array($vendorDir . '/kartik-v/yii2-grid'),
     'kartik\\export\\' => array($vendorDir . '/kartik-v/yii2-export'),
     'kartik\\date\\' => array($vendorDir . '/kartik-v/yii2-widget-datepicker'),
