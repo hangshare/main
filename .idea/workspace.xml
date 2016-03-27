@@ -2,20 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9ce9491-80d9-4725-94f3-9721cfe5d6d7" name="Default" comment="SIMPLE CODE">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/kartik-v/yii2-export" afterPath="$PROJECT_DIR$/vendor/kartik-v/yii2-export" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/console.php" afterPath="$PROJECT_DIR$/config/console.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/installed.json" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/phpexcel/PHPExcel/Shared/String.php" afterPath="$PROJECT_DIR$/vendor/phpexcel/PHPExcel/Shared/String.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/yiisoft/extensions.php" afterPath="$PROJECT_DIR$/vendor/yiisoft/extensions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/.htaccess" afterPath="$PROJECT_DIR$/web/.htaccess" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/index.php" afterPath="$PROJECT_DIR$/web/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/mrclay/minify" afterPath="$PROJECT_DIR$/vendor/mrclay/minify" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/tedivm/jshrink" afterPath="$PROJECT_DIR$/vendor/tedivm/jshrink" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="hangshare.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,30 +43,50 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CronController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CronController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/commands/CronController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.28295255">
-              <caret line="64" column="30" selection-start-line="64" selection-start-column="30" selection-end-line="64" selection-end-column="30" />
+            <state vertical-scroll-proportion="-4.6538463">
+              <caret line="61" column="87" selection-start-line="61" selection-start-column="87" selection-end-line="61" selection-end-column="87" />
               <folding>
-                <marker date="1458439178613" expanded="true" signature="365:541" placeholder="SELECT t.id ..user_payment..." />
-                <marker date="1458439178613" expanded="true" signature="858:913" placeholder="UPDATE user_..." />
-                <marker date="1458439178613" expanded="true" signature="969:1013" placeholder="UPDATE user ..." />
-                <marker date="1458439178613" expanded="true" signature="1556:1604" placeholder="SELECT 1 FRO..post_view..." />
-                <marker date="1458439178613" expanded="true" signature="2258:2395" placeholder="INSERT INTO `hangshare`.`post_view`..." />
-                <marker date="1458439178613" expanded="true" signature="2722:2791" placeholder="SELECT id ,c..country..." />
-                <marker date="1458439178613" expanded="true" signature="3052:3123" placeholder="SELECT `valu..sys_values..." />
-                <marker date="1458439178613" expanded="true" signature="3343:3411" placeholder="SELECT price..region..." />
-                <marker date="1458439178613" expanded="true" signature="4105:4208" placeholder="INSERT INTO post_view_country..." />
-                <marker date="1458439178613" expanded="true" signature="4348:4412" placeholder="SELECT value..sys_values..." />
-                <marker date="1458439178613" expanded="true" signature="4544:4653" placeholder="UPDATE `post..." />
-                <marker date="1458439178613" expanded="true" signature="4717:4967" placeholder="UPDATE `user..." />
-                <marker date="1458439178613" expanded="true" signature="5156:5252" placeholder="SELECT id, t..post..." />
-                <marker date="1458439178613" expanded="true" signature="5532:5585" placeholder="SELECT id FR..post..." />
-                <marker date="1458439178613" expanded="true" signature="5731:5774" placeholder="UPDATE post ..." />
-                <marker date="1458439178613" expanded="true" signature="5932:6030" placeholder="SELECT t.id,..post..." />
-                <marker date="1458439178613" expanded="true" signature="7441:7513" placeholder="SELECT t.id,..user..." />
+                <marker date="1458907541878" expanded="true" signature="365:541" placeholder="SELECT t.id ..user_payment..." />
+                <marker date="1458907541878" expanded="true" signature="858:913" placeholder="UPDATE user_..." />
+                <marker date="1458907541878" expanded="true" signature="969:1013" placeholder="UPDATE user ..." />
+                <marker date="1458907541878" expanded="true" signature="1556:1604" placeholder="SELECT 1 FRO..post_view..." />
+                <marker date="1458907541878" expanded="true" signature="2226:2339" placeholder="INSERT INTO `hangshare`.`post_view`..." />
+                <marker date="1458907541878" expanded="true" signature="2734:2803" placeholder="SELECT id ,c..country..." />
+                <marker date="1458907541878" expanded="true" signature="3064:3135" placeholder="SELECT `valu..sys_values..." />
+                <marker date="1458907541878" expanded="true" signature="3355:3423" placeholder="SELECT price..region..." />
+                <marker date="1458907541878" expanded="true" signature="4117:4220" placeholder="INSERT INTO post_view_country..." />
+                <marker date="1458907541878" expanded="true" signature="4360:4424" placeholder="SELECT value..sys_values..." />
+                <marker date="1458907541878" expanded="true" signature="4556:4665" placeholder="UPDATE `post..." />
+                <marker date="1458907541878" expanded="true" signature="4729:4979" placeholder="UPDATE `user..." />
+                <marker date="1458907541878" expanded="true" signature="5168:5264" placeholder="SELECT id, t..post..." />
+                <marker date="1458907541878" expanded="true" signature="5544:5597" placeholder="SELECT id FR..post..." />
+                <marker date="1458907541878" expanded="true" signature="5743:5786" placeholder="UPDATE post ..." />
+                <marker date="1458907541878" expanded="true" signature="5944:6042" placeholder="SELECT t.id,..post..." />
+                <marker date="1458907541878" expanded="true" signature="7453:7525" placeholder="SELECT t.id,..user..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="function.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/codeception/verify/src/Codeception/function.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.153846">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Verify.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vendor/codeception/verify/src/Codeception/Verify.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.29982364">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -128,8 +138,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/models/LoginForm.php" />
-        <option value="$PROJECT_DIR$/models/FaqSearch.php" />
         <option value="$PROJECT_DIR$/models/PostTag.php" />
         <option value="$PROJECT_DIR$/components/Helper.php" />
         <option value="$PROJECT_DIR$/views/explore/_most.php" />
@@ -179,6 +187,8 @@
         <option value="$PROJECT_DIR$/views/explore/view.php" />
         <option value="$PROJECT_DIR$/components/Hitcounter.php" />
         <option value="$PROJECT_DIR$/commands/CronController.php" />
+        <option value="$PROJECT_DIR$/vendor/codeception/verify/src/Codeception/function.php" />
+        <option value="$PROJECT_DIR$/vendor/codeception/verify/src/Codeception/Verify.php" />
       </list>
     </option>
   </component>
@@ -226,7 +236,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -241,7 +250,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="hangshare" />
+              <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -251,21 +260,74 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="hangshare" />
+              <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hangshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="codeception" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="verify" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hangshare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="codeception" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="verify" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Codeception" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tme" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.externalTools" />
     <property name="settings.editor.splitter.proportion" value="0.2182377" />
     <property name="WebServerToolWindowFactoryState" value="true" />
@@ -339,12 +401,6 @@
       <created>1456196038485</created>
       <option name="number" value="Default" />
       <updated>1456196038485</updated>
-    </task>
-    <task id="LOCAL-00209" summary="Gold User ENded cron">
-      <created>1457634106064</created>
-      <option name="number" value="00209" />
-      <option name="project" value="LOCAL" />
-      <updated>1457634106064</updated>
     </task>
     <task id="LOCAL-00210" summary="Notify Email Paypal">
       <created>1457642840855</created>
@@ -634,7 +690,13 @@
       <option name="project" value="LOCAL" />
       <updated>1458439182411</updated>
     </task>
-    <option name="localTasksCounter" value="258" />
+    <task id="LOCAL-00258" summary="BUG">
+      <created>1458907556072</created>
+      <option name="number" value="00258" />
+      <option name="project" value="LOCAL" />
+      <updated>1458907556073</updated>
+    </task>
+    <option name="localTasksCounter" value="259" />
     <servers />
   </component>
   <component name="TodoView">
@@ -648,11 +710,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930514" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2326284" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23867069" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279483" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279483" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930514" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -660,7 +723,6 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36392915" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279483" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -731,6 +793,7 @@
     <MESSAGE value="New Hit counter" />
     <MESSAGE value="Email Bounce Rate" />
     <MESSAGE value="Bug" />
+    <MESSAGE value="BUG" />
     <MESSAGE value="SIMPLE CODE" />
     <option name="LAST_COMMIT_MESSAGE" value="SIMPLE CODE" />
   </component>
@@ -741,20 +804,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/console.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="10" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="216" column="19" selection-start-line="216" selection-start-column="19" selection-end-line="216" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1104,27 +1153,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/commands/CronController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28295255">
-          <caret line="64" column="30" selection-start-line="64" selection-start-column="30" selection-end-line="64" selection-end-column="30" />
+        <state vertical-scroll-proportion="-4.6538463">
+          <caret line="61" column="87" selection-start-line="61" selection-start-column="87" selection-end-line="61" selection-end-column="87" />
           <folding>
-            <marker date="1458439178613" expanded="true" signature="365:541" placeholder="SELECT t.id ..user_payment..." />
-            <marker date="1458439178613" expanded="true" signature="858:913" placeholder="UPDATE user_..." />
-            <marker date="1458439178613" expanded="true" signature="969:1013" placeholder="UPDATE user ..." />
-            <marker date="1458439178613" expanded="true" signature="1556:1604" placeholder="SELECT 1 FRO..post_view..." />
-            <marker date="1458439178613" expanded="true" signature="2258:2395" placeholder="INSERT INTO `hangshare`.`post_view`..." />
-            <marker date="1458439178613" expanded="true" signature="2722:2791" placeholder="SELECT id ,c..country..." />
-            <marker date="1458439178613" expanded="true" signature="3052:3123" placeholder="SELECT `valu..sys_values..." />
-            <marker date="1458439178613" expanded="true" signature="3343:3411" placeholder="SELECT price..region..." />
-            <marker date="1458439178613" expanded="true" signature="4105:4208" placeholder="INSERT INTO post_view_country..." />
-            <marker date="1458439178613" expanded="true" signature="4348:4412" placeholder="SELECT value..sys_values..." />
-            <marker date="1458439178613" expanded="true" signature="4544:4653" placeholder="UPDATE `post..." />
-            <marker date="1458439178613" expanded="true" signature="4717:4967" placeholder="UPDATE `user..." />
-            <marker date="1458439178613" expanded="true" signature="5156:5252" placeholder="SELECT id, t..post..." />
-            <marker date="1458439178613" expanded="true" signature="5532:5585" placeholder="SELECT id FR..post..." />
-            <marker date="1458439178613" expanded="true" signature="5731:5774" placeholder="UPDATE post ..." />
-            <marker date="1458439178613" expanded="true" signature="5932:6030" placeholder="SELECT t.id,..post..." />
-            <marker date="1458439178613" expanded="true" signature="7441:7513" placeholder="SELECT t.id,..user..." />
+            <marker date="1458907541878" expanded="true" signature="365:541" placeholder="SELECT t.id ..user_payment..." />
+            <marker date="1458907541878" expanded="true" signature="858:913" placeholder="UPDATE user_..." />
+            <marker date="1458907541878" expanded="true" signature="969:1013" placeholder="UPDATE user ..." />
+            <marker date="1458907541878" expanded="true" signature="1556:1604" placeholder="SELECT 1 FRO..post_view..." />
+            <marker date="1458907541878" expanded="true" signature="2226:2339" placeholder="INSERT INTO `hangshare`.`post_view`..." />
+            <marker date="1458907541878" expanded="true" signature="2734:2803" placeholder="SELECT id ,c..country..." />
+            <marker date="1458907541878" expanded="true" signature="3064:3135" placeholder="SELECT `valu..sys_values..." />
+            <marker date="1458907541878" expanded="true" signature="3355:3423" placeholder="SELECT price..region..." />
+            <marker date="1458907541878" expanded="true" signature="4117:4220" placeholder="INSERT INTO post_view_country..." />
+            <marker date="1458907541878" expanded="true" signature="4360:4424" placeholder="SELECT value..sys_values..." />
+            <marker date="1458907541878" expanded="true" signature="4556:4665" placeholder="UPDATE `post..." />
+            <marker date="1458907541878" expanded="true" signature="4729:4979" placeholder="UPDATE `user..." />
+            <marker date="1458907541878" expanded="true" signature="5168:5264" placeholder="SELECT id, t..post..." />
+            <marker date="1458907541878" expanded="true" signature="5544:5597" placeholder="SELECT id FR..post..." />
+            <marker date="1458907541878" expanded="true" signature="5743:5786" placeholder="UPDATE post ..." />
+            <marker date="1458907541878" expanded="true" signature="5944:6042" placeholder="SELECT t.id,..post..." />
+            <marker date="1458907541878" expanded="true" signature="7453:7525" placeholder="SELECT t.id,..user..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/codeception/verify/src/Codeception/function.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.153846">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/codeception/verify/src/Codeception/Verify.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29982364">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
