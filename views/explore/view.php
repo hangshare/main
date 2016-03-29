@@ -88,8 +88,8 @@ $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize'
                                 $incr = 0;
                             }
                             $ips[] = Yii::$app->hitcounter->getRemoteIPAddress();
-                            $st = Yii::$app->cache->set('views_ips_arr_' . $model->id, $ips, 60);
-                            Yii::$app->cache->set('post_tmp_views_' . $model->id, $totalViews + $incr, 60);
+                            $st = Yii::$app->cache->set('views_ips_arr_' . $model->id, $ips, 30);
+                            Yii::$app->cache->set('post_tmp_views_' . $model->id, $totalViews + $incr, 30);
                             echo number_format($totalViews + $incr);
                         ?>
                     </p>
