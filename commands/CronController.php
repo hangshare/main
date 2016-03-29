@@ -58,21 +58,18 @@ class CronController extends Controller
                         }
                         $country["{$view['country_code']}"] += 1;
                         $total_views++;
-
                         $ins[] = "({$view['userId']}, {$id}, '{$view['ip']}', '{$hash}')";
                     }
                 }
                 if (isset($ins)) {
                     $qar = implode(', ', $ins);
-                    try{
+                    try {
                         Yii::$app->db->createCommand("INSERT INTO `hangshare`.`post_view` (`userId` , `postId` , `ip` , `hash`)
                                 VALUES {$qar} ;")->query();
-                    }catch (Exception $e){
+                    } catch (Exception $e) {
 
                     }
                 }
-
-
                 $total_price = 0;
                 foreach ($country as $key => $num) {
                     $country_price = $memcached->get('country_price_' . $key);
@@ -102,7 +99,7 @@ class CronController extends Controller
                     $qar = implode(', ', $insq);
 
                     Yii::$app->db->createCommand("
-            INSERT INTO post_view_country (`postId` , `countryId` , `views` , `income`)
+                    INSERT INTO post_view_country (`postId` , `countryId` , `views` , `income`)
                     VALUES {$qar} ;")->query();
                 }
                 if ($view['plan']) {
@@ -111,10 +108,9 @@ class CronController extends Controller
                 }
                 Yii::$app->db->createCommand("UPDATE `post_stats` SET `views`=`views`+{$total_views}, `profit` = `profit` + {$total_price} WHERE `postId`= {$id}")->query();
                 Yii::$app->db->createCommand("UPDATE `user_stats` SET `post_total_views`=`post_total_views`+{$total_views}, `post_views`=`post_views`+{$total_views},
-              `available_amount`=`available_amount`+{$total_price}, `total_amount`=`total_amount`+ {$total_price} WHERE `userId`= {$view['post_user_id']}")->query();
+                `available_amount`=`available_amount`+{$total_price}, `total_amount`=`total_amount`+ {$total_price} WHERE `userId`= {$view['post_user_id']}")->query();
             }
         }
-
         print 'Done ...' . chr(10);
     }
 
