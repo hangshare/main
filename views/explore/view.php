@@ -80,16 +80,15 @@ $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize'
                     <p> تاريخ اﻹضافة : <?php echo date('Y-m-d', strtotime($model->created_at)); ?>
                         | المشاهدات : <?php
                             $incr = 1;
-                            if (!($totalViews = Yii::$app->cache->get('post_tmp_views_' . $model->id))) {
+//                            if (!($totalViews = Yii::$app->cache->get('post_tmp_views_' . $model->id))) {
                                 $totalViews = $model->postStats->views;
-                            }
-
-                            if (($ips = Yii::$app->cache->get('views_ips_arr_' . $model->id)) && in_array(Yii::$app->hitcounter->getRemoteIPAddress(), $ips)) {
-                                $incr = 0;
-                            }
-                            $ips[] = Yii::$app->hitcounter->getRemoteIPAddress();
-                            $st = Yii::$app->cache->set('views_ips_arr_' . $model->id, $ips, 30);
-                            Yii::$app->cache->set('post_tmp_views_' . $model->id, $totalViews + $incr, 30);
+//                            }
+//                            if (($ips = Yii::$app->cache->get('views_ips_arr_' . $model->id)) && in_array(Yii::$app->hitcounter->getRemoteIPAddress(), $ips)) {
+//                                $incr = 0;
+//                            }
+//                            $ips[] = Yii::$app->hitcounter->getRemoteIPAddress();
+//                            $st = Yii::$app->cache->set('views_ips_arr_' . $model->id, $ips, 30);
+//                            Yii::$app->cache->set('post_tmp_views_' . $model->id, $totalViews + $incr, 30);
                             echo number_format($totalViews + $incr);
                         ?>
                     </p>
