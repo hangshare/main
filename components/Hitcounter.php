@@ -93,12 +93,13 @@ class Hitcounter extends Component
 
     public function AddHit($pageID, $post_user_id, $plan)
     {
-        if (self::IGNORE_SEARCH_BOTS && self::IsSearchBot())
-            return false;
-        if (in_array(self::getRemoteIPAddress(), self::$IP_IGNORE_LIST))
-            return false;
-        if (self::HONOR_DO_NOT_TRACK && isset($_SERVER['HTTP_DNT']) && $_SERVER['HTTP_DNT'] == "1")
-            return false;
+//        if (self::IGNORE_SEARCH_BOTS && self::IsSearchBot())
+//            return false;
+//        if (in_array(self::getRemoteIPAddress(), self::$IP_IGNORE_LIST))
+//            return false;
+//        if (self::HONOR_DO_NOT_TRACK && isset($_SERVER['HTTP_DNT']) && $_SERVER['HTTP_DNT'] == "1")
+//            return false;
+
         if (!Yii::$app->user->isGuest && Yii::$app->user->id == $post_user_id)
             return false;
 
