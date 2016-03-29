@@ -45,7 +45,7 @@ class CronController extends Controller
         $memcached = new \Memcache();
         $memcached->addserver('127.0.0.1');
         $results = $memcached->get('hang_mem_views');
-        $memcached->delete('hang_mem_views');
+
         var_dump($results);
         if (is_array($results)) {
             foreach ($results as $id => $views) {
@@ -114,6 +114,7 @@ class CronController extends Controller
             }
         }
 
+        $memcached->delete('hang_mem_views');
         print 'Done ...' . chr(10);
     }
 
