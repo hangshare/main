@@ -141,9 +141,9 @@ class Hitcounter extends Component
             'ip' => self::getRemoteIPAddress(),
             'post_user_id' => $post_user_id,
             'plan' => $plan,
-            'userAgent' => json_encode($_SERVER),
+//            'userAgent' => json_encode($_SERVER),
             'userId' => Yii::$app->user->isGuest ? 0 : Yii::$app->user->identity->id,
-            'ip_info' => isset($_COOKIE['ip_info']) ? $_COOKIE['ip_info'] : ''
+//            'ip_info' => isset($_COOKIE['ip_info']) ? $_COOKIE['ip_info'] : ''
         ];
         $memcached->set('hang_mem_views', $res);
         setcookie($hashId, true, time() + self::HIT_OLD_AFTER_SECONDS, "/");
