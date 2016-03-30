@@ -98,7 +98,7 @@ class Imageresize extends Component
             $im->destroy();
         }
 
-        if (filemtime($thumppath) < (time() - 58000)) {
+        if (filemtime($thumppath) < (time() - 98000)) {
             return 'https://dw4xox9sj1rhd.cloudfront.net/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
         } else {
             return Url::home(true) . 'media/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
