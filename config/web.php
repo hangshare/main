@@ -66,8 +66,8 @@ $config = [
         'cache' => array(
             'class' => 'yii\caching\MemCache',
             'servers' => array(
-                array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 60),
-                array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 40),
+                array('host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 60),
+                array('host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 40),
             ),
         ),
         'session' => [
