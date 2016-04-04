@@ -57,52 +57,51 @@ class Imageresize extends Component
 
 
 //        @unlink($thumppath);
-        if (!is_file($thumppath)) {
-            if (!is_dir($path)) {
-                mkdir($path, 0777, true);
-            }
-            $im = new \Imagick($this->mediaFile . '/' . $this->file);
-            $im->setImageCompression(\Imagick::COMPRESSION_LOSSLESSJPEG);
-            $im->setImageFormat($ext);
-            $im->setImageCompressionQuality($this->quality);
-            $im->stripImage();
+//        if (!is_file($thumppath)) {
+//            if (!is_dir($path)) {
+//                mkdir($path, 0777, true);
+//            }
+//            $im = new \Imagick($this->mediaFile . '/' . $this->file);
+//            $im->setImageCompression(\Imagick::COMPRESSION_LOSSLESSJPEG);
+//            $im->setImageFormat($ext);
+//            $im->setImageCompressionQuality($this->quality);
+//            $im->stripImage();
 
-            if ($this->method == 'resize') {
-                $im->resizeImage($this->width, $this->height, \Imagick::FILTER_LANCZOS, 0.9, true);
-                $im->writeImage($thumppath);
-            } else {
-                if ($im->getimageheight() > $im->getimagewidth() || (($this->width + $this->height) > ($im->getimagewidth() + $im->getimageheight()))) {
-                    $im = new \Imagick($this->mediaFile . '/' . $this->file);
-                    $im->scaleimage(0, $this->height);
-                    $im->writeimage($thumppath);
-                    $bkim = new \Imagick($this->mediaFile . '/' . $this->file);
-                    $bkim->evaluateImage(\Imagick::EVALUATE_MULTIPLY, 0.3, \Imagick::CHANNEL_ALPHA);
-                    $bkim->cropThumbnailImage($this->width, $this->height);
-                    $bkim->blurimage(25, 15);
-                    $bkim->setImageFormat('png');
-                    $bkim->setImageCompression(\Imagick::COMPRESSION_LOSSLESSJPEG);
-                    //$im->cropThumbnailImage($this->width / 2, $this->height + $this->height / 3);
-                    $im->resizeImage($this->width / 2, $this->height / 2, \Imagick::FILTER_LANCZOS, 0.9, true);
-                    $shadow = $im->clone();
-                    $shadow->setImageBackgroundColor(new \ImagickPixel('black'));
-                    $shadow->shadowImage(70, 10, 15, 15);
-                    $bkim->compositeImage($shadow, \Imagick::COMPOSITE_OVER, (((($bkim->getImageWidth()) - ($im->getImageWidth()))) / 2), (((($bkim->getImageHeight()) - ($im->getImageHeight()))) / 2));
-                    $bkim->compositeImage($im, \Imagick::COMPOSITE_DEFAULT, (((($bkim->getImageWidth()) - ($im->getImageWidth()))) / 2), (((($bkim->getImageHeight()) - ($im->getImageHeight()))) / 2));
-                    @$bkim->writeImage($thumppath);
-                } else {
-                    $im->cropThumbnailImage($this->width, $this->height);
-                    $im->writeImage($thumppath);
-                }
-            }
-            $im->clear();
-            $im->destroy();
-        }
-
-//        if (filemtime($thumppath) < (time() - 98000)) {
-            return 'https://dw4xox9sj1rhd.cloudfront.net/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
-//        } else {
-//            return Url::home(true) . 'media/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
+//            if ($this->method == 'resize') {
+//                $im->resizeImage($this->width, $this->height, \Imagick::FILTER_LANCZOS, 0.9, true);
+//                $im->writeImage($thumppath);
+//            } else {
+//                if ($im->getimageheight() > $im->getimagewidth() || (($this->width + $this->height) > ($im->getimagewidth() + $im->getimageheight()))) {
+//                    $im = new \Imagick($this->mediaFile . '/' . $this->file);
+//                    $im->scaleimage(0, $this->height);
+//                    $im->writeimage($thumppath);
+//                    $bkim = new \Imagick($this->mediaFile . '/' . $this->file);
+//                    $bkim->evaluateImage(\Imagick::EVALUATE_MULTIPLY, 0.3, \Imagick::CHANNEL_ALPHA);
+//                    $bkim->cropThumbnailImage($this->width, $this->height);
+//                    $bkim->blurimage(25, 15);
+//                    $bkim->setImageFormat('png');
+//                    $bkim->setImageCompression(\Imagick::COMPRESSION_LOSSLESSJPEG);
+//                    //$im->cropThumbnailImage($this->width / 2, $this->height + $this->height / 3);
+//                    $im->resizeImage($this->width / 2, $this->height / 2, \Imagick::FILTER_LANCZOS, 0.9, true);
+//                    $shadow = $im->clone();
+//                    $shadow->setImageBackgroundColor(new \ImagickPixel('black'));
+//                    $shadow->shadowImage(70, 10, 15, 15);
+//                    $bkim->compositeImage($shadow, \Imagick::COMPOSITE_OVER, (((($bkim->getImageWidth()) - ($im->getImageWidth()))) / 2), (((($bkim->getImageHeight()) - ($im->getImageHeight()))) / 2));
+//                    $bkim->compositeImage($im, \Imagick::COMPOSITE_DEFAULT, (((($bkim->getImageWidth()) - ($im->getImageWidth()))) / 2), (((($bkim->getImageHeight()) - ($im->getImageHeight()))) / 2));
+//                    @$bkim->writeImage($thumppath);
+//                } else {
+//                    $im->cropThumbnailImage($this->width, $this->height);
+//                    $im->writeImage($thumppath);
+//                }
+//            }
+//            $im->clear();
+//            $im->destroy();
 //        }
+
+         return 'https://dw4xox9sj1rhd.cloudfront.net/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
+
+//            return Url::home(true) . 'media/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
+
 
     }
 
