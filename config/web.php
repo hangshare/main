@@ -18,6 +18,9 @@ $config = [
         'init' => [
             'class' => 'app\components\Init',
         ],
+        'customs3'=>[
+            'class' => 'app\components\Customs3',
+        ],
         'imageresize' => [
             'class' => 'app\components\Imageresize',
         ],
@@ -66,8 +69,10 @@ $config = [
         'cache' => array(
             'class' => 'yii\caching\MemCache',
             'servers' => array(
-                array('host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 60),
-                array('host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 40),
+//                array('host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 60),
+//                array('host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 40),
+                array('host' => 'localhost', 'port' => 11211, 'weight' => 60),
+                array('host' => 'localhost', 'port' => 11211, 'weight' => 40),
             ),
         ),
         'session' => [
@@ -97,7 +102,7 @@ $config = [
         ],
         'db' => [
             'class' => 'yii\db\Connection',
-                    'dsn' => 'mysql:host=main.cdb3bm2h7j5j.us-east-1.rds.amazonaws.com;port=3306;dbname=hangshare',
+            'dsn' => 'mysql:host=main.cdb3bm2h7j5j.us-east-1.rds.amazonaws.com;port=3306;dbname=hangshare',
             'username' => 'hangshare',
             'password' => 'Khaled!23',
 //            'dsn' => 'mysql:host=127.0.0.1;dbname=hangshare',
