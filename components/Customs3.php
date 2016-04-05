@@ -10,11 +10,12 @@ namespace app\components;
 
 use Aws\S3\S3Client;
 use Yii;
+use yii\base\Component;
 
 require Yii::$app->vendorPath . '/autoload.php';
 
 
-class S3 extends Component
+class Customs3 extends Component
 {
 
 
