@@ -114,7 +114,7 @@ class ExploreController extends Controller
         $query->where('post.type = 1 AND post.deleted = 0');
         $query->andWhere(['<>', 'cover', '']);
         if (!empty($tag)) {
-            $tag = str_replace('-',' ', $tag);
+            $tag = str_replace('-', ' ', $tag);
             $query->joinWith(['postTags', 'postTags.tags']);
             $query->andFilterWhere(['like', 'tags.name', $tag]);
         }
@@ -250,7 +250,7 @@ class ExploreController extends Controller
         $query->where('post.type = 0 AND post.deleted = 0 AND post.deleted=0');
         $query->andWhere(['<>', 'cover', '']);
         if (!empty($tag)) {
-            $tag = str_replace('-',' ',$tag);
+            $tag = str_replace('-', ' ', $tag);
             $query->andFilterWhere(['like', 'tags.name', $tag]);
         }
         $currentPage = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -284,6 +284,70 @@ class ExploreController extends Controller
             ]);
         }
     }
+
+    public function actionResize()
+    {
+        Yii::$app->imageresize->PatchPostResize($_POST['bucket'], $_POST['key']);
+    }
+
+
+    public function actionS3crd()
+    {
+        $s3Bucket = 'hangshare.media';
+        $region = 'eu-west-1';
+        $acl = 'public-read';
+        $awsKey = 'AKIAIXXCGXOS77W753RQ';
+        $awsSecret = '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';
+        $algorithm = "AWS4-HMAC-SHA256";
+        $service = "s3";
+        $date = gmdate("Ymd\THis\Z");
+        $shortDate = gmdate("Ymd");
+        $requestType = "aws4_request";
+        $expires = "6400";
+        $successStatus = "201";
+        $url = "http://{$s3Bucket}.s3.amazonaws.com/";
+        $scope = [
+            $awsKey,
+            $shortDate,
+            $region,
+            $service,
+            $requestType
+        ];
+        $credentials = implode('/', $scope);
+        $policy = [
+            'expiration' => gmdate('Y-m-d\TG:i:s\Z', strtotime('+6 hours')),
+            'conditions' => [
+                ['bucket' => $s3Bucket],
+                ['acl' => $acl],
+                ['starts-with', '$key', ''],
+                ['starts-with', '$Content-Type', ''],
+                ['success_action_status' => $successStatus],
+                ['x-amz-credential' => $credentials],
+                ['x-amz-algorithm' => $algorithm],
+                ['x-amz-date' => $date],
+                ['x-amz-expires' => $expires],
+            ]
+        ];
+        $base64Policy = base64_encode(json_encode($policy));
+        $dateKey = hash_hmac('sha256', $shortDate, 'AWS4' . $awsSecret, true);
+        $dateRegionKey = hash_hmac('sha256', $region, $dateKey, true);
+        $dateRegionServiceKey = hash_hmac('sha256', $service, $dateRegionKey, true);
+        $signingKey = hash_hmac('sha256', $requestType, $dateRegionServiceKey, true);
+        $signature = hash_hmac('sha256', $base64Policy, $signingKey);
+        $inputs = [
+            'ContentType' => '',
+            'acl' => $acl,
+            'success_action_status' => $successStatus,
+            'policy' => $base64Policy,
+            'X_amz_credential' => $credentials,
+            'X_amz_algorithm' => $algorithm,
+            'X_amz_date' => $date,
+            'X_amz_expires' => $expires,
+            'X_amz_signature' => $signature
+        ];
+        echo json_encode(['url' => $url, 'inputs' => $inputs]);
+    }
+
 
     public function actionRed($id)
     {
@@ -422,7 +486,7 @@ class ExploreController extends Controller
      */
     public function actionDelete($id)
     {
-        $model = Post::findOne(['id'=>$id]);
+        $model = Post::findOne(['id' => $id]);
         if (Yii::$app->user->id != $model->userId) {
             throw new Exception('غير مسموح.', '403');
         }
@@ -430,7 +494,7 @@ class ExploreController extends Controller
         Yii::$app->getSession()->setFlash('success', [
             'message' => 'تم حذف الموضوع بنجاح.',
         ]);
-        return $this->redirect(['/user/'. $model->userId]);
+        return $this->redirect(['/user/' . $model->userId]);
     }
 
 }
