@@ -108,6 +108,96 @@ $(function () {
         });
     }
 
+    //cover image to s3 upload
+    var uploadform = $('#uploadform');
+    if (uploadform.length > 0) {
+        $(document).on('click', '#uploadtos3', function (e) {
+            e.preventDefault();
+            $('#files3').click();
+        });
+
+        var credData;
+        $.ajax({
+            url: '/main/web/explore/s3crd/',
+            type: 'POST',
+            dataType: 'JSON',
+            data: {},
+            success: function (data) {
+                credData = data;
+            }
+        });
+
+
+        function randomFolderName() {
+            var text = "";
+            var possible = "1234ABCDEFGHIJKLMNOPQRSTUVWXY567890Zabcdefghijklmnopqrstuvwxyz0123456789-";
+
+            for (var i = 0; i < 6; i++)
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+            return text;
+        }
+
+
+        var _URL = window.URL;
+
+        $('#files3').change(function () {
+            var file, img, widthCover, heightCover;
+            if (file = this.files[0]) {
+                img = new Image();
+                img.onload = function () {
+                    widthCover = this.width;
+                    heightCover = this.height;
+                };
+                img.src = _URL.createObjectURL(file);
+
+                folderName = randomFolderName();
+                formData = new FormData();
+                formData.append("key", folderName + "/" + file.name);
+                formData.append("acl", credData.inputs.acl);
+                formData.append("success_action_status", credData.inputs.success_action_status);
+                formData.append("Content-Type", file.type);
+                formData.append("policy", credData.inputs.policy);
+                formData.append("X-amz-credential", credData.inputs.X_amz_credential);
+                formData.append("X-amz-algorithm", credData.inputs.X_amz_algorithm);
+                formData.append("X-amz-date", credData.inputs.X_amz_date);
+                formData.append("X-amz-expires", credData.inputs.X_amz_expires);
+                formData.append("X-amz-signature", credData.inputs.X_amz_signature);
+
+                formData.append("file", file);
+                $.ajax({
+                    url: credData.url,
+                    type: 'POST',
+                    data: formData,
+                    crossDomain: true,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'XML',
+                    success: function (response, status, xml) {
+                        var Bucket = xml.responseXML.getElementsByTagName("PostResponse")[0].childNodes[1].firstChild.nodeValue;
+                        var Key = xml.responseXML.getElementsByTagName("PostResponse")[0].childNodes[2].firstChild.nodeValue;
+                        if (status === 'success') {
+                            $.ajax({
+                                url: "/main/web/explore/resize/",
+                                method: "POST",
+                                dataType: "json",
+                                data: {bucket: Bucket, key: Key},
+                                success: function (data) {
+                                }
+                            });
+                        }
+                    }
+                });
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#coveri').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    }
+    // cover image to s3 upload
+
     if ($("#user-country").length) {
         rel_c = $("#user-country").attr('rel');
         if (rel_c === 'autoload') {
@@ -224,6 +314,7 @@ $(function () {
         $(this).addClass("btn-warning");
         $('#' + Id + '_form').show();
     });
+
 
     if ($('article').length > 0) {
         var Dat = $('article').data();
