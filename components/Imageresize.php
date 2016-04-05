@@ -6,7 +6,7 @@ use Yii;
 use yii\base\Component;
 use yii\helpers\Url;
 
-class Imageresize extends Component
+class Imageresize extends Upload
 {
     private $file = '';
     private $width = 200;
@@ -44,6 +44,33 @@ class Imageresize extends Component
     {
         $json = json_decode($string);
         return (json_last_error() == JSON_ERROR_NONE) ? $json : false;
+    }
+
+    public function s3Resize($path, $width, $height)
+    {
+        return true;
+    }
+
+    public function PatchPostResize($bucket, $key)
+    {
+        $sizes = [
+            ['width' => '200', 'height' => '200'],
+            ['width' => '200', 'height' => '200'],
+            ['width' => '200', 'height' => '200'],
+            ['width' => '200', 'height' => '200'],
+            ['width' => '200', 'height' => '200'],
+            ['width' => '200', 'height' => '200'],
+            ['width' => '200', 'height' => '200'],
+            ['width' => '200', 'height' => '200'],
+        ];
+
+        $path = $this->getImage();
+        foreach ($sizes as $size) {
+            $this->resize($path, $size['width'], $size['height']);
+        }
+
+        return true;
+
     }
 
     protected function resize()
@@ -98,7 +125,7 @@ class Imageresize extends Component
 //            $im->destroy();
 //        }
 
-         return 'https://dw4xox9sj1rhd.cloudfront.net/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
+        return 'https://dw4xox9sj1rhd.cloudfront.net/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
 
 //            return Url::home(true) . 'media/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
 
