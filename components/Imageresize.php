@@ -50,7 +50,7 @@ class Imageresize extends Component
         return (json_last_error() == JSON_ERROR_NONE) ? $json : false;
     }
 
-    public function s3Resize($path, $width, $height)
+    public function s3Resize($path, $width, $height, $method)
     {
         return true;
     }
@@ -58,19 +58,14 @@ class Imageresize extends Component
     public function PatchPostResize($bucket, $key)
     {
         $sizes = [
-            ['width' => '200', 'height' => '200'],
-            ['width' => '200', 'height' => '200'],
-            ['width' => '200', 'height' => '200'],
-            ['width' => '200', 'height' => '200'],
-            ['width' => '200', 'height' => '200'],
-            ['width' => '200', 'height' => '200'],
-            ['width' => '200', 'height' => '200'],
-            ['width' => '200', 'height' => '200'],
+            ['width' => '150', 'height' => '100', 'method' => 'crop'],
+            ['width' => '200', 'height' => '200', 'method' => 'crop'],
+            ['width' => '200', 'height' => '200', 'method' => 'crop'],
         ];
 
         $path = $this->downloadFile();
         foreach ($sizes as $size) {
-            $this->resize($path, $size['width'], $size['height']);
+            $this->s3Resize($path, $size['width'], $size['height'],$size['method']);
         }
 
         return true;
