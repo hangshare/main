@@ -64,7 +64,7 @@ class Imageresize extends Upload
             ['width' => '200', 'height' => '200'],
         ];
 
-        $path = $this->getImage();
+        $path = $this->downloadFile();
         foreach ($sizes as $size) {
             $this->resize($path, $size['width'], $size['height']);
         }
