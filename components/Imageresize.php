@@ -5,8 +5,9 @@ namespace app\components;
 use Yii;
 use yii\base\Component;
 use yii\helpers\Url;
+use app\components\Customs3;
 
-class Imageresize extends Upload
+class Imageresize extends Component
 {
     private $file = '';
     private $width = 200;
@@ -14,9 +15,11 @@ class Imageresize extends Upload
     private $method = 'resize';
     private $mediaFile = '/web/media';
     private $quality = 75;
+    private $s3;
 
     public function __construct($config = array())
     {
+        $this->s3 = Yii::$app->customs3;
         $this->mediaFile = Yii::$app->basePath . $this->mediaFile;
     }
 
@@ -30,11 +33,12 @@ class Imageresize extends Upload
         $this->width = $width;
         $this->height = $height;
         $this->method = $method;
-        if (empty($this->file) || $this->file === 0 || !is_file($this->mediaFile . '/' . $this->file)) {
+        if (empty($this->file) || $this->file === 0) //|| !is_file($this->mediaFile . '/' . $this->file)
+        {
             $this->file = 'other/no-profile-image.jpg';
         }
         try {
-            return @$this->resize();
+            return $this->resize();
         } catch (Exception $ex) {
 
         }
@@ -77,10 +81,14 @@ class Imageresize extends Upload
     {
         $filethump = $this->width . 'x' . $this->height . '-' . $this->method;
         $fileExtract = explode('/', $this->file);
-        $path_info = pathinfo($this->file);
-        $ext = $path_info['extension'];
-        $path = Yii::$app->basePath . '/web/media/' . $fileExtract[0] . '/' . $filethump;
-        $thumppath = $path . '/' . $fileExtract[1];
+
+        return 'https://dw4xox9sj1rhd.cloudfront.net/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
+
+
+//        $path_info = pathinfo($this->file);
+//        $ext = $path_info['extension'];
+//        $path = Yii::$app->basePath . '/web/media/' . $fileExtract[0] . '/' . $filethump;
+//        $thumppath = $path . '/' . $fileExtract[1];
 
 
 //        @unlink($thumppath);
@@ -125,7 +133,6 @@ class Imageresize extends Upload
 //            $im->destroy();
 //        }
 
-        return 'https://dw4xox9sj1rhd.cloudfront.net/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
 
 //            return Url::home(true) . 'media/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
 
