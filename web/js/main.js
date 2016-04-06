@@ -183,6 +183,7 @@ $(function () {
                                 dataType: "json",
                                 data: {bucket: Bucket, key: Key},
                                 success: function (data) {
+                                    $("#cover_input").val('{"bucket":' + Bucket + ', "key":' + Key + '}');
                                 }
                             });
                         }
