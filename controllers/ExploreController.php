@@ -422,7 +422,6 @@ class ExploreController extends Controller
      */
     public function actionPost($id = '')
     {
-
         if (empty($id)) {
             $model = new Post();
         } else {
@@ -432,21 +431,14 @@ class ExploreController extends Controller
             }
         }
         if ($model->load(Yii::$app->request->post())) {
-            $model->cover_file = UploadedFile::getInstance($model, 'cover_file');
             if (!empty($model->ylink)) {
                 $model->type = 1;
             }
-            $upload_result = $model->upload();
-            if ($upload_result && $model->type) { //get cover image from file
-                $model->saveExternal(false);
-            } else if ($model->type) { // get cover image from youtube or vimeo
-                $model->saveExternal(true);
-            }
+            $model->saveExternal();
             if (!$model->save()) {
                 var_dump($model->getErrors());
                 die();
             }
-
 
             return $this->redirect(["/{$model->urlTitle}"]);
         } else {
