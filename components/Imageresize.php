@@ -44,14 +44,14 @@ class Imageresize extends Component
         if ($json = $this->isJson($file))
             $file = $json->image;
 
-//        if (empty($this->file) || $this->file === 0)
-//            $file = 'other/no-profile-image.jpg';
+        if (empty($file) || $file === 0)
+            $file = 'other/no-profile-image.jpg';
 
         $filethump = $this->thumpName($width, $height, $method);
         $filename = basename($file);
         $folder = dirname($file);
-        if (!isset($fileExtract[1]))
-            return "https://dw4xox9sj1rhd.cloudfront.net/{$folder}/{$filethump}/{$filename}";
+
+        return "https://dw4xox9sj1rhd.cloudfront.net/{$folder}/{$filethump}/{$filename}";
     }
 
     public function isJson($string)
