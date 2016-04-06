@@ -139,7 +139,6 @@ class Customs3 extends Component
             'ContentType' => $this->mime_content_type($path)
         ]);
         @unlink($path);
-        var_dump($path);
         return $this;
     }
 
