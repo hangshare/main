@@ -155,10 +155,11 @@ class UserController extends Controller
         return $this->render('//transfer/transfer', ['model' => $model, 'user' => $this->user]);
     }
 
-    public function actionGetcountry(){
+    public function actionGetcountry()
+    {
         $countryCode = Yii::$app->hitcounter->ip_details();
         $countryId = Yii::$app->db->createCommand("SELECT id FROM country WHERE code= '{$countryCode}'")->queryScalar();
-        echo json_encode(['id'=>$countryId]);
+        echo json_encode(['id' => $countryId]);
     }
 
     public function actionGold()
@@ -174,18 +175,18 @@ class UserController extends Controller
 
     public function actionImage()
     {
-        $re = [];
-        if (isset($_FILES['image']) && !empty($_FILES['image']['name'])) {
-            if (Yii::$app->user->isGuest) {
-                $image = 'user/' . time() . '-' . strtolower($_FILES['image']['name']);
-            } else {
-                $image = 'user/' . time() . '-' . Yii::$app->user->identity->name . '-' . strtolower($_FILES['image']['name']);
-            }
-            move_uploaded_file($_FILES['image']['tmp_name'], Yii::$app->basePath . '/media/' . $image);
-            $re['url'] = Yii::$app->imageresize->thump($image, 50, 50, 'crop');
-            $re['name'] = $image;
-            echo json_encode($re);
-        }
+//        $re = [];
+//        if (isset($_FILES['image']) && !empty($_FILES['image']['name'])) {
+//            if (Yii::$app->user->isGuest) {
+//                $image = 'user/' . time() . '-' . strtolower($_FILES['image']['name']);
+//            } else {
+//                $image = 'user/' . time() . '-' . Yii::$app->user->identity->name . '-' . strtolower($_FILES['image']['name']);
+//            }
+//            move_uploaded_file($_FILES['image']['tmp_name'], Yii::$app->basePath . '/media/' . $image);
+//            $re['url'] = Yii::$app->imageresize->thump($image, 50, 50, 'crop');
+//            $re['name'] = $image;
+//            echo json_encode($re);
+//        }
     }
 
     public function actionSuccess($id)
@@ -310,8 +311,10 @@ class UserController extends Controller
         }
         $this->layout = 'usermanage';
         $model = $this->view->params['user'] = $this->findModel(Yii::$app->user->identity->id);
-
         if ($model->load(Yii::$app->request->post())) {
+            if (isset($_POST['image']) && !empty($_POST['image'])) {
+                $model->image = str_replace('key', 'image', $_POST['image']);
+            }
             if (isset($_POST['User']['year']) && isset($_POST['User']['month']) && isset($_POST['User']['day']) && $_POST['User']['day'] != 0 && $_POST['User']['month'] != 0 && $_POST['User']['day'] != 0) {
                 $model->dob = $_POST['User']['year'] . '-' . $_POST['User']['month'] . '-' . $_POST['User']['day'];
             }
