@@ -41,9 +41,10 @@ foreach ($model->postBodies as $data) {
                     </span>
                 </div>
                 <div class="col-md-9">
-                    <?= $form->field($model, 'ylink')->textInput(['maxlength' => true, 'placeholder'=> 'مثال: https://www.youtube.com/watch?v=K5sqorZ9x7o']) ?>
+                    <?= $form->field($model, 'ylink')->textInput(['maxlength' => true, 'placeholder' => 'مثال: https://www.youtube.com/watch?v=K5sqorZ9x7o']) ?>
                 </div>
             </div>
+            <input id="cover_input" name="cover" type="hidden" value=""/>
             <br>
             <?php
             $keywords = array();
@@ -140,5 +141,5 @@ foreach ($model->postBodies as $data) {
 </div>
 
 <from id="uploadform" method="POST" enctype="multipart/form-data">
-    <input id="files3" type="file" />
+    <input id="files3" type="file"/>
 </from>
