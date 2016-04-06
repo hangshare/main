@@ -21,6 +21,8 @@ class Imageresize extends Component
         ['width' => '1000', 'height' => '1000', 'method' => 'resize'],
         ['width' => '300', 'height' => '250', 'method' => 'crop'],
         ['width' => '400', 'height' => '230', 'method' => 'crop'],
+        ['width' => '400', 'height' => '250', 'method' => 'crop'],
+        ['width' => '400', 'height' => '290', 'method' => 'crop'],
         ['width' => '300', 'height' => '290', 'method' => 'crop'],
         ['width' => '500', 'height' => '350', 'method' => 'resize'],
         ['width' => '500', 'height' => '350', 'method' => 'crop'],
@@ -51,7 +53,8 @@ class Imageresize extends Component
         $filename = basename($file);
         $folder = dirname($file);
 
-        return "https://dw4xox9sj1rhd.cloudfront.net/{$folder}/{$filethump}/{$filename}";
+//        return "https://dw4xox9sj1rhd.cloudfront.net/{$folder}/{$filethump}/{$filename}";
+        return "http://hangshare.media.s3.amazonaws.com/{$folder}/{$filethump}/{$filename}";
     }
 
     public function isJson($string)
@@ -116,7 +119,7 @@ class Imageresize extends Component
 
     public function PatchResize($bucket, $key, $type = 'post')
     {
-        $path = $this->s3->downloadFile($bucket,$key);
+        $path = $this->s3->downloadFile($bucket, $key);
 
         $array = "{$type}_sizes";
         foreach ($this->$array as $size) {
