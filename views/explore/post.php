@@ -25,6 +25,14 @@ foreach ($model->postBodies as $data) {
                 , 'enctype' => 'multipart/form-data']])
             ?>
 
+            <div id="cover_error" style="display: none;">
+                <span class="alert alert-danger" style="display: block; text-align: center;">
+
+
+            يرجى اضافة صورة الغلاف
+            </span>
+            </div>
+
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
             <label>صورة الغلاف</label>
 
@@ -140,6 +148,6 @@ foreach ($model->postBodies as $data) {
     </div>
 </div>
 
-<from id="uploadform" method="POST" enctype="multipart/form-data">
+<from id="uploadform" method="POST" enctype="multipart/form-data" style="display: none;">
     <input id="files3" type="file"/>
 </from>
