@@ -286,7 +286,7 @@ class ExploreController extends Controller
     }
 
     public function actionResize(){
-        Yii::$app->imageresize->PatchResize($_POST['bucket'], $_POST['key'], 'post');
+        Yii::$app->imageresize->PatchResize($_POST['bucket'], $_POST['key'], $_POST['type']);
     }
 
 
