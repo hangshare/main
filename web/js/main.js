@@ -118,7 +118,7 @@ $(function () {
 
         var credData;
         $.ajax({
-            url: '/main/web/explore/s3crd/',
+            url: '/explore/s3crd/',
             type: 'POST',
             dataType: 'JSON',
             data: {},
@@ -178,7 +178,7 @@ $(function () {
                         var Key = xml.responseXML.getElementsByTagName("PostResponse")[0].childNodes[2].firstChild.nodeValue;
                         if (status === 'success') {
                             $.ajax({
-                                url: "/main/web/explore/resize/",
+                                url: "/explore/resize/",
                                 method: "POST",
                                 dataType: "json",
                                 data: {bucket: Bucket, key: Key},
