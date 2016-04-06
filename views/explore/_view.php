@@ -17,10 +17,11 @@ $thump = Yii::$app->imageresize->thump($model->cover, $width, $height, 'crop');
 $userthump = Yii::$app->imageresize->thump($model->user->image, 25, 25, 'crop');
 ?>
 <li>
-    <div class="ex-all" cover="<?= $model->cover; ?>">
+    <div class="ex-all">
         <a href="<?= $model->url ?>">
             <?php echo Html::img($thump, ['class' => 'img-responsive zoom-tilt']); ?>
         </a>
+
         <div class="shareblogsimi">
             <ul class="list-inline">
                 <li><a class="btn btn-primary js-share js-share-fasebook" post-url="<?= $model->url ?>"><i
@@ -44,9 +45,9 @@ $userthump = Yii::$app->imageresize->thump($model->user->image, 25, 25, 'crop');
                     }
                     ?></p>
             <?php endif; ?>
-            <img src = "<?= $userthump; ?>" />
+            <img src="<?= $userthump; ?>"/>
             <span><?php echo $model->user->name;
-            ?></span>
+                ?></span>
         </div>
     </a>
 </li>
