@@ -3,13 +3,14 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use \yii\bootstrap\Modal;
-use kartik\date\DatePicker;
 use yii\helpers\ArrayHelper;
 use app\models\Country;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
 /* @var $form yii\widgets\ActiveForm */
+
+$thump = Yii::$app->imageresize->thump($model->image, 100, 80, 'crop');
 ?>
 <div class="col-sm-12 user-form">
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
@@ -18,18 +19,17 @@ use app\models\Country;
     </div>
     <hr>
     <div class="row">
-        <?= $form->field($model, 'image')->hiddenInput()->label(null, ['class' => 'col-sm-4']) ?>
-        <div class="col-sm-8">
-            <div class="row">
-                <div class="col-xs-10">
-                    <div class="row">
-                        <img id='coveri'width="60" src="<?= Yii::$app->imageresize->thump($model->image, 50, 50, 'crop'); ?>" />
-                    </div>
-                </div>
-                <div class="col-xs-2 text-left">
-                    <a id='js_edpix' class="btn btn-default text-right" href="javascript:void(0);">تعديل</a>
-                </div>
+        <?= $form->field($model, 'image')->hiddenInput()->label(null, []) ?>
+        <div class="col-xs-2">
+            <?php echo Html::img($thump, ['id' => 'coveri']); ?>
+            <div id="prev"
+                 style="background-color: rgba(0, 0, 0, 0.4);padding: 40px 38px;position: absolute;text-align: center;top: 0; display: none;">
+                <i class="fa fa-spin fa-spinner fa-2x" style="position: relative; top: -10px; color: #fff;"></i>
             </div>
+            <button class="btn btn-primary btn-block" id="uploadtos3" style="border-radius: 0;">
+                <span>اختر صورة</span>
+            </button>
+            <input id="cover_input" name="image" type="hidden" value=""/>
         </div>
     </div>
     <hr>
@@ -84,7 +84,7 @@ use app\models\Country;
                 </div>
 
                 <?php Modal::end(); ?>
-            </div>             
+            </div>
         </div>
         <hr>
     <?php endif; ?>
@@ -94,6 +94,7 @@ use app\models\Country;
     <hr>
     <div class="row">
         <label class="col-sm-4">تاريخ الميلاد</label>
+
         <div class="col-sm-6">
             <div class="row">
                 <div id="containerdate">
@@ -130,7 +131,7 @@ use app\models\Country;
     <div class="row">
         <?=
         $form->field($model, 'country')->dropDownList(ArrayHelper::map(Country:: find()->all(), 'id', 'name_ar')
-                , ['prompt' => 'مكان الإقامة', 'class' => ''])->label(null, ['class' => 'col-sm-4']);
+            , ['prompt' => 'مكان الإقامة', 'class' => ''])->label(null, ['class' => 'col-sm-4']);
         ?>
     </div>
     <hr>
@@ -140,7 +141,8 @@ use app\models\Country;
     <div class="row">
         <div class="col-sm-4"></div>
         <div class="col-sm-8">
-            <p class="row">يرجى كتابة الرقم كامل مع الرقم الخاص بالدولة ، و يرجى العلم بأنه لن نقوم بنشر هذا الرقم باي مكان على الموقع.</p>
+            <p class="row">يرجى كتابة الرقم كامل مع الرقم الخاص بالدولة ، و يرجى العلم بأنه لن نقوم بنشر هذا الرقم باي
+                مكان على الموقع.</p>
         </div>
     </div>
     <hr>
@@ -149,7 +151,7 @@ use app\models\Country;
     </div>
     <?php ActiveForm::end(); ?>
 </div>
-<form id="ProfileImage" method="POST" action="<?= Yii::$app->urlManager->createUrl('//user/image'); ?>" enctype="multipart/form-data" class="hidden">
-    <input id="post-cover_file" type="file" name="image" />    
-</form>
-
+<from id="uploadform" method="POST" enctype="multipart/form-data" style="display: none;">
+    <input id="files3" type="file"/>
+    <input id="type" value="user"/>
+</from>
