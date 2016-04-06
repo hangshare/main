@@ -39,7 +39,10 @@ foreach ($model->postBodies as $data) {
             <div class="row">
                 <div class="col-md-2">
                     <?php echo Html::img($thump, ['class' => 'img-responsive', 'id' => 'coveri']); ?>
-                    <button class="btn btn-primary btn-block" id="uploadtos3">
+                    <div id="prev" style="background-color: rgba(0, 0, 0, 0.4);padding: 40px 38px;position: absolute;text-align: center;top: 0; display: none;">
+                        <i class="fa fa-spin fa-spinner fa-2x" style="position: relative; top: -10px; color: #fff;"></i>
+                    </div>
+                    <button class="btn btn-primary btn-block" id="uploadtos3" style="border-radius: 0;">
                         <span>اختر صورة</span>
                     </button>
                 </div>
@@ -150,4 +153,5 @@ foreach ($model->postBodies as $data) {
 
 <from id="uploadform" method="POST" enctype="multipart/form-data" style="display: none;">
     <input id="files3" type="file"/>
+    <input id="type" value="post" />
 </from>
