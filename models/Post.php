@@ -108,7 +108,7 @@ class Post extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'q' => 'البحث',
             'tags' => 'التصنيفات الرئيسية',
-            'ylink' => 'رابط من موقع YouTube أو Vimeo',
+            'ylink' => 'رابط فيديو من يوتيوب او موقع فيميو ( ملاحظة / سوف يتم أخذ صورة الغلاف من الفيديو وارفاقها وسوف يتم وضع الفيديو في بداية المقالة )',
         ];
     }
 
@@ -116,7 +116,7 @@ class Post extends \yii\db\ActiveRecord
     {
         if ($this->isNewRecord) {
             $this->userId = Yii::$app->user->id;
-            if (!empty($this->userId)){
+            if (!empty($this->userId)) {
                 Yii::$app->db->createCommand('UPDATE `user_stats` SET `post_count`=`post_count`+1 WHERE `userId`=' . $this->userId)->query();
             }
             $url = Yii::$app->helper->urlTitle($this->title);
@@ -131,42 +131,55 @@ class Post extends \yii\db\ActiveRecord
     }
 
 
-    public function saveExternal($image)
+    public function saveExternal()
     {
         $imageLink = $this->cover;
-
         if (preg_match("/https?:\/\/(?:www\.)?vimeo\.com\/\d+/", $this->ylink)) {
             $typeid = 'vimeo';
             $vidId = substr(parse_url($this->ylink, PHP_URL_PATH), 1);
-            if ($image) {
-                $JSonurl = "http://vimeo.com/api/v2/video/{$vidId}.json";
-                $headers = get_headers($JSonurl);
-                $urlResopnse = substr($headers[0], 9, 3);
-                if ($urlResopnse == '200') {
-                    $url = file_get_contents($JSonurl);
-                    $url_json = json_decode($url);
-                    $path = Yii::$app->basePath . "/web/media/{$typeid}/$vidId.jpg";
-                    $imageLink = "{$typeid}/$vidId.jpg";
-                    Yii::$app->helper->downloadFromUrl($url_json[0]->thumbnail_large, $path);
-                }
+            $JSonurl = "http://vimeo.com/api/v2/video/{$vidId}.json";
+            $headers = get_headers($JSonurl);
+            $urlResopnse = substr($headers[0], 9, 3);
+            if ($urlResopnse == '200') {
+                $url = file_get_contents($JSonurl);
+                $url_json = json_decode($url);
+                $path = Yii::$app->basePath . "/web/media/{$typeid}/$vidId.jpg";
+                $imageLink = "{$typeid}/$vidId.jpg";
+                Yii::$app->helper->downloadFromUrl($url_json[0]->thumbnail_large, $path);
+                list($width, $height) = getimagesize($path);
+                Yii::$app->Customs3->uploadFromPath($path, 'hangshare.media', "{$typeid}/$vidId.jpg");
+                Yii::$app->imageresize->PatchResize('hangshare.media', "{$typeid}/$vidId.jpg");
             }
         } else if (preg_match('#^(?:https?://)?(?:www\.)?(?:youtu\.be/|youtube\.com(?:/embed/|/v/|/watch\?v=|/watch\?.+&v=))([\w-]{11})(?:.+)?$#x', $this->ylink)) {
             $typeid = 'youtube';
             $vidId = Yii::$app->helper->youtubeId($this->ylink);
-            if ($image) {
-                $imageLink = "{$typeid}/$vidId.jpg";
-                $path = Yii::$app->basePath . "/web/media/{$typeid}/$vidId.jpg";
-                Yii::$app->helper->downloadFromUrl("http://img.youtube.com/vi/{$vidId}/0.jpg", $path);
-            }
+            $imageLink = "{$typeid}/$vidId.jpg";
+            $path = Yii::$app->basePath . "/web/media/{$typeid}/$vidId.jpg";
+            Yii::$app->helper->downloadFromUrl("http://img.youtube.com/vi/{$vidId}/0.jpg", $path);
+            list($width, $height) = getimagesize($path);
+            Yii::$app->customs3->uploadFromPath($path, 'hangshare.media', "{$typeid}/$vidId.jpg");
+            Yii::$app->imageresize->PatchResize('hangshare.media', "{$typeid}/$vidId.jpg");
         }
         if (isset($typeid)) {
             $this->cover = json_encode([
                 'type' => $typeid,
                 'link' => $vidId,
-                'image' => $imageLink
+                'image' => $imageLink,
+                'width' => $width,
+                'height' => $height
             ]);
         } else {
             $this->type = 0;
+            if (isset($_POST['cover']) && $json = $_POST['cover']) {
+                $json = json_decode($json);
+                $this->cover = json_encode([
+                    'type' => 's3',
+                    'image' => $json->key,
+                    'bucket' => $json->bucket,
+                    'width' => $json->width,
+                    'height' => $json->height
+                ]);
+            }
         }
     }
 
