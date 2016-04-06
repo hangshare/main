@@ -16,6 +16,38 @@ use app\commands\Post;
 
 class CronController extends Controller
 {
+    public function actionViewsbak()
+    {
+        $char = range('a', 'zzz');
+        $i = 3;
+        Yii::$app->db->createCommand("CREATE TABLE hangshare.post_view_{$char[$i]} LIKE hangshare.post_view;
+              INSERT hangshare.post_view_{$char[$i]} SELECT * FROM hangshare.post_view;")->query();
+        Yii::$app->db->createCommand("TRUNCATE `hangshare`.`post_view`;")->query();
+    }
+
+    public function actionDeservedamount()
+    {
+        //GOLD USERS
+        Yii::$app->db->createCommand("SET SQL_SAFE_UPDATES = 0;")->query();
+        Yii::$app->db->createCommand("UPDATE user_stats stats
+        LEFT OUTER JOIN user on (stats.userId = user.id)
+        SET
+        stats.cantake_amount = stats.available_amount,
+        stats.available_amount = 0
+
+        WHERE plan = 1 AND stats.available_amount >=50")->query();
+        //Normal USERS
+
+        Yii::$app->db->createCommand("UPDATE user_stats stats
+        LEFT OUTER JOIN user on (stats.userId = user.id)
+        SET
+        stats.cantake_amount = stats.available_amount,
+        stats.available_amount = 0
+
+        WHERE plan = 0 AND stats.available_amount >=100")->query();
+
+        Yii::$app->db->createCommand("SET SQL_SAFE_UPDATES = 1;")->query();
+    }
 
     public function actionGoldend()
     {
@@ -37,7 +69,6 @@ class CronController extends Controller
             Yii::$app->db->createCommand("UPDATE user SET plan = 0 WHERE id IN ({$st});")->query();
         }
     }
-
 
     public function actionCounter()
     {
