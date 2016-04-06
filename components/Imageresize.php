@@ -40,16 +40,18 @@ class Imageresize extends Component
 
     public function thump($file, $width, $height, $method)
     {
+
         if ($json = $this->isJson($file))
             $file = $json->image;
 
-        if (empty($this->file) || $this->file === 0)
-            $this->file = 'other/no-profile-image.jpg';
+//        if (empty($this->file) || $this->file === 0)
+//            $file = 'other/no-profile-image.jpg';
 
         $filethump = $this->thumpName($width, $height, $method);
-        $fileExtract = explode('/', $file);
-
-        return 'https://dw4xox9sj1rhd.cloudfront.net/' . $fileExtract[0] . '/' . $filethump . '/' . $fileExtract[1];
+        $filename = basename($file);
+        $folder = dirname($file);
+        if (!isset($fileExtract[1]))
+            return "https://dw4xox9sj1rhd.cloudfront.net/{$folder}/{$filethump}/{$filename}";
     }
 
     public function isJson($string)
