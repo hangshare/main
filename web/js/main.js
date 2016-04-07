@@ -56,9 +56,9 @@ $(function () {
     if (input) {
         input.onchange = function () {
             textinpt = document.getElementById("uploadFile");
-            if (textinpt) {
+            if (textinpt)
                 textinpt.value = this.value;
-            }
+
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
@@ -108,6 +108,16 @@ $(function () {
         });
     }
 
+    function randomFolderName() {
+        var text = "";
+        var possible = "1234ABCDEFGHIJKLMNOPQRSTUVWXY567890Zabcdefghijklmnopqrstuvwxyz0123456789-";
+
+        for (var i = 0; i < 6; i++)
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+    }
+
     //cover image to s3 upload
     var uploadform = $('#uploadform');
     if (uploadform.length > 0) {
@@ -115,7 +125,6 @@ $(function () {
             e.preventDefault();
             $('#files3').click();
         });
-
         var credData;
         $.ajax({
             url: '/explore/s3crd/',
@@ -126,23 +135,10 @@ $(function () {
                 credData = data;
             }
         });
-
-
-        function randomFolderName() {
-            var text = "";
-            var possible = "1234ABCDEFGHIJKLMNOPQRSTUVWXY567890Zabcdefghijklmnopqrstuvwxyz0123456789-";
-
-            for (var i = 0; i < 6; i++)
-                text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-            return text;
-        }
-
-
         var _URL = window.URL;
-
         $('#files3').change(function () {
             var file, img, widthCover, heightCover;
+            var Type = $('#type').val();
             if (file = this.files[0]) {
                 img = new Image();
                 img.onload = function () {
@@ -165,6 +161,7 @@ $(function () {
                 formData.append("X-amz-signature", credData.inputs.X_amz_signature);
 
                 formData.append("file", file);
+                $("#prev").fadeIn();
                 $.ajax({
                     url: credData.url,
                     type: 'POST',
@@ -177,13 +174,14 @@ $(function () {
                         var Bucket = xml.responseXML.getElementsByTagName("PostResponse")[0].childNodes[1].firstChild.nodeValue;
                         var Key = xml.responseXML.getElementsByTagName("PostResponse")[0].childNodes[2].firstChild.nodeValue;
                         if (status === 'success') {
+                            $("#cover_input").val('{"bucket":"' + Bucket + '", "key":"' + Key + '", "width": "' + widthCover + '", "height" : "' + heightCover + '"}');
                             $.ajax({
                                 url: "/explore/resize/",
                                 method: "POST",
                                 dataType: "json",
-                                data: {bucket: Bucket, key: Key},
-                                success: function (data) {
-                                    $("#cover_input").val('{"bucket":' + Bucket + ', "key":' + Key + '}');
+                                data: {bucket: Bucket, key: Key, type : Type},
+                                complete: function () {
+                                    $("#prev").hide();
                                 }
                             });
                         }
@@ -213,29 +211,15 @@ $(function () {
         }
     }
 
-    $(document).on('click', '#js_edpix', function (e) {
-        e.preventDefault();
-        $('#post-cover_file').click();
-    });
-    $.getScript("https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.js", function () {
-        $('#ProfileImage').ajaxForm({
-            beforeSend: function () {
-                //$('#loading').fadeIn(); 
-            },
-            success: function (data) {
-                //$('#loading').fadeOut();
-                var obj = JSON.parse(data);
-                $('#coveri').attr({'src': obj.url});
-                $('#user-image').val(obj.name);
-            },
-            complete: function (xhr) {
-            }
-        });
-    });
-    $(document).on('change', '#post-cover_file', function (e) {
-        e.preventDefault();
 
-        $('#ProfileImage').submit();
+    $(document).on('click', '#main-post', function (e) {
+        if ($('#post-ylink').val() === "" && $("#cover_input").val() === "") {
+            e.preventDefault();
+            var body = $("html, body");
+            body.stop().animate({scrollTop: 0}, '500', 'swing', function () {
+                $('#cover_error').fadeIn(1000);
+            });
+        }
     });
 
 
