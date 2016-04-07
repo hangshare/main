@@ -80,7 +80,7 @@ class ExploreController extends Controller
             move_uploaded_file($_FILES['file']['tmp_name'], Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename);
 
 
-            Yii::$app->Customs3->uploadFromPath(Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename,
+            Yii::$app->customs3->uploadFromPath(Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename,
                 'hangshare.media', $file_path . '/' . $filename);
             Yii::$app->imageresize->s3Resize(Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename,
                 1000, 1000, 'resize');
