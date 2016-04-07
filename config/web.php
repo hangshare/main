@@ -18,7 +18,7 @@ $config = [
         'init' => [
             'class' => 'app\components\Init',
         ],
-        'customs3'=>[
+        'customs3' => [
             'class' => 'app\components\Customs3',
         ],
         'imageresize' => [
@@ -33,6 +33,34 @@ $config = [
         'AwsEmail' => [
             'class' => 'app\components\AwsEmail',
         ],
+
+
+        'assetManager' => [
+            'class' => 'yii\web\AssetManager',
+            'bundles' => [
+                'yii\web\YiiAsset' => [
+                    'js' => [
+                        'yii.min.js'
+                    ]
+                ],
+                'yii\web\JqueryAsset' => [
+                    'js' => [
+                        'jquery.min.js'
+                    ]
+                ],
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'js' => [
+                        'js/bootstrap.min.js',
+                    ]
+                ],
+                'yii\bootstrap\BootstrapAsset' => [
+                    'css' => [
+                        'css/bootstrap.min.css',
+                    ]
+                ],
+            ]
+        ],
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
@@ -42,7 +70,13 @@ $config = [
                 'مقالات/مقاطع-فيديو/<tag:[^*]+>' => 'explore/video',
                 '/' => 'site/index',
                 'مقالات' => 'explore/all',
-                'user/<id:\d+>' => 'user/view',
+                'users' => 'user/index',
+                'register' => 'site/signup',
+                'user/<id:[^*]+>' => 'user/view',
+                'u/manage' => 'user/manage',
+                'u/transfer' => 'user/transfer',
+                'u/payment' => 'user/payment',
+                'u/verify' => 'user/verify',
                 'explore/<id:\d+>' => 'explore/red',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
@@ -86,7 +120,7 @@ $config = [
             'identityClass' => 'app\models\User',
 //            'enableAutoLogin' => true,
             'enableSession' => true,
-            'authTimeout' => 600,
+            'authTimeout' => 2592000,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
