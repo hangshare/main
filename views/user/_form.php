@@ -12,6 +12,13 @@ use app\models\Country;
 
 $thump = Yii::$app->imageresize->thump($model->image, 100, 80, 'crop');
 ?>
+<style>
+    .field-user-username > .help-block {
+        clear: both;
+        float: right;
+        margin-top: 25px;
+    }
+</style>
 <div class="col-sm-12 user-form">
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
     <div class="row">
@@ -88,6 +95,21 @@ $thump = Yii::$app->imageresize->thump($model->image, 100, 80, 'crop');
         </div>
         <hr>
     <?php endif; ?>
+
+    <div style="position: relative">
+        <span style="    background-color: #d5d5d5;
+    border: 1px solid #848d9c;
+    direction: ltr;
+    left: 57px;
+    padding: 1px 12px;
+    position: absolute;
+    text-align: left;
+    z-index: 3;">www.hangshare.com/user/</span>
+    </div>
+    <div class="row">
+        <?php echo $form->field($model, 'username')->textInput(['class' => 'col-sm-4 text-left', 'placeholder' => 'Ahmad-Adel'])->label(null, ['class' => 'col-sm-4']); ?>
+    </div>
+    <hr/>
     <div class="row">
         <?= $form->field($model, 'gender')->radioList(['1' => 'ذكر', '2' => 'أنثى'])->label(null, ['class' => 'col-sm-4']); ?>
     </div>
@@ -119,6 +141,7 @@ $thump = Yii::$app->imageresize->thump($model->image, 100, 80, 'crop');
                     $yearArr = array_combine($yearArr, $yearArr);
                     ?>
                     <ul class="list-inline">
+                        <?php $model->day = str_replace('0', '', $model->day); ?>
                         <li><?= $form->field($model, 'day')->dropDownList($dayArr, ['prompt' => 'اليوم', 'class' => ''])->label(false); ?></li>
                         <li><?= $form->field($model, 'month')->dropDownList($monthArr, ['prompt' => 'الشهر', 'class' => ''])->label(false); ?></li>
                         <li><?= $form->field($model, 'year')->dropDownList($yearArr, ['prompt' => 'السنة', 'class' => ''])->label(false); ?></li>

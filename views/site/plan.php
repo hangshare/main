@@ -21,7 +21,7 @@ Use yii\helpers\Html;
                                 <li class="nodecoration">&nbsp;</li>
                             </ul>
                             <?=
-                            Html::a('تسجيل مجاني', ['site/signup'], [
+                            Html::a('تسجيل مجاني', ['//register/'], [
                                 'class' => 'btn free-btn btn-block',
                                 'data' => [
                                     'method' => 'post',
@@ -48,7 +48,7 @@ Use yii\helpers\Html;
                         </ul>
                         <div id="planb">
                             <?=
-                            Html::a('تسجيل ذهبي', [Yii::$app->user->isGuest ? 'site/signup' : 'site/plangold'], [
+                            Html::a('تسجيل ذهبي', [Yii::$app->user->isGuest ? '//register/' : 'site/plangold'], [
                                 'class' => 'btn gold-btn btn-block',
                                 'data' => [
                                     'method' => 'post',
@@ -59,7 +59,7 @@ Use yii\helpers\Html;
                         </div>
                         <div id="planc" style="display: none;">
                             <?=
-                            Html::a('تسجيل ذهبي', [Yii::$app->user->isGuest ? 'site/signup' : 'site/plangold'], [
+                            Html::a('تسجيل ذهبي', [Yii::$app->user->isGuest ? '//register/' : 'site/plangold'], [
                                 'class' => 'btn gold-btn btn-block',
                                 'data' => [
                                     'method' => 'post',

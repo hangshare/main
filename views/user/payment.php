@@ -20,7 +20,7 @@ if ($model->plan == '1') {
                 <h3>يرجى مراجعة معلومات حسابك</h3>
                 <?php
                 if ($model->transfer_type == 0) {
-                    echo Html::a('تحديث معلومات الدفع', ['//user/transfer'], ['class' => 'btn btn-primary']);
+                    echo Html::a('تحديث معلومات الدفع', ['//u/transfer'], ['class' => 'btn btn-primary']);
                 } else {
                     $obj = json_decode($model->currentMethod->info);
                     echo '<ul class="list-unstyled well">';

@@ -136,7 +136,7 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
                                     </ul>
                                     <div id="planb">
                                         <?=
-                                        Html::a('تسجيل ذهبي', [Yii::$app->user->isGuest ? 'site/signup' : 'site/plangold'], [
+                                        Html::a('تسجيل ذهبي', [Yii::$app->user->isGuest ? 'register' : 'site/plangold'], [
                                             'class' => 'btn gold-btn btn-block',
                                             'data' => [
                                                 'method' => 'post',
@@ -147,7 +147,7 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
                                     </div>
                                     <div id="planc" style="display: none;">
                                         <?=
-                                        Html::a('تسجيل ذهبي', [Yii::$app->user->isGuest ? 'site/signup' : 'site/plangold'], [
+                                        Html::a('تسجيل ذهبي', [Yii::$app->user->isGuest ? 'register' : 'site/plangold'], [
                                             'class' => 'btn gold-btn btn-block',
                                             'data' => [
                                                 'method' => 'post',

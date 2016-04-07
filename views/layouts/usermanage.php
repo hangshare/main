@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use kartik\alert\Alert;
+
 ?>
 <?php
 $this->beginContent('@app/views/layouts/htmlhead.php');
@@ -17,14 +18,18 @@ $this->endContent();
             <div class="row">
                 <div class="col-xs-3">
                     <div class="list-group">
-                        <a class="list-group-item" href="<?= Yii::$app->urlManager->createUrl(['//user/' . Yii::$app->user->identity->id]); ?>">
+                        <?php
+                        $username = empty(Yii::$app->user->identity->username) ? Yii::$app->user->identity->id : Yii::$app->user->identity->username;
+                        ?>
+                        <a class="list-group-item" href=
+                        "<?= Yii::$app->urlManager->createUrl(['//user/' . $username]); ?>">
                             <i class="fa fa-user"></i> <?= Html::img(Yii::$app->imageresize->thump(Yii::$app->user->identity->image, 50, 50, 'crop')); ?> <?php echo $this->params['user']->name; ?>
                         </a>
-                        <a class="list-group-item" href="<?= Yii::$app->urlManager->createUrl(['//user/manage']); ?>">
-                            <i class="fa fa-info"></i> المعلومات الشخصية  
+                        <a class="list-group-item" href="<?= Yii::$app->urlManager->createUrl(['//u/manage']); ?>">
+                            <i class="fa fa-info"></i> المعلومات الشخصية
                         </a>
-                        <a class="list-group-item" href="<?= Yii::$app->urlManager->createUrl(['//user/transfer']); ?>">
-                            <i class="fa fa-money"></i>طرق تحويل النقود 
+                        <a class="list-group-item" href="<?= Yii::$app->urlManager->createUrl(['//u/transfer']); ?>">
+                            <i class="fa fa-money"></i>طرق تحويل النقود
                         </a>
                     </div>
                 </div>

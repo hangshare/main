@@ -72,9 +72,11 @@ $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize'
                         ?>
                     </div>
                     <h1 class="post-header"><?= Html::encode($this->title) ?></h1>
-
+                    <?php
+                    $username = empty($model->user->username) ? $model->user->id : $model->user->username;
+                    ?>
                     <div class="pull-left"> الكاتب : <a
-                            href="<?= Yii::$app->urlManager->createUrl(['//user/view', 'id' => $model->user->id]) ?>"
+                            href="<?= Yii::$app->urlManager->createUrl(['//user/view', 'id' => $username]) ?>"
                             title="<?= $model->user->name; ?>"><?= $model->user->name; ?></a> |&nbsp;
                     </div>
                     <p> تاريخ اﻹضافة : <?php echo date('Y-m-d', strtotime($model->created_at)); ?>

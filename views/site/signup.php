@@ -11,6 +11,9 @@ use app\models\Country;
 
 $this->title = 'تسجيل حساب جديد';
 $this->params['breadcrumbs'][] = $this->title;
+
+$thump = Yii::$app->imageresize->thump($model->image, 100, 80, 'crop');
+
 ?>
 <div class="container m-t-25">
     <div class="center w-600">
@@ -24,7 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                     eventCategory: 'Sign Up',
                                     eventAction: 'Facebook',
                                     eventLabel: 'Sign Up Page'
-                                });" href="<?= Yii::$app->urlManager->createUrl('//site/facebook'); ?>" rel="nofollow" class="btn btn-primary btn-block" style="background-color: #3b5998;height: 30px; margin-bottom: 20px; margin-top: 30px; width: 280px;padding: 4px 10px 10px;">
+                                });" href="<?= Yii::$app->urlManager->createUrl('//site/facebook'); ?>" rel="nofollow"
+                       class="btn btn-primary btn-block"
+                       style="background-color: #3b5998;height: 30px; margin-bottom: 20px; margin-top: 30px; width: 280px;padding: 4px 10px 10px;">
                         <i class="fa fa-fw fa-facebook pull-left" style="border-left: 1px solid;
                            font-size: 15px;
                            margin-top: 3px;
@@ -34,12 +39,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             <?php endif; ?>
         </div>
-        <div class="site-signup white-box">    
+        <div class="site-signup white-box">
             <div class="row">
                 <div class="col-lg-12">
                     <?php
                     $form = ActiveForm::begin(['id' => 'form-signup',
-                                'enableClientValidation' => true
+                        'enableClientValidation' => true
                     ]);
                     ?>
                     <h3>معلومات الحساب</h3>
@@ -49,25 +54,50 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'password')->passwordInput() ?>
                     <h3>معلومات الصفحة الشخصية</h3>
                     <hr>
+                    <label for="user-image" class="control-label" style="display:block;">الصورة الشخصية</label>
+                    <div class="col-xs-2" style="background-color: #f8f8f8; text-align: center; padding: 0;">
+                        <?php echo Html::img($thump, ['id' => 'coveri']); ?>
+                        <div id="prev"
+                             style="background-color: rgba(0, 0, 0, 0.4);padding: 40px 38px;position: absolute;text-align: center;top: 0; display: none;">
+                            <i class="fa fa-spin fa-spinner fa-2x"
+                               style="position: relative; top: -10px; color: #fff;"></i>
+                        </div>
+                        <button class="btn btn-primary btn-block" id="uploadtos3" style="border-radius: 0;">
+                            <span>اختر صورة</span>
+                        </button>
+                        <input id="cover_input" name="image" type="hidden" value=""/>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr/>
+
                     <div class="row">
-                        <?= $form->field($model, 'image')->hiddenInput()->label(null, ['class' => 'col-sm-4']) ?>
+                        <div style="position: relative">
+                    <span style="    background-color: #d5d5d5;
+                    border: 1px solid #848d9c;
+                    direction: ltr;
+                    left: 47px;
+                    padding: 1px 12px;
+                    position: absolute;
+                    text-align: left;
+                    top: 10px;
+                    z-index: 3;">www.hangshare.com/user/</span>
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-10">
-                            <img id='coveri'width="60" src="<?= Yii::$app->imageresize->thump($model->image, 50, 50, 'crop'); ?>" />
-                        </div>
-                        <div class="col-xs-2 text-left">
-                            <a id='js_edpix' class="btn btn-default text-right" href="javascript:void(0);">اضافة</a>
-                        </div>
+                        <?php echo $form->field($model, 'username')->textInput(['class' => 'col-sm-3 text-left', 'placeholder' => 'Ahmad-Adel'])->label(null, ['class' => 'col-sm-4']); ?>
                     </div>
+                    <hr/>
                     <?= $form->field($model, 'bio')->textarea(); ?>
+                    <hr/>
                     <?php
                     if ($model->isNewRecord) {
                         $model->gender = 1;
                     }
                     echo $form->field($model, 'gender')->radioList(['1' => 'ذكر', 2 => 'أنثى']);
                     ?>
+                    <hr/>
                     <label style="margin-bottom: 10px;">تاريخ الميلاد</label>
+
                     <div id="containerdate">
                         <?php
                         $monthArr = [
@@ -94,15 +124,20 @@ $this->params['breadcrumbs'][] = $this->title;
                             <li><?= $form->field($model, 'year')->dropDownList($yearArr, ['prompt' => 'السنة', 'class' => ''])->label(false); ?></li>
                         </ul>
                     </div>
+                    <hr/>
                     <div class="form-group">
-                        <lable style="font-weight: bold; margin-bottom: 10px;display: block;" for="user-country" >مكان الإقامة</lable>
+                        <lable style="font-weight: bold; margin-bottom: 10px;display: block;" for="user-country">مكان
+                            الإقامة
+                        </lable>
 
                         <?= $form->field($model, 'country')->dropDownList(ArrayHelper::map(Country:: find()->where("published = 1")->all(), 'id', 'name_ar')
-                                , ['prompt' => 'مكان الإقامة', 'class' => '', 'rel'=>'autoload'])->label(false);
+                            , ['prompt' => 'مكان الإقامة', 'class' => '', 'rel' => 'autoload'])->label(false);
                         ?>
                     </div>
+                    <hr/>
                     <?= $form->field($model, 'phone') ?>
-                    <p style="font-size: 12px; margin-top: -4px;">يرجى كتابة الرقم كامل مع الرقم الخاص بالدولة ، و يرجى العلم بأنه لن نقوم بنشر هذا الرقم باي مكان على الموقع.</p>
+                    <p style="font-size: 12px; margin-top: -4px;">يرجى كتابة الرقم كامل مع الرقم الخاص بالدولة ، و يرجى
+                        العلم بأنه لن نقوم بنشر هذا الرقم باي مكان على الموقع.</p>
 
                     <div class="form-group">
                         <?=
@@ -118,18 +153,21 @@ $this->params['breadcrumbs'][] = $this->title;
                         ])
                         ?>
                         <?php if ($plan == 'b') : ?>
-                            <p class="normal m-t-8">سوف يتم تحويلك الى صفحة PayPal لكي تدفع $10 لاتمام عملية التسجيل.</p>
+                            <p class="normal m-t-8">سوف يتم تحويلك الى صفحة PayPal لكي تدفع $10 لاتمام عملية
+                                التسجيل.</p>
                         <?php elseif ($plan == 'c'): ?>
-                            <p class="normal m-t-8">سوف يتم تحويلك الى صفحة PayPal لكي تدفع $25 لاتمام عملية التسجيل.</p>
+                            <p class="normal m-t-8">سوف يتم تحويلك الى صفحة PayPal لكي تدفع $25 لاتمام عملية
+                                التسجيل.</p>
                         <?php endif; ?>
                     </div>
-                    <input name="plan" type="hidden" value="<?= $plan; ?>" />
+                    <input name="plan" type="hidden" value="<?= $plan; ?>"/>
                     <?php ActiveForm::end(); ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<form id="ProfileImage" method="POST" action="<?= Yii::$app->urlManager->createUrl('//user/image'); ?>" enctype="multipart/form-data" class="hidden">
-    <input id="post-cover_file" type="file" name="image" />
-</form>
+<from id="uploadform" method="POST" enctype="multipart/form-data" style="display: none;">
+    <input id="files3" type="file"/>
+    <input id="type" value="user"/>
+</from>

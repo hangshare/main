@@ -10,7 +10,7 @@ $thump = Yii::$app->imageresize->thump($model->image, 80, 80, 'crop');
     <div class="row">
         <div class="col-md-4">
             <div class="clr-gray-dark">
-                <a href="<?php echo Yii::$app->urlManager->createUrl(['user/manage']); ?>">
+                <a href="<?php echo Yii::$app->urlManager->createUrl(['u/manage']); ?>">
                     <div style="padding: 0 20px;">
                         <img src="<?= $thump; ?>" class="img-circle"
                              style="margin: 0 auto;display: table;margin-top: 20px;border: 1px solid #aaa; padding: 4px;"/>
@@ -26,7 +26,7 @@ $thump = Yii::$app->imageresize->thump($model->image, 80, 80, 'crop');
             </div>
         </div>
         <div class="col-md-8">
-            <a class="dsp--b" href="<?php echo Yii::$app->urlManager->createUrl(['/user/payment']); ?>">
+            <a class="dsp--b" href="<?php echo Yii::$app->urlManager->createUrl(['/u/payment']); ?>">
                 <div class="panel panel-default text-center clr-gray-dark">
                     <div class="carda__body pdn--as text-center">
                         <div class="row no-gutter">

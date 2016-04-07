@@ -12,7 +12,7 @@ $this->title='مرحبا بكم موقع هانج شير';
             <br>
             <br>
             <p class="text-center">تأكد من تحديث معلوماتك الشخصية واضافة الطريقة التي تناسبك لتحويل النقود لك في حال استحقاقها</p>
-            <?= Html::a('تعديل معلومات طرق الدفع', ['//user/transfer'], ['class' => 'btn btn-default']) ?>
+            <?= Html::a('تعديل معلومات طرق الدفع', ['//u/transfer'], ['class' => 'btn btn-default']) ?>
         </div>
     </div>
 </div>

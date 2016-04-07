@@ -10,7 +10,7 @@ $this->description = Yii::t('app', 'مقالات متنوعة من كافة ان
         <h1><?= $this->title; ?></h1>
         <div class="row">
             <div class="col-md-6">
-                <h3><a href="<?php echo Yii::$app->urlManager->createUrl(['//user/index']); ?>">المستخدمين</a></h3>
+                <h3><a href="<?php echo Yii::$app->urlManager->createUrl(['//users/']); ?>">المستخدمين</a></h3>
                 <?=
                 ListView::widget([
                     'dataProvider' => $userProvider,
