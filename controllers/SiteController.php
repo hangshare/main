@@ -359,7 +359,8 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function beforeAction($action) {
+    public function beforeAction($action)
+    {
         $this->enableCsrfValidation = false;
         return parent::beforeAction($action);
     }
@@ -515,7 +516,9 @@ class SiteController extends Controller
         $model->setScenario('signup');
         $plan = isset($_POST['plan']) ? $_POST['plan'] : 'a';
         if ($model->load(Yii::$app->request->post())) {
-
+            if (isset($_POST['image']) && !empty($_POST['image'])) {
+                $model->image = str_replace('key', 'image', $_POST['image']);
+            }
             if (isset($_POST['User']['year']) && isset($_POST['User']['month']) && isset($_POST['User']['day']) && $_POST['User']['day'] != 0 && $_POST['User']['month'] != 0 && $_POST['User']['day'] != 0) {
                 $model->dob = $_POST['User']['year'] . '-' . $_POST['User']['month'] . '-' . $_POST['User']['day'];
             }

@@ -17,6 +17,7 @@ use Yii;
  * @property integer $country
  * @property string $dob
  * @property string $scId
+ * @property string $username
  * @property string $created_at
  *
  * @property Post[] $posts
@@ -34,7 +35,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 //    public $rememberMe = true;
     const STATUS_ACTIVE = 10;
     public $password, $password_re, $password_old, $password_new, $year, $day, $month;
-    public $auth_key, $username;
+    public $auth_key;
 
     /**
      * @inheritdoc
@@ -77,7 +78,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findByUsername($username)
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['username' => $username]);
     }
 
     /**
@@ -119,14 +120,17 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['name', 'email', 'gender', 'month', 'day', 'year', 'country'], 'required'],
+            [['name', 'email', 'gender', 'month', 'day', 'year', 'country', 'username'], 'required'],
             [['password'], 'required', 'on' => 'signup'],
-            [['email'], 'unique'],
+            [['email', 'username'], 'unique'],
             [['email'], 'email'],
             [['gender', 'plan', 'country', 'transfer_type'], 'integer'],
-            [['dob', 'created_at', 'phone', 'password', 'scId', 'bio', 'plan', 'country', 'transfer_type'], 'safe'],
+            [['dob', 'created_at', 'phone', 'password', 'scId', 'bio', 'plan', 'country', 'transfer_type', 'username'], 'safe'],
             [['name', 'email'], 'string', 'max' => 50],
-
+            [['username'], 'string', 'max' => 20],
+            [['username', 'email'], 'filter', 'filter' => 'trim', 'skipOnArray' => true],
+            ['username', 'match', 'pattern' => '/^[a-z0-9_-]{3,16}$/',
+                'message'=>'عنوان الصفحة يجب ان يتكون من الأحرف الانجليزية و الأرقام ويمكن اضافة  الشرطة الأفقية - فقط ، ولا يجب ان يبدأ برقم.'],
             [['image', 'bio'], 'string', 'max' => 250],
             [['email', 'password_hash'], 'unique', 'targetAttribute' => ['email', 'password_hash'], 'message' => 'The combination of Email, Paypal Email and Password Hash has already been taken.']
         ];
@@ -156,6 +160,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'bio' => 'نبذة مختصرة',
             'country' => 'الدولة',
             'phone' => 'رقم الهاتف',
+            'username' => 'عنوان الصفحة'
         ];
     }
 
@@ -265,7 +270,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             $stats->save();
 
             AwsEmail::queueUser($this->id, 1, [
-                '__LINK__' => Yii::$app->urlManager->createAbsoluteUrl(['//user/verify', 'key' => $settings->key])
+                '__LINK__' => Yii::$app->urlManager->createAbsoluteUrl(['//u/verify', 'key' => $settings->key])
             ]);
         }
         return parent::beforeSave($insert);

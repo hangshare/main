@@ -84,7 +84,8 @@ class UserController extends Controller
             Yii::$app->getSession()->setFlash('success', [
                 'message' => 'تم تفعيل حسابك بنجاح ',
             ]);
-            return $this->redirect(["//user/{$userSettings->userId}"]);
+            $username = empty($userSettings->user->username) ? $userSettings->user->id : $userSettings->user->username;
+            return $this->redirect(['view', 'id' => $username]);
         } else {
             Yii::$app->getSession()->setFlash('error', [
                 'message' => 'نعتذر حصل خطأ يرجى التواصل معنا.',
@@ -254,10 +255,14 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
+        if (is_numeric($id)) {
+            $model = $this->findModel($id);
+        } else {
+            $model = User::findByUsername($id);
 
-        if (!isset($_COOKIE["hangprofile-$id"])) {
-            Yii::$app->db->createCommand('UPDATE `user_stats` SET `profile_views`=`profile_views`+1 WHERE `userId`=' . $id)->query();
-            setcookie("hangprofile-$id", true, time() + (86400), "/");
+            if (!isset($model))
+                throw new NotFoundHttpException('The requested page does not exist.');
+
         }
 
         $query = Post::find()->orderBy('id desc');
@@ -267,35 +272,19 @@ class UserController extends Controller
             'pagination' => array('pageSize' => 6),
         ]);
         $query->andFilterWhere([
-            'userId' => $id,
+            'userId' => $model->id
         ]);
-        $model = $this->findModel($id);
+
         $view = 'guest';
         if (!Yii::$app->user->isGuest && Yii::$app->user->identity->id == $model->id) {
             $view = 'view';
         }
+
+        Yii::$app->db->createCommand('UPDATE `user_stats` SET `profile_views`=`profile_views`+1 WHERE `userId`=' . $model->id)->query();
         return $this->render($view, [
             'model' => $model,
             'dataProvider' => $dataProvider
         ]);
-    }
-
-    /**
-     * Creates a new User model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new User();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
     }
 
     /**
@@ -306,11 +295,14 @@ class UserController extends Controller
      */
     public function actionManage()
     {
+
         if (Yii::$app->user->isGuest) {
             return $this->redirect(['/']);
         }
         $this->layout = 'usermanage';
+
         $model = $this->view->params['user'] = $this->findModel(Yii::$app->user->identity->id);
+
         if ($model->load(Yii::$app->request->post())) {
             if (isset($_POST['image']) && !empty($_POST['image'])) {
                 $model->image = str_replace('key', 'image', $_POST['image']);
@@ -319,12 +311,11 @@ class UserController extends Controller
                 $model->dob = $_POST['User']['year'] . '-' . $_POST['User']['month'] . '-' . $_POST['User']['day'];
             }
             if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                $username = empty($model->username) ? $model->id : $model->username;
+                return $this->redirect(['view', 'id' => $username]);
             }
         }
         if (!empty($model->getErrors())) {
-            var_dump($model->getErrors());
-            die();
         }
         return $this->render('update', [
             'model' => $model,

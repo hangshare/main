@@ -285,7 +285,8 @@ class ExploreController extends Controller
         }
     }
 
-    public function actionResize(){
+    public function actionResize()
+    {
         Yii::$app->imageresize->PatchResize($_POST['bucket'], $_POST['key'], $_POST['type']);
     }
 
@@ -485,7 +486,8 @@ class ExploreController extends Controller
         Yii::$app->getSession()->setFlash('success', [
             'message' => 'تم حذف الموضوع بنجاح.',
         ]);
-        return $this->redirect(['/user/' . $model->userId]);
+        $username = empty($model->user->username) ? $model->user->id : $model->user->username;
+        return $this->redirect(['/user/' . $username. '/']);
     }
 
 }

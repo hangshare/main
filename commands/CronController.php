@@ -190,9 +190,10 @@ class CronController extends Controller
             $changefreq_text = $sitemap->createTextNode("weekly");
             $changefreq->appendChild($changefreq_text);
         }
-        $users = Yii::$app->db->createCommand("SELECT t.id, t.created_at, t.name FROM user t WHERE 1 ORDER BY t.id DESC;")->queryAll();
+        $users = Yii::$app->db->createCommand("SELECT t.id, t.username, t.created_at, t.name FROM user t WHERE 1 ORDER BY t.id DESC;")->queryAll();
         foreach ($users as $user) {
-            $link = "http://www.hangshare.com/user/{$user['id']}/";
+            $username = empty($user['username']) ? $user['id'] : $user['username'];
+            $link = "http://www.hangshare.com/user/{$username}/";
             $url = $sitemap->createElement('url');
             $root->appendChild($url);
 
