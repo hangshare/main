@@ -46,7 +46,6 @@ return [
             'schemaCacheDuration' => 3600,
             'charset' => 'utf8',
         ],
-
         'log' => [
             'targets' => [
                 [
