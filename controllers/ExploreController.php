@@ -77,17 +77,22 @@ class ExploreController extends Controller
             $file_ext = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
             $filebase_name = str_replace('.' . $file_ext, '', $filebase_name);
             $filename = rand(1, 100) . '-' . preg_replace("/[^A-Za-z0-9?!]/", '-', $filebase_name) . '.' . $file_ext;
-            move_uploaded_file($_FILES['file']['tmp_name'], Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename);
+            $r3 = move_uploaded_file($_FILES['file']['tmp_name'], Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename);
 
-
-            Yii::$app->customs3->uploadFromPath(Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename,
-                'hangshare.media', $file_path . '/' . $filename);
-            Yii::$app->imageresize->s3Resize(Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename,
-                1000, 1000, 'resize');
-            $file_url = Yii::$app->imageresize->thump($file_path . '/' . $filename, 1000, 1000, 'resize');
-            header('Content-Type: application/json');
-            echo json_encode(array('link' => $file_url));
-            Yii::$app->end();
+            if ($r3) {
+                Yii::$app->customs3->uploadFromPath(Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename,
+                    'hangshare.media', $file_path . '/' . $filename);
+                Yii::$app->imageresize->s3Resize(Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename,
+                    1000, 1000, 'resize');
+                $file_url = Yii::$app->imageresize->thump($file_path . '/' . $filename, 1000, 1000, 'resize');
+                header('Content-Type: application/json');
+                echo json_encode(array('link' => $file_url));
+                Yii::$app->end();
+            } else {
+                header('Content-Type: application/json');
+                echo json_encode(array('error' => $r3));
+                Yii::$app->end();
+            }
         }
     }
 
