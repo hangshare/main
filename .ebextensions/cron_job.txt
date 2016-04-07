@@ -1,5 +1,5 @@
-*/5 * * * *  root php /var/www/html/yii cron/deservedamount &>/dev/null
-0 1 * * *  root php /var/www/html/yii cron/sitemap &>/dev/null
-0 */1 * * *  root php /var/www/html/yii cron/goldend &>/dev/null
-*/1 * * * *  root php /var/www/html/yii cron/counter &>/dev/null
+*/5 * * * *  root /usr/bin/php /var/www/html/yii cron/deservedamount &>/dev/null
+0 1 * * *  root /usr/bin/php /var/www/html/yii cron/sitemap &>/dev/null
+0 */1 * * *  root /usr/bin/php /var/www/html/yii cron/goldend &>/dev/null
+*/1 * * * *  root /usr/bin/php /var/www/html/yii cron/counter &>/dev/null
 
