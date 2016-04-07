@@ -35,31 +35,31 @@ $config = [
         ],
 
 
-        'assetManager' => [
-            'class' => 'yii\web\AssetManager',
-            'bundles' => [
+//        'assetManager' => [
+//            'class' => 'yii\web\AssetManager',
+//            'bundles' => [
 //                'yii\web\YiiAsset' => [
 //                    'js' => [
 //                        'yii.min.js'
 //                    ]
 //                ],
-                'yii\web\JqueryAsset' => [
-                    'js' => [
-                        'jquery.min.js'
-                    ]
-                ],
-                'yii\bootstrap\BootstrapPluginAsset' => [
-                    'js' => [
-                        'js/bootstrap.min.js',
-                    ]
-                ],
-                'yii\bootstrap\BootstrapAsset' => [
-                    'css' => [
-                        'css/bootstrap.min.css',
-                    ]
-                ],
-            ]
-        ],
+//                'yii\web\JqueryAsset' => [
+//                    'js' => [
+//                        'jquery.min.js'
+//                    ]
+//                ],
+//                'yii\bootstrap\BootstrapPluginAsset' => [
+//                    'js' => [
+//                        'js/bootstrap.min.js',
+//                    ]
+//                ],
+//                'yii\bootstrap\BootstrapAsset' => [
+//                    'css' => [
+//                        'css/bootstrap.min.css',
+//                    ]
+//                ],
+//            ]
+//        ],
 
         'urlManager' => [
             'enablePrettyUrl' => true,
