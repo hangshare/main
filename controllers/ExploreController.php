@@ -67,7 +67,6 @@ class ExploreController extends Controller
 
     public function actionUpload()
     {
-//        header('Content-Type: application/json');
 
         if (isset($_FILES['file']) && !empty($_FILES['file']['name'])) {
             $file_path = date('Ydm');
@@ -79,7 +78,14 @@ class ExploreController extends Controller
             $filebase_name = str_replace('.' . $file_ext, '', $filebase_name);
             $filename = rand(1, 100) . '-' . preg_replace("/[^A-Za-z0-9?!]/", '-', $filebase_name) . '.' . $file_ext;
             move_uploaded_file($_FILES['file']['tmp_name'], Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename);
+
+
+            Yii::$app->Customs3->uploadFromPath(Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename,
+                'hangshare.media', $file_path . '/' . $filename);
+            Yii::$app->imageresize->s3Resize(Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename,
+                1000, 1000, 'resize');
             $file_url = Yii::$app->imageresize->thump($file_path . '/' . $filename, 1000, 1000, 'resize');
+            header('Content-Type: application/json');
             echo json_encode(array('link' => $file_url));
             Yii::$app->end();
         }
@@ -487,7 +493,7 @@ class ExploreController extends Controller
             'message' => 'تم حذف الموضوع بنجاح.',
         ]);
         $username = empty($model->user->username) ? $model->user->id : $model->user->username;
-        return $this->redirect(['/user/' . $username. '/']);
+        return $this->redirect(['/user/' . $username . '/']);
     }
 
 }
