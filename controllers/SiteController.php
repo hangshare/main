@@ -221,14 +221,14 @@ class SiteController extends Controller
                     Yii::$app->getSession()->setFlash('success', [
                         'message' => "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.",
                     ]);
-                    return $this->redirect(['//site/login', 'stat' => 'user']);
+                    return $this->redirect(['//login', 'stat' => 'user']);
                 }
                 if (!$model->save(false)) {
                     AwsEmail::SendMail('hasania.lhaled@gmail.com', 'Fb Bug', json_encode($model->getErrors()) . json_encode($model->attributes));
                     Yii::$app->getSession()->setFlash('success', [
                         'message' => "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.",
                     ]);
-                    return $this->redirect(['//site/login', 'stat' => 'user']);
+                    return $this->redirect(['//login', 'stat' => 'user']);
                 }
                 $login_password = $model->scId;
                 $login_email = $model->email;
@@ -237,7 +237,7 @@ class SiteController extends Controller
                     Yii::$app->getSession()->setFlash('success', [
                         'message' => "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.",
                     ]);
-                    return $this->redirect(['//site/login', 'stat' => 'user']);
+                    return $this->redirect(['//login', 'stat' => 'user']);
                 }
                 $login_password = $user['scId'];
                 $login_email = $user['email'];
@@ -269,7 +269,7 @@ class SiteController extends Controller
                 Yii::$app->getSession()->setFlash('error', [
                     'message' => 'نعتذر حصل خطأ سوف نقوم بحل هذه المشكلة في أقرب وقت. ',
                 ]);
-                return $this->redirect(['//site/login']);
+                return $this->redirect(['//login']);
             }
         } else {
             //$params = ['scope' => 'email,user_about_me,user_birthday,user_hometown,user_location'];

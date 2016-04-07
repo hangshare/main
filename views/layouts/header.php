@@ -21,8 +21,8 @@ $menuItems_left = [
     ['label' => '<span class="btn font-16">هل لديك استفسار ؟</span>', 'url' => ['//الأسئلة-الشائعة']],
 ];
 if (Yii::$app->user->isGuest) {
-    $menuItems_right[] = ['label' => '<span class="btn btn-primary">حساب جديد</span>', 'url' => ['/site/plan']];
-    $menuItems_right[] = ['label' => '<span class="btn">تسجيل الدخول</span>', 'url' => ['/site/login']];
+    $menuItems_right[] = ['label' => '<span class="btn btn-primary">حساب جديد</span>', 'url' => ['//plan']];
+    $menuItems_right[] = ['label' => '<span class="btn">تسجيل الدخول</span>', 'url' => ['//login']];
 } else {
 
     $menuItems_right[] = [
@@ -34,13 +34,13 @@ if (Yii::$app->user->isGuest) {
     if (Yii::$app->user->identity->plan) {
         $menuItems_right[] = [
             'label' => '<span class="addd"><i class="glyphicon glyphicon-star userplan gold"></i>معلومات حسابك الذهبي </span>',
-            'url' => ['//user/gold'],
+            'url' => ['//u/gold'],
             'options' => ['class' => 'planholder']
         ];
     } else {
         $menuItems_right[] = [
             'label' => '<span class="addd"><i class="glyphicon glyphicon-star userplan"></i> الترقية الى الحساب الذهبي</span>',
-            'url' => ['/site/plan'],
+            'url' => ['//plan'],
             'options' => ['class' => 'planholder']
         ];
     }

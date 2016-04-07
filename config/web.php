@@ -35,9 +35,9 @@ $config = [
         ],
 
 
-//        'assetManager' => [
-//            'class' => 'yii\web\AssetManager',
-//            'bundles' => [
+        'assetManager' => [
+            'class' => 'yii\web\AssetManager',
+            'bundles' => [
 //                'yii\web\YiiAsset' => [
 //                    'js' => [
 //                        'yii.min.js'
@@ -48,18 +48,18 @@ $config = [
 //                        'jquery.min.js'
 //                    ]
 //                ],
-//                'yii\bootstrap\BootstrapPluginAsset' => [
-//                    'js' => [
-//                        'js/bootstrap.min.js',
-//                    ]
-//                ],
-//                'yii\bootstrap\BootstrapAsset' => [
-//                    'css' => [
-//                        'css/bootstrap.min.css',
-//                    ]
-//                ],
-//            ]
-//        ],
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'js' => [
+                        'js/bootstrap.min.js',
+                    ]
+                ],
+                'yii\bootstrap\BootstrapAsset' => [
+                    'css' => [
+                        'css/bootstrap.min.css',
+                    ]
+                ],
+            ]
+        ],
 
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -72,11 +72,14 @@ $config = [
                 'مقالات' => 'explore/all',
                 'users' => 'user/index',
                 'register' => 'site/signup',
+                'plan' => 'site/plan',
+                'login'=>'site/login',
                 'user/<id:[^*]+>' => 'user/view',
                 'u/manage' => 'user/manage',
                 'u/transfer' => 'user/transfer',
                 'u/payment' => 'user/payment',
                 'u/verify' => 'user/verify',
+                'u/gold' => 'user/gold',
                 'explore/<id:\d+>' => 'explore/red',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
