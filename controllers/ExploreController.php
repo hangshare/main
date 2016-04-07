@@ -80,10 +80,12 @@ class ExploreController extends Controller
             $r3 = move_uploaded_file($_FILES['file']['tmp_name'], Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename);
 
             if ($r3) {
-                Yii::$app->customs3->uploadFromPath(Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename,
-                    'hangshare.media', $file_path . '/' . $filename);
+
                 Yii::$app->imageresize->s3Resize(Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename,
                     1000, 1000, 'resize');
+                Yii::$app->customs3->uploadFromPath(Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename,
+                    'hangshare.media', $file_path . '/' . $filename);
+
                 $file_url = Yii::$app->imageresize->thump($file_path . '/' . $filename, 1000, 1000, 'resize');
                 header('Content-Type: application/json');
                 echo json_encode(array('link' => $file_url));
