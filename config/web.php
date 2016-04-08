@@ -38,16 +38,16 @@ $config = [
         'assetManager' => [
             'class' => 'yii\web\AssetManager',
             'bundles' => [
-//                'yii\web\YiiAsset' => [
-//                    'js' => [
-//                        'yii.min.js'
-//                    ]
-//                ],
-//                'yii\web\JqueryAsset' => [
-//                    'js' => [
-//                        'jquery.min.js'
-//                    ]
-//                ],
+                'yii\web\YiiAsset' => [
+                    'js' => [
+                        'yii.min.js'
+                    ]
+                ],
+                'yii\web\JqueryAsset' => [
+                    'js' => [
+                        'jquery.min.js'
+                    ]
+                ],
                 'yii\bootstrap\BootstrapPluginAsset' => [
                     'js' => [
                         'js/bootstrap.min.js',
