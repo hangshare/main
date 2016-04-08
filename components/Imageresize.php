@@ -29,6 +29,7 @@ class Imageresize extends Component
         ['width' => '900', 'height' => '430', 'method' => 'crop'],
     ];
     private $user_sizes = [
+        ['width' => '25', 'height' => '25', 'method' => 'crop'],
         ['width' => '50', 'height' => '50', 'method' => 'crop'],
         ['width' => '80', 'height' => '80', 'method' => 'crop'],
         ['width' => '100', 'height' => '80', 'method' => 'crop'],
