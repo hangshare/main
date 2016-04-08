@@ -159,6 +159,14 @@ class SiteController extends Controller
         }
     }
 
+    public function actionRes($id)
+    {
+        $model = User::find()->where('id >= ' . $id)->limit(50)->all();
+        foreach ($model as $data) {
+            Yii::$app->imageresize->PatchResize('hangshare.media', $data->image, 'user');
+        }
+    }
+
     public function actionFacebook()
     {
         if (session_status() == PHP_SESSION_NONE) {
@@ -252,7 +260,11 @@ class SiteController extends Controller
                     $url = "http://graph.facebook.com/{$user_profile->getId()}/picture?type=large";
                     $imagecontent = file_get_contents($url);
                     $imageFile = Yii::$app->basePath . '/media/' . $model->image;
-                    file_put_contents($imageFile, $imagecontent);
+                    @file_put_contents($imageFile, $imagecontent);
+
+                    Yii::$app->customs3->uploadFromPath($imageFile, 'hangshare.media', 'fa/' . $model->image);
+                    Yii::$app->imageresize->PatchResize('hangshare.media', 'fa/' . $model->image, 'user');
+
                     Yii::$app->getSession()->setFlash('success', [
                         'message' => '، يرجى منك اكمال تعبئة المعلومات في الأسفل لكي نستطيع تحويل لك النقود في المستقبل. <strong>تمت عملية التسجيل بنجاح</strong>',
                     ]);
