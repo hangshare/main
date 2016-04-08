@@ -37,6 +37,7 @@ class Imageresize extends Component
         ['width' => '300', 'height' => '250', 'method' => 'crop'],
     ];
 
+
     public function __construct($config = array())
     {
         $this->s3 = Yii::$app->customs3;
