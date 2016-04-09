@@ -163,9 +163,12 @@ class SiteController extends Controller
     {
         $model = User::find()
             ->where(['>=', 'id', $id])
-            ->limit(50)->all();
+            ->andWhere(['<>', 'image', "''"])
+            ->andWhere(['<>', 'image', "0"])
+            ->limit(10)->all();
         foreach ($model as $data) {
-            Yii::$app->imageresize->PatchResize('hangshare.media', $data->image, 'user');
+            if (!empty($data->image))
+                Yii::$app->imageresize->PatchResize('hangshare.media', $data->image, 'user');
         }
     }
 
