@@ -167,8 +167,13 @@ class SiteController extends Controller
             ->andWhere(['<>', 'image', "0"])
             ->limit(10)->all();
         foreach ($model as $data) {
-            if (!empty($data->image))
-                Yii::$app->imageresize->PatchResize('hangshare.media', $data->image, 'user');
+            if (!empty($data->image)) {
+                try{
+                    Yii::$app->imageresize->PatchResize('hangshare.media', $data->image, 'user');
+                }catch (\Exception $e){
+
+                }
+            }
         }
     }
 
