@@ -161,7 +161,9 @@ class SiteController extends Controller
 
     public function actionRes($id)
     {
-        $model = User::find()->where('id >= ' . $id)->limit(50)->all();
+        $model = User::find()
+            ->where(['>=', 'id', $id])
+            ->limit(50)->all();
         foreach ($model as $data) {
             Yii::$app->imageresize->PatchResize('hangshare.media', $data->image, 'user');
         }
