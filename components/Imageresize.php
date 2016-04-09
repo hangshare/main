@@ -58,7 +58,8 @@ class Imageresize extends Component
         $folder = dirname($file);
 
 //        return "https://dw4xox9sj1rhd.cloudfront.net/{$folder}/{$filethump}/{$filename}";
-        return "http://hangshare.media.s3.amazonaws.com/{$folder}/{$filethump}/{$filename}";
+//        return "http://hangshare.media.s3.amazonaws.com/{$folder}/{$filethump}/{$filename}";
+        return "https://s3-eu-west-1.amazonaws.com/hangshare.media/{$folder}/{$filethump}/{$filename}";
     }
 
     public function isJson($string)
