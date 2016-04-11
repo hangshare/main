@@ -73,7 +73,7 @@ $config = [
                 'users' => 'user/index',
                 'register' => 'site/signup',
                 'plan' => 'site/plan',
-                'login'=>'site/login',
+                'login' => 'site/login',
                 'user/<id:[^*]+>' => 'user/view',
                 'u/manage' => 'user/manage',
                 'u/transfer' => 'user/transfer',
@@ -103,21 +103,17 @@ $config = [
         'request' => [
             'cookieValidationKey' => 'adsaew2343a',
         ],
-        'cache' => array(
+        'cache' => [
             'class' => 'yii\caching\MemCache',
-            'servers' => array(
-                array('host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 60),
-                array('host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 40),
-//                array('host' => 'localhost', 'port' => 11211, 'weight' => 60),
-//                array('host' => 'localhost', 'port' => 11211, 'weight' => 40),
-            ),
-        ),
+            'servers' => [
+                ['host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 60],
+                ['host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 40],
+//                ['host' => 'localhost', 'port' => 11211, 'weight' => 60],
+//                ['host' => 'localhost', 'port' => 11211, 'weight' => 40],
+            ],
+        ],
         'session' => [
-            'class' => 'yii\web\Session',
-            'cookieParams' => ['httponly' => true, 'lifetime' => 5184000],
-            'timeout' => 5184000,
-            'useCookies' => true,
-            'name' => 'POSssjkOPj'
+            'class' => 'yii\web\DbSession',
         ],
         'user' => [
             'identityClass' => 'app\models\User',
