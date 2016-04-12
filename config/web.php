@@ -111,9 +111,9 @@ $config = [
 //                ['host' => 'localhost', 'port' => 11211, 'weight' => 40],
             ],
         ],
-//        'session' => [
-//            'class' => 'yii\web\DbSession',
-//        ],
+        'session' => [
+            'class' => 'yii\web\DbSession',
+        ],
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
