@@ -26,6 +26,7 @@
     ExpiresDefault "access 8 days"
 </IfModule>
 # mod_deflate configuration
+SetOutputFilter DEFLATE
 <IfModule mod_deflate.c>
   # Restrict compression to these MIME types
   AddOutputFilterByType DEFLATE text/plain
