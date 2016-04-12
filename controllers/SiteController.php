@@ -292,10 +292,10 @@ class SiteController extends Controller
                         'message' => '، يرجى منك اكمال تعبئة المعلومات في الأسفل لكي نستطيع تحويل لك النقود في المستقبل. <strong>تمت عملية التسجيل بنجاح</strong>',
                     ]);
                     return $this->redirect(['//site/welcome']);
-                } else {
-                    AwsEmail::SendMail('hasania.khaled@gmail.com', 'ass', json_encode($status));
-                    return $this->redirect(['//site/welcome']);
                 }
+
+                AwsEmail::SendMail('hasania.khaled@gmail.com', 'ass', json_encode($status));
+                return $this->redirect(['//site/welcome']);
             } else {
                 mail('hasania.khaled@gmail.com', 'error face hang', json_encode(['user info db' => $user,
                     'email' => $login_email,
