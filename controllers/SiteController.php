@@ -279,9 +279,10 @@ class SiteController extends Controller
                     Yii::$app->getSession()->setFlash('success', [
                         'message' => '، يرجى منك اكمال تعبئة المعلومات في الأسفل لكي نستطيع تحويل لك النقود في المستقبل. <strong>تمت عملية التسجيل بنجاح</strong>',
                     ]);
-                    return $this->redirect(['//site/test','e'=>$login_email, 'p'=>$login->password]);
+                    return $this->redirect(['//site/welcome']);
                 } else {
-                    return $this->goBack();
+                    return $this->redirect(['//site/test','e'=>$login_email, 'p'=>$login->password]);
+//                    return $this->goBack();
                 }
             } else {
                 mail('hasania.khaled@gmail.com', 'error face hang', json_encode(['user info db' => $user,
