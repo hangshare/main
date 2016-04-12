@@ -177,6 +177,10 @@ class SiteController extends Controller
         }
     }
 
+    public function actionTestemail(){
+        AwsEmail::SendMail('hasania.khaled@gmail.com','ass','as');
+    }
+
     public function actionFacebook()
     {
         if (session_status() == PHP_SESSION_NONE) {
