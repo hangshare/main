@@ -269,7 +269,8 @@ class SiteController extends Controller
             $login->rememberMe = true;
             $login->username = $login_email;
             $login->password = $user_profile->getId();
-            if ($login->login()) {
+
+            if ($status = $login->login()) {
                 if (isset($model) && ($model->created_at + 300 > time())) {
                     $url = "http://graph.facebook.com/{$user_profile->getId()}/picture?type=large";
                     $imagecontent = file_get_contents($url);
