@@ -113,7 +113,6 @@ $config = [
         ],
         'session' => [
             'class' => 'yii\web\DbSession',
-            'autoStart'=>true,
         ],
         'user' => [
             'identityClass' => 'app\models\User',
