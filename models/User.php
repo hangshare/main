@@ -50,8 +50,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findIdentity($id)
     {
-        $model = static::findOne($id);
-        return new static($model);
+        return static::findOne($id);
+//        return new static($model);
     }
 
     /**
