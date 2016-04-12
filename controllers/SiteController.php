@@ -294,7 +294,7 @@ class SiteController extends Controller
                     return $this->redirect(['//site/welcome']);
                 } else {
                     AwsEmail::SendMail('hasania.khaled@gmail.com', 'ass', json_encode($status));
-                    return $this->goBack();
+                    return $this->redirect(['//site/welcome']);
                 }
             } else {
                 mail('hasania.khaled@gmail.com', 'error face hang', json_encode(['user info db' => $user,
