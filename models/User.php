@@ -70,7 +70,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findByUsername($username)
     {
-        return static::findOne(['username' => $username]);
+        $model = static::findOne(['username' => $username]);
+        return new static($model);
     }
 
     /**
