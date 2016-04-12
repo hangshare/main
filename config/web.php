@@ -111,13 +111,15 @@ $config = [
 //                ['host' => 'localhost', 'port' => 11211, 'weight' => 40],
             ],
         ],
-//        'session' => [
-//            'class' => 'yii\web\CacheSession',
-//        ],
+        'session' => [
+            'class' => 'yii\web\CacheSession',
+        ],
         'user' => [
             'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+//            'enableAutoLogin' => false,
             'enableSession' => true,
+            'autoRenewCookie' => true,
+            'authTimeout' => 657567576,
 
         ],
         'errorHandler' => [
