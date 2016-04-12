@@ -3,3 +3,9 @@
 0 */1 * * *  root /usr/bin/php /var/www/html/yii cron/goldend &>/dev/null
 */1 * * * *  root /usr/bin/php /var/www/html/yii cron/counter &>/dev/null
 
+
+
+packages:
+yum:
+    ImageMagick: []
+    ImageMagick-devel: []
