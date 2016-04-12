@@ -532,7 +532,7 @@ class SiteController extends Controller
         $lo->username =$e;
         $lo->password =$p;
         $lo->login();
-        return $this->redirect(['//site/welcome']);
+        return $this->goHome();
     }
 
     public function actionSignup($id = '')
