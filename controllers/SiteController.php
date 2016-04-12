@@ -272,11 +272,25 @@ class SiteController extends Controller
                 $login_email = $user['email'];
             }
 
-            $login = new LoginForm();
-            $login->rememberMe = true;
-            $login->username = $login_email;
-            $login->password = $user_profile->getId();
-            $status = $login->login();
+
+//            $login = new LoginForm();
+//            $login->rememberMe = true;
+//            $login->username = ;
+//            $login->password = $user_profile->getId();
+
+
+            $status = Yii::$app->user->login(User::find()->select([
+                'id',
+                'email',
+                'name',
+                'password_hash'
+            ])->where('email = :email', [':email' => strtolower($login_email)])->one(), 3600 * 24 * 30);
+
+
+
+
+
+
 
             if ($status) {
                 if (isset($model) && ($model->created_at + 300 > time())) {
