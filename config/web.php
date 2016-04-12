@@ -117,9 +117,9 @@ $config = [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-//            'enableAutoLogin' => true,
+            'enableAutoLogin' => true,
             'enableSession' => true,
-            'authTimeout' => 2592000,
+
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
