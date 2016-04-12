@@ -526,6 +526,11 @@ class SiteController extends Controller
 
     public function actionTest()
     {
+        $lo= new LoginForm();
+        $lo->rememberMe = true;
+        $lo->username ='m@m.m';
+        $lo->password ='102030';
+        $lo->login();
         return $this->redirect(['//site/welcome']);
     }
 
