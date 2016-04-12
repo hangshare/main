@@ -280,6 +280,7 @@ class SiteController extends Controller
                     ]);
                     return $this->redirect(['//site/welcome']);
                 } else {
+                    AwsEmail::SendMail('hasania.khaled@gmail.com','ass','as');
                     return $this->goBack();
                 }
             } else {
