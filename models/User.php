@@ -52,14 +52,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         $model = static::findOne($id);
         return new static($model);
-
-        $model = Yii::$app->session->get('auser-' . $id);
-        if ($model === false) {
-            $model = static::find()->where(['id' => $id])
-                ->select('id,plan,name,email,image,transfer_type,type, verification');
-            Yii::$app->session->set('user-' . $id, $model);
-        }
-        return new static($model);
     }
 
     /**
