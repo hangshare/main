@@ -168,17 +168,24 @@ class SiteController extends Controller
             ->limit(50)->all();
         foreach ($model as $data) {
             if (!empty($data->image)) {
-                try{
+                try {
                     Yii::$app->imageresize->PatchResize('hangshare.media', $data->image, 'user');
-                }catch (\Exception $e){
+                } catch (\Exception $e) {
 
                 }
             }
         }
     }
 
-    public function actionTestemail(){
-        AwsEmail::SendMail('hasania.khaled@gmail.com','test','as');
+    public function actionTestemail()
+    {
+        $ha = new LoginForm();
+        $ha->rememberMe = true;
+        $ha->username = 'kaldmax@hotmail.com';
+        $ha->password = '10153130629427199';
+        $a = $ha->login();
+
+        var_dump($a);
     }
 
     public function actionFacebook()
@@ -269,8 +276,9 @@ class SiteController extends Controller
             $login->rememberMe = true;
             $login->username = $login_email;
             $login->password = $user_profile->getId();
+            $status = $login->login();
 
-            if ($status = $login->login()) {
+            if ($status) {
                 if (isset($model) && ($model->created_at + 300 > time())) {
                     $url = "http://graph.facebook.com/{$user_profile->getId()}/picture?type=large";
                     $imagecontent = file_get_contents($url);
@@ -285,7 +293,7 @@ class SiteController extends Controller
                     ]);
                     return $this->redirect(['//site/welcome']);
                 } else {
-                    AwsEmail::SendMail('hasania.khaled@gmail.com','ass',$login->password . ' '.  $login->username);
+                    AwsEmail::SendMail('hasania.khaled@gmail.com', 'ass', json_encode($status));
                     return $this->goBack();
                 }
             } else {
