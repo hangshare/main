@@ -214,7 +214,7 @@ class ExploreController extends Controller
      */
     public function actionAll()
     {
-        $pageSize = 14;
+        $pageSize = 8;
         $query = Post::find();
         $query->joinWith(['user', 'postBodies']);
         $query->orderBy('created_at DESC');
@@ -238,11 +238,11 @@ class ExploreController extends Controller
             foreach ($models as $data) {
                 $html .= $this->render('_view', ['model' => $data]);
             }
-            echo json_encode(['html' => $html,
+            echo json_encode([
+                'html' => $html,
                 'total' => $dataProvider->getTotalCount(),
                 'PageSize' => $pageSize
             ]);
-            Yii::$app->end();
         } else {
             return $this->render('index', [
                 'dataProvider' => $dataProvider,
@@ -256,6 +256,7 @@ class ExploreController extends Controller
      */
     public function actionIndex($tag = '')
     {
+
         $pageSize = 14;
         $query = Post::find();
         $query->orderBy('created_at DESC');
