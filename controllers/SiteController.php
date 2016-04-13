@@ -184,7 +184,7 @@ class SiteController extends Controller
             'app_secret' => '0df74c464dc8e58424481fb4cb3bb13c',
             'default_graph_version' => 'v2.4',
 //            'default_access_token' => isset($_SESSION['facebook_access_token']) ? $_SESSION['facebook_access_token'] : '1024611190883720|0df74c464dc8e58424481fb4cb3bb13c',
-//            'persistent_data_handler' => 'session'
+            'persistent_data_handler' => 'session'
         ]);
 
         $helper = $fb->getRedirectLoginHelper();
