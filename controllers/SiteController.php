@@ -471,6 +471,7 @@ class SiteController extends Controller
                 $payment = new UserPayment;
                 $payment->userId = $custom->userId;
                 $payment->price = $payment_amount;
+                $payment->active = 1;
                 $payment->payer_email = $payer_email;
                 $payment->start_date = time();
                 $payment->end_date = $endTime;
