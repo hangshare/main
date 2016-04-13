@@ -9,6 +9,18 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = 'تسجيل الدخول ';
 $this->params['breadcrumbs'][] = $this->title;
+
+$fb = new Facebook\Facebook([
+    'app_id' => '1024611190883720',
+    'app_secret' => '0df74c464dc8e58424481fb4cb3bb13c',
+    'default_graph_version' => 'v2.4',
+]);
+$helper = $fb->getRedirectLoginHelper();
+
+$params = ['scope' => 'email,user_about_me'];
+$fUrl = $helper->getLoginUrl('http://www.hangshare.com/site/facebook/', $params);
+
+
 ?>
 <div class="container">
     <div class="white-box row">
@@ -38,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ])
                         ?>
                     </div>
-<?php ActiveForm::end(); ?>
+                    <?php ActiveForm::end(); ?>
                 </div>
             </div>
             <div class="col-md-2">
@@ -52,10 +64,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             eventCategory: 'Login',
                             eventAction: 'Facebook',
                             eventLabel: 'Login Page'
-                        });" href="<?= Yii::$app->urlManager->createUrl('//site/facebook'); ?>" class="btn btn-primary" style="background-color: #3b5998;">
+                        });" href="<?= $fUrl; ?>" class="btn btn-primary"
+                       style="background-color: #3b5998;">
                         <i class="fa fa-fw fa-facebook pull-left" style=" border-left: 1px solid;
                            margin: 3px 5px 0 10px;
-                           padding-left: 10px;"></i>   
+                           padding-left: 10px;"></i>
                         <span class="pull-left">سجل باستخدام حساب فيسبوك</span>
                     </a>
                 </div>
