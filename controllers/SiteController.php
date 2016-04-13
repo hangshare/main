@@ -191,7 +191,7 @@ class SiteController extends Controller
                 try {
                     Yii::$app->imageresize->PatchResize('hangshare.media', $data->image, 'user');
                 } catch (\Exception $e) {
-
+                    echo $e->getMessage();
                 }
             }
         }
