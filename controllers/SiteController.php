@@ -168,9 +168,9 @@ class SiteController extends Controller
             ->limit(50)->all();
         foreach ($model as $data) {
             if (!empty($data->image)) {
-                try{
+                try {
                     Yii::$app->imageresize->PatchResize('hangshare.media', $data->image, 'user');
-                }catch (\Exception $e){
+                } catch (\Exception $e) {
 
                 }
             }
@@ -179,124 +179,109 @@ class SiteController extends Controller
 
     public function actionFacebook()
     {
-
-
         $fb = new Facebook\Facebook([
             'app_id' => '1024611190883720',
             'app_secret' => '0df74c464dc8e58424481fb4cb3bb13c',
             'default_graph_version' => 'v2.4',
-
 //            'default_access_token' => isset($_SESSION['facebook_access_token']) ? $_SESSION['facebook_access_token'] : '1024611190883720|0df74c464dc8e58424481fb4cb3bb13c',
 //            'persistent_data_handler' => 'session'
         ]);
+
         $helper = $fb->getRedirectLoginHelper();
+//      $_SESSION['facebook_access_token'] = (string)$accessToken;
 
         try {
             $accessToken = $helper->getAccessToken();
+            $fb->setDefaultAccessToken($accessToken);
+            $response = $fb->get('/me?fields=id,name,email,about,age_range,bio,birthday,gender,hometown,location');
+            $user_profile = $response->getGraphUser();
         } catch (Facebook\Exceptions\FacebookResponseException $e) {
-
+            echo $e->getMessage();
+            exit;
         } catch (Facebook\Exceptions\FacebookSDKException $e) {
-
+            echo $e->getMessage();
+            exit;
         }
-        if (isset($accessToken)) {
-//            $_SESSION['facebook_access_token'] = (string)$accessToken;
-            try {
-                $fb->setDefaultAccessToken($accessToken);
-                $response = $fb->get('/me?fields=id,name,email,about,age_range,bio,birthday,gender,hometown,location');
-//                $response = $fb->get('/me?fields=id,name,email');
-                $user_profile = $response->getGraphUser();
-            } catch (Facebook\Exceptions\FacebookResponseException $e) {
-                mail('hasania.khaled@gmail.com', ' FacebookResponseException', 'Graph returned an error: ' . $e->getMessage());
-                exit;
-            } catch (Facebook\Exceptions\FacebookSDKException $e) {
-                mail('hasania.khaled@gmail.com', 'FacebookSDKException', 'Facebook SDK returned an error: ' . $e->getMessage());
-                exit;
+        $user = Yii::$app->db->createCommand("SELECT id,password_hash,email,scId FROM user WHERE email = '{$user_profile->getEmail()}' OR scId = {$user_profile->getId()}  LIMIT 1;")->queryOne();
+        if ($user === false) {
+            $model = new User;
+            $model->name = $user_profile->getName();
+            $model->scId = $user_profile->getId();
+            $model->password = $user_profile->getId();
+            $model->email = strtolower($user_profile->getEmail());
+            if (empty($model->email)) {
+                $model->email = $user_profile->getId();
             }
-            $user = Yii::$app->db->createCommand("SELECT id,password_hash,email,scId FROM user WHERE email = '{$user_profile->getEmail()}' OR scId = {$user_profile->getId()}  LIMIT 1;")->queryOne();
-            if ($user === false) {
-                $model = new User;
-                $model->name = $user_profile->getName();
-                $model->scId = $user_profile->getId();
-                $model->password = $user_profile->getId();
-                $model->email = strtolower($user_profile->getEmail());
-                if (empty($model->email)) {
-                    $model->email = $user_profile->getId();
-                }
-                $model->gender = $user_profile->getGender() == 'male' ? 1 : 2;
-                $birth = $user_profile->getBirthday();
-                if (isset($birth))
-                    $model->dob = $birth->format('Y-m-d');
-                $model->bio = empty($user_profile->getProperty('bio')) ? '' : $user_profile->getProperty('bio');
-                $image = preg_replace('/(\d{4})-(\d{2})-(\d{2})$/', '', $model->name) . '.jpg';
-                $model->image = 'user/' . $image;
-                $eecheck = Yii::$app->db->createCommand("SELECT email FROM user WHERE email = '{$model->email}' LIMIT 1;")->queryOne();
-                if ($eecheck) {
-                    AwsEmail::SendMail('hasania.lhaled@gmail.com', 'Fb Bug 2', json_encode($model->attributes));
-                    Yii::$app->getSession()->setFlash('success', [
-                        'message' => "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.",
-                    ]);
-                    return $this->redirect(['//login', 'stat' => 'user']);
-                }
-                if (!$model->save(false)) {
-                    AwsEmail::SendMail('hasania.lhaled@gmail.com', 'Fb Bug', json_encode($model->getErrors()) . json_encode($model->attributes));
-                    Yii::$app->getSession()->setFlash('success', [
-                        'message' => "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.",
-                    ]);
-                    return $this->redirect(['//login', 'stat' => 'user']);
-                }
-                $login_password = $model->scId;
-                $login_email = $model->email;
-            } else {
-                if (empty($user['scId'])) {
-                    Yii::$app->getSession()->setFlash('success', [
-                        'message' => "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.",
-                    ]);
-                    return $this->redirect(['//login', 'stat' => 'user']);
-                }
-                $login_password = $user['scId'];
-                $login_email = $user['email'];
-            }
-
-            $login = new LoginForm();
-            $login->rememberMe = true;
-            $login->username = $login_email;
-            $login->password = $user_profile->getId();
-
-            if ($status = $login->login()) {
-                if (isset($model) && ($model->created_at + 300 > time())) {
-                    $url = "http://graph.facebook.com/{$user_profile->getId()}/picture?type=large";
-                    $imagecontent = file_get_contents($url);
-                    $imageFile = Yii::$app->basePath . '/media/' . $model->image;
-                    @file_put_contents($imageFile, $imagecontent);
-
-                    Yii::$app->customs3->uploadFromPath($imageFile, 'hangshare.media', 'fa/' . $model->image);
-                    Yii::$app->imageresize->PatchResize('hangshare.media', 'fa/' . $model->image, 'user');
-
-                    Yii::$app->getSession()->setFlash('success', [
-                        'message' => '، يرجى منك اكمال تعبئة المعلومات في الأسفل لكي نستطيع تحويل لك النقود في المستقبل. <strong>تمت عملية التسجيل بنجاح</strong>',
-                    ]);
-                    return $this->redirect(['//site/welcome']);
-                } else {
-                    return $this->redirect(['//site/test','e'=>$login_email, 'p'=>$login->password]);
-//                    return $this->goBack();
-                }
-            } else {
-                mail('hasania.khaled@gmail.com', 'error face hang', json_encode(['user info db' => $user,
-                    'email' => $login_email,
-                    'id' => $user_profile->getId(),
-                    'pass' => $login_password,
-                ]));
-                Yii::$app->getSession()->setFlash('error', [
-                    'message' => 'نعتذر حصل خطأ سوف نقوم بحل هذه المشكلة في أقرب وقت. ',
+            $model->gender = $user_profile->getGender() == 'male' ? 1 : 2;
+            $birth = $user_profile->getBirthday();
+            if (isset($birth))
+                $model->dob = $birth->format('Y-m-d');
+            $model->bio = empty($user_profile->getProperty('bio')) ? '' : $user_profile->getProperty('bio');
+            $image = preg_replace('/(\d{4})-(\d{2})-(\d{2})$/', '', $model->name) . '.jpg';
+            $model->image = 'user/' . $image;
+            $eecheck = Yii::$app->db->createCommand("SELECT email FROM user WHERE email = '{$model->email}' LIMIT 1;")->queryOne();
+            if ($eecheck) {
+                AwsEmail::SendMail('hasania.lhaled@gmail.com', 'Fb Bug 2', json_encode($model->attributes));
+                Yii::$app->getSession()->setFlash('success', [
+                    'message' => "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.",
                 ]);
-                return $this->redirect(['//login']);
+                return $this->redirect(['//login', 'stat' => 'user']);
+            }
+            if (!$model->save(false)) {
+                AwsEmail::SendMail('hasania.lhaled@gmail.com', 'Fb Bug', json_encode($model->getErrors()) . json_encode($model->attributes));
+                Yii::$app->getSession()->setFlash('success', [
+                    'message' => "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.",
+                ]);
+                return $this->redirect(['//login', 'stat' => 'user']);
+            }
+            $login_password = $model->scId;
+            $login_email = $model->email;
+        } else {
+            if (empty($user['scId'])) {
+                Yii::$app->getSession()->setFlash('success', [
+                    'message' => "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.",
+                ]);
+                return $this->redirect(['//login', 'stat' => 'user']);
+            }
+            $login_password = $user['scId'];
+            $login_email = $user['email'];
+        }
+
+        $login = new LoginForm();
+        $login->rememberMe = true;
+        $login->username = $login_email;
+        $login->password = $user_profile->getId();
+
+        if ($status = $login->login()) {
+            if (isset($model) && ($model->created_at + 300 > time())) {
+                $url = "http://graph.facebook.com/{$user_profile->getId()}/picture?type=large";
+                $imagecontent = file_get_contents($url);
+                $imageFile = Yii::$app->basePath . '/media/' . $model->image;
+                @file_put_contents($imageFile, $imagecontent);
+
+                Yii::$app->customs3->uploadFromPath($imageFile, 'hangshare.media', 'fa/' . $model->image);
+                Yii::$app->imageresize->PatchResize('hangshare.media', 'fa/' . $model->image, 'user');
+
+                Yii::$app->getSession()->setFlash('success', [
+                    'message' => '، يرجى منك اكمال تعبئة المعلومات في الأسفل لكي نستطيع تحويل لك النقود في المستقبل. <strong>تمت عملية التسجيل بنجاح</strong>',
+                ]);
+                return $this->redirect(['//site/welcome']);
+            } else {
+                return $this->redirect(['//site/test', 'e' => $login_email, 'p' => $login->password]);
+//                    return $this->goBack();
             }
         } else {
-            //$params = ['scope' => 'email,user_about_me,user_birthday,user_hometown,user_location'];
-            $params = ['scope' => 'email,user_about_me'];
-            $loginUrl = $helper->getLoginUrl('http://www.hangshare.com/site/facebook/', $params);
-            $this->redirect($loginUrl, 301);
+            mail('hasania.khaled@gmail.com', 'error face hang', json_encode(['user info db' => $user,
+                'email' => $login_email,
+                'id' => $user_profile->getId(),
+                'pass' => $login_password,
+            ]));
+            Yii::$app->getSession()->setFlash('error', [
+                'message' => 'نعتذر حصل خطأ سوف نقوم بحل هذه المشكلة في أقرب وقت. ',
+            ]);
+            return $this->redirect(['//login']);
         }
+
     }
 
     public function actionLogin()
@@ -521,12 +506,12 @@ class SiteController extends Controller
         return $this->render('welcome');
     }
 
-    public function actionTest($e,$p)
+    public function actionTest($e, $p)
     {
-        $lo= new LoginForm();
+        $lo = new LoginForm();
         $lo->rememberMe = true;
-        $lo->username =$e;
-        $lo->password =$p;
+        $lo->username = $e;
+        $lo->password = $p;
         $lo->login();
         return $this->goHome();
     }
