@@ -179,15 +179,15 @@ class SiteController extends Controller
 
     public function actionFacebook()
     {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
+
+
         $fb = new Facebook\Facebook([
             'app_id' => '1024611190883720',
             'app_secret' => '0df74c464dc8e58424481fb4cb3bb13c',
             'default_graph_version' => 'v2.4',
-            'default_access_token' => isset($_SESSION['facebook_access_token']) ? $_SESSION['facebook_access_token'] : '1024611190883720|0df74c464dc8e58424481fb4cb3bb13c',
-            'persistent_data_handler' => 'session'
+
+//            'default_access_token' => isset($_SESSION['facebook_access_token']) ? $_SESSION['facebook_access_token'] : '1024611190883720|0df74c464dc8e58424481fb4cb3bb13c',
+//            'persistent_data_handler' => 'session'
         ]);
         $helper = $fb->getRedirectLoginHelper();
 
@@ -203,7 +203,7 @@ class SiteController extends Controller
             exit;
         }
         if (isset($accessToken)) {
-            $_SESSION['facebook_access_token'] = (string)$accessToken;
+//            $_SESSION['facebook_access_token'] = (string)$accessToken;
             try {
                 $fb->setDefaultAccessToken($accessToken);
                 $response = $fb->get('/me?fields=id,name,email,about,age_range,bio,birthday,gender,hometown,location');
