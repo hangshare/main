@@ -240,7 +240,8 @@ class ExploreController extends Controller
             }
             echo json_encode([
                 'html' => $html,
-                'total' => $dataProvider->getTotalCount(),
+                //'total' => $dataProvider->getTotalCount(),
+                'total' => 40000,
                 'PageSize' => $pageSize
             ]);
         } else {
