@@ -14,6 +14,7 @@ use Yii;
  * @property integer $planId
  * @property User $user
  * @property string transactionId
+ * @property int active
  */
 class UserPayment extends \yii\db\ActiveRecord {
 
@@ -29,7 +30,7 @@ class UserPayment extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['userId', 'start_date', 'end_date'], 'integer'],
+            [['userId', 'start_date', 'end_date', 'active'], 'integer'],
             [['price'], 'number'],
             [['transactionId', 'payer_email'], 'string', 'max' => 500],
             [['start_date', 'end_date', 'payer_email', 'start_date','end_date', 'planId', 'transactionId'], 'safe']
