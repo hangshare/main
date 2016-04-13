@@ -179,6 +179,10 @@ class SiteController extends Controller
 
     public function actionFacebook()
     {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
         $fb = new Facebook\Facebook([
             'app_id' => '1024611190883720',
             'app_secret' => '0df74c464dc8e58424481fb4cb3bb13c',
