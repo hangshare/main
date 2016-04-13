@@ -457,10 +457,10 @@ class SiteController extends Controller
                 $custom = json_decode($custom);
                 switch ($custom->type) {
                     case 'gold_1':
-                        $endTime = strtotime('+1 month');
+                        $endTime = time() + 1460555157; // 30 days
                         break;
                     case 'gold_3':
-                        $endTime = strtotime('+3 month');
+                        $endTime = time() + 4381665471; // 90 days
                         break;
                 }
 
