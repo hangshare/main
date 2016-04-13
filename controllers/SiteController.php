@@ -159,6 +159,25 @@ class SiteController extends Controller
         }
     }
 
+    public function actionThump($id){
+
+        $model = Post::find()
+            ->where(['>=', 'id', $id])
+            ->andWhere(['<>', 'image', "''"])
+            ->andWhere(['<>', 'image', "0"])
+            ->limit(50)->all();
+        foreach ($model as $data) {
+            if (!empty($data->image)) {
+                try {
+                    Yii::$app->imageresize->PatchResize('hangshare.media', $data->image, 'post');
+                } catch (\Exception $e) {
+
+                }
+            }
+        }
+
+    }
+
     public function actionRes($id)
     {
         $model = User::find()
