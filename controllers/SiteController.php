@@ -163,15 +163,16 @@ class SiteController extends Controller
 
         $model = Post::find()
             ->where(['>=', 'id', $id])
-            ->andWhere(['<>', 'image', "''"])
-            ->andWhere(['<>', 'image', "0"])
+            ->andWhere(['<>', 'cover', "''"])
+            ->andWhere(['<>', 'cover', "0"])
             ->limit(50)->all();
         foreach ($model as $data) {
-            if (!empty($data->image)) {
+            if (!empty($data->cover)) {
                 try {
-                    Yii::$app->imageresize->PatchResize('hangshare.media', $data->image, 'post');
+                    $json = json_decode($data->cover);
+                    Yii::$app->imageresize->PatchResize('hangshare.media', $json->image, 'post');
                 } catch (\Exception $e) {
-
+                    echo $e->getMessage();
                 }
             }
         }
