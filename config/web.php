@@ -13,8 +13,6 @@ $config = [
 //            'cssFileCompile' => true,
 //            'jsFileCompile' => true,
 //        ],
-
-
         'init' => [
             'class' => 'app\components\Init',
         ],
@@ -33,10 +31,9 @@ $config = [
         'AwsEmail' => [
             'class' => 'app\components\AwsEmail',
         ],
-
-
         'assetManager' => [
             'class' => 'yii\web\AssetManager',
+            'forceCopy' => true,
             'bundles' => [
                 'yii\web\YiiAsset' => [
                     'js' => [
@@ -96,7 +93,6 @@ $config = [
                 'نبذة-عنا' => 'site/privacy',
                 'request-password-reset' => 'site/reset',
                 '<slug:.*?>' => 'explore/view',
-
             ],
         ],
         'request' => [
