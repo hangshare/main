@@ -159,7 +159,8 @@ class SiteController extends Controller
         }
     }
 
-    public function actionThump($id){
+    public function actionThump($id)
+    {
 
         $model = Post::find()
             ->where(['>=', 'id', $id])
@@ -201,6 +202,10 @@ class SiteController extends Controller
     {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
+        }
+
+        if (isset($_GET['state'])) {
+            $_SESSION['FBRLH_state'] = $_GET['state'];
         }
 
         $fb = new Facebook\Facebook([
