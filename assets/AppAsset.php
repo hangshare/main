@@ -22,7 +22,7 @@ class AppAsset extends AssetBundle
 
     //add to github
     public $css = [
-        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.2.0-rc2/css/bootstrap-rtl.min.css',
         YII_DEBUG ? 'css/site.css' : 'css/site.min.css',
         'css/font-awesome/css/font-awesome.min.css',
 
@@ -56,7 +56,7 @@ class AppAsset extends AssetBundle
 
             ];
             $this->css = [
-                'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
+                'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.2.0-rc2/css/bootstrap-rtl.min.css',
                 YII_DEBUG ? 'css/site.css' : 'css/site.min.css',
                 'css/font-awesome/css/font-awesome.min.css',
                 "css/editor/css/froala_editor.min.css",
