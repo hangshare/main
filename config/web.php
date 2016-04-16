@@ -44,13 +44,19 @@ $config = [
                     ]
                 ],
                 'yii\web\JqueryAsset' => [
-                    'js' => false
+                    'js' => [
+                        'jquery.min.js'
+                    ]
                 ],
                 'yii\bootstrap\BootstrapPluginAsset' => [
-                    'js' => false
+                    'js' => [
+                        'js/bootstrap.min.js',
+                    ]
                 ],
                 'yii\bootstrap\BootstrapAsset' => [
-                    'css' => false
+                    'css' => [
+                        'css/bootstrap.min.css',
+                    ]
                 ],
             ]
         ],
