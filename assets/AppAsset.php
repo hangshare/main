@@ -22,20 +22,25 @@ class AppAsset extends AssetBundle
 
     //add to github
     public $css = [
+        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
         YII_DEBUG ? 'css/site.css' : 'css/site.min.css',
         'css/font-awesome/css/font-awesome.min.css',
+
 //        "css/editor/css/froala_editor.min.css",
 //        "css/editor/css/froala_style.min.css"
     ];
     public $js = [
 //        '/css/lazyload/jquery.lazyload.min.js',
 //        '/css/lazyload/jquery.scrollstop.min.js',
-        YII_DEBUG ? 'js/main.js' : '/js/main.1.1.min.js'
+        'https://code.jquery.com/jquery-2.2.3.min.js',
+        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js',
+        YII_DEBUG ? 'js/main.js' : '/js/main.1.1.min.js',
     ];
-    public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-    ];
+    public $depends =
+        [
+            'yii\web\YiiAsset',
+//        'yii\bootstrap\BootstrapAsset',
+        ];
 
     public function init()
     {
@@ -47,13 +52,16 @@ class AppAsset extends AssetBundle
                 'css/editor/js/langs/ar.js',
                 'css/editor/js/plugins/char_counter.min.js',
                 'css/editor/js/plugins/video.min.js',
-                YII_DEBUG ? 'js/main.js' : 'js/main.1.1.min.js'
+                YII_DEBUG ? 'js/main.js' : 'js/main.1.1.min.js',
+
             ];
             $this->css = [
+                'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
                 YII_DEBUG ? 'css/site.css' : 'css/site.min.css',
                 'css/font-awesome/css/font-awesome.min.css',
                 "css/editor/css/froala_editor.min.css",
-                "css/editor/css/froala_style.min.css"
+                "css/editor/css/froala_style.min.css",
+
             ];
         }
     }
