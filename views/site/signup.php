@@ -14,6 +14,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $thump = Yii::$app->imageresize->thump($model->image, 100, 80, 'crop');
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 $fb = new Facebook\Facebook([
     'app_id' => '1024611190883720',
