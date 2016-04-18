@@ -14,6 +14,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $thump = Yii::$app->imageresize->thump($model->image, 100, 80, 'crop');
 
+
+$fb = new Facebook\Facebook([
+    'app_id' => '1024611190883720',
+    'app_secret' => '0df74c464dc8e58424481fb4cb3bb13c',
+    'default_graph_version' => 'v2.4',
+    'persistent_data_handler'=>'session'
+]);
+$helper = $fb->getRedirectLoginHelper();
+
+$params = ['scope' => 'email,user_about_me'];
+$fUrl = $helper->getLoginUrl('http://www.hangshare.com/site/facebook/', $params);
+
+
 ?>
 <div class="container m-t-25">
     <div class="center w-600">
@@ -27,7 +40,7 @@ $thump = Yii::$app->imageresize->thump($model->image, 100, 80, 'crop');
                                     eventCategory: 'Sign Up',
                                     eventAction: 'Facebook',
                                     eventLabel: 'Sign Up Page'
-                                });" href="<?= Yii::$app->urlManager->createUrl('//site/facebook'); ?>" rel="nofollow"
+                                });" href="<?= $fUrl; ?>" rel="nofollow"
                        class="btn btn-primary btn-block"
                        style="background-color: #3b5998;height: 30px; margin-bottom: 20px; margin-top: 30px; width: 280px;padding: 4px 10px 10px;">
                         <i class="fa fa-fw fa-facebook pull-left" style="border-left: 1px solid;
