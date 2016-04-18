@@ -3,6 +3,19 @@ use yii\helpers\Html;
 
 $this->title = $model->title;
 $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize');
+
+
+$fb = new Facebook\Facebook([
+    'app_id' => '1024611190883720',
+    'app_secret' => '0df74c464dc8e58424481fb4cb3bb13c',
+    'default_graph_version' => 'v2.4',
+    'persistent_data_handler'=>'session'
+]);
+$helper = $fb->getRedirectLoginHelper();
+
+$params = ['scope' => 'email,user_about_me'];
+$fUrl = $helper->getLoginUrl('http://www.hangshare.com/site/facebook/', $params);
+
 ?>
     <div class="row">
         <div class="col-md-12">
@@ -13,7 +26,7 @@ $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize'
                             <div class="white text-center">
                                 <div class="col-md-12">
                                     <h4 class="text-center">انشر مقالتك واحصل على المال مقابل كل مشاهدة</h4>
-                                    <a href="<?= Yii::$app->urlManager->createUrl('//site/facebook'); ?>"
+                                    <a href="<?= $fUrl; ?>"
                                        class="btn btn-primary btn-block"
                                        style="background-color: #3b5998;height: 30px;margin-top: 30px; padding: 4px 10px 10px;">
                                         <i class="fa fa-fw fa-facebook pull-left" style="  border-left: 1px solid;
