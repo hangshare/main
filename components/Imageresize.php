@@ -19,6 +19,7 @@ class Imageresize extends Component
     private $post_sizes = [
         ['width' => '150', 'height' => '100', 'method' => 'crop'],
         ['width' => '1000', 'height' => '1000', 'method' => 'resize'],
+        ['width' => '500', 'height' => '500', 'method' => 'resize'],
         ['width' => '300', 'height' => '250', 'method' => 'crop'],
         ['width' => '400', 'height' => '230', 'method' => 'crop'],
         ['width' => '400', 'height' => '250', 'method' => 'crop'],
