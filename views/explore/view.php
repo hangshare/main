@@ -4,6 +4,9 @@ use yii\helpers\Html;
 $this->title = $model->title;
 $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize');
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 $fb = new Facebook\Facebook([
     'app_id' => '1024611190883720',
