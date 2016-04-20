@@ -41,6 +41,7 @@ $this->description = Yii::t('app', "مقالات متنوعة $q ، انشر م�
             </script>
         <?php else : ?>
             <div class="white">
+                <div style="margin: 0 auto; display: table;">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- Leaderboard - Category Upper -->
                 <ins class="adsbygoogle"
@@ -50,6 +51,7 @@ $this->description = Yii::t('app', "مقالات متنوعة $q ، انشر م�
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
+                </div>
             </div>
         <?php endif ?>
     </div>
