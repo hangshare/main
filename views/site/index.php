@@ -1,13 +1,18 @@
-<?php if (!Yii::$app->helper->isMobile()) : ?>    
+<?php if (!Yii::$app->helper->isMobile()) : ?>
     <style>
-        #w3, #w3, .navbar-inverse{
+        #w3, #w3, .navbar-inverse {
             background: none;
             position: relative;
         }
-        .planholder{background: none;}
-        .nav > li:hover {
-            background: rgba(248,248,248,.3);
+
+        .planholder {
+            background: none;
         }
+
+        .nav > li:hover {
+            background: rgba(248, 248, 248, .3);
+        }
+
         .navbar-nav > li {
             border-radius: 25px;
         }
@@ -31,30 +36,24 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
             </aside>
         </h1>
         <div class="col-md-4 col-md-offset-4 m-t-25 m-b-20">
-            <img width="100" class="pull-left" src="http://hangshare.media.s3.amazonaws.com/paypal_verified.png" />
-            <h3 class="header-index" style="line-height: 31px;margin-right: 107px;margin-top: 4px;">موقع معتمد لدى PayPal</h3>
+            <img width="100" class="pull-left" src="http://hangshare.media.s3.amazonaws.com/paypal_verified.png"/>
+            <h3 class="header-index" style="line-height: 31px;margin-right: 107px;margin-top: 4px;">موقع معتمد لدى
+                PayPal</h3>
         </div>
-        <div class="signuppost">
-            <?php
-//            if (Yii::$app->user->isGuest) {
-//                echo Html::a('سجل الآن', ['//site/plan'], ['class' => 'btn btn-success btn-big']);
-//            } else {
-//                echo Html::a('انشر موضوع', ['//explore/post'], ['class' => 'btn btn-success btn-big']);
-//            }
-            ?>
-        </div>
-        <h4 style="color: #fff; text-align: center; margin-bottom: 80px; margin-top: -80px;"> انشر مواضيع   > شاركها على مواقع التواصل  > احصل على المال مقابل كل مشاهدة</h4>
+        <div class="clearfix"></div>
+        <h4 style="color: #fff; text-align: center; margin-bottom: 60px;"> انشر مواضيع > شاركها على
+            مواقع التواصل > احصل على المال مقابل كل مشاهدة</h4>
     </div>
 </section>
 <section>
     <div class="home-header">
         <h3>مقالات متميزة</h3>
     </div>
-    <div class = "homepost_contaner">
-        <div class = "postsho">
+    <div class="homepost_contaner">
+        <div class="postsho">
             <?=
             ListView::widget([
-                    'dataProvider' => $featured,
+                'dataProvider' => $featured,
                 'itemView' => '_post',
                 'layout' => "{items}",
                 'options' => [
@@ -108,7 +107,9 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
                                 js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1390171834574276&version=v2.0";
                                 fjs.parentNode.insertBefore(js, fjs);
                             }(document, 'script', 'facebook-jssdk'));</script>
-                        <div class="fb-like-box m-t-20" data-href="https://www.facebook.com/Hangshare" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+                        <div class="fb-like-box m-t-20" data-href="https://www.facebook.com/Hangshare"
+                             data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false"
+                             data-show-border="true"></div>
                     </div>
                     <div class="row m-t-25">
                         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -126,6 +127,7 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
                             <div class="white text-center ressocal">
                                 <div class="col-md-12">
                                     <h3>الحساب الذهبي</h3>
+
                                     <p>عرض لمدة محدودة</p>
                                     <select id="goldtime">
                                         <option value="b">$10 دولار / لشهر واحد</option>
@@ -189,7 +191,7 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
                                  data-ad-client="ca-pub-6288640194310142"
                                  data-ad-slot="4022492110"></ins>
                             <script>
-                                                        (adsbygoogle = window.adsbygoogle || []).push({});
+                                (adsbygoogle = window.adsbygoogle || []).push({});
                             </script>
                         </div>
                     </div>
