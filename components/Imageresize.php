@@ -14,7 +14,7 @@ class Imageresize extends Component
     private $height = 200;
     private $method = 'resize';
     private $mediaFile = '/web/media';
-    private $quality = 70;
+    private $quality = 75;
     private $s3;
     private $post_sizes = [
         ['width' => '150', 'height' => '100', 'method' => 'crop'],
