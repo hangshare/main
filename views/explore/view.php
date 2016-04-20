@@ -4,7 +4,7 @@ use yii\helpers\Html;
 $this->title = $model->title;
 $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize');
 
-if (session_status() == PHP_SESSION_NONE) {
+if (Yii::$app->user->isGuest && session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
