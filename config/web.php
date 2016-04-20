@@ -91,6 +91,8 @@ $config = [
                 'u/payment' => 'user/payment',
                 'u/verify' => 'user/verify',
                 'u/gold' => 'user/gold',
+                'u/request' => 'user/request',
+                'u/success/<id:\d+>'=>'user/success',
                 'explore/<id:\d+>' => 'explore/red',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
@@ -108,6 +110,7 @@ $config = [
                 'نبذة-عنا' => 'site/privacy',
                 'request-password-reset' => 'site/reset',
                 '<slug:.*?>' => 'explore/view',
+                'sitemap.xml'=>'site/sitemapxml',
             ],
         ],
         'request' => [
