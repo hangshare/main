@@ -15,18 +15,18 @@ use yii\web\NotFoundHttpException;
 class FaqController extends Controller
 {
 
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => 'yii\filters\HttpCache',
-                'only' => ['index'],
-                'lastModified' => function ($action, $params) {
-                    return 3600;
-                },
-            ],
-        ];
-    }
+//    public function behaviors()
+//    {
+//        return [
+//            [
+//                'class' => 'yii\filters\HttpCache',
+//                'only' => ['index'],
+//                'lastModified' => function ($action, $params) {
+//                    return 3600;
+//                },
+//            ],
+//        ];
+//    }
 
     /**
      * Lists all Faq models.
