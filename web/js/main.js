@@ -213,7 +213,7 @@ $(function () {
 
 
     $(document).on('click', '#main-post', function (e) {
-        if ($('#post-ylink').val() === "" && $("#cover_input").val() === "") {
+        if ($('#post-ylink').val() === "" && $("#cover_input").val() === "" && $("#covercheck").val() === "") {
             e.preventDefault();
             var body = $("html, body");
             body.stop().animate({scrollTop: 0}, '500', 'swing', function () {
