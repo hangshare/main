@@ -39,6 +39,8 @@ foreach ($model->postBodies as $data) {
             <div class="row">
                 <div class="col-md-2">
                     <?php echo Html::img($thump, ['class' => 'img-responsive', 'id' => 'coveri']); ?>
+                    <input id="covercheck" name="covercheck" value="<?= $model->cover ?>">
+
                     <div id="prev" style="background-color: rgba(0, 0, 0, 0.4);padding: 40px 38px;position: absolute;text-align: center;top: 0; display: none;">
                         <i class="fa fa-spin fa-spinner fa-2x" style="position: relative; top: -10px; color: #fff;"></i>
                     </div>
