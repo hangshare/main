@@ -307,14 +307,14 @@ class SiteController extends Controller
             $model->image = 'user/' . $image;
             $eecheck = Yii::$app->db->createCommand("SELECT email FROM user WHERE email = '{$model->email}' LIMIT 1;")->queryOne();
             if ($eecheck) {
-                AwsEmail::SendMail('hasania.lhaled@gmail.com', 'Fb Bug 2', json_encode($model->attributes));
+                AwsEmail::SendMail('hasania.khaled@gmail.com', 'Fb Bug 2', json_encode($model->attributes));
                 Yii::$app->getSession()->setFlash('success', [
                     'message' => "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.",
                 ]);
                 return $this->redirect(['//login', 'stat' => 'user']);
             }
             if (!$model->save(false)) {
-                AwsEmail::SendMail('hasania.lhaled@gmail.com', 'Fb Bug', json_encode($model->getErrors()) . json_encode($model->attributes));
+                AwsEmail::SendMail('hasania.khaled@gmail.com', 'Fb Bug', json_encode($model->getErrors()) . json_encode($model->attributes));
                 Yii::$app->getSession()->setFlash('success', [
                     'message' => "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.",
                 ]);
