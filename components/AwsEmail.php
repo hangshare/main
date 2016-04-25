@@ -66,7 +66,7 @@ class AwsEmail extends Component
                     return false;
                 }
                 $client->sendEmail(array(
-                    'Source' => "HangShare.com <info@hangshare.com>",
+                    'Source' => "HangShare.com <no-reply@hangshare.com>",
                     'Destination' => array(
                         'ToAddresses' => array($to)
                     ),
@@ -86,7 +86,7 @@ class AwsEmail extends Component
                             ),
                         ),
                     ),
-                    'ReplyToAddresses' => array($from),
+                    'ReplyToAddresses' => array('info@hangshare.com'),
                     'ReturnPath' => 'info@hangshare.com'
                 ));
             } catch (Exception $exc) {
