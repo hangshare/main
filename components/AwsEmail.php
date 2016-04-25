@@ -60,9 +60,9 @@ class AwsEmail extends Component
                 'region' => 'us-east-1',
                 'version' => '2010-12-01'
             ));
-            $allowed_domians = ['hotmail.com', 'yahoo.com', 'gmail.com', 'outlook.com', 'live.com'];
+            $allowed_domians = ['hotmail.com', 'yahoo.com', 'gmail.com', 'outlook.com', 'live.com', 'hangshare.com'];
             try {
-                if (!filter_var($to, FILTER_VALIDATE_EMAIL) || !in_array(self::getDomainFromEmail($to), $allowed_domians)){
+                if (!filter_var($to, FILTER_VALIDATE_EMAIL) || !in_array(self::getDomainFromEmail($to), $allowed_domians)) {
                     return false;
                 }
                 $client->sendEmail(array(
