@@ -81,15 +81,11 @@ class UserController extends Controller
         if (isset($userSettings)) {
             $userSettings->verified_email = 1;
             $userSettings->save(false);
-            Yii::$app->getSession()->setFlash('success', [
-                'message' => 'تم تفعيل حسابك بنجاح ',
-            ]);
+            Yii::$app->getSession()->setFlash('success', 'تم تفعيل حسابك بنجاح ');
             $username = empty($userSettings->user->username) ? $userSettings->user->id : $userSettings->user->username;
             return $this->redirect(['view', 'id' => $username]);
         } else {
-            Yii::$app->getSession()->setFlash('error', [
-                'message' => 'نعتذر حصل خطأ يرجى التواصل معنا.',
-            ]);
+            Yii::$app->getSession()->setFlash('danger', 'نعتذر حصل خطأ يرجى التواصل معنا.');
         }
         return $this->redirect(['//تواصل-معنا']);
     }
