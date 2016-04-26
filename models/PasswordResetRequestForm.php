@@ -57,9 +57,14 @@ class PasswordResetRequestForm extends Model
         if ($user) {
             $user->generatePasswordResetToken();
             $user->save(false);
-            AwsEmail::queueUser($user->id, 7, [
-                '__link__' => Yii::$app->urlManager->createAbsoluteUrl('//reset-password?token=' . $user->password_reset_token)
-            ]);
+
+            if (!empty($user->scId)) {
+                AwsEmail::queueUser($user->id, 8);
+            } else {
+                AwsEmail::queueUser($user->id, 7, [
+                    '__link__' => Yii::$app->urlManager->createAbsoluteUrl('//reset-password?token=' . $user->password_reset_token)
+                ]);
+            }
             return TRUE;
         }
         return false;
