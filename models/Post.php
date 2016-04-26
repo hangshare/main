@@ -38,8 +38,8 @@ class Post extends \yii\db\ActiveRecord
         $featured = Yii::$app->cache->get('featured-posts');
         if ($featured === false) {
             $featured = Post::find()
-                ->where("type=0 AND cover <> '' AND featured = 1")
-                ->orderBy('sort desc')
+                ->where("featured = 1")
+                ->orderBy('rand();')
                 ->select('id,cover,title, urlTitle')
                 ->limit($limit)
                 ->all();
