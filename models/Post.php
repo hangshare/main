@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Exception;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "post".
@@ -35,13 +36,14 @@ class Post extends \yii\db\ActiveRecord
 
     public static function featured($limit = 8)
     {
+
         $featured = Yii::$app->cache->get('featured-posts');
         if ($featured === false) {
             $featured = Post::find()
                 ->where("type=0 AND cover <> '' AND featured = 1")
                 ->select('id,cover,title, urlTitle')
+                ->orderBy(new Expression('rand()'))
                 ->limit($limit)
-                ->orderBy('rand()')
                 ->all();
             Yii::$app->cache->set('featured-posts', $featured, 300);
         }
