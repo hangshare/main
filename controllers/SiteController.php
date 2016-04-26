@@ -196,7 +196,7 @@ class SiteController extends Controller
             $featured = Yii::$app->cache->get('home-featured');
             if ($featured === false) {
                 $queryfeatured = Post::find()
-                    ->where("featured = 1")
+                    ->where("type=0 AND cover <> '' AND featured = 1")
                     ->select('id, cover, title, urlTitle')
                     ->limit(21)
                     ->orderBy('rand();');
