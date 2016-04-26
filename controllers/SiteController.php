@@ -655,6 +655,7 @@ class SiteController extends Controller
 
     public function actionResetpassword($token)
     {
+        $token = substr($token, 0, -1);
         try {
             $model = new ResetPasswordForm($token);
         } catch (InvalidParamException $e) {
@@ -662,7 +663,7 @@ class SiteController extends Controller
         }
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
             Yii::$app->getSession()->setFlash('success', 'تم تغير كلمة السر بنجاح.');
-            return $this->goHome();
+            return $this->redirect(['//login']);
         }
         return $this->render('resetPassword', [
             'model' => $model,
