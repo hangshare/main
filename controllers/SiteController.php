@@ -644,8 +644,6 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
                 Yii::$app->getSession()->setFlash('success', 'تم ارسال طريقة اعادة تعيين كلمة المرور الى البريد الاكتروني الخاص بك.');
-
-                return $this->goHome();
             } else {
                 Yii::$app->getSession()->setFlash('error', 'نعتذر حصل خطأ ما يرجى مراسلة ادارة الموقع.');
             }
