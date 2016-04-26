@@ -10,23 +10,22 @@ use Yii;
 /**
  * Password reset form
  */
-class ResetPasswordForm extends Model {
+class ResetPasswordForm extends Model
+{
 
     public $password;
-
-    /**
-     * @var \common\models\User
-     */
+    public $repeat_password;
     private $_user;
 
     /**
      * Creates a form model given a token.
      *
-     * @param  string                          $token
-     * @param  array                           $config name-value pairs that will be used to initialize the object properties
+     * @param  string $token
+     * @param  array $config name-value pairs that will be used to initialize the object properties
      * @throws \yii\base\InvalidParamException if token is empty or not valid
      */
-    public function __construct($token, $config = []) {
+    public function __construct($token, $config = [])
+    {
         if (empty($token) || !is_string($token)) {
             throw new InvalidParamException('Password reset token cannot be blank.');
         }
@@ -40,16 +39,20 @@ class ResetPasswordForm extends Model {
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
-            ['password', 'required'],
+            [['password', 'repeat_password'], 'required'],
+            ['repeat_password', 'compare', 'compareAttribute' => 'password', 'message' => "كلمة المرور غير متطابقة"],
             ['password', 'string', 'min' => 6],
         ];
     }
 
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
-            'password' => Yii::t('app', 'كلمة المرور')
+            'password' => Yii::t('app', 'كلمة المرور'),
+            'repeat_password' => Yii::t('app', 'تكرار كلمة المرور'),
         ];
     }
 
@@ -58,7 +61,8 @@ class ResetPasswordForm extends Model {
      *
      * @return boolean if password was reset.
      */
-    public function resetPassword() {
+    public function resetPassword()
+    {
         $user = $this->_user;
         $user->password_hash = sha1($this->password);
         $user->removePasswordResetToken();
