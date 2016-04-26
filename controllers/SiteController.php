@@ -162,7 +162,7 @@ class SiteController extends Controller
         header("Pragma: no-cache");
 
         $pageSize = 16;
-        $newpost = Yii::$app->cache->get('home-new-postsa');
+        $newpost = Yii::$app->cache->get('home-new-posts');
         if ($newpost === false) {
             $querypost = Post::find()
                 ->where("post.deleted=0 AND post.cover <> ''")
@@ -196,10 +196,10 @@ class SiteController extends Controller
             $featured = Yii::$app->cache->get('home-featured');
             if ($featured === false) {
                 $queryfeatured = Post::find()
-                    ->where("type=0 AND cover <> '' AND featured = 1")
+                    ->where("featured = 1")
                     ->select('id, cover, title, urlTitle')
                     ->limit(21)
-                    ->orderBy('id desc');
+                    ->orderBy('rand();');
                 $featured = new ActiveDataProvider([
                     'query' => $queryfeatured,
                     'pagination' => array('pageSize' => 21),
