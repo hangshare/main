@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\AwsEmail;
 use Yii;
 use app\models\User;
 use yii\base\Model;
@@ -11,14 +12,16 @@ use yii\helpers\Url;
 /**
  * Password reset request form
  */
-class PasswordResetRequestForm extends Model {
+class PasswordResetRequestForm extends Model
+{
 
     public $email;
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             //['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
@@ -33,7 +36,8 @@ class PasswordResetRequestForm extends Model {
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'email' => Yii::t('app', 'البريد الالكتروني'),
         ];
@@ -44,34 +48,22 @@ class PasswordResetRequestForm extends Model {
      *
      * @return boolean whether the email was send
      */
-    public function sendEmail() {
+    public function sendEmail()
+    {
         /* @var $user User */
         $user = User::findOne([
-                    'email' => $this->email,
+            'email' => $this->email,
         ]);
-
         if ($user) {
             if (!User::isPasswordResetTokenValid($user->password_reset_token)) {
                 $user->generatePasswordResetToken();
             }
-
-            if ($user->save()) {
-                $message = '<table>'
-                        . '<tr><td><b>لاعادة تعيين كلمة المرور لهذا الحساب على موقع هانج شير يرجة الضغط على الرابط التالي :</b></td></tr>'
-                        . '<tr><td><a href="' . Yii::$app->urlManager->createAbsoluteUrl('site/reset-password?token=' . $user->password_reset_token) . '">' .
-                        Yii::$app->urlManager->createAbsoluteUrl('site/reset-password?token=' . $user->password_reset_token)
-                        . '</a></td></tr>'
-                        . '</table>';
-                $headers = "From: <info@hangshare.com> \r\n";
-                $headers .= "Reply-To: <info@hangshare.com> \r\n";
-                $headers .= "MIME-Version: 1.0\r\n";
-                $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-
-                mail($user->email, 'اعادة تعيين كلمة المورور', $message, $headers);
-            }
+            $user->save(false);
+            AwsEmail::queueUser($user->id, 7, [
+                '__link__' => Yii::$app->urlManager->createAbsoluteUrl('//reset-password?token=' . $user->password_reset_token)
+            ]);
             return TRUE;
         }
-
         return false;
     }
 
