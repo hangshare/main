@@ -47,7 +47,7 @@ class ExploreController extends Controller
 //                        ->groupBy('userId')
 //                        ->where("id IN ({$sqp}) AND cover <> ''")->all();
 
-        $model = Post::featured(8);
+        $model = Post::featured(6);
         echo '<ul class="list-inline releated">';
         foreach ($model as $data) {
             echo $this->render('_related', ['model' => $data]);
