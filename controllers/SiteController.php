@@ -653,7 +653,7 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionResetPassword($token)
+    public function actionResetpassword($token)
     {
         try {
             $model = new ResetPasswordForm($token);
