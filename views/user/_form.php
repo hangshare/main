@@ -137,7 +137,7 @@ $thump = Yii::$app->imageresize->thump($model->image, 100, 80, 'crop');
                     ];
                     $dayArr = range(1, 31);
                     $dayArr = array_combine($dayArr, $dayArr);
-                    $yearArr = range(1980, date('Y') - 18);
+                    $yearArr = range(1950, date('Y') - 12);
                     $yearArr = array_combine($yearArr, $yearArr);
                     ?>
                     <ul class="list-inline">
