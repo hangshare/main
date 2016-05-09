@@ -6,13 +6,11 @@ use yii\helpers\Html;
 <?php if (Yii::$app->helper->isMobile()): ?>
     <div class="footads">
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- Large mobile Banner - Mobile Post Upper -->
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:320px;height:100px"
-             data-ad-client="ca-pub-6288640194310142"
-             data-ad-slot="5787356113"></ins>
         <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
+            (adsbygoogle = window.adsbygoogle || []).push({
+                google_ad_client: "ca-pub-6288640194310142",
+                enable_page_level_ads: true
+            });
         </script>
     </div>
 <?php endif; ?>
