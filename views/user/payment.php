@@ -1,6 +1,8 @@
 <?php
 
 use yii\helpers\Html;
+$this->title = 'طلب تحويل النقود';
+
 
 $cantak = 100;
 if ($model->plan == '1') {
