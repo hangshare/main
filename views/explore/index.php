@@ -29,7 +29,7 @@ $this->description = Yii::t('app', "مقالات متنوعة $q ، انشر م�
 <div class="container m-t-25">
     <div class="row">
         <?php if (Yii::$app->helper->isMobile()) : ?>
-            <script async src = "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- left right responsive categery -->
             <ins class="adsbygoogle"
                  style="display:block"
@@ -42,15 +42,15 @@ $this->description = Yii::t('app', "مقالات متنوعة $q ، انشر م�
         <?php else : ?>
             <div class="white">
                 <div style="margin: 0 auto; display: table;">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- Leaderboard - Category Upper -->
-                <ins class="adsbygoogle"
-                     style="display:inline-block;width:728px;height:90px"
-                     data-ad-client="ca-pub-6288640194310142"
-                     data-ad-slot="6969174910"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Leaderboard - Category Upper -->
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:728px;height:90px"
+                         data-ad-client="ca-pub-6288640194310142"
+                         data-ad-slot="6969174910"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
                 </div>
             </div>
         <?php endif ?>
@@ -58,7 +58,7 @@ $this->description = Yii::t('app', "مقالات متنوعة $q ، انشر م�
     <div class="row">
         <div class="col-md-3  res-hidden">
             <h3 class="m-t-25">البحث</h3>
-            <hr class="nomargin"> 
+            <hr class="nomargin">
             <div class="row m-b-20">
                 <?= $this->render('_search', ['model' => new Post]) ?>
             </div>
@@ -85,21 +85,6 @@ $this->description = Yii::t('app', "مقالات متنوعة $q ، انشر م�
                              style="display:inline-block;width:300px;height:250px"
                              data-ad-client="ca-pub-6288640194310142"
                              data-ad-slot="9922641319"></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
-                </div>
-            </div>
-            <div class="m-t-20">
-                <div style="position: relative">
-                    <div class="row m-t-25 fixad" rel="2800">
-                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <!-- Wide Skyscraper - Category Right -->
-                        <ins class="adsbygoogle"
-                             style="display:inline-block;width:160px;height:600px"
-                             data-ad-client="ca-pub-6288640194310142"
-                             data-ad-slot="2399374518"></ins>
                         <script>
                             (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
@@ -143,33 +128,6 @@ $this->description = Yii::t('app', "مقالات متنوعة $q ، انشر م�
                     </li>
                 <?php endforeach; ?>
             </ul>
-
-            <div class="row m-t-25">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- MPU - Category Left -->
-                <ins class="adsbygoogle"
-                     style="display:inline-block;width:300px;height:250px"
-                     data-ad-client="ca-pub-6288640194310142"
-                     data-ad-slot="3876107710"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-            <div class="m-b-20">
-                <div style="position: relative">
-                    <div class="row m-t-25 fixad" rel="2800">
-                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <!-- Wide Skyscraper - Category Left -->
-                        <ins class="adsbygoogle"
-                             style="display:inline-block;width:160px;height:600px"
-                             data-ad-client="ca-pub-6288640194310142"
-                             data-ad-slot="5352840915"></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
