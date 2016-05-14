@@ -37,6 +37,7 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
         </h1>
         <div class="col-md-4 col-md-offset-4 m-t-25 m-b-20">
             <img width="100" class="pull-left" src="http://hangshare.media.s3.amazonaws.com/paypal_verified.png"/>
+
             <h3 class="header-index" style="line-height: 31px;margin-right: 107px;margin-top: 4px;">موقع معتمد لدى
                 PayPal</h3>
         </div>
@@ -170,17 +171,6 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
                                 <?php echo $this->render('//explore/_most', ['data' => $postData]); ?>
                             <?php endforeach; ?>
                         </ul>
-                    </div>
-                    <div class="row m-t-25">
-                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <!-- MPU - Home Page Bottom -->
-                        <ins class="adsbygoogle"
-                             style="display:inline-block;width:300px;height:250px"
-                             data-ad-client="ca-pub-6288640194310142"
-                             data-ad-slot="1062242110"></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
                     </div>
                     <div style="position: relative">
                         <div id="fixad" class="row m-t-25" rel="5100">
