@@ -43,15 +43,6 @@ $fUrl = $helper->getLoginUrl('http://www.hangshare.com/site/facebook/', $params)
                         </div>
                     <?php endif; ?>
                     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- MPU - Post page right Upper -->
-                    <ins class="adsbygoogle"
-                         style="display:inline-block;width:300px;height:250px"
-                         data-ad-client="ca-pub-6288640194310142"
-                         data-ad-slot="1962272113"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <!-- MPU - Post page right Upper  -->
                     <ins class="adsbygoogle"
                          style="display:inline-block;width:300px;height:250px"
@@ -274,18 +265,6 @@ $fUrl = $helper->getLoginUrl('http://www.hangshare.com/site/facebook/', $params)
             </div>
             <?php if (!Yii::$app->helper->isMobile()): ?>
                 <div class="col-md-2" style="margin-right: 0;padding-right: 0;">
-
-                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- Wide Skyscraper - Post Page right upper -->
-                    <ins class="adsbygoogle"
-                         style="display:inline-block;width:160px;height:600px"
-                         data-ad-client="ca-pub-6288640194310142"
-                         data-ad-slot="3439005315"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-
-
                     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <!-- Wide Skyscraper - Post Page right upper -->
                     <ins class="adsbygoogle"
