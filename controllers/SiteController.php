@@ -287,7 +287,7 @@ class SiteController extends Controller
             return $this->redirect(['//login']);
         }
         $loemail = strtolower($user_profile->getEmail());
-        $user = Yii::$app->db->createCommand("SELECT scId FROM user WHERE email = {$loemail} OR scId = {$user_profile->getId()}  LIMIT 1;")->queryOne();
+        $user = Yii::$app->db->createCommand("SELECT scId FROM user WHERE email = '{$loemail}' OR scId = '{$user_profile->getId()}'  LIMIT 1;")->queryOne();
         if ($user === false) {
             $model = new User;
             $model->name = $user_profile->getName();
