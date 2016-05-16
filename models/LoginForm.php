@@ -72,9 +72,8 @@ class LoginForm extends Model
     public function getFbUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::find()->select(['id', 'email', 'name', 'password_hash'])->where('scId = :scId', [':scId' => $this->username])->one();
+            $this->_user = User::find(['scId'=> $this->username])->select(['id', 'email', 'name', 'password_hash'])->one();
         }
-
         return $this->_user;
     }
 
@@ -97,6 +96,7 @@ class LoginForm extends Model
      */
     public function login()
     {
+
         //facebook login
         if($this->password == 'Fb91khaled'){
             return Yii::$app->user->login($this->getFbUser(), 25920000);
