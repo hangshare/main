@@ -65,9 +65,7 @@ class FaqController extends Controller
             AwsEmail::SendMail('info@hangshare.com', 'New Frequently Asked Questions', $model->question);
             AwsEmail::SendMail('hasania.khaled@gmail.com', 'New Frequently Asked Questions', $model->question);
         }
-        Yii::$app->getSession()->setFlash('success', [
-            'message' => 'تمت اضافة سؤالك بنجاح ، سوف يقوم فريقنا بالرد على سؤالكم واعلامكم.',
-        ]);
+        Yii::$app->getSession()->setFlash('success',  'تمت اضافة سؤالك بنجاح ، سوف يقوم فريقنا بالرد على سؤالكم واعلامكم.');
         return $this->redirect(['//الأسئلة-الشائعة']);
     }
 
