@@ -72,7 +72,7 @@ class LoginForm extends Model
     public function getFbUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::find(['scId'=> $this->username])->select(['id', 'email', 'name', 'password_hash'])->one();
+            $this->_user = User::find(['scId'=> $this->username])->one();
         }
         return $this->_user;
     }
