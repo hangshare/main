@@ -319,8 +319,8 @@ class SiteController extends Controller
         }
         $login = new LoginForm();
         $login->rememberMe = true;
-        $login->username = $user_profile->getId();
-        $login->password = 'Fb91khaled';
+        $login->username = strtolower($user_profile->getEmail());  //$user_profile->getId();
+        $login->password = $user_profile->getId(); // 'Fb91khaled';
         if ($status = $login->login()) {
             if (isset($model) && ($model->created_at + 100 > time())) {
                 $url = "http://graph.facebook.com/{$user_profile->getId()}/picture?type=large";
@@ -337,7 +337,7 @@ class SiteController extends Controller
                 Yii::$app->getSession()->setFlash('success', '، يرجى منك اكمال تعبئة المعلومات في الأسفل لكي نستطيع تحويل لك النقود في المستقبل. <strong>تمت عملية التسجيل بنجاح</strong>');
                 return $this->redirect(['//site/welcome']);
             } else {
-                return $this->goBack();
+                return $this->redirect(['//site/loginr', ['id' => $user_profile->getId()]]);
             }
         } else {
             Yii::$app->getSession()->setFlash('error', 'نعتذر حصل خطأ سوف نقوم بحل هذه المشكلة في أقرب وقت. ');
@@ -347,6 +347,24 @@ class SiteController extends Controller
                 ]));
             return $this->redirect(['//login']);
         }
+    }
+
+    public function actionLoginr($id)
+    {
+        $user = User::find()->select(['id', 'scId', 'email', 'name', 'password_hash'])->where('scId LIKE :scId', [':scId' => $id])->one();
+        var_dump($user);
+        die();
+        //var_dump(Yii::$app->user->id);die();
+        //localhost/main/web/site/loginr/?id=643482198
+        $login = new LoginForm();
+        $login->rememberMe = true;
+        $login->username = $id;
+        $login->password = 'Fb91khaled';
+        $status = $login->login();
+        var_dump(Yii::$app->user->id);
+        die();
+
+        return $this->goHome();
     }
 
     public function actionLogin()
