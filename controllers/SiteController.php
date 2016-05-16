@@ -312,8 +312,10 @@ class SiteController extends Controller
                 ':scId' => $user_profile->getId(),
                 ':email' => strtolower($user_profile->getEmail())
             ])->one();
-            $model->scId = $user_profile->getId();
-            $model->save(false);
+            if($model) {
+                $model->scId = $user_profile->getId();
+                $model->save(false);
+            }
         }
         $login = new LoginForm();
         $login->rememberMe = true;
