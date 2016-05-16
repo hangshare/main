@@ -337,7 +337,7 @@ class SiteController extends Controller
                 Yii::$app->getSession()->setFlash('success', '، يرجى منك اكمال تعبئة المعلومات في الأسفل لكي نستطيع تحويل لك النقود في المستقبل. <strong>تمت عملية التسجيل بنجاح</strong>');
                 return $this->redirect(['//site/welcome']);
             } else {
-                return $this->goHome();
+                return $this->goBack();
             }
         } else {
             Yii::$app->getSession()->setFlash('error', 'نعتذر حصل خطأ سوف نقوم بحل هذه المشكلة في أقرب وقت. ');
