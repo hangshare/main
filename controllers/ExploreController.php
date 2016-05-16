@@ -498,9 +498,7 @@ class ExploreController extends Controller
             throw new Exception('غير مسموح.', '403');
         }
         Yii::$app->db->createCommand("UPDATE post SET deleted=1 WHERE id=$id")->query();
-        Yii::$app->getSession()->setFlash('success', [
-            'message' => 'تم حذف الموضوع بنجاح.',
-        ]);
+        Yii::$app->getSession()->setFlash('success','تم حذف الموضوع بنجاح.');
         $username = empty($model->user->username) ? $model->user->id : $model->user->username;
         return $this->redirect(['/user/' . $username . '/']);
     }
