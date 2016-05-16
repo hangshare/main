@@ -312,7 +312,7 @@ class SiteController extends Controller
                 ':scId' => $user_profile->getId(),
                 ':email' => strtolower($user_profile->getEmail())
             ])->one();
-            if($model) {
+            if ($model) {
                 $model->scId = $user_profile->getId();
                 $model->save(false);
             }
@@ -336,6 +336,8 @@ class SiteController extends Controller
                 }
                 Yii::$app->getSession()->setFlash('success', '، يرجى منك اكمال تعبئة المعلومات في الأسفل لكي نستطيع تحويل لك النقود في المستقبل. <strong>تمت عملية التسجيل بنجاح</strong>');
                 return $this->redirect(['//site/welcome']);
+            } else {
+                return $this->goHome();
             }
         } else {
             Yii::$app->getSession()->setFlash('error', 'نعتذر حصل خطأ سوف نقوم بحل هذه المشكلة في أقرب وقت. ');
