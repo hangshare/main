@@ -260,11 +260,9 @@ class SiteController extends Controller
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-
         if (isset($_GET['state'])) {
             $_SESSION['FBRLH_state'] = $_GET['state'];
         }
-
         $fb = new Facebook\Facebook([
             'app_id' => '1024611190883720',
             'app_secret' => '0df74c464dc8e58424481fb4cb3bb13c',
@@ -272,10 +270,8 @@ class SiteController extends Controller
 //            'default_access_token' => isset($_SESSION['facebook_access_token']) ? $_SESSION['facebook_access_token'] : '1024611190883720|0df74c464dc8e58424481fb4cb3bb13c',
             'persistent_data_handler' => 'session'
         ]);
-
         $helper = $fb->getRedirectLoginHelper();
 //      $_SESSION['facebook_access_token'] = (string)$accessToken;
-
         try {
             $accessToken = $helper->getAccessToken();
             $fb->setDefaultAccessToken($accessToken);
@@ -290,7 +286,8 @@ class SiteController extends Controller
             AwsEmail::SendMail('hasania.khaled@gmail.com', 'HangShare FB  Err 2', $e->getMessage());
             return $this->redirect(['//login']);
         }
-        $user = Yii::$app->db->createCommand("SELECT scId FROM user WHERE scId = {$user_profile->getId()}  LIMIT 1;")->queryOne();
+        $loemail = strtolower($user_profile->getEmail());
+        $user = Yii::$app->db->createCommand("SELECT scId FROM user WHERE email = {$loemail} OR scId = {$user_profile->getId()}  LIMIT 1;")->queryOne();
         if ($user === false) {
             $model = new User;
             $model->name = $user_profile->getName();
@@ -310,12 +307,18 @@ class SiteController extends Controller
                 Yii::$app->getSession()->setFlash('success', "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.");
                 return $this->redirect(['//login', 'stat' => 'user']);
             }
+        } else {
+            $model = User::find()->where('scId = :scId OR email = :email', [
+                ':scId' => $user_profile->getId(),
+                ':email' => strtolower($user_profile->getEmail())
+            ])->one();
+            $model->scId = $user_profile->getId();
+            $model->save(false);
         }
         $login = new LoginForm();
         $login->rememberMe = true;
         $login->username = $user_profile->getId();
         $login->password = 'Fb91khaled';
-
         if ($status = $login->login()) {
             if (isset($model) && ($model->created_at + 100 > time())) {
                 $url = "http://graph.facebook.com/{$user_profile->getId()}/picture?type=large";
