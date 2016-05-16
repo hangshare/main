@@ -65,19 +65,6 @@ class LoginForm extends Model
     }
 
     /**
-     * Finds user by [[username]]
-     *
-     * @return User|null
-     */
-    public function getFbUser()
-    {
-        if ($this->_user === false) {
-            $this->_user = User::find(['scId'=> $this->username])->one();
-        }
-        return $this->_user;
-    }
-
-    /**
      * @inheritdoc
      */
     public function attributeLabels()
@@ -96,14 +83,8 @@ class LoginForm extends Model
      */
     public function login()
     {
-
-        //facebook login
-        if($this->password == 'Fb91khaled'){
-            return Yii::$app->user->login($this->getFbUser(), 25920000);
-        }
-
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), 25920000);
+            return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
         } else {
             return false;
         }
