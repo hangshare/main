@@ -3,58 +3,48 @@ use yii\helpers\Html;
 
 $this->title = $model->title;
 $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize');
-
 if (Yii::$app->user->isGuest && session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
 $fb = new Facebook\Facebook([
     'app_id' => '1024611190883720',
     'app_secret' => '0df74c464dc8e58424481fb4cb3bb13c',
     'default_graph_version' => 'v2.4',
-    'persistent_data_handler'=>'session'
+    'persistent_data_handler' => 'session'
 ]);
 $helper = $fb->getRedirectLoginHelper();
-
 $params = ['scope' => 'email,user_about_me'];
 $fUrl = $helper->getLoginUrl('http://www.hangshare.com/site/facebook/', $params);
-
 ?>
+    <div class="center m-t-8">
+        <?php if (Yii::$app->helper->isMobile()) : ?>
+            <script async
+                    src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- Responsive - Mobile Post Upper -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-6288640194310142"
+                 data-ad-slot="6756705310"
+                 data-ad-format="auto"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        <?php else : ?>
+            <script async
+                    src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- Leaderboard - Post Upper -->
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:728px;height:90px"
+                 data-ad-client="ca-pub-6288640194310142"
+                 data-ad-slot="1011333310"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        <?php endif; ?>
+    </div>
     <div class="row">
         <div class="col-md-12">
-            <?php if (!Yii::$app->helper->isMobile()): ?>
-                <div class="col-md-3">
-                    <?php if (Yii::$app->user->isGuest) : ?>
-                        <div style="margin-bottom: 10px;">
-                            <div class="white text-center">
-                                <div class="col-md-12">
-                                    <h4 class="text-center">انشر مقالتك واحصل على المال مقابل كل مشاهدة</h4>
-                                    <a href="<?= $fUrl; ?>"
-                                       class="btn btn-primary btn-block"
-                                       style="background-color: #3b5998;height: 30px;margin-top: 30px; padding: 4px 10px 10px;">
-                                        <i class="fa fa-fw fa-facebook pull-left" style="  border-left: 1px solid;
-                               font-size: 15px;
-                               margin-top: 3px;
-                               padding-left: 10px;"></i>
-                                        <span class="pull-left"> سجل باستخدام الفيسبوك</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- MPU - Post page right Upper  -->
-                    <ins class="adsbygoogle"
-                         style="display:inline-block;width:300px;height:250px"
-                         data-ad-client="ca-pub-6288640194310142"
-                         data-ad-slot="1962272113"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-
-                </div>
-            <?php endif; ?>
-            <div class="col-md-7 white">
+            <div class="col-md-9 white">
                 <article data-id="<?= $model->id; ?>" data-userId="<?= $model->userId ?>"
                          data-plan="<?= $model->user->plan; ?>">
                     <div class="pull-right">
@@ -80,17 +70,17 @@ $fUrl = $helper->getLoginUrl('http://www.hangshare.com/site/facebook/', $params)
                     </div>
                     <p> تاريخ اﻹضافة : <?php echo date('Y-m-d', strtotime($model->created_at)); ?>
                         | المشاهدات : <?php
-                            $incr = 1;
-//                            if (!($totalViews = Yii::$app->cache->get('post_tmp_views_' . $model->id))) {
-                                $totalViews = $model->postStats->views;
-//                            }
-//                            if (($ips = Yii::$app->cache->get('views_ips_arr_' . $model->id)) && in_array(Yii::$app->hitcounter->getRemoteIPAddress(), $ips)) {
-//                                $incr = 0;
-//                            }
-//                            $ips[] = Yii::$app->hitcounter->getRemoteIPAddress();
-//                            $st = Yii::$app->cache->set('views_ips_arr_' . $model->id, $ips, 30);
-//                            Yii::$app->cache->set('post_tmp_views_' . $model->id, $totalViews + $incr, 30);
-                            echo number_format($totalViews + $incr);
+                        $incr = 1;
+                        //                            if (!($totalViews = Yii::$app->cache->get('post_tmp_views_' . $model->id))) {
+                        $totalViews = $model->postStats->views;
+                        //                            }
+                        //                            if (($ips = Yii::$app->cache->get('views_ips_arr_' . $model->id)) && in_array(Yii::$app->hitcounter->getRemoteIPAddress(), $ips)) {
+                        //                                $incr = 0;
+                        //                            }
+                        //                            $ips[] = Yii::$app->hitcounter->getRemoteIPAddress();
+                        //                            $st = Yii::$app->cache->set('views_ips_arr_' . $model->id, $ips, 30);
+                        //                            Yii::$app->cache->set('post_tmp_views_' . $model->id, $totalViews + $incr, 30);
+                        echo number_format($totalViews + $incr);
                         ?>
                     </p>
                     <ul class="list-inline shareer" style="margin: 18px 7px 0;">
@@ -107,32 +97,6 @@ $fUrl = $helper->getLoginUrl('http://www.hangshare.com/site/facebook/', $params)
                     </ul>
                     <div class="post-body">
                         <div class="chebody">
-                            <div class="col-md-12" style="margin-bottom: 10px;">
-                                <?php if (Yii::$app->helper->isMobile()) : ?>
-                                    <script async
-                                            src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                                    <!-- Responsive - Mobile Post Upper -->
-                                    <ins class="adsbygoogle"
-                                         style="display:block"
-                                         data-ad-client="ca-pub-6288640194310142"
-                                         data-ad-slot="6756705310"
-                                         data-ad-format="auto"></ins>
-                                    <script>
-                                        (adsbygoogle = window.adsbygoogle || []).push({});
-                                    </script>
-                                <?php else : ?>
-                                    <script async
-                                            src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                                    <!-- Leaderboard - Post Upper -->
-                                    <ins class="adsbygoogle"
-                                         style="display:inline-block;width:728px;height:90px"
-                                         data-ad-client="ca-pub-6288640194310142"
-                                         data-ad-slot="1011333310"></ins>
-                                    <script>
-                                        (adsbygoogle = window.adsbygoogle || []).push({});
-                                    </script>
-                                <?php endif; ?>
-                            </div>
                             <div class="col-md-12" style="margin: 50px 0;">
                                 <?php
                                 if ($model->type) {
@@ -232,37 +196,70 @@ $fUrl = $helper->getLoginUrl('http://www.hangshare.com/site/facebook/', $params)
                             </div>
                         </div>
                 </article>
-<!--                <hr/>-->
-<!--                <div class="row">-->
-<!--                    <div class="col-md-12">-->
-<!--                        <h3>التعليقات على موقع الفيسبوك</h3>-->
+                <!--                <hr/>-->
+                <!--                <div class="row">-->
+                <!--                    <div class="col-md-12">-->
+                <!--                        <h3>التعليقات على موقع الفيسبوك</h3>-->
 
-<!--                        <div id="fb-root"></div>-->
-<!--                        <script>(function (d, s, id) {-->
-<!--                                var js, fjs = d.getElementsByTagName(s)[0];-->
-<!--                                if (d.getElementById(id))-->
-<!--                                    return;-->
-<!--                                js = d.createElement(s);-->
-<!--                                js.id = id;-->
-<!--                                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1024611190883720";-->
-<!--                                fjs.parentNode.insertBefore(js, fjs);-->
-<!--                            }(document, 'script', 'facebook-jssdk'));</script>-->
-<!--                        <div class="fb-comments" data-href="--><?php //echo $model->url ?><!--" data-numposts="5"-->
-<!--                             data-width="100%"></div>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <!--                        <div id="fb-root"></div>-->
+                <!--                        <script>(function (d, s, id) {-->
+                <!--                                var js, fjs = d.getElementsByTagName(s)[0];-->
+                <!--                                if (d.getElementById(id))-->
+                <!--                                    return;-->
+                <!--                                js = d.createElement(s);-->
+                <!--                                js.id = id;-->
+                <!--                                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1024611190883720";-->
+                <!--                                fjs.parentNode.insertBefore(js, fjs);-->
+                <!--                            }(document, 'script', 'facebook-jssdk'));</script>-->
+                <!--                        <div class="fb-comments" data-href="-->
+                <?php //echo $model->url ?><!--" data-numposts="5"-->
+                <!--                             data-width="100%"></div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
             </div>
             <?php if (!Yii::$app->helper->isMobile()): ?>
-                <div class="col-md-2" style="margin-right: 0;padding-right: 0;">
-                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- Wide Skyscraper - Post Page right upper -->
-                    <ins class="adsbygoogle"
-                         style="display:inline-block;width:160px;height:600px"
-                         data-ad-client="ca-pub-6288640194310142"
-                         data-ad-slot="3439005315"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
+                <div class="col-md-3">
+                    <?php if (Yii::$app->user->isGuest) : ?>
+                        <div style="margin-bottom: 10px;">
+                            <div class="white text-center">
+                                <div class="col-md-12">
+                                    <h4 class="text-center">انشر مقالتك واحصل على المال مقابل كل مشاهدة</h4>
+                                    <a href="<?= $fUrl; ?>"
+                                       class="btn btn-primary btn-block"
+                                       style="background-color: #3b5998;height: 30px;margin-top: 30px; padding: 4px 10px 10px;">
+                                        <i class="fa fa-fw fa-facebook pull-left" style="  border-left: 1px solid;
+                               font-size: 15px;
+                               margin-top: 3px;
+                               padding-left: 10px;"></i>
+                                        <span class="pull-left"> سجل باستخدام الفيسبوك</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    <div class="m-t-25">
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- MPU - Post page right Upper  -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:300px;height:250px"
+                             data-ad-client="ca-pub-6288640194310142"
+                             data-ad-slot="1962272113"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                    <div class="m-t-25">
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- Wide Skyscraper - Post Page right upper -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:160px;height:600px"
+                             data-ad-client="ca-pub-6288640194310142"
+                             data-ad-slot="3439005315"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+
                 </div>
             <?php endif; ?>
         </div>
