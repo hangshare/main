@@ -244,7 +244,7 @@ $fUrl = $helper->getLoginUrl('http://www.hangshare.com/site/facebook/', $params)
                 <!--                </div>-->
             </div>
             <?php if (!Yii::$app->helper->isMobile()): ?>
-                <div class="col-md-3">
+                <div class="col-md-3" style="left: 0;position: fixed;">
                     <?php if (Yii::$app->user->isGuest) : ?>
                         <div style="margin-bottom: 10px;">
                             <div class="white text-center">
