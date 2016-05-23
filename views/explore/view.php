@@ -141,7 +141,7 @@ $fUrl = $helper->getLoginUrl('http://www.hangshare.com/site/facebook/', $params)
                                     $bodys = Yii::$app->helper->replaceLinks($bodys);
                                     Yii::$app->cache->set('post-body-' . $model->id, $bodys, 3000);
                                 }
-                                $this->description = Yii::$app->helper->metabody($bodys);
+                                $this->description = Yii::$app->helper->metabody($bodyas);
                                 echo $bodys;
                                 ?>
                                 <div class="m-b-20">
@@ -222,6 +222,7 @@ $fUrl = $helper->getLoginUrl('http://www.hangshare.com/site/facebook/', $params)
                                     <?php endif; ?>
                                 </div>
                             </div>
+                        </div>
                         </div>
                 </article>
             </div>
