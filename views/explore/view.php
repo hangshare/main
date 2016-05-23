@@ -98,16 +98,19 @@ $fUrl = $helper->getLoginUrl('http://www.hangshare.com/site/facebook/', $params)
                     <div class="post-body">
                         <div class="center m-t-8">
                             <?php if (Yii::$app->helper->isMobile()) : ?>
-                                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                                <!-- responsive - new mobile upper post -->
-                                <ins class="adsbygoogle"
-                                     style="display:block"
-                                     data-ad-client="ca-pub-6288640194310142"
-                                     data-ad-slot="9020008518"
-                                     data-ad-format="auto"></ins>
-                                <script>
-                                    (adsbygoogle = window.adsbygoogle || []).push({});
-                                </script>
+                                <div style="width:250px;height: 250px;">
+                                    <script async
+                                            src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                    <!-- responsive - new mobile upper post -->
+                                    <ins class="adsbygoogle"
+                                         style="display:block; height: 250px;"
+                                         data-ad-client="ca-pub-6288640194310142"
+                                         data-ad-slot="9020008518"
+                                         data-ad-format="auto"></ins>
+                                    <script>
+                                        $(document).ready(function(){(adsbygoogle = window.adsbygoogle || []).push({})})
+                                    </script>
+                                </div>
                             <?php else : ?>
                                 <script async
                                         src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
