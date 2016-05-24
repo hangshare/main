@@ -133,7 +133,25 @@ $fUrl = $helper->getLoginUrl('http://www.hangshare.com/site/facebook/', $params)
                                 echo $bodys;
                                 ?>
                             </div>
-                            <ul class="list-inline shareer" style="margin: 18px 7px 20px;">
+
+
+                            <?php //if (Yii::$app->helper->isMobile()): ?>
+                            <div class="col-md-12">
+                                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                <!-- Responsive - Mobile Post Bottom -->
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-client="ca-pub-6288640194310142"
+                                     data-ad-slot="9710171716"
+                                     data-ad-format="auto"></ins>
+                                <script>
+                                    (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            </div>
+                            <?php //endif; ?>
+
+
+                            <ul class="col-md-12 list-inline shareer" style="margin: 50px 7px 20px;">
                                 <li><a class="btn btn-primary js-share js-share-fasebook" href="javascript:void(0);"
                                        post-url="<?= $model->url; ?>"><i style="margin: 3px;"
                                                                          class="fa fa-fw fa-facebook"></i>انشر هذا
@@ -149,18 +167,6 @@ $fUrl = $helper->getLoginUrl('http://www.hangshare.com/site/facebook/', $params)
                                         جوجل</a></li>
                             </ul>
 
-                            <?php if (Yii::$app->helper->isMobile()): ?>
-                                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                                <!-- Responsive - Mobile Post Bottom -->
-                                <ins class="adsbygoogle"
-                                     style="display:block"
-                                     data-ad-client="ca-pub-6288640194310142"
-                                     data-ad-slot="9710171716"
-                                     data-ad-format="auto"></ins>
-                                <script>
-                                    (adsbygoogle = window.adsbygoogle || []).push({});
-                                </script>
-                            <?php endif; ?>
                             <div id="related-posts" data-id="<?= $model->id; ?>" class="col-md-12 m-t-20">
                                 <h3>اقرأ ايضا</h3>
                                 <hr/>
