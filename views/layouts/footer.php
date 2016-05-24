@@ -1,20 +1,20 @@
 <?php
-
 use yii\helpers\Html;
-
 ?>
 <?php if (Yii::$app->helper->isMobile()): ?>
     <div class="footads">
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Responsive - Mobile -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6288640194310142"
+             data-ad-slot="4505880919"
+             data-ad-format="auto"></ins>
         <script>
-            (adsbygoogle = window.adsbygoogle || []).push({
-                google_ad_client: "ca-pub-6288640194310142",
-                enable_page_level_ads: true
-            });
+            (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     </div>
 <?php endif; ?>
-
 <?php if (!Yii::$app->helper->isMobile()): ?>
     <footer style="position: relative">
         <ul class="list-inline pull-left" style="width: 100%;padding-right: 70px;">
