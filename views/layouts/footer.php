@@ -6,7 +6,7 @@ use yii\helpers\Html;
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <!-- Responsive - Mobile -->
         <ins class="adsbygoogle"
-             style="display:block"
+             style="display:block; max-height: 80px"
              data-ad-client="ca-pub-6288640194310142"
              data-ad-slot="4505880919"
              data-ad-format="auto"></ins>
