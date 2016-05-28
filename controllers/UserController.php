@@ -75,6 +75,16 @@ class UserController extends Controller
         }
     }
 
+
+    public function actionMissing(){
+        $model = $this->findModel(Yii::$app->user->identity->id);
+
+        return $this->render('missing', [
+            'model' => $model,
+        ]);
+    }
+
+
     public function actionVerify($key)
     {
         $userSettings = \app\models\UserSettings::find()->where(['key' => $key])->one();
@@ -255,10 +265,8 @@ class UserController extends Controller
             $model = $this->findModel($id);
         } else {
             $model = User::findByUsername($id);
-
-            if (!isset($model))
+            if (!$model->id)
                 throw new NotFoundHttpException('The requested page does not exist.');
-
         }
 
         $query = Post::find()->orderBy('id desc');
