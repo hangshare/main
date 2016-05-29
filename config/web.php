@@ -5,7 +5,7 @@ $config = [
     'id' => 'hangshare-live',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log', 'init'],
-    'components' => [
+        'components' => [
 //        'assetsAutoCompress' => [
 //            'class' => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
 //            'enabled' => true,
@@ -92,6 +92,7 @@ $config = [
                 'u/verify' => 'user/verify',
                 'u/gold' => 'user/gold',
                 'u/request' => 'user/request',
+                'u/missing' => 'user/missing',
                 'u/success/<id:\d+>'=>'user/success',
                 'explore/<id:\d+>' => 'explore/red',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
@@ -131,10 +132,10 @@ $config = [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-//            'enableAutoLogin' => false,
             'enableSession' => true,
-            'autoRenewCookie' => true,
-            'authTimeout' => 657567576,
+            'enableAutoLogin' => true,
+            //'autoRenewCookie' => true,
+            //'authTimeout' => 657567576,
 
         ],
         'errorHandler' => [
