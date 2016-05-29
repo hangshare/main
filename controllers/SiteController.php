@@ -216,6 +216,18 @@ class SiteController extends Controller
         }
     }
 
+    public function actionAut($id)
+    {
+        $model = User::find()
+            ->where(['>=', 'id', $id])
+            ->limit(50)->all();
+        foreach ($model as $data) {
+            $data->auth_key = \Yii::$app->security->generateRandomString();
+            $data->save(false);
+        }
+        echo $data->id;
+    }
+
     public function actionThump($id)
     {
 
