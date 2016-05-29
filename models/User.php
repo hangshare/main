@@ -24,18 +24,17 @@ use Yii;
  * @property UserSettings $userSettings
  * @property UserStats $userStats
  * @property UserTransactions[] $userTransactions
+ * @property string auth_key
  */
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
-
     const STATUS_DELETED = 0;
 //    public $enableSession = true;
 //    private static $users = [];
 //    private $_user = false;
-//    public $rememberMe = true;
     const STATUS_ACTIVE = 10;
+
     public $password, $password_re, $password_old, $password_new, $year, $day, $month;
-    public $auth_key;
 
     /**
      * @inheritdoc
@@ -45,13 +44,116 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return 'user';
     }
 
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['name', 'email', 'gender', 'month', 'day', 'year', 'country', 'username'], 'required'],
+            [['password'], 'required', 'on' => 'signup'],
+            [['email', 'username'], 'unique'],
+            [['email'], 'email'],
+            [['gender', 'plan', 'country', 'transfer_type'], 'integer'],
+            [['auth_key','dob', 'created_at', 'phone', 'password', 'scId', 'bio', 'plan', 'country', 'transfer_type', 'username'], 'safe'],
+            [['name', 'email'], 'string', 'max' => 50],
+            [['username'], 'string', 'max' => 20],
+            [['username', 'email'], 'filter', 'filter' => 'trim', 'skipOnArray' => true],
+            ['username', 'match', 'pattern' => '/^[a-z0-9_-]{3,16}$/',
+                'message'=>'عنوان الصفحة يجب ان يتكون من الأحرف الانجليزية و الأرقام ويمكن اضافة  الشرطة الأفقية - فقط ، ولا يجب ان يبدأ برقم.'],
+            [['image', 'bio'], 'string', 'max' => 250],
+            [['email', 'password_hash'], 'unique', 'targetAttribute' => ['email', 'password_hash'], 'message' => 'The combination of Email, Paypal Email and Password Hash has already been taken.']
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'الإسم'),
+            'email' => Yii::t('app', 'البريد الإلكتروني'),
+            'image' => Yii::t('app', 'الصورة الشخصية'),
+            'password_hash' => Yii::t('app', 'Password Hash'),
+            'password' => 'كلمة المرور',
+            'password_new' => 'كلمة المرور',
+            'password_re' => 'تأكيد كلمة المرور',
+            'gender' => Yii::t('app', 'الجنس'),
+            'dob' => Yii::t('app', 'تاريخ الميلاد'),
+            'password_old' => 'كلمة المرور الحالية',
+            'created_at' => Yii::t('app', 'Created At'),
+            'month' => 'الشهر',
+            'day' => 'اليوم',
+            'year' => 'السنة',
+            'bio' => 'نبذة مختصرة',
+            'country' => 'الدولة',
+            'phone' => 'رقم الهاتف',
+            'username' => 'عنوان الصفحة'
+        ];
+    }
+
+
+    public function beforeSave($insert)
+    {
+        if ($insert) {
+            $this->password_hash = sha1($this->password);
+            $this->transfer_type = 0;
+            $this->password_reset_token = sha1(time() . rand(2, 200));
+            $this->scId = '';
+            $this->type = 1;
+            $this->plan = 0;
+            $this->auth_key = \Yii::$app->security->generateRandomString();
+        }
+
+        return parent::beforeSave($insert);
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        if ($insert) {
+            $settings = new UserSettings;
+            $settings->userId = $this->id;
+            $settings->newsletter = 1;
+            $settings->key = md5(uniqid($this->id, true));
+            $settings->verified_email = 0;
+            $settings->save();
+            $stats = new UserStats;
+            $stats->userId = $this->id;
+            $stats->post_views = 0;
+            $stats->profile_views = 0;
+            $stats->total_amount = 0;
+            $stats->available_amount = 0;
+            $stats->cantake_amount = 0;
+            $stats->post_total_views = 0;
+            $stats->post_count = 0;
+            $stats->save();
+
+            AwsEmail::queueUser($this->id, 1, [
+                '__LINK__' => Yii::$app->urlManager->createAbsoluteUrl(['//u/verify', 'key' => $settings->key])
+            ]);
+        }
+        return parent::beforeSave($insert);
+    }
+
+    public function afterFind()
+    {
+        parent::afterFind();
+        $time = strtotime($this->dob);
+        $this->day = date('d', $time);
+        $this->month = (int)date('m', $time);
+        $this->year = date('Y', $time);
+        return true;
+    }
+
     /**
      * @inheritdoc
      */
     public static function findIdentity($id)
     {
         return static::findOne($id);
-//        return new static($model);
     }
 
     /**
@@ -59,7 +161,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        return static::findOne(['auth_key' => $token]);
     }
 
     /**
@@ -103,65 +205,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $timestamp + 300 >= time();
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['name', 'email', 'gender', 'month', 'day', 'year', 'country', 'username'], 'required'],
-            [['password'], 'required', 'on' => 'signup'],
-            [['email', 'username'], 'unique'],
-            [['email'], 'email'],
-            [['gender', 'plan', 'country', 'transfer_type'], 'integer'],
-            [['dob', 'created_at', 'phone', 'password', 'scId', 'bio', 'plan', 'country', 'transfer_type', 'username'], 'safe'],
-            [['name', 'email'], 'string', 'max' => 50],
-            [['username'], 'string', 'max' => 20],
-            [['username', 'email'], 'filter', 'filter' => 'trim', 'skipOnArray' => true],
-            ['username', 'match', 'pattern' => '/^[a-z0-9_-]{3,16}$/',
-                'message'=>'عنوان الصفحة يجب ان يتكون من الأحرف الانجليزية و الأرقام ويمكن اضافة  الشرطة الأفقية - فقط ، ولا يجب ان يبدأ برقم.'],
-            [['image', 'bio'], 'string', 'max' => 250],
-            [['email', 'password_hash'], 'unique', 'targetAttribute' => ['email', 'password_hash'], 'message' => 'The combination of Email, Paypal Email and Password Hash has already been taken.']
-        ];
-    }
 
-    /**
-     * @inheritdoc
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'الإسم'),
-            'email' => Yii::t('app', 'البريد الإلكتروني'),
-            'image' => Yii::t('app', 'الصورة الشخصية'),
-            'password_hash' => Yii::t('app', 'Password Hash'),
-            'password' => 'كلمة المرور',
-            'password_new' => 'كلمة المرور',
-            'password_re' => 'تأكيد كلمة المرور',
-            'gender' => Yii::t('app', 'الجنس'),
-            'dob' => Yii::t('app', 'تاريخ الميلاد'),
-            'password_old' => 'كلمة المرور الحالية',
-            'created_at' => Yii::t('app', 'Created At'),
-            'month' => 'الشهر',
-            'day' => 'اليوم',
-            'year' => 'السنة',
-            'bio' => 'نبذة مختصرة',
-            'country' => 'الدولة',
-            'phone' => 'رقم الهاتف',
-            'username' => 'عنوان الصفحة'
-        ];
-    }
-
-    public function afterFind()
-    {
-        parent::afterFind();
-        $time = strtotime($this->dob);
-        $this->day = date('d', $time);
-        $this->month = (int)date('m', $time);
-        $this->year = date('Y', $time);
-        return true;
-    }
 
     /**
      * @inheritdoc
@@ -169,6 +213,11 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getAuthKey()
+    {
+        return $this->auth_key;
     }
 
     /**
@@ -179,13 +228,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $this->getAuthKey() === $authKey;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getAuthKey()
-    {
-        return $this->auth_key;
-    }
 
     /**
      * Validates password
@@ -198,13 +240,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 
-    /**
-     * Generates "remember me" authentication key
-     */
-    public function generateAuthKey()
-    {
-        $this->auth_key = Yii::$app->security->generateRandomString();
-    }
 
     /**
      * Generates new password reset token
@@ -222,48 +257,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $this->password_reset_token = null;
     }
 
-    public function beforeSave($insert)
-    {
-        if ($insert) {
-            $this->password_hash = sha1($this->password);
 
-            $this->transfer_type = 0;
-            $this->password_reset_token = sha1(time() . rand(2, 200));
-            $this->scId = '';
-            $this->type = 1;
-            $this->plan = 0;
 
-        }
-
-        return parent::beforeSave($insert);
-    }
-
-    public function afterSave($insert, $changedAttributes)
-    {
-        if ($insert) {
-            $settings = new UserSettings;
-            $settings->userId = $this->id;
-            $settings->newsletter = 1;
-            $settings->key = md5(uniqid($this->id, true));
-            $settings->verified_email = 0;
-            $settings->save();
-            $stats = new UserStats;
-            $stats->userId = $this->id;
-            $stats->post_views = 0;
-            $stats->profile_views = 0;
-            $stats->total_amount = 0;
-            $stats->available_amount = 0;
-            $stats->cantake_amount = 0;
-            $stats->post_total_views = 0;
-            $stats->post_count = 0;
-            $stats->save();
-
-            AwsEmail::queueUser($this->id, 1, [
-                '__LINK__' => Yii::$app->urlManager->createAbsoluteUrl(['//u/verify', 'key' => $settings->key])
-            ]);
-        }
-        return parent::beforeSave($insert);
-    }
+    // relations
 
     /**
      * @return \yii\db\ActiveQuery
