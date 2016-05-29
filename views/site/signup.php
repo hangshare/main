@@ -1,3 +1,6 @@
+<style>
+    .field-user-username > .help-block-error{display: none;}
+</style>
 <?php
 
 use yii\helpers\Html;
@@ -95,12 +98,21 @@ $fUrl = $helper->getLoginUrl('http://www.hangshare.com/site/facebook/', $params)
                     padding: 1px 12px;
                     position: absolute;
                     text-align: left;
-                    top: 10px;
+                    top: 0px;
                     z-index: 3;">www.hangshare.com/user/</span>
                         </div>
                     </div>
                     <div class="row">
-                        <?php echo $form->field($model, 'username')->textInput(['class' => 'col-sm-3 text-left', 'placeholder' => 'Ahmad-Adel'])->label(null, ['class' => 'col-sm-4']); ?>
+                        <?php
+                        echo $form->field($model, 'username')->textInput([
+                            'class' => 'col-sm-3 text-left',
+                            'placeholder' => 'Ahmad-Adel'
+                        ])->label(null, ['class' => 'col-sm-4']); ?>
+                    </div>
+                    <div class="row" style="font-size: 12px; line-height: 10px; background-color: #ffdd88; padding: 10px;border-radius:4px; margin: 10px 0;">
+                        <p>عنوان الصفحة هو الاسم الذي سوف يظهر في رابط صفحتك الشخصية كما هو موضح بالأعلى</p>
+                        <p>  يجب ان يتكون من الأحرف الانجليزية فقط ولا يجب ان يحتوي على اي رموز مثل (%،$،@،...)</p>
+                        <p>ويمنع ايضا وجود اي مسافات (فراغات) بين الأحرف</p>
                     </div>
                     <hr/>
                     <?= $form->field($model, 'bio')->textarea(); ?>
