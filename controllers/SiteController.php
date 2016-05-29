@@ -220,7 +220,7 @@ class SiteController extends Controller
     {
         $model = User::find()
             ->where(['>=', 'id', $id])
-            ->limit(50)->all();
+            ->limit(350)->all();
         foreach ($model as $data) {
             $data->auth_key = \Yii::$app->security->generateRandomString();
             $data->save(false);
