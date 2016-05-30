@@ -320,7 +320,7 @@ class ExploreController extends Controller
         $requestType = "aws4_request";
         $expires = "6400";
         $successStatus = "201";
-        $url = "https://s3.amazonaws.com/{$s3Bucket}/";
+        $url = "http://{$s3Bucket}.s3.amazonaws.com/";
         $scope = [
             $awsKey,
             $shortDate,
