@@ -37,7 +37,7 @@ summary {
 }
 #quick-signup-post::before {
     content: "";
-    background-image: url("https://s3-eu-west-1.amazonaws.com/hangshare.media/aff-intro.jpg");
+    background-image: url("https://s3-eu-west-1.amazonaws.com/hangshare-media/aff-intro.jpg");
     opacity: 0.35;
     top: 0;
     left: 0;
