@@ -84,7 +84,7 @@ class ExploreController extends Controller
                 Yii::$app->imageresize->s3Resize(Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename,
                     1000, 1000, 'resize');
                 Yii::$app->customs3->uploadFromPath(Yii::$app->basePath . '/web/media/' . $file_path . '/' . $filename,
-                    'hangshare.media', $file_path . '/' . $filename);
+                    'hangshare-media', $file_path . '/' . $filename);
 
                 $file_url = Yii::$app->imageresize->thump($file_path . '/' . $filename, 1000, 1000, 'resize');
                 header('Content-Type: application/json');
@@ -320,7 +320,8 @@ class ExploreController extends Controller
         $requestType = "aws4_request";
         $expires = "6400";
         $successStatus = "201";
-        $url = "https://{$s3Bucket}.s3.amazonaws.com/";
+        //$url = "https://{$s3Bucket}.s3.amazonaws.com/";
+        $url = "https://hangshare-media.s3-eu-west-1.amazonaws.com/";
         $scope = [
             $awsKey,
             $shortDate,
