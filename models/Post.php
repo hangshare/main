@@ -149,8 +149,8 @@ class Post extends \yii\db\ActiveRecord
                 $imageLink = "{$typeid}/$vidId.jpg";
                 Yii::$app->helper->downloadFromUrl($url_json[0]->thumbnail_large, $path);
                 list($width, $height) = getimagesize($path);
-                Yii::$app->Customs3->uploadFromPath($path, 'hangshare.media', "{$typeid}/$vidId.jpg");
-                Yii::$app->imageresize->PatchResize('hangshare.media', "{$typeid}/$vidId.jpg");
+                Yii::$app->Customs3->uploadFromPath($path, 'hangshare-media', "{$typeid}/$vidId.jpg");
+                Yii::$app->imageresize->PatchResize('hangshare-media', "{$typeid}/$vidId.jpg");
             }
         } else if (preg_match('#^(?:https?://)?(?:www\.)?(?:youtu\.be/|youtube\.com(?:/embed/|/v/|/watch\?v=|/watch\?.+&v=))([\w-]{11})(?:.+)?$#x', $this->ylink)) {
             $typeid = 'youtube';
@@ -159,8 +159,8 @@ class Post extends \yii\db\ActiveRecord
             $path = Yii::$app->basePath . "/web/media/{$typeid}/$vidId.jpg";
             Yii::$app->helper->downloadFromUrl("http://img.youtube.com/vi/{$vidId}/0.jpg", $path);
             list($width, $height) = getimagesize($path);
-            Yii::$app->customs3->uploadFromPath($path, 'hangshare.media', "{$typeid}/$vidId.jpg");
-            Yii::$app->imageresize->PatchResize('hangshare.media', "{$typeid}/$vidId.jpg");
+            Yii::$app->customs3->uploadFromPath($path, 'hangshare-media', "{$typeid}/$vidId.jpg");
+            Yii::$app->imageresize->PatchResize('hangshare-media', "{$typeid}/$vidId.jpg");
         }
         if (isset($typeid)) {
             $this->cover = json_encode([
