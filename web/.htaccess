@@ -42,8 +42,8 @@ RewriteRule .* https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 #RewriteCond %{HTTP_HOST} !^www\.
 #RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
 #Add Trailing Slash at the end
-RewriteCond %{REQUEST_URI}  !\.(php|html?|jpg|JPG|gif|GIF|css|js|png|PNG|woff2|ico|ICO|ttf|TTF|xml|XML|JPEG|jpeg|bmp|BMP)$
-RewriteRule ^(.*)([^/])$ https://www.%{HTTP_HOST}/$1$2/ [L,R=301]
+#RewriteCond %{REQUEST_URI}  !\.(php|html?|jpg|JPG|gif|GIF|css|js|png|PNG|woff2|ico|ICO|ttf|TTF|xml|XML|JPEG|jpeg|bmp|BMP)$
+#RewriteRule ^(.*)([^/])$ https://www.%{HTTP_HOST}/$1$2/ [L,R=301]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
