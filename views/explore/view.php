@@ -14,7 +14,7 @@ $fb = new Facebook\Facebook([
 ]);
 $helper = $fb->getRedirectLoginHelper();
 $params = ['scope' => 'email,user_about_me'];
-$fUrl = $helper->getLoginUrl('http://www.hangshare.com/site/facebook/', $params);
+$fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params);
 ?>
 
 
