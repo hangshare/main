@@ -30,7 +30,6 @@
 AddDefaultCharset UTF-8
 RewriteEngine on
 
-RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://www.hangshare.com/$1 [R=301,L]
 RewriteCond %{http_host} ^hangshare.com [NC]
