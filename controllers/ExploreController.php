@@ -308,7 +308,7 @@ class ExploreController extends Controller
 
     public function actionS3crd()
     {
-        $s3Bucket = 'hangshare.media';
+        $s3Bucket = 'hangshare-media';
         $region = 'eu-west-1';
         $acl = 'public-read';
         $awsKey = 'AKIAIXXCGXOS77W753RQ';
@@ -320,7 +320,7 @@ class ExploreController extends Controller
         $requestType = "aws4_request";
         $expires = "6400";
         $successStatus = "201";
-        $url = "http://{$s3Bucket}.s3.amazonaws.com/";
+        $url = "https://{$s3Bucket}.s3.amazonaws.com/";
         $scope = [
             $awsKey,
             $shortDate,
