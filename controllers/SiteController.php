@@ -240,7 +240,7 @@ class SiteController extends Controller
             if (!empty($data->cover)) {
                 try {
                     $json = json_decode($data->cover);
-                    Yii::$app->imageresize->PatchResize('hangshare.media', $json->image, 'post');
+                    Yii::$app->imageresize->PatchResize('hangshare-media', $json->image, 'post');
                 } catch (\Exception $e) {
                     echo $e->getMessage();
                 }
@@ -259,7 +259,7 @@ class SiteController extends Controller
         foreach ($model as $data) {
             if (!empty($data->image)) {
                 try {
-                    Yii::$app->imageresize->PatchResize('hangshare.media', $data->image, 'user');
+                    Yii::$app->imageresize->PatchResize('hangshare-media', $data->image, 'user');
                 } catch (\Exception $e) {
                     echo $e->getMessage();
                 }
@@ -357,8 +357,8 @@ class SiteController extends Controller
                 $imageFile = Yii::$app->basePath . '/media/' . $model->image;
                 @file_put_contents($imageFile, $imagecontent);
 
-                Yii::$app->customs3->uploadFromPath($imageFile, 'hangshare.media', 'fa/' . $model->image);
-                Yii::$app->imageresize->PatchResize('hangshare.media', 'fa/' . $model->image, 'user');
+                Yii::$app->customs3->uploadFromPath($imageFile, 'hangshare-media', 'fa/' . $model->image);
+                Yii::$app->imageresize->PatchResize('hangshare-media', 'fa/' . $model->image, 'user');
 
                 Yii::$app->getSession()->setFlash('success', [
                     'message' => '، يرجى منك اكمال تعبئة المعلومات في الأسفل لكي نستطيع تحويل لك النقود في المستقبل. <strong>تمت عملية التسجيل بنجاح</strong>',
