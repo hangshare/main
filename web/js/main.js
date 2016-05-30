@@ -169,7 +169,7 @@ $(function () {
                     crossDomain: true,
                     contentType: false,
                     processData: false,
-                    dataType: "jsonp",
+                    dataType: 'XML',
                     success: function (response, status, xml) {
                         var Bucket = xml.responseXML.getElementsByTagName("PostResponse")[0].childNodes[1].firstChild.nodeValue;
                         var Key = xml.responseXML.getElementsByTagName("PostResponse")[0].childNodes[2].firstChild.nodeValue;
