@@ -8,7 +8,7 @@ use yii\helpers\Url;
 $this->registerLinkTag(['rel' => 'canonical', 'href' => Url::current(['src' => null], true)]);
 $this->registerLinkTag(['rel' => 'alternate', 'hreflang' => 'ar', 'href' => Url::current(['src' => null], true)]);
 NavBar::begin([
-    'brandLabel' => '<img src="https://hangshare.media.s3.amazonaws.com/hangshare-logo.png" width="135" />',
+    'brandLabel' => '<img src="https://s3-eu-west-1.amazonaws.com/hangshare.media/hangshare-logo.png" width="135" />',
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
         'class' => 'navbar-inverse',
@@ -84,7 +84,7 @@ if (empty($this->title)) {
     <div class="scroll-header">
         <div class="pull-left">
             <a href="/" class="navbar-brand"><img width="135"
-                                                  src="https://hangshare.media.s3.amazonaws.com/hangshare-logo.png"></a>
+                                                  src="https://s3-eu-west-1.amazonaws.com/hangshare.media/hangshare-logo.png"></a>
 
             <h3><?= $this->title ?></h3>
         </div>
