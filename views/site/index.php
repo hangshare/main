@@ -36,7 +36,7 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
             </aside>
         </h1>
         <div class="col-md-4 col-md-offset-4 m-t-25 m-b-20">
-            <img width="100" class="pull-left" src="http://hangshare.media.s3.amazonaws.com/paypal_verified.png"/>
+            <img width="100" class="pull-left" src="https://hangshare.media.s3.amazonaws.com/paypal_verified.png"/>
 
             <h3 class="header-index" style="line-height: 31px;margin-right: 107px;margin-top: 4px;">موقع معتمد لدى
                 PayPal</h3>
