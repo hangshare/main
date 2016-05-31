@@ -96,7 +96,7 @@ class SiteController extends Controller
         $root_attr_text = $sitemap->createTextNode('http://www.sitemaps.org/schemas/sitemap/0.9');
         $root_attr->appendChild($root_attr_text);
         foreach ($posts as $post) {
-            $link = "http://www.hangshare.com/{$post['urlTitle']}/";
+            $link = "https://www.hangshare.com/{$post['urlTitle']}/";
             $url = $sitemap->createElement('url');
             $root->appendChild($url);
             $loc = $sitemap->createElement("loc");
@@ -115,7 +115,7 @@ class SiteController extends Controller
         $users = Yii::$app->db->createCommand("SELECT t.id, t.username, t.created_at, t.name FROM user t WHERE 1 ORDER BY t.id DESC LIMIT 10000;")->queryAll();
         foreach ($users as $user) {
             $username = empty($user['username']) ? $user['id'] : $user['username'];
-            $link = "http://www.hangshare.com/user/{$username}/";
+            $link = "https://www.hangshare.com/user/{$username}/";
             $url = $sitemap->createElement('url');
             $root->appendChild($url);
 
