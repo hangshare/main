@@ -226,7 +226,7 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                     </script>
                 </div>
                 <div>
-                    <a onclick="ga('send',{hitType: 'event',eventCategory: 'Ads',eventAction:'Ads',eventLabel: 'postId : ' . <?= $model->id; ?> });"
+                    <a onclick="ga('send',{hitType: 'event',eventCategory: 'Ads',eventAction:'Ads',eventLabel: 'postId : <?= $model->id; ?>'});"
                        href="<?= Yii::$app->urlManager->createUrl(['//تواصل-معنا/']); ?>"><img
                             src="https://s3.amazonaws.com/hangshare.static/assets/ads-arabic.jpg" alt="أضف اعلانك عنا"/></a>
                 </div>
