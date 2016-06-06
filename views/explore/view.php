@@ -225,7 +225,7 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                             (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
                     </div>
-                    <div class="m-t-25">
+                    <div>
                         <a href="<?= Yii::$app->urlManager->createUrl(['//تواصل-معنا/']); ?>"><img src="https://s3.amazonaws.com/hangshare.static/assets/ads-arabic.jpg" alt="أضف اعلانك عنا" /></a>
                     </div>
                 </div>
