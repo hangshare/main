@@ -300,6 +300,16 @@ $(function () {
         $('#' + Id + '_form').show();
     });
 
+    if($('#slide-signup').length > 0){
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > 100) {
+                $("#slide-signup").css({'bottom':'0px'});
+            } else {
+                $("#slide-signup").css({'bottom':'-300px'});
+            }
+        });
+    }
+
 
     if ($('article').length > 0) {
         var Dat = $('article').data();
@@ -416,7 +426,7 @@ $(function () {
                     .css({
                         position: mainobj.cssfixedsupport ? 'fixed' : 'absolute',
                         bottom: mainobj.controlattrs.offsety,
-                        right: mainobj.controlattrs.offsetx,
+                        left: mainobj.controlattrs.offsetx,
                         opacity: 0,
                         cursor: 'pointer'
                     })
