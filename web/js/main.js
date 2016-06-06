@@ -300,6 +300,17 @@ $(function () {
         $('#' + Id + '_form').show();
     });
 
+    if($('#scroll-fixed-top').length > 0){
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > 150) {
+                $("#scroll-fixed-top").css({'top':'60px'});
+            } else {
+                $("#scroll-fixed-top").css({'top':'auto'});
+            }
+        });
+    }
+
+
     if($('#slide-signup').length > 0){
         $(window).scroll(function() {
             if ($(window).scrollTop() > 100) {
