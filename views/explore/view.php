@@ -214,10 +214,7 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
             </div>
             <?php if (!Yii::$app->helper->isMobile()): ?>
                 <div class="col-md-3" style="left: 0;position: fixed;">
-                    <div class="m-t-25">
-                        <a href="<?= Yii::$app->urlManager->createUrl(['//تواصل-معنا/']); ?>"><img src="https://s3.amazonaws.com/hangshare.static/assets/ads-arabic.jpg" alt="أضف اعلانك عنا" /></a>
-                    </div>
-                    <div class="m-t-25">
+                    <div>
                         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                         <!-- MPU - Post page right Upper  -->
                         <ins class="adsbygoogle"
@@ -227,6 +224,9 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                         <script>
                             (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
+                    </div>
+                    <div class="m-t-25">
+                        <a href="<?= Yii::$app->urlManager->createUrl(['//تواصل-معنا/']); ?>"><img src="https://s3.amazonaws.com/hangshare.static/assets/ads-arabic.jpg" alt="أضف اعلانك عنا" /></a>
                     </div>
                 </div>
             <?php endif; ?>
