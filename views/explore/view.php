@@ -16,8 +16,6 @@ $helper = $fb->getRedirectLoginHelper();
 $params = ['scope' => 'email,user_about_me'];
 $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params);
 ?>
-
-
 <?php if (Yii::$app->helper->isMobile()) : ?>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <!-- responsive - new mobile upper post -->
@@ -213,47 +211,12 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                             </div>
                         </div>
                 </article>
-                <!--                <hr/>-->
-                <!--                <div class="row">-->
-                <!--                    <div class="col-md-12">-->
-                <!--                        <h3>التعليقات على موقع الفيسبوك</h3>-->
-
-                <!--                        <div id="fb-root"></div>-->
-                <!--                        <script>(function (d, s, id) {-->
-                <!--                                var js, fjs = d.getElementsByTagName(s)[0];-->
-                <!--                                if (d.getElementById(id))-->
-                <!--                                    return;-->
-                <!--                                js = d.createElement(s);-->
-                <!--                                js.id = id;-->
-                <!--                                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1024611190883720";-->
-                <!--                                fjs.parentNode.insertBefore(js, fjs);-->
-                <!--                            }(document, 'script', 'facebook-jssdk'));</script>-->
-                <!--                        <div class="fb-comments" data-href="-->
-                <?php //echo $model->url ?><!--" data-numposts="5"-->
-                <!--                             data-width="100%"></div>-->
-                <!--                    </div>-->
-                <!--                </div>-->
             </div>
             <?php if (!Yii::$app->helper->isMobile()): ?>
                 <div class="col-md-3" style="left: 0;position: fixed;">
-                    <?php if (Yii::$app->user->isGuest) : ?>
-                        <div style="margin-bottom: 10px;">
-                            <div class="white text-center">
-                                <div class="col-md-12">
-                                    <h4 class="text-center">انشر مقالتك واحصل على المال مقابل كل مشاهدة</h4>
-                                    <a href="<?= $fUrl; ?>"
-                                       class="btn btn-primary btn-block"
-                                       style="background-color: #3b5998;height: 30px;margin-top: 30px; padding: 4px 10px 10px;">
-                                        <i class="fa fa-fw fa-facebook pull-left" style="  border-left: 1px solid;
-                               font-size: 15px;
-                               margin-top: 3px;
-                               padding-left: 10px;"></i>
-                                        <span class="pull-left"> سجل باستخدام الفيسبوك</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endif; ?>
+                    <div class="m-t-25">
+                        <a href="<?= Yii::$app->urlManager->createUrl(['//تواصل-معنا/']); ?>"><img src="https://s3.amazonaws.com/hangshare.static/assets/ads-arabic.jpg" alt="أضف اعلانك عنا" /></a>
+                    </div>
                     <div class="m-t-25">
                         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                         <!-- MPU - Post page right Upper  -->
@@ -303,3 +266,25 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
         <?php
     endif;
 endif; ?>
+
+
+<?php if (Yii::$app->user->isGuest) : ?>
+    <div id="slide-signup" style="position: fixed; bottom:-250px; transition: bottom 2s; width : 300px; z-index: 1000; border: 3px solid #3d8eb9; border-bottom: 0; right: 20px;">
+        <div class="white text-center" style="height: 200px;">
+            <div class="col-md-12">
+                <a href="javascript:void(0);" onclick="$(this).parent().parent().parent().hide();" rel="nofollow" style="color: #ccc; position: relative; top: -10px"><i class="glyphicon glyphicon-remove-sign"></i></a>
+                <h4 class="text-center margin-0">انشر مواضيع واحصل على ربح فوري</h4>
+                <a href="<?= $fUrl; ?>"
+                   class="btn btn-primary btn-block"
+                   style="background-color: #3b5998;height: 30px;margin-top: 30px; padding: 4px 10px 10px;">
+                    <i class="fa fa-fw fa-facebook pull-left" style="  border-left: 1px solid;
+                               font-size: 15px;
+                               margin-top: 3px;
+                               padding-left: 10px;"></i>
+                    <span class="pull-left">سجل الآن باستخدام الفيسبوك</span>
+                </a>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+
