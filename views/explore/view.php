@@ -213,7 +213,7 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                 </article>
             </div>
             <?php if (!Yii::$app->helper->isMobile()): ?>
-                <div class="col-md-3" style="left: 0;position: fixed;">
+                <div id="scroll-fixed-top" class="col-md-3" style="left: 0;position: fixed; transition: top 3s;">
                     <div>
                         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                         <!-- MPU - Post page right Upper  -->
