@@ -305,3 +305,8 @@ endif; ?>
     </div>
 <?php endif; ?>
 
+
+<script type="text/javascript">
+    mixpanel.track("<?= $model->title ?>");
+</script>
+
