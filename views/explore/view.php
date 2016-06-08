@@ -214,6 +214,18 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
         </div>
         <?php if (!Yii::$app->helper->isMobile()): ?>
             <div id="scroll-fixed-top" class="col-md-3" style="left: 0;position: fixed; transition: top 3s;">
+
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : 'c2d278aae73e5894294b35ae1da5f2db',
+                        'format' : 'iframe',
+                        'height' : 250,
+                        'width' : 300,
+                        'params' : {}
+                    };
+                    document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + '://www.bnhtml.com/invoke.js"></scr' + 'ipt>');
+                </script>
+
                 <div>
                     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <!-- MPU - Post page right Upper  -->
