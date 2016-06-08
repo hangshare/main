@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+
 ?>
 <?php if (Yii::$app->helper->isMobile()): ?>
     <div class="footads">
@@ -46,8 +47,10 @@ use yii\helpers\Html;
     </footer>
 <?php endif; ?>
 <?php $this->endBody() ?>
-<script type="text/javascript">
-    mixpanel.track("Test");
-</script>
+<?php if (!Yii::$app->user->isGuest): ?>
+    <script type="text/javascript">
+        mixpanel.identify("<?= Yii::$app->user->identity->id ?>");
+    </script>
+<?php endif; ?>
 </body>
 </html>
