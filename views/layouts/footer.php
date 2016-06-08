@@ -46,5 +46,8 @@ use yii\helpers\Html;
     </footer>
 <?php endif; ?>
 <?php $this->endBody() ?>
+<script type="text/javascript">
+    mixpanel.track("Test");
+</script>
 </body>
 </html>
