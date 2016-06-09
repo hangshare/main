@@ -52,7 +52,7 @@ use yii\helpers\Html;
         mixpanel.identify("<?= Yii::$app->user->identity->id ?>");
         mixpanel.people.set({
             "$email": "<?= Yii::$app->user->identity->email ?>",
-            "$created": "<?= date('Y-m-d h:i:s',Yii::$app->user->identity->created_at) ?>",
+            "$created": "<?= Yii::$app->user->identity->created_at ?>",
             "$last_login": new Date(),
             "gender": "<?= Yii::$app->user->identity->gender == 1 ? 'Male' : 'Female' ?>"
         });
