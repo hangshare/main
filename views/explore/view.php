@@ -213,7 +213,8 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
             </article>
         </div>
         <?php if (!Yii::$app->helper->isMobile()): ?>
-            <div id="scroll-fixed-top" class="col-md-3" style="left: 0;position: fixed; transition: top 3s;">
+<!--            id="scroll-fixed-top" style="left: 0;position: fixed; transition: top 3s;" -->
+            <div  class="col-md-3">
                 <script type="text/javascript"
                         src="http://www.adnetworkperformance.com/ad/display.php?idsite=595922&ban=176321&option=js&sub1=&sub2="></script>
                 <div>
