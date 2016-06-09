@@ -213,9 +213,10 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
             </article>
         </div>
         <?php if (!Yii::$app->helper->isMobile()): ?>
-<!--            id="scroll-fixed-top" style="left: 0;position: fixed; transition: top 3s;" -->
-            <div  class="col-md-3">
-                <script data-cfasync="false" type="text/javascript" src="https://www.adnetworkperformance.com/script/java.php?option=rotateur&r=1288849"></script>
+            <!--            id="scroll-fixed-top" style="left: 0;position: fixed; transition: top 3s;" -->
+            <div class="col-md-3">
+                <script data-cfasync="false" type="text/javascript"
+                        src="https://www.adnetworkperformance.com/script/java.php?option=rotateur&r=1288849"></script>
                 <div>
                     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <!-- MPU - Post page right Upper  -->
@@ -298,5 +299,7 @@ endif; ?>
 
 <script type="text/javascript">
     mixpanel.track("<?= $model->title ?>");
+    mixpanel.identify("<?= $model->userId ?>");
+    mixpanel.people.track_charge(.0005);
 </script>
 
