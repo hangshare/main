@@ -215,8 +215,7 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
         <?php if (!Yii::$app->helper->isMobile()): ?>
 <!--            id="scroll-fixed-top" style="left: 0;position: fixed; transition: top 3s;" -->
             <div  class="col-md-3">
-                <script type="text/javascript"
-                        src="http://www.adnetworkperformance.com/ad/display.php?idsite=595922&ban=176321&option=js&sub1=&sub2="></script>
+                <script data-cfasync="false" type="text/javascript" src="https://www.adnetworkperformance.com/script/java.php?option=rotateur&r=1288849"></script>
                 <div>
                     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <!-- MPU - Post page right Upper  -->
