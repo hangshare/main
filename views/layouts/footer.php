@@ -56,6 +56,7 @@ use yii\helpers\Html;
             "$last_login": new Date(),
             "gender": "<?= Yii::$app->user->identity->gender == 1 ? 'Male' : 'Female' ?>"
         });
+        mixpanel.people.track_charge(29.99);
     </script>
 <?php endif; ?>
 </body>
