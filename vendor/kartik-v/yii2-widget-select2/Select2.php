@@ -83,7 +83,7 @@ class Select2 extends InputWidget
     /**
      * @var bool whether to show the toggle all button for selection all options in a multiple select.
      */
-    public $showToggleAll = true;
+    public $showToggleAll = false;
 
     /**
      * @var array the toggle all button settings for selecting/unselecting all the options. This is applicable only for
