@@ -18,6 +18,7 @@ class Hitcounter extends Component
         1 => 0.0015
     ];
 
+
     private static $ip_info = '';
     private static $IP_IGNORE_LIST = array(
         '127.0.0.1'
