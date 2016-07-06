@@ -173,7 +173,7 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
                         </ul>
                     </div>
                     <div style="position: relative">
-                        <div id="fixad" class="row m-t-25" rel="5100">
+                        <div class="row m-t-25">
                             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                             <!-- faq ad -->
                             <ins class="adsbygoogle"
