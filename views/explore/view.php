@@ -215,9 +215,6 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
         <?php if (!Yii::$app->helper->isMobile()): ?>
             <!--            id="scroll-fixed-top" style="left: 0;position: fixed; transition: top 3s;" -->
             <div class="col-md-3">
-                <script data-cfasync="false" type="text/javascript"
-                        src="https://www.adnetworkperformance.com/script/java.php?option=rotateur&r=1288849"></script>
-                <div>
                     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <!-- MPU - Post page right Upper  -->
                     <ins class="adsbygoogle"
@@ -227,7 +224,6 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                     <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
-                </div>
                 <div>
                     <a onclick="ga('send',{hitType: 'event',eventCategory: 'Ads',eventAction:'Ads',eventLabel: 'postId : <?= $model->id; ?>'});"
                        href="<?= Yii::$app->urlManager->createUrl(['//تواصل-معنا/']); ?>"><img
