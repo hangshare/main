@@ -35,8 +35,8 @@ RewriteBase /
 # RewriteCond %{HTTP_HOST} !^www\.
 # RewriteRule ^(.*)$ https://www.hangshare.com/$1 [R=301,L,NE]
 
-RewriteCond %{REQUEST_URI}  !\.(php|html?|jpg|JPG|gif|GIF|css|js|png|PNG|woff2|ico|ICO|ttf|TTF|xml|XML|JPEG|jpeg|bmp|BMP|TXT|txt)$
-RewriteRule ^(.*)([^/])$ https://www.%{HTTP_HOST}/$1$2/ [L,R=301]
+# RewriteCond %{REQUEST_URI}  !\.(php|html?|jpg|JPG|gif|GIF|css|js|png|PNG|woff2|ico|ICO|ttf|TTF|xml|XML|JPEG|jpeg|bmp|BMP|TXT|txt)$
+# RewriteRule ^(.*)([^/])$ https://www.%{HTTP_HOST}/$1$2/ [L,R=301]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
