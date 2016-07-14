@@ -29,6 +29,16 @@
 AddDefaultCharset UTF-8
 RewriteEngine on
 RewriteBase /
+
+# Ensure www.
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule !/elbcheck.html https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Ensure https
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteCond %{HTTPS} off
+RewriteRule !/elbcheck.html https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
 # RewriteCond %{HTTP:X-Forwarded-Proto} !https
 # RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
 
