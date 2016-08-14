@@ -1,8 +1,49 @@
 $(function () {
+
     if ((location.hash == "#_=_" || location.href.slice(-1) == "#_=_")) {
         removeHash();
     }
-    $('[data-toggle="tooltip"]').tooltip();
+    //$('[data-toggle="tooltip"]').tooltip();
+
+    $(".menu-category > li").on({
+        mouseenter: function () {
+            $(this).find('.supdropdown').addClass('submenu-active');
+        },
+        mouseleave: function () {
+            $(this).find('.supdropdown').removeClass('submenu-active');
+        }
+    });
+
+    var delete_cookie = function (name) {
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    };
+
+
+    $('.showhide').on('click', function (e) {
+        var da = $(this).data().element;
+
+        $(".mainmenu").each(function (index, value) {
+            console.log(da);
+            console.log($(value).data().element);
+            if($(value).data().element != da){
+                $("#"+$(value).data().element).hide();
+            }
+        });
+        $("#"+da).toggle();
+    });
+
+    $('.changeLang').on('click', function (e) {
+        var name = "userlanghangshare";
+        var pathBits = location.pathname.split('/');
+        var pathCurrent = ' path=';
+        document.cookie = name + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT;';
+        for (var i = 0; i < pathBits.length; i++) {
+            pathCurrent += ((pathCurrent.substr(-1) != '/') ? '/' : '') + pathBits[i];
+            document.cookie = name + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT;' + pathCurrent + ';';
+        }
+    });
+
+
     function removeHash() {
         var scrollV, scrollH, loc = window.location;
         if ('replaceState' in history) {
@@ -41,16 +82,19 @@ $(function () {
         }
     });
     if ($.isFunction($.fn.editable)) {
-        $('.froala-edit').editable({
+        var options = {
             inlineMode: false,
             toolbarFixed: true,
             mediaManager: false,
-            language: 'ar',
-            direction: 'rtl',
+            language: $.Yii.getLang(),
             imageUploadURL: '/explore/upload/',
             minHeight: 200,
             maxHeight: 800
-        });
+        };
+        if ($.Yii.getLang() === 'ar')
+            options['direction'] = 'rtl';
+        console.log(options);
+        $('.froala-edit').editable(options);
     }
     input = document.getElementById("post-cover_file");
     if (input) {
@@ -110,7 +154,7 @@ $(function () {
 
     function randomFolderName() {
         var text = "";
-        var possible = "1234ABCDEFGHIJKLMNOPQRSTUVWXY567890Zabcdefghijklmnopqrstuvwxyz0123456789-";
+        var possible = "1234ABCDEFGHIJKLMNOPQRSTUVWXY567890Zabcdefghijklmnopqrstuvwxyz0123456789";
 
         for (var i = 0; i < 6; i++)
             text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -135,6 +179,8 @@ $(function () {
                 credData = data;
             }
         });
+
+
         var _URL = window.URL;
         $('#files3').change(function () {
             var file, img, widthCover, heightCover;
@@ -179,7 +225,7 @@ $(function () {
                                 url: "/explore/resize/",
                                 method: "POST",
                                 dataType: "json",
-                                data: {bucket: Bucket, key: Key, type : Type},
+                                data: {bucket: Bucket, key: Key, type: Type},
                                 complete: function () {
                                     $("#prev").hide();
                                 }
@@ -228,7 +274,8 @@ $(function () {
 
         } else {
             $(this).prop('disabled', true);
-            $('body').append("<div class='black_overlay'></div><div class='white_content'>الرجاء الإنتظار</div>");
+            var message = $.Yii.t('Please Wait');
+            $('body').append("<div class='black_overlay'></div><div class='white_content'>" + message + "</div>");
         }
     });
 
@@ -237,8 +284,9 @@ $(function () {
         var old = $('#user-password_old').val();
         var password = $('#user-password_new').val();
         var confirm = $('#user-password_re').val();
+        var message_repated_pass = $.Yii.t("Confirm password is identical to the password");
         if (confirm !== password) {
-            alert('تأكيد كلمة السر غير مطابق لكلمة السر.');
+            alert(message_repated_pass);
             return;
         }
         $.ajax({
@@ -248,9 +296,9 @@ $(function () {
             data: {password: password, old: old},
             success: function (result) {
                 if (result.status === false) {
-                    alert('كلمة السر الحالية غير صحيحة.');
+                    alert($.Yii.t("The current password is incorrect"));
                 } else {
-                    alert('تم تغيير كلمة المرور بنجاح.');
+                    alert($.Yii.t("Password has been changed successfully"));
                     $(".modal").modal('hide');
                 }
             }
@@ -266,7 +314,7 @@ $(function () {
         }
 
         if ($(this).hasClass('js-share-twitter')) {
-            popup_url = 'http://twitter.com/intent/tweet?text=' + title + ' @hangshare ' + url;
+            popup_url = 'http://twitter.com/intent/tweet?text=' + title + ' @hang_share ' + url;
         } else if ($(this).hasClass('js-share-fasebook')) {
 //            popup_url = 'https://www.facebook.com/dialog/feed?app_id=1024611190883720&display=popup&link=' + url + '&redirect_uri=http://www.hangshare.com/';
             popup_url = 'https://www.facebook.com/sharer/sharer.php?u=' + url;
@@ -279,7 +327,7 @@ $(function () {
         popUp.focus();
     });
 
-    $('#sharenew').modal('show');
+    //$('#sharenew').modal('show');
 
     function random() {
         var random_number = Math.random();
@@ -288,7 +336,6 @@ $(function () {
 
     $(document).on('click', '.showclick', function (e) {
         e.preventDefault();
-        console.log('asd');
         var Id = $(this).attr('id');
         $("[id$='_form']").hide();
 
@@ -300,23 +347,23 @@ $(function () {
         $('#' + Id + '_form').show();
     });
 
-    if($('#scroll-fixed-top').length > 0){
-        $(window).scroll(function() {
+    if ($('#scroll-fixed-top').length > 0) {
+        $(window).scroll(function () {
             if ($(window).scrollTop() > 150) {
-                $("#scroll-fixed-top").css({'top':'60px'});
+                $("#scroll-fixed-top").css({'top': '60px'});
             } else {
-                $("#scroll-fixed-top").css({'top':'auto'});
+                $("#scroll-fixed-top").css({'top': 'auto'});
             }
         });
     }
 
 
-    if($('#slide-signup').length > 0){
-        $(window).scroll(function() {
+    if ($('#slide-signup').length > 0) {
+        $(window).scroll(function () {
             if ($(window).scrollTop() > 100) {
-                $("#slide-signup").css({'bottom':'0px'});
+                $("#slide-signup").css({'bottom': '0px'});
             } else {
-                $("#slide-signup").css({'bottom':'-300px'});
+                $("#slide-signup").css({'bottom': '-300px'});
             }
         });
     }
@@ -328,6 +375,18 @@ $(function () {
             method: "POST",
             url: "/explore/countcheck/?qt=" + random(),
             data: Dat
+        });
+    }
+
+    if ($('#hot-posts').length > 0) {
+        var Dat = $('article').data();
+        $.ajax({
+            method: "POST",
+            url: "/explore/hot/?qt=" + random(),
+            data: Dat,
+            success: function (data, textStatus, jqXHR) {
+                $('#hot-posts').append(data);
+            }
         });
     }
 
@@ -460,7 +519,5 @@ $(function () {
         }
     };
     scrolltotop.init();
-
-
 });
 
