@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\base\Exception;
 use yii\db\Expression;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "post".
@@ -24,7 +25,7 @@ use yii\db\Expression;
 class Post extends \yii\db\ActiveRecord
 {
 
-    public $body, $tags, $cover_file, $q, $keywords, $ylink, $vidId, $vidType, $url;
+    public $body, $tags, $cover_file, $q, $keywords, $categories, $ylink, $vidId, $vidType, $url;
 
     /**
      * @inheritdoc
@@ -34,18 +35,35 @@ class Post extends \yii\db\ActiveRecord
         return 'post';
     }
 
-    public static function featured($limit = 8)
+    public static function related($catId, $limit = 8)
     {
-
-        $featured = Yii::$app->cache->get('featured-posts');
-        if ($featured === false) {
-            $featured = Post::find()
-                ->where("type=0 AND cover <> '' AND featured = 1")
+        $related = Yii::$app->cache->get('featured-posts-' . $catId . Yii::$app->language);
+        if ($related === false) {
+            $related = Post::find()
+                ->joinWith(['postCategories'])
+                ->where("post.deleted=0 AND post.cover <> '' AND post.lang = '" . Yii::$app->language . "'")
+                ->andWhere(['=', 'post_category.categoryId', $catId])
                 ->select('id,cover,title, urlTitle')
                 ->orderBy(new Expression('rand()'))
                 ->limit($limit)
                 ->all();
-            Yii::$app->cache->set('featured-posts', $featured, 300);
+            Yii::$app->cache->set('featured-posts-' . $catId . Yii::$app->language, $related, 300);
+        }
+        return $related;
+    }
+
+    public static function featured($limit = 8)
+    {
+        $featured = Yii::$app->cache->get('featured-posts-' . Yii::$app->language);
+        if ($featured === false) {
+            $featured = Post::find()
+                ->where("featured = 1 AND lang = '" . Yii::$app->language . "'")
+                ->select('id,cover,title, urlTitle')
+                ->orderBy(new Expression('rand()'))
+                ->limit($limit)
+                ->all();
+
+            Yii::$app->cache->set('featured-posts-' . Yii::$app->language, $featured, 300);
         }
         return $featured;
     }
@@ -55,7 +73,7 @@ class Post extends \yii\db\ActiveRecord
         $most = Yii::$app->cache->get('mostViewed');
         if ($most === false) {
             $most = Post::find()
-                ->where("cover <> ''")
+                ->where("cover <> ''  AND lang = '" . Yii::$app->language . "'")
                 ->joinWith(['postStats'])
                 ->select('id,cover,title, urlTitle')
                 ->orderBy('post_stats.views desc')
@@ -72,7 +90,7 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'tags', 'body'], 'required'],
+            [['title', 'body', 'categories'], 'required'],
             [['urlTitle'], 'unique'],
             [['cover_file', 'ylink'], 'either'],
             ['ylink', 'match', 'pattern' => '/^https?:\/\/(?:.*?)\.?(youtube|vimeo)\.com\/(watch\?[^#]*v=([\w-]+)|(\d+)).*$/'],
@@ -84,6 +102,7 @@ class Post extends \yii\db\ActiveRecord
             [['urlTitle'], 'string', 'max' => 200],
             [['title'], 'string', 'max' => 100],
             [['body'], 'string', 'min' => 100],
+            [['lang'], 'string', 'max' => 2],
         ];
     }
 
@@ -102,15 +121,15 @@ class Post extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'userId' => Yii::t('app', 'User ID'),
-            'cover_file' => 'صورة الغلاف',
-            'title' => 'عنوان الموضوع',
-            'body' => 'الموضوع',
-            'created_at' => Yii::t('app', 'Created At'),
-            'q' => 'البحث',
-            'tags' => 'التصنيفات الرئيسية',
-            'ylink' => 'رابط فيديو من يوتيوب او موقع فيميو ( ملاحظة / سوف يتم أخذ صورة الغلاف من الفيديو وارفاقها وسوف يتم وضع الفيديو في بداية المقالة )',
+            'id' => Yii::t('app', 'Post.id'),
+            'userId' => Yii::t('app', 'Post.user'),
+            'cover_file' => Yii::t('app', 'Post.coverFile'),
+            'title' => Yii::t('app', 'Post.title'),
+            'body' => Yii::t('app', 'Post.body'),
+            'created_at' => Yii::t('app', 'Post.created_at'),
+            'q' => Yii::t('app', 'Post.search'),
+            'tags' => Yii::t('app', 'Post.tags'),
+            'ylink' => Yii::t('app', 'Post.ylink'),
         ];
     }
 
@@ -128,10 +147,10 @@ class Post extends \yii\db\ActiveRecord
                 $url .= "-{$rand}";
             }
             $this->urlTitle = $url;
+            $this->lang = Yii::$app->language;
         }
         return true;
     }
-
 
     public function saveExternal()
     {
@@ -200,14 +219,13 @@ class Post extends \yii\db\ActiveRecord
                 }
             }
         }
-        $this->url = Yii::$app->urlManager->createAbsoluteUrl(["/{$this->urlTitle}"]);
+        $this->url = Url::to(["//{$this->urlTitle}"]);
         return TRUE;
     }
 
     public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
-
         if ($insert) {
             $stats = new PostStats;
             $stats->postId = $this->id;
@@ -220,26 +238,23 @@ class Post extends \yii\db\ActiveRecord
             $body = new PostBody;
             $body->postId = $this->id;
         } else {
-            if (!empty($this->tags)) {
-                Yii::$app->db->createCommand('DELETE FROM post_tag WHERE postId = ' . $this->id)->query();
-            }
             $body = PostBody::findOne(['postId' => $this->id]);
             if (!isset($body)) {
                 $body = new PostBody;
                 $body->postId = $this->id;
             }
         }
-        if ($this->type) {
-            array_push($this->tags, 2);
-        }
-        if (!empty($this->tags)) {
+
+        if (!empty($this->categories)) {
+            Yii::$app->db->createCommand('DELETE FROM post_category WHERE postId = ' . $this->id)->query();
             $insertrow = '';
-            foreach ($this->tags as $tag) {
+            foreach ($this->categories as $tag) {
                 $insertrow .= "('{$this->id}','{$tag}'),";
             }
             $insertrow = rtrim($insertrow, ",");
-            Yii::$app->db->createCommand("INSERT INTO post_tag (postId, tag) VALUES $insertrow")->query();
+            Yii::$app->db->createCommand("INSERT INTO post_category (postId, categoryId) VALUES $insertrow")->query();
         }
+
         if (!empty($this->keywords)) {
             $insertrow = '';
             foreach ($this->keywords as $keywords) {
@@ -257,10 +272,7 @@ class Post extends \yii\db\ActiveRecord
         }
 
         $body->body = $this->body;
-        if (!$body->save()) {
-            var_dump($body->getErrors());
-            die();
-        }
+        $body->save();
     }
 
     public function upload()
@@ -314,6 +326,14 @@ class Post extends \yii\db\ActiveRecord
     public function getPostTags()
     {
         return $this->hasMany(PostTag::className(), ['postId' => 'id'])->limit(30);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPostCategories()
+    {
+        return $this->hasMany(PostCategory::className(), ['postId' => 'id'])->limit(10);
     }
 
 }
