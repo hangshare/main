@@ -19,7 +19,8 @@ class AwsEmail extends Component
 
     public static function queueUser($userId, $type, $params = [])
     {
-        $email = EmailTemplate::find()->where("id = {$type}")->one();
+        $lang = Yii::$app->language;
+        $email = EmailTemplate::find()->where("code = {$type} AND lang = {$lang}")->one();
         if ($userId != 0) {
             $user = User::find()->where("id = {$userId}")->one();
             $name = $user->name;
@@ -38,7 +39,7 @@ class AwsEmail extends Component
             $userEmail->save();
             $params['__user_name__ '] = $name;
             $body = strtr($email->body, $params);
-            $body .= "<img src='http://www.hangshare.com/site/email/?id={$key}' width='1' height='1' />";
+            $body .= "<img src='https://www.hangshare.com/site/email/{$key}/' width='1' height='1' />";
             self::SendMail($email_to, $email->subject, $body);
         }
     }
