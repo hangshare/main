@@ -1,14 +1,16 @@
 <?php
 use yii\helpers\Html;
-$this->title = 'تمت عملية طلب النقود بنجاح';
+
+$this->title = Yii::t('app', 'user.success.payment');
 ?>
 <div class="container">
     <div class="white-box">
-        <h1 class="text-center">تم ارسال طلب التحويل بنحاح ، سوف نقوم بتحويل المبلغ اليكم خلال خمس أيام عمل.</h1>
+        <h1 class="text-center"><?= Yii::t('app', 'money.sent') ?></h1>
         <br>
         <br>
+
         <div class="text-center">
-            <?= Html::a('العودة الى الصفحة الرئيسية', 'http://www.hangshare.com/', ['class' => 'btn btn-default btn-lg']); ?>
+            <?= Html::a(Yii::t('app', 'back.home'), 'http://www.hangshare.com/', ['class' => 'btn btn-default btn-lg']); ?>
         </div>
     </div>
 </div>

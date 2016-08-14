@@ -4,6 +4,7 @@ use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Post */
@@ -17,83 +18,70 @@ foreach ($model->postBodies as $data) {
 <div class="container m-t-25">
     <div class="post-form col-md-9">
         <div class="white pad">
-            <h3>معلومات المقالة</h3>
+            <h3><?= Yii::t('app', 'post info') ?></h3>
             <hr/>
             <?php
             $form = ActiveForm::begin(['options' => [
                 'id' => 'add-post'
                 , 'enctype' => 'multipart/form-data']])
             ?>
-
             <div id="cover_error" style="display: none;">
                 <span class="alert alert-danger" style="display: block; text-align: center;">
-
-
-            يرجى اضافة صورة الغلاف
+            <?= Yii::t('app', 'please add cover image') ?>
             </span>
             </div>
-
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-            <label>صورة الغلاف</label>
+            <label><?= Yii::t('app', 'cover image') ?></label>
 
             <div class="row">
                 <div class="col-md-2">
                     <?php echo Html::img($thump, ['class' => 'img-responsive', 'id' => 'coveri']); ?>
-                    <input id="covercheck" type="hidden" name="covercheck" value="<?= empty($model->cover) ? '' : '0' ?>">
+                    <input id="covercheck" type="hidden" name="covercheck"
+                           value="<?= empty($model->cover) ? '' : '0' ?>">
 
-                    <div id="prev" style="background-color: rgba(0, 0, 0, 0.4);padding: 40px 38px;position: absolute;text-align: center;top: 0; display: none;">
+                    <div id="prev"
+                         style="background-color: rgba(0, 0, 0, 0.4);padding: 40px 38px;position: absolute;text-align: center;top: 0; display: none;">
                         <i class="fa fa-spin fa-spinner fa-2x" style="position: relative; top: -10px; color: #fff;"></i>
                     </div>
                     <button class="btn btn-primary btn-block" id="uploadtos3" style="border-radius: 0;">
-                        <span>اختر صورة</span>
+                        <span><?= Yii::t('app', 'Choose a picture') ?></span>
                     </button>
                 </div>
                 <div class="col-md-1">
-                    <span style="font-size: 30px;top: 22px; position: relative;">
-                        أو
-                    </span>
+                    <span style="font-size: 30px;top: 22px; position: relative;"><?= Yii::t('app', 'or') ?></span>
                 </div>
                 <div class="col-md-9">
-                    <?= $form->field($model, 'ylink')->textInput(['maxlength' => true, 'placeholder' => 'مثال: https://www.youtube.com/watch?v=K5sqorZ9x7o']) ?>
+                    <?= $form->field($model, 'ylink')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'youtube ex')]) ?>
                 </div>
             </div>
             <input id="cover_input" name="cover" type="hidden" value=""/>
             <br>
-            <?php
-            $keywords = array();
-            $tag_selected = array();
-            foreach ($model->postTags as $tags) {
-                if (isset($tags->tags)) {
-                    if ($tags->tags->type == 1) {
-                        array_push($tag_selected, $tags->tags->id);
-                    } else {
-                        array_push($keywords, $tags->tags->id);
-                    }
-                }
-            }
-            $model->tags = $tag_selected;
-            ?>
+            <?php $keywords = array(); ?>
             <?= $form->field($model, 'body')->textarea(['class' => 'froala-edit']) ?>
-            <?=
-            $form->field($model, 'tags')->checkboxList(ArrayHelper::map(
-                Tags::find()
-                    ->where('type=1')
-                    ->select('id, name')
-                    ->orderBy('id desc')
-                    ->limit(50)
-                    ->all(), 'id', 'name'))
+            <?php
+            $arr = [];
+            foreach ($model->postCategories as $cat_selected) {
+                $arr[] = $cat_selected->categoryId;
+            }
+            $model->categories = $arr;
             ?>
-
-            <label>التصنيفات الاضافية</label>
+            <?= $form->field($model, 'categories')->checkboxList(ArrayHelper::map(Category::find()
+                ->where("lang = '" . Yii::$app->language . "'")
+                ->select('id, title')
+                ->orderBy('id desc')
+                ->limit(50)
+                ->all(), 'id', 'title'))
+            ?>
+            <label><?= Yii::t('app', 'Tags') ?></label>
             <?php
             echo Select2::widget([
                 'name' => 'Post[keywords]',
                 'value' => $keywords,
                 'data' => ArrayHelper::map(Tags::find()
-                    ->where('type=0')
+                    ->where("published = 1 AND lang = '" . Yii::$app->language . "'")
                     ->orderBy('name')
                     ->all(), 'id', 'name'),
-                'options' => ['multiple' => true, 'placeholder' => 'اضف الكلمات المناسبة'],
+                'options' => ['multiple' => true, 'placeholder' => Yii::t('app', 'add tags')],
                 'pluginOptions' => [
                     'tags' => true,
                     'maximumInputLength' => 10
@@ -115,7 +103,7 @@ foreach ($model->postBodies as $data) {
                         });";
                 ?>
                 <?=
-                Html::submitButton($model->isNewRecord ? 'انشر المقالة' : 'احفظ التعديلات', [
+                Html::submitButton($model->isNewRecord ? Yii::t('app', 'Post') : Yii::t('app', 'Save'), [
                     'id' => 'main-post',
                     'class' => 'btn btn-primary pull-left',
                     'onclick' => $event
@@ -128,26 +116,21 @@ foreach ($model->postBodies as $data) {
     <div class="col-md-3 res-m-t55">
         <div class="row">
             <div class="white-box" style="border: 1px solid #51B415;">
-                <h3 style="margin-top: 10px;">ملاحظة : </h3>
+                <h3 style="margin-top: 10px;"><?= Yii::t('app', 'Note') ?> : </h3>
 
-                <p>سوف يتم مراجعة وتدقيق المقالة قبل نشرها بشكل رسمي على الموقع</p>
+                <p><?= Yii::t('app', 'Add-Post-Note-1') ?></p>
+
             </div>
         </div>
         <div class="row m-t-25">
             <div class="white-box">
-                <h3 style="margin-top: 10px;">نصائح :</h3>
-
-                <p><b>العنوان : </b> إختيار العنوان المناسب يساعد على وصول المقالة لأكبر عدد من الأشخاص المهتمين ، يرجى
-                    اختيار جملة قصيرة تتكون من 4 كلمات على الأقل و 10 كلمات كحد أقصى.</p>
-
-                <p><b>صورة الغلاف : </b> اختيار صورة اغلاف جميلة تجذب الأشخاص الى قراءة مقالتك ، يرجى اختيار صورة يقل
-                    حجمها عن 3 MB . </p>
-
-                <p><b>الموضوع: </b> يفضل ان يكون الموضوع متوسط الحجم يزيد عن عشر اسطر ، يمكنك تحميل صور او ارفاق فيديو
-                    وتنسيق النص بشكل جميل.</p>
-
-                <p><b>الكلمات المفتاحية : </b> اختيار الكلمات المفتاحية المناسبة تسهل عملية البحث وبالتالي زيادة ظهور
-                    المقالة .</p>
+                <h3 style="margin-top: 10px;"><?= Yii::t('app', 'Tips') ?>: </h3>
+                <?php if (Yii::$app->language == 'en') {
+                    echo $this->render('tips-en');
+                } else {
+                    echo $this->render('tips-ar');
+                }
+                ?>
             </div>
         </div>
     </div>
@@ -155,5 +138,5 @@ foreach ($model->postBodies as $data) {
 
 <from id="uploadform" method="POST" enctype="multipart/form-data" style="display: none;">
     <input id="files3" type="file"/>
-    <input id="type" value="post" />
+    <input id="type" value="post"/>
 </from>

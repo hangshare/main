@@ -7,7 +7,7 @@ use yii\widgets\ListView;
 /* @var $searchModel app\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'المستخدمين');
+$this->title = Yii::t('app', 'user index');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">

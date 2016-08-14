@@ -18,6 +18,6 @@ $form = ActiveForm::begin(['id' => 'PayPal-form']);
 <?= $form->field($model, 'cashier_name') ?>
 
 <div class="form-group">
-    <?= Html::submitButton('حفظ', ['class' => 'btn btn-primary', 'name' => 'save-button']) ?>
+    <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-primary', 'name' => 'save-button']) ?>
 </div>
 <?php ActiveForm::end(); ?>

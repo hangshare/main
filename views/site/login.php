@@ -5,9 +5,8 @@ use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \common\models\LoginForm */
 
-$this->title = 'تسجيل الدخول ';
+$this->title = Yii::t('app', 'Sign in to your account');
 $this->params['breadcrumbs'][] = $this->title;
 
 if (session_status() == PHP_SESSION_NONE) {
@@ -18,14 +17,12 @@ $fb = new Facebook\Facebook([
     'app_id' => '1024611190883720',
     'app_secret' => '0df74c464dc8e58424481fb4cb3bb13c',
     'default_graph_version' => 'v2.4',
-    'persistent_data_handler'=>'session'
+    'persistent_data_handler' => 'session'
 ]);
 $helper = $fb->getRedirectLoginHelper();
 
 $params = ['scope' => 'email,user_about_me'];
 $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params);
-
-
 ?>
 <div class="container">
     <div class="white-box row">
@@ -38,12 +35,12 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                     <?= $form->field($model, 'password')->passwordInput() ?>
                     <?= $form->field($model, 'rememberMe')->checkbox() ?>
                     <div class="pull-right">
-                        <?= Html::a('هل نسيت كلمة المرور ؟', ['//request-password-reset']) ?>
+                        <?= Html::a('Forget your username or password?', ['//request-password-reset']) ?>
                     </div>
 
                     <div class="form-group">
                         <?=
-                        Html::submitButton('تسجيل الدخول', [
+                        Html::submitButton(Yii::t('app', 'Login'), [
                             'class' => 'btn btn-primary res-full',
                             'onClick' => "ga('send', {
                             hitType: 'event',
@@ -63,7 +60,7 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
             </div>
             <div class="col-md-4">
                 <div class="row">
-                    <h3 class="m-b-20">التسجيل باستخدام مواقع التواصل</h3>
+                    <h3 class="m-b-20"><?= Yii::t('app', 'Signup using social networks') ?></h3>
                     <a onClick="ga('send', {
                             hitType: 'event',
                             eventCategory: 'Login',
@@ -71,10 +68,8 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                             eventLabel: 'Login Page'
                         });" href="<?= $fUrl; ?>" class="btn btn-primary"
                        style="background-color: #3b5998;">
-                        <i class="fa fa-fw fa-facebook pull-left" style=" border-left: 1px solid;
-                           margin: 3px 5px 0 10px;
-                           padding-left: 10px;"></i>
-                        <span class="pull-left">سجل باستخدام حساب فيسبوك</span>
+                        <i class="fa fa-fw fa-facebook pull-left fb-icon"></i>
+                        <span class="pull-left"><?= Yii::t('app', 'Signin using your Facebook account') ?></span>
                     </a>
                 </div>
             </div>

@@ -1,7 +1,8 @@
 <?php
-$this->title = 'تسجيل حساب جديد | موقع هانج شير';
+$this->title = Yii::t('app', 'New account hangshare');
 
 Use yii\helpers\Html;
+
 ?>
 <div class="container">
     <div class="white-box">
@@ -10,18 +11,18 @@ Use yii\helpers\Html;
                 <?php if (Yii::$app->user->isGuest): ?>
                     <div class="col-md-6">
                         <div class="plana">
-                            <h3>الحساب المجاني</h3>
-                            <span class="price">مجاني</span>
+                            <h3><?= Yii::t('app', 'Free Account') ?></h3>
+                            <span class="price"><?= Yii::t('app', 'Free') ?></span>
                             <ul class="list-group-item-heading">
-                                <li>نسبة ربح متفاوتة بين 0.5 الى  2 دولار حسب نوع الزيارات.</li>
-                                <li>إرفاق مقالاتك في النشرة الشهرية للموقع في حال كانت مقالاتك مميزة.</li>
-                                <li>إمكانية سحب النقود عن وصولها لـ 100 دولار</li>
+                                <li><?= Yii::t('app', 'freetips1') ?></li>
+                                <li><?= Yii::t('app', 'freetips2') ?></li>
+                                <li><?= Yii::t('app', 'freetips3') ?></li>
                                 <li class="nodecoration">&nbsp;</li>
                                 <li class="nodecoration">&nbsp;</li>
                                 <li class="nodecoration">&nbsp;</li>
                             </ul>
                             <?=
-                            Html::a('تسجيل مجاني', ['//register/'], [
+                            Html::a(Yii::t('app', 'Free Registrations'), ['//register/'], [
                                 'class' => 'btn free-btn btn-block',
                                 'data' => [
                                     'method' => 'post',
@@ -34,21 +35,20 @@ Use yii\helpers\Html;
                 <?php endif; ?>
                 <div class="col-md-6">
                     <div class="planb">
-                        <h3>الحساب الذهبي</h3>
+                        <h3><?= Yii::t('app', 'Gold Account') ?></h3>
                         <span class="pricegold">
                             <select id="goldtime">
-                                <option value="b">$10 دولار / لشهر واحد</option>
-                                <option value="c">$25 دولار / لثلاث أشهر</option>
+                                <option value="b"><?= Yii::t('app', 'one month offer', ['price' => '10']) ?></option>
+                                <option value="c"><?= Yii::t('app', 'three month offer', ['price' => '25']) ?></option>
                             </select>
-                            عرض لمدة محدودة
+                            <?= Yii::t('app', 'Limited Time Offer') ?>
                         </span>
-                        
                         <ul class="list-group-item-heading">
                             <?php echo $this->render('//plan/gold'); ?>
                         </ul>
                         <div id="planb">
                             <?=
-                            Html::a('تسجيل ذهبي', [Yii::$app->user->isGuest ? '//register/' : 'site/plangold'], [
+                            Html::a(Yii::t('app', 'Register'), [Yii::$app->user->isGuest ? '//register/' : 'site/plangold'], [
                                 'class' => 'btn gold-btn btn-block',
                                 'data' => [
                                     'method' => 'post',
@@ -59,7 +59,7 @@ Use yii\helpers\Html;
                         </div>
                         <div id="planc" style="display: none;">
                             <?=
-                            Html::a('تسجيل ذهبي', [Yii::$app->user->isGuest ? '//register/' : 'site/plangold'], [
+                            Html::a(Yii::t('app', 'Register'), [Yii::$app->user->isGuest ? '//register/' : 'site/plangold'], [
                                 'class' => 'btn gold-btn btn-block',
                                 'data' => [
                                     'method' => 'post',

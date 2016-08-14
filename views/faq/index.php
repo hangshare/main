@@ -8,7 +8,7 @@ use yii\widgets\ListView;
 /* @var $searchModel app\models\FaqSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = "{$tit} - موقع هانج شير";
+$this->title = Yii::t('app', 'Faq Title', ['category' => isset($_GET['category']) ? isset($_GET['category']) : '']);
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
@@ -16,12 +16,16 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="row">
             <div class="col-xs-3" style="position: relative;">
                 <div style="position: fixed; width: 300px;">
-                    <h3>تصنيفات الأسئلة</h3>
+                    <h3><?= Yii::t('app', 'Classifications') ?></h3>
+
                     <div class="list-group">
                         <?php
+
                         foreach (Faq::$CategoryStr as $key => $cat) {
-                            $catlink = str_replace(' ', '-', $cat);
-                            echo Html::a($cat, ["//الأسئلة-الشائعة/{$catlink}"], ['title' => $cat, 'class' => 'list-group-item']);
+                            $cattitle = Yii::t('app', $cat);
+                            $catlink = strtolower(Yii::t('app', str_replace(' ', '-', $cattitle)));
+
+                            echo Html::a($cattitle, ["//" . Yii::t('app', 'Faqs-url') . "/" . $catlink], ['title' => $cat, 'class' => 'list-group-item']);
                         }
                         ?>
                     </div>
@@ -40,33 +44,32 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
             <div class="col-md-9">
-                <div class="white-box">
-                    <h1><?= $tit ?></h1>
-                    <div style="padding: 20px;">
-                        <div class="row">
-                            <form id="faqsearch">
-                                <input name="q" placeholder="ابحث عن سؤال" type="text" />
-                                <input  type="submit" name="submit" value="ابحث" />
-                            </form>
-                            <br>
-                        </div>
-                        <div id="content">
-                            <?=
-                            ListView::widget([
-                                'dataProvider' => $dataProvider,
-                                'itemView' => '_view',
-                                'layout' => '{items}{pager}'
-                            ]);
-                            ?>
-                        </div>
-                        <?php if (!Yii::$app->user->isGuest): ?>
-                            <div class="row m-t-25">
-                                <div class="well">
-                                    <?= $this->render('_search', ['model' => new Faq]); ?>
-                                </div>
-                            </div>
-                        <?php endif; ?>
+                <h1><?= $tit ?></h1>
+
+                <div style="padding: 20px;">
+                    <div class="row">
+                        <form id="faqsearch">
+                            <input name="q" placeholder="<?= Yii::t('app', 'Search') ?>" type="text"/>
+                            <input type="submit" name="submit" value="<?= Yii::t('app', 'Search') ?>"/>
+                        </form>
+                        <br>
                     </div>
+                    <div id="content">
+                        <?=
+                        ListView::widget([
+                            'dataProvider' => $dataProvider,
+                            'itemView' => '_view',
+                            'layout' => '{items}{pager}'
+                        ]);
+                        ?>
+                    </div>
+                    <?php if (!Yii::$app->user->isGuest): ?>
+                        <div class="row m-t-25">
+                            <div class="well">
+                                <?= $this->render('_search', ['model' => new Faq]); ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

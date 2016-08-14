@@ -34,7 +34,7 @@ $thump = Yii::$app->imageresize->thump($model->image, 100, 80, 'crop');
                 <i class="fa fa-spin fa-spinner fa-2x" style="position: relative; top: -10px; color: #fff;"></i>
             </div>
             <button class="btn btn-primary btn-block" id="uploadtos3" style="border-radius: 0;">
-                <span>اختر صورة</span>
+                <span><?= Yii::t('app', 'Choose a picture') ?></span>
             </button>
             <input id="cover_input" name="image" type="hidden" value=""/>
         </div>
@@ -64,8 +64,8 @@ $thump = Yii::$app->imageresize->thump($model->image, 100, 80, 'crop');
             <div class="col-sm-2 text-left" style="margin-top: -8px;">
                 <?php
                 Modal::begin([
-                    'header' => '<h4>تعديل كلمة المرور</h4>',
-                    'toggleButton' => ['label' => 'تعديل', 'class' => 'btn btn-default'],
+                    'header' => '<h4>' . Yii::t('app', 'Edit Password') . '</h4>',
+                    'toggleButton' => ['label' => Yii::t('app', 'Edit'), 'class' => 'btn btn-default'],
                 ]);
                 ?>
                 <div class="row">
@@ -86,7 +86,7 @@ $thump = Yii::$app->imageresize->thump($model->image, 100, 80, 'crop');
                 <hr>
                 <div class="row">
                     <div class="col-sm-12">
-                        <a class="btn btn-primary btn-block pull-left js_passch res-full">حفظ التغيرات</a>
+                        <a class="btn btn-primary btn-block pull-left js_passch res-full"><?= Yii::t('app', 'Save') ?></a>
                     </div>
                 </div>
 
@@ -111,29 +111,29 @@ $thump = Yii::$app->imageresize->thump($model->image, 100, 80, 'crop');
     </div>
     <hr/>
     <div class="row">
-        <?= $form->field($model, 'gender')->radioList(['1' => 'ذكر', '2' => 'أنثى'])->label(null, ['class' => 'col-sm-4']); ?>
+        <?= $form->field($model, 'gender')->radioList(['1' => Yii::t('app', 'Male'), '2' => Yii::t('app', 'Female')])->label(null, ['class' => 'col-sm-4']); ?>
     </div>
     <hr>
     <div class="row">
-        <label class="col-sm-4">تاريخ الميلاد</label>
+        <label class="col-sm-4"><?= Yii::t('app','User.dob') ?></label>
 
         <div class="col-sm-6">
             <div class="row">
                 <div id="containerdate">
                     <?php
                     $monthArr = [
-                        1 => ' كانون الثاني',
-                        2 => ' شباط',
-                        3 => ' آذار',
-                        4 => ' نيسان',
-                        5 => ' أيار',
-                        6 => ' حزيران',
-                        7 => ' تموز',
-                        8 => ' أب',
-                        9 => ' أيلول',
-                        10 => ' تشرين الأول',
-                        11 => ' تشرين الثاني',
-                        12 => ' كانون الأول',
+                        1 => Yii::t('app', 'January'),
+                        2 => Yii::t('app', 'February'),
+                        3 => Yii::t('app', 'March'),
+                        4 => Yii::t('app', 'April'),
+                        5 => Yii::t('app', 'May'),
+                        6 => Yii::t('app', 'June'),
+                        7 => Yii::t('app', 'July'),
+                        8 => Yii::t('app', 'August'),
+                        9 => Yii::t('app', 'September'),
+                        10 => Yii::t('app', 'October'),
+                        11 => Yii::t('app', 'November'),
+                        12 => Yii::t('app', 'December'),
                     ];
                     $dayArr = range(1, 31);
                     $dayArr = array_combine($dayArr, $dayArr);
@@ -142,9 +142,9 @@ $thump = Yii::$app->imageresize->thump($model->image, 100, 80, 'crop');
                     ?>
                     <ul class="list-inline">
                         <?php $model->day = str_replace('0', '', $model->day); ?>
-                        <li><?= $form->field($model, 'day')->dropDownList($dayArr, ['prompt' => 'اليوم', 'class' => ''])->label(false); ?></li>
-                        <li><?= $form->field($model, 'month')->dropDownList($monthArr, ['prompt' => 'الشهر', 'class' => ''])->label(false); ?></li>
-                        <li><?= $form->field($model, 'year')->dropDownList($yearArr, ['prompt' => 'السنة', 'class' => ''])->label(false); ?></li>
+                        <li><?= $form->field($model, 'day')->dropDownList($dayArr, ['prompt' => Yii::t('app', 'User.day'), 'class' => ''])->label(false); ?></li>
+                        <li><?= $form->field($model, 'month')->dropDownList($monthArr, ['prompt' => Yii::t('app', 'User.month'), 'class' => ''])->label(false); ?></li>
+                        <li><?= $form->field($model, 'year')->dropDownList($yearArr, ['prompt' => Yii::t('app', 'User.year'), 'class' => ''])->label(false); ?></li>
                     </ul>
                 </div>
             </div>
@@ -153,8 +153,8 @@ $thump = Yii::$app->imageresize->thump($model->image, 100, 80, 'crop');
     <hr>
     <div class="row">
         <?=
-        $form->field($model, 'country')->dropDownList(ArrayHelper::map(Country:: find()->all(), 'id', 'name_ar')
-            , ['prompt' => 'مكان الإقامة', 'class' => ''])->label(null, ['class' => 'col-sm-4']);
+        $form->field($model, 'country')->dropDownList(ArrayHelper::map(Country::find()->where("lang = '" . Yii::$app->language . "'")->all(), 'id', 'name')
+            , ['prompt' => Yii::t('app', 'Location'), 'class' => ''])->label(null, ['class' => 'col-sm-4']);
         ?>
     </div>
     <hr>
@@ -164,13 +164,12 @@ $thump = Yii::$app->imageresize->thump($model->image, 100, 80, 'crop');
     <div class="row">
         <div class="col-sm-4"></div>
         <div class="col-sm-8">
-            <p class="row">يرجى كتابة الرقم كامل مع الرقم الخاص بالدولة ، و يرجى العلم بأنه لن نقوم بنشر هذا الرقم باي
-                مكان على الموقع.</p>
+            <p class="row"><?= Yii::t('app', 'user.phone.note') ?></p>
         </div>
     </div>
     <hr>
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'حفظ التغيرات'), ['class' => 'btn btn-primary res-full']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-primary res-full']) ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>

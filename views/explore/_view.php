@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 
 $width = 500;
@@ -12,42 +11,29 @@ if (Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 
     $width = 400;
     $height = 250;
 }
-
 $thump = Yii::$app->imageresize->thump($model->cover, $width, $height, 'crop');
-$userthump = Yii::$app->imageresize->thump($model->user->image, 25, 25, 'crop');
 ?>
 <li>
-    <div class="ex-all">
-        <a href="<?= $model->url ?>">
-            <?php echo Html::img($thump, ['class' => 'img-responsive zoom-tilt']); ?>
-        </a>
-
-        <div class="shareblogsimi">
-            <ul class="list-inline">
-                <li><a class="btn btn-primary js-share js-share-fasebook" post-url="<?= $model->url ?>"><i
-                            style="margin: 3px;" class="fa fa-fw fa-facebook"></i>شارك</a></li>
-                <li><a class="btn js-share js-share-twitter" post-url="<?= $model->url ?>"
-                       style="color: #fff; background-color: #3E4347;"><i style="margin: 3px;"
-                                                                          class="fa fa-twitter"></i>غرد</a></li>
-                <li><a class="btn js-share js-share-gpuls" post-url="<?= $model->url ?>"
-                       style="color: #fff; background-color: #e51717;"><i style="margin: 3px;"
-                                                                          class="fa fa-google-plus"></i> شارك</a></li>
-            </ul>
+    <a href="<?= $model->url ?>" title="<?= Html::encode($model->title) ?>"
+       style="display: inline-block; border-bottom: 1px solid #eee; background-color: #fff; padding: 0 0 15px 0; max-width: 100%;
+       text-decoration: none; border-radius: 3px;">
+        <div class="col-md-3">
+            <div class="row">
+                <?php echo Html::img($thump, ['class' => 'img-responsive zoom-tilt', 'style'=>'padding:25px;']); ?>
+            </div>
         </div>
-    </div>
-    <a href="<?= $model->url ?>">
-        <div class="col-md-12 titlein">
-            <h4 style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><?php echo $model->title; ?></h4>
-            <?php if (!isset($home)): ?>
-                <p><?php
-                    foreach ($model->postBodies as $data) {
-                        echo Yii::$app->helper->limit_text($data->body, 300);
-                    }
-                    ?></p>
-            <?php endif; ?>
-            <img src="<?= $userthump; ?>"/>
-            <span><?php echo $model->user->name;
-                ?></span>
+        <div class="col-md-9" style="overflow: hidden;">
+            <h3 style="font-size: 20px;color: #4e83a2; font-weight: bold;"><?php echo $model->title; ?></h3>
+            <p><?php
+                foreach ($model->postBodies as $data) {
+                    echo Yii::$app->helper->limit_text($data->body, 300);
+                }
+                ?></p>
+            <span style="color: #999;">
+                 <?php
+            $totalViews = $model->postStats->views;
+            echo number_format($totalViews + 1);
+            ?> <?= Yii::t('app', 'Views') ?> </b></span>
         </div>
     </a>
 </li>

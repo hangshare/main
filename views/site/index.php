@@ -1,54 +1,36 @@
-<?php if (!Yii::$app->helper->isMobile()) : ?>
-    <style>
-        #w3, #w3, .navbar-inverse {
-            background: none;
-            position: relative;
-        }
-
-        .planholder {
-            background: none;
-        }
-
-        .nav > li:hover {
-            background: rgba(248, 248, 248, .3);
-        }
-
-        .navbar-nav > li {
-            border-radius: 25px;
-        }
-    </style>
-<?php endif; ?>
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\ListView;
 
-$this->title = Yii::t('app', 'هانج - Share - شير مقالات واحصل على المال');
-$this->description = Yii::t('app', 'احصل على المال مقابل كل مشاهدة على المقالات التي تقوم بنشرها من خلال الباي بال ومشاركة مقالاتك عبر الفيسبوك ومواقع التواصل الأخرى.');
+$this->title = Yii::t('app', 'Home Title');
+$this->description = Yii::t('app', 'Homepage.Description');
 ?>
 <section id="quick-signup-post">
     <div class="container">
         <div class="spacer"></div>
         <h1 class="header-index">
-            انشر مقالاتك مجانا لدينا واحصل على المال
+            <?= Yii::t('app', 'welcome 1') ?>
             <aside>
-                اشترك بالحساب الذهبي للحصول على الدعم وزيادة في الربح
+                <?= Yii::t('app', 'welcome 2') ?>
             </aside>
         </h1>
         <div class="col-md-4 col-md-offset-4 m-t-25 m-b-20">
-            <img width="100" class="pull-left" src="https://s3-eu-west-1.amazonaws.com/hangshare.media/paypal_verified.png"/>
+            <img width="100" class="pull-left"
+                 src="https://s3-eu-west-1.amazonaws.com/hangshare-media/paypal_verified.png"/>
 
-            <h3 class="header-index" style="line-height: 31px;margin-right: 107px;margin-top: 4px;">موقع معتمد لدى
-                PayPal</h3>
+            <h3 class="header-index" style="line-height: 31px;margin-right: 107px;margin-top: 4px;">
+                <?= Yii::t('app', 'Certified By Paypal') ?>
+            </h3>
         </div>
         <div class="clearfix"></div>
-        <h4 style="color: #fff; text-align: center; margin-bottom: 60px;"> انشر مواضيع > شاركها على
-            مواقع التواصل > احصل على المال مقابل كل مشاهدة</h4>
+        <h4 style="color: #fff; text-align: center; margin-bottom: 75px;">
+            <?= Yii::t('app', 'Create your post > Share on social media > Get money for every view') ?>
+        </h4>
     </div>
 </section>
 <section>
     <div class="home-header">
-        <h3>مقالات متميزة</h3>
+        <h3><?= Yii::t('app', 'Featured Posts') ?></h3>
     </div>
     <div class="homepost_contaner">
         <div class="postsho">
@@ -69,7 +51,7 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
         </div>
         <div class="clearfix"></div>
         <div class="container">
-            <div class="col-md-9 nopadding">
+            <div class="col-md-8">
                 <div class="col-md-12 m-t-25 m-b-20">
                     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <!-- Responsive - Home Page Upper -->
@@ -82,13 +64,12 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
                 </div>
-                <h3 class="m-t-25">مقالات جديدة</h3>
-                <hr class="nomargin">
+                <h3 class="underlined"><?= Yii::t('app', 'New Post') ?></h3>
                 <?php
                 echo ListView::widget([
                     'dataProvider' => $newpost,
-                    'itemView' => '//explore/_view',
-                    'layout' => "<ul class='list-inline postindex homepost inifi'>{items}\n</ul>",
+                    'itemView' => '//explore/_home',
+                    'layout' => "<ul class='list-inline  homepost inifi'>{items}\n</ul>",
                     'itemOptions' => [
                         'tag' => false
                     ],
@@ -96,23 +77,8 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
                 ?>
             </div>
             <?php if (!Yii::$app->helper->isMobile()) : ?>
-                <div class="col-md-3" style="position: relative; z-index: 1;">
-                    <div class="row m-t-25">
-                        <div id="fb-root"></div>
-                        <script>(function (d, s, id) {
-                                var js, fjs = d.getElementsByTagName(s)[0];
-                                if (d.getElementById(id))
-                                    return;
-                                js = d.createElement(s);
-                                js.id = id;
-                                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1390171834574276&version=v2.0";
-                                fjs.parentNode.insertBefore(js, fjs);
-                            }(document, 'script', 'facebook-jssdk'));</script>
-                        <div class="fb-like-box m-t-20" data-href="https://www.facebook.com/Hangshare"
-                             data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false"
-                             data-show-border="true"></div>
-                    </div>
-                    <div class="row m-t-25">
+                <div class="col-md-4">
+                    <div class="m-t-25 text-center">
                         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                         <!-- Wide Skyscraper - Home Page Upper -->
                         <ins class="adsbygoogle"
@@ -127,19 +93,21 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
                         <div class="row">
                             <div class="white text-center ressocal">
                                 <div class="col-md-12">
-                                    <h3>الحساب الذهبي</h3>
+                                    <h3><?= Yii::t('app', 'Gold Account') ?></h3>
 
-                                    <p>عرض لمدة محدودة</p>
+                                    <p><?= Yii::t('app', 'Limited Time Offer') ?></p>
                                     <select id="goldtime">
-                                        <option value="b">$10 دولار / لشهر واحد</option>
-                                        <option value="c">$25 دولار / لثلاث أشهر</option>
+                                        <option
+                                            value="b"><?= Yii::t('app', 'one month offer', ['price' => '10']) ?></option>
+                                        <option
+                                            value="c"><?= Yii::t('app', 'three month offer', ['price' => '25']) ?></option>
                                     </select>
                                     <ul class="list-unstyled">
                                         <?php echo $this->render('//plan/gold'); ?>
                                     </ul>
                                     <div id="planb">
                                         <?=
-                                        Html::a('تسجيل ذهبي', [Yii::$app->user->isGuest ? '//register/' : '//site/plangold'], [
+                                        Html::a(Yii::t('app', 'Register'), [Yii::$app->user->isGuest ? '//register/' : '//site/plangold'], [
                                             'class' => 'btn gold-btn btn-block',
                                             'data' => [
                                                 'method' => 'post',
@@ -150,7 +118,7 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
                                     </div>
                                     <div id="planc" style="display: none;">
                                         <?=
-                                        Html::a('تسجيل ذهبي', [Yii::$app->user->isGuest ? '//register/' : '//site/plangold'], [
+                                        Html::a(Yii::t('app', 'Register'), [Yii::$app->user->isGuest ? '//register/' : '//site/plangold'], [
                                             'class' => 'btn gold-btn btn-block',
                                             'data' => [
                                                 'method' => 'post',
@@ -164,16 +132,15 @@ $this->description = Yii::t('app', 'احصل على المال مقابل كل �
                         </div>
                     <?php endif; ?>
                     <div class="m-t-25">
-                        <h3>الأكثر مشاهدة</h3>
-                        <hr>
-                        <ul class="list-unstyled list-res">
+                        <h3 class="underlined"><?= Yii::t('app', 'Most Visited') ?></h3>
+                        <ul class="list-unstyled">
                             <?php foreach ($mostviewd as $postData) : ?>
-                                <?php echo $this->render('//explore/_most', ['data' => $postData]); ?>
+                                <?php echo $this->render('//explore/_hot', ['model' => $postData]); ?>
                             <?php endforeach; ?>
                         </ul>
                     </div>
-                    <div style="position: relative">
-                        <div class="row m-t-25">
+                    <div class="rela">
+                        <div class="row m-t-25 text-center">
                             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                             <!-- faq ad -->
                             <ins class="adsbygoogle"

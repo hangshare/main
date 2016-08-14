@@ -1,18 +1,18 @@
 <?php
 
 use yii\helpers\Html;
-$this->title='مرحبا بكم موقع هانج شير';
+$this->title=Yii::t('app','Welcome in hangshare');
 ?>
 <div class="container">
     <div class="white-box">
         <div class="text-center">
-            <h1 class="text-center m-b-20">مرحبا بكم في موقع هانج شير</h1>
-            <?= Html::a('اضف أول موضوع', ['explore/post'], ['class' => 'btn btn-primary btn-lg']) ?>
+            <h1 class="text-center m-b-20"><?= $this->title ?></h1>
+            <?= Html::a(Yii::t('app','Add your first post'), ['explore/post'], ['class' => 'btn btn-primary btn-lg']) ?>
             <br>
             <br>
             <br>
-            <p class="text-center">تأكد من تحديث معلوماتك الشخصية واضافة الطريقة التي تناسبك لتحويل النقود لك في حال استحقاقها</p>
-            <?= Html::a('تعديل معلومات طرق الدفع', ['//u/transfer'], ['class' => 'btn btn-default']) ?>
+            <p class="text-center"><?=Yii::t('app','Welcome.message') ?></p>
+            <?= Html::a(Yii::t('app','Edit your payment methods'), ['//u/transfer'], ['class' => 'btn btn-default']) ?>
         </div>
     </div>
 </div>
