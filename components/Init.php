@@ -66,17 +66,17 @@ class Init extends Component
 
     protected function language()
     {
-        if (strpos(Yii::$app->request->url, '.com/en') !== false || strpos(Yii::$app->request->url, '/web/en') !== false) {
+        if (strpos(Yii::$app->request->url, 'en') !== false || strpos(Yii::$app->request->url, '/web/en') !== false) {
             Yii::$app->language = 'en';
             Yii::$app->homeUrl = Yii::getAlias('@web') . '/en/';
-//            setcookie('userlanghangshare', 'en', time() + 999999, "/");
+            setcookie('userlanghangshare', 'en', time() + 999999, "/");
             $_GET['language'] = 'en';
         } elseif (isset($_COOKIE['userlanghangshare']) && $_COOKIE['userlanghangshare'] == 'en' && $this->isHome()) {
             $_GET['language'] = 'en';
             Yii::$app->homeUrl = Yii::getAlias('@web') . '/en/';
             header("HTTP/1.1 302 Moved Permanently");
             //header("Location: http://localhost/hangshare/web/en/");
-            //header("Location: https://www.hangshare.com/en/");
+            header("Location: https://www.hangshare.com/en/");
             exit(0);
         } else {
             setcookie('userlanghangshare', 'ar', time() + 999999, "/");
