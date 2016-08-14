@@ -247,4 +247,5 @@ return [
     'Settings'=>'الاعدادت',
     'Money Transfer'=>'طرق تحويل النقود',
     'Logout'=>'تسجيل الخروج',
+    'Share this Article'=>'شارك هذا الموضوع',
 ];
