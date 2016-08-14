@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\components\AwsEmail;
+use app\models\Category;
 use app\models\Post;
 use app\models\PostSearch;
 use Yii;
@@ -16,45 +17,28 @@ use yii\web\UploadedFile;
  */
 class ExploreController extends Controller
 {
-
     public $next;
     public $enableCsrfValidation = false;
 
+    public function actionHot(){
+        $this->layout = false;
+        $model = Post::featured(6);
+        echo '<ul class="list-inline">';
+        foreach ($model as $data) {
+            echo $this->render('_hot', ['model' => $data]);
+        }
+        echo '</ul>';
+    }
     public function actionRelated()
     {
         $this->layout = false;
-//        $id = $_POST['id'];
-//        $ids = Yii::$app->db->createCommand("
-//                    SELECT `postId`
-//                    FROM `post_tag`
-//                    WHERE  `tag`
-//                            IN (
-//                                    SELECT `tag`
-//                                    FROM `post_tag`
-//                                    WHERE `postId` = {$id}
-//                            ) AND `postId` != {$id}
-//                    GROUP BY `postId`
-//                    ORDER BY `postId` DESC
-//                    LIMIT 8
-//            ")->queryAll();
-//
-//        $ar = [];
-//        foreach ($ids as $id) {
-//            $ar[] = $id['postId'];
-//        }
-//        $sqp = implode(',', $ar);
-//        $model = Post::find()
-//                        ->groupBy('userId')
-//                        ->where("id IN ({$sqp}) AND cover <> ''")->all();
-
-        $model = Post::featured(6);
+        $model = Post::mostViewed(6);
         echo '<ul class="list-inline releated">';
         foreach ($model as $data) {
             echo $this->render('_related', ['model' => $data]);
         }
         echo '</ul>';
     }
-
     public function actionCountcheck()
     {
         session_write_close();
@@ -64,7 +48,6 @@ class ExploreController extends Controller
 //            AwsEmail::SendMail('hasania.khaled@gmail.com', '61', json_encode($_SERVER));
         }
     }
-
     public function actionUpload()
     {
 
@@ -97,74 +80,6 @@ class ExploreController extends Controller
             }
         }
     }
-
-    /**
-     * Lists all Post models.
-     * @return mixed
-     */
-    public function actionFun($tag = 'ترفيه')
-    {
-
-        $searchModel = new PostSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $tag);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Lists all Post models.
-     * @return mixed
-     */
-    public function actionVideo($tag = '')
-    {
-        $pageSize = 14;
-        $query = Post::find();
-        $query->joinWith(['user', 'postBodies']);
-        $query->orderBy('created_at DESC');
-        $query->where('post.type = 1 AND post.deleted = 0');
-        $query->andWhere(['<>', 'cover', '']);
-        if (!empty($tag)) {
-            $tag = str_replace('-', ' ', $tag);
-            $query->joinWith(['postTags', 'postTags.tags']);
-            $query->andFilterWhere(['like', 'tags.name', $tag]);
-        }
-        $currentPage = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $currentPage = preg_replace("/tag=[^&]+/", "", $currentPage);
-        $currentPage = preg_replace("/&{2,}/", "&", $currentPage);
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-            'pagination' => array(
-                'defaultPageSize' => $pageSize,
-                'pageSize' => $pageSize,
-                'route' => $currentPage
-            ),
-        ]);
-        if (Yii::$app->request->isAjax) {
-            $this->layout = false;
-            $html = '';
-            $models = $dataProvider->getModels();
-            foreach ($models as $data) {
-                $html .= $this->render('_view', ['model' => $data]);
-            }
-            echo json_encode(['html' => $html,
-                'total' => $dataProvider->getTotalCount(),
-                'PageSize' => $pageSize
-            ]);
-            Yii::$app->end();
-        } else {
-            return $this->render('index', [
-                'dataProvider' => $dataProvider,
-            ]);
-        }
-    }
-
-    /**
-     * Lists all Post models.
-     * @return mixed
-     */
     public function actionSearch($q)
     {
         $pageSize = 14;
@@ -207,11 +122,46 @@ class ExploreController extends Controller
             ]);
         }
     }
+    public function actionCategory($category)
+    {
+        $cat = Category::find()->where(['url_link' => $category])->one();
+        $pageSize = 10;
+        $query = Post::find();
+        $query->joinWith(['postCategories']);
+        $query->orderBy('post.created_at DESC');
+        $query->where("post.deleted=0 AND post.lang = '" . Yii::$app->language . "'");
+        $query->andWhere(['<>', 'post.cover', '']);
+        $query->andWhere(['=', 'post_category.categoryId', $cat->id]);
 
-    /**
-     * Lists all Post models.
-     * @return mixed
-     */
+        $currentPage = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $currentPage = preg_replace("/tag=[^&]+/", "", $currentPage);
+        $currentPage = preg_replace("/&{2,}/", "&", $currentPage);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => array(
+                'defaultPageSize' => $pageSize,
+                'pageSize' => $pageSize,
+                'route' => $currentPage),
+        ]);
+        if (Yii::$app->request->isAjax) {
+            $this->layout = false;
+            $html = '';
+            $models = $dataProvider->getModels();
+            foreach ($models as $data) {
+                $html .= $this->render('_view', ['model' => $data]);
+            }
+            echo json_encode([
+                'html' => $html,
+                'total' => 40000,
+                'PageSize' => $pageSize
+            ]);
+        } else {
+            return $this->render('index', [
+                'dataProvider' => $dataProvider,
+                'cat' => $cat
+            ]);
+        }
+    }
     public function actionAll()
     {
         $pageSize = 8;
@@ -250,62 +200,10 @@ class ExploreController extends Controller
             ]);
         }
     }
-
-    /**
-     * Lists all Post models.
-     * @return mixed
-     */
-    public function actionIndex($tag = '')
-    {
-
-        $pageSize = 14;
-        $query = Post::find();
-        $query->orderBy('created_at DESC');
-        $query->joinWith(['postTags', 'postTags.tags', 'user', 'postBodies']);
-        $query->where('post.type = 0 AND post.deleted = 0 AND post.deleted=0');
-        $query->andWhere(['<>', 'cover', '']);
-        if (!empty($tag)) {
-            $tag = str_replace('-', ' ', $tag);
-            $query->andFilterWhere(['like', 'tags.name', $tag]);
-        }
-        $currentPage = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $currentPage = preg_replace("/tag=[^&]+/", "", $currentPage);
-        $currentPage = preg_replace("/&{2,}/", "&", $currentPage);
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-            'pagination' => array(
-                'defaultPageSize' => $pageSize,
-                'pageSize' => $pageSize,
-                'route' => $currentPage
-            ),
-        ]);
-
-        if (Yii::$app->request->isAjax) {
-            $this->layout = false;
-            $html = '';
-            $models = $dataProvider->getModels();
-            foreach ($models as $data) {
-                $html .= $this->render('_view', ['model' => $data]);
-            }
-            echo json_encode(['html' => $html,
-                'total' => $dataProvider->getTotalCount(),
-                'PageSize' => $pageSize
-            ]);
-            Yii::$app->end();
-        } else {
-            return $this->render('index', [
-                'dataProvider' => $dataProvider,
-            ]);
-        }
-    }
-
     public function actionResize()
     {
         Yii::$app->imageresize->PatchResize($_POST['bucket'], $_POST['key'], $_POST['type']);
     }
-
-
     public function actionS3crd()
     {
         $s3Bucket = 'hangshare-media';
@@ -363,8 +261,6 @@ class ExploreController extends Controller
         ];
         echo json_encode(['url' => $url, 'inputs' => $inputs]);
     }
-
-
     public function actionRed($id)
     {
         $post = Post::findOne(['id' => $id]);
@@ -375,12 +271,6 @@ class ExploreController extends Controller
         header("Location: {$post->url}");
         exit(0);
     }
-
-    /**
-     * Displays a single Post model.
-     * @param integer $id
-     * @return mixed
-     */
     public function actionView($slug)
     {
         $model = $this->findModel($slug);
@@ -388,7 +278,7 @@ class ExploreController extends Controller
         $this->view->params['next'] = Yii::$app->cache->get('next-' . $model->id);
         if ($this->view->params['next'] == false) {
             $this->view->params['next'] = Post::find()
-                ->where(['and', "id>$model->id"])
+                ->where("id > $model->id AND lang = '" . Yii::$app->language . "'")
                 ->select('id,title, urlTitle')
                 ->orderBy('id desc')
                 ->one();
@@ -398,7 +288,7 @@ class ExploreController extends Controller
         $this->view->params['prev'] = Yii::$app->cache->get('prev-' . $model->id);
         if ($this->view->params['prev'] == false) {
             $this->view->params['prev'] = Post::find()
-                ->where(['and', "id<$model->id"])
+                ->where("id < $model->id AND '" . Yii::$app->language . "'")
                 ->select('id,title, urlTitle')
                 ->orderBy('id desc')
                 ->one();
@@ -409,34 +299,27 @@ class ExploreController extends Controller
             'mostviewd' => $mostviewd
         ]);
     }
-
-    /**
-     * Finds the Post model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Post the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
+
+        $lang = Yii::$app->language;
+        $userId = Yii::$app->user->identity->id;
         $model = Yii::$app->cache->get($id);
         if ($model === false) {
             $qu = Post::find()->joinWith(['user', 'postTags', 'postTags.tags']);
-
-            $model = $qu->where(['post.urlTitle' => $id])->one();
+            if (!Yii::$app->user->isGuest)
+                $model = $qu->where("post.urlTitle = '{$id}' AND (post.lang = '{$lang}' OR post.userId = '{$userId}')")->one();
+            else
+                $model = $qu->where(['post.urlTitle' => $id, 'post.lang' => Yii::$app->language])->one();
             Yii::$app->cache->set($id, $model, 3000);
         }
+
         if (!isset($model)) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+
         return $model;
     }
-
-    /**
-     * Creates a new Post model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
     public function actionPost($id = '')
     {
         if (empty($id)) {
@@ -457,6 +340,7 @@ class ExploreController extends Controller
                 die();
             }
 
+
             return $this->redirect(["/{$model->urlTitle}"]);
         } else {
             return $this->render('post', [
@@ -464,16 +348,8 @@ class ExploreController extends Controller
             ]);
         }
     }
-
-    /**
-     * Updates an existing Post model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
     public function actionUpdate($id)
     {
-
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->cache->delete('postView-' . $id);
@@ -485,21 +361,14 @@ class ExploreController extends Controller
             ]);
         }
     }
-
-    /**
-     * Deletes an existing Post model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
     public function actionDelete($id)
     {
         $model = Post::findOne(['id' => $id]);
         if (Yii::$app->user->id != $model->userId) {
-            throw new Exception('غير مسموح.', '403');
+            throw new Exception(Yii::t('app','you are not allwoed to access this page'), '403');
         }
         Yii::$app->db->createCommand("UPDATE post SET deleted=1 WHERE id=$id")->query();
-        Yii::$app->getSession()->setFlash('success','تم حذف الموضوع بنجاح.');
+        Yii::$app->getSession()->setFlash('success',Yii::t('app','Post has been deleted successfully'));
         $username = empty($model->user->username) ? $model->user->id : $model->user->username;
         return $this->redirect(['/user/' . $username . '/']);
     }

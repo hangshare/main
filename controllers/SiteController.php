@@ -11,6 +11,7 @@ use app\models\PasswordResetRequestForm;
 use app\models\Post;
 use app\models\ResetPasswordForm;
 use app\models\User;
+use app\models\UserEmail;
 use app\models\UserPayment;
 use Facebook;
 use Yii;
@@ -157,15 +158,11 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-        header("Cache-Control: post-check=0, pre-check=0", false);
-        header("Pragma: no-cache");
-
         $pageSize = 16;
-        $newpost = Yii::$app->cache->get('home-new-posts');
+        $newpost = Yii::$app->cache->get('home-new-posts-' . Yii::$app->language);
         if ($newpost === false) {
             $querypost = Post::find()
-                ->where("post.deleted=0 AND post.cover <> ''")
+                ->where("post.deleted=0 AND post.cover <> '' AND post.lang = '" . Yii::$app->language . "'")
                 ->joinWith(['user'])
                 ->select('post.id,post.title , post.cover ,user.id as userId, post.urlTitle')
                 ->orderBy('id desc');
@@ -177,13 +174,14 @@ class SiteController extends Controller
 //                    'route' => $currentPage
                 ),
             ]);
-            Yii::$app->cache->set('home-new-posts', $newpost, 200);
+            Yii::$app->cache->set('home-new-posts-' . Yii::$app->language, $newpost, 200);
         }
+
         if (Yii::$app->request->isAjax && isset($_GET['page'])) {
             $this->layout = false;
             $html = '';
             foreach ($newpost->getModels() as $data) {
-                $html .= $this->render('//explore/_view', ['model' => $data]);
+                $html .= $this->render('//explore/_home', ['model' => $data]);
             }
             echo json_encode(['html' => $html,
                 'total' => $newpost->getTotalCount(),
@@ -191,12 +189,15 @@ class SiteController extends Controller
             ]);
             Yii::$app->end();
         } else {
+
             $this->layout = 'homepage';
-            $this->description = 'أسرع طريقة للحصول على المال عن طريق الانترنت والفيسبوك وتحقيق ارباح مالية سريعة';
-            $featured = Yii::$app->cache->get('home-featured');
+            $this->description = Yii::t('app', 'meta.homepage.desc');
+
+
+            $featured = Yii::$app->cache->get('home-featured-' . Yii::$app->language);
             if ($featured === false) {
                 $queryfeatured = Post::find()
-                    ->where("type=0 AND cover <> '' AND featured = 1")
+                    ->where("type=0 AND cover <> '' AND featured = 1 AND lang = '" . Yii::$app->language . "'")
                     ->select('id, cover, title, urlTitle')
                     ->limit(21)
                     ->orderBy('rand();');
@@ -204,7 +205,7 @@ class SiteController extends Controller
                     'query' => $queryfeatured,
                     'pagination' => array('pageSize' => 21),
                 ]);
-                Yii::$app->cache->set('home-featured', $featured, 1500);
+                Yii::$app->cache->set('home-featured-' . Yii::$app->language, $featured, 1000);
             }
             $mostviewd = Post::featured(4);
 
@@ -214,6 +215,7 @@ class SiteController extends Controller
                 'newpost' => $newpost
             ]);
         }
+
     }
 
     public function actionAut($id)
@@ -319,16 +321,15 @@ class SiteController extends Controller
             $model->image = 'user/' . $image;
             $eecheck = Yii::$app->db->createCommand("SELECT email FROM user WHERE email = '{$model->email}' LIMIT 1;")->queryOne();
             if ($eecheck) {
-                AwsEmail::SendMail('hasania.khaled@gmail.com', 'Fb Bug 2', json_encode($model->attributes));
                 Yii::$app->getSession()->setFlash('success', [
-                    'message' => "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.",
+                    'message' => Yii::t('app', 'email.used.fb', ['email' => $user['email']]),
                 ]);
                 return $this->redirect(['//login', 'stat' => 'user']);
             }
             if (!$model->save(false)) {
                 AwsEmail::SendMail('hasania.khaled@gmail.com', 'Fb Bug', json_encode($model->getErrors()) . json_encode($model->attributes));
                 Yii::$app->getSession()->setFlash('success', [
-                    'message' => "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.",
+                    'message' => Yii::t('app', 'email.used.fb', ['email' => $user['email']]),
                 ]);
                 return $this->redirect(['//login', 'stat' => 'user']);
             }
@@ -337,7 +338,7 @@ class SiteController extends Controller
         } else {
             if (empty($user['scId'])) {
                 Yii::$app->getSession()->setFlash('success', [
-                    'message' => "يوجد بريد الكتروني مسجل على الموقع باستخدام البريد الاكتروني التالي {$user['email']} ، يرجى تسجيل الدخول باستخدام البريد الاكتروني المذكور وكلمة المرور.",
+                    'message' => Yii::t('app', 'email.used.fb', ['email' => $user['email']]),
                 ]);
                 return $this->redirect(['//login', 'stat' => 'user']);
             }
@@ -361,21 +362,15 @@ class SiteController extends Controller
                 Yii::$app->imageresize->PatchResize('hangshare-media', 'fa/' . $model->image, 'user');
 
                 Yii::$app->getSession()->setFlash('success', [
-                    'message' => '، يرجى منك اكمال تعبئة المعلومات في الأسفل لكي نستطيع تحويل لك النقود في المستقبل. <strong>تمت عملية التسجيل بنجاح</strong>',
+                    'message' => Yii::t('app', 'sucess.fb.fillcontent')
                 ]);
                 return $this->redirect(['//site/welcome']);
             } else {
                 return $this->redirect(['//site/test', 'e' => $login_email, 'p' => $login->password]);
-//                    return $this->goBack();
             }
         } else {
-            mail('hasania.khaled@gmail.com', 'error face hang', json_encode(['user info db' => $user,
-                'email' => $login_email,
-                'id' => $user_profile->getId(),
-                'pass' => $login_password,
-            ]));
             Yii::$app->getSession()->setFlash('error', [
-                'message' => 'نعتذر حصل خطأ سوف نقوم بحل هذه المشكلة في أقرب وقت. ',
+                'message' => Yii::t('app', 'error.fb.login'),
             ]);
             return $this->redirect(['//login']);
         }
@@ -417,8 +412,7 @@ class SiteController extends Controller
                 . '</table>' . $model->body;
 
             AwsEmail::SendMail('info@hangshare.com', $model->subject, $message, $model->email);
-            AwsEmail::SendMail('hasania.khaled@gmail.com', $model->subject, $message, $model->email);
-            Yii::$app->session->setFlash('success', 'شكرا لك لتواصلك عنا سوف يقوم فريقنا بالرد على رسالتكم خلال 24 ساعة القادمة.');
+            Yii::$app->session->setFlash('success', Yii::t('app', 'success.contact'));
             return $this->refresh();
         } else {
             return $this->render('contact', [
@@ -434,7 +428,10 @@ class SiteController extends Controller
 
     public function actionPrivacy()
     {
-        return $this->render('privacy');
+        if (Yii::$app->language == 'en')
+            return $this->render('privacy-en');
+        else
+            return $this->render('privacy');
     }
 
     public function actionCancel()
@@ -459,7 +456,10 @@ class SiteController extends Controller
 
     public function actionAbout()
     {
-        return $this->render('about');
+        if (Yii::$app->language == 'en')
+            return $this->render('about-en');
+        else
+            return $this->render('about');
     }
 
     public function beforeAction($action)
@@ -571,12 +571,12 @@ class SiteController extends Controller
         $option = [
             'b' => [
                 'price' => '10.00',
-                'txt' => 'عضوية الحساب الذهبي لمدة شهر واحد',
+                'txt' => Yii::t('app', 'gold.user.1'),
                 'key' => 'gold_1'
             ],
             'c' => [
                 'price' => '25.00',
-                'txt' => 'عضوية الحساب الذهبي لمدة 3 اشهر',
+                'txt' => Yii::t('app', 'gold.user.3'),
                 'key' => 'gold_3'
             ],
         ];
@@ -655,9 +655,9 @@ class SiteController extends Controller
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                Yii::$app->getSession()->setFlash('success', 'تم ارسال طريقة اعادة تعيين كلمة المرور الى البريد الاكتروني الخاص بك.');
+                Yii::$app->getSession()->setFlash('success', Yii::t('app', 'success.password.rest'));
             } else {
-                Yii::$app->getSession()->setFlash('error', 'نعتذر حصل خطأ ما يرجى مراسلة ادارة الموقع.');
+                Yii::$app->getSession()->setFlash('error', Yii::t('app', 'error.password.rest'));
             }
         }
         return $this->render('requestPasswordResetToken', [
@@ -674,13 +674,37 @@ class SiteController extends Controller
             throw new BadRequestHttpException($e->getMessage());
         }
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->getSession()->setFlash('success', 'تم تغير كلمة السر بنجاح.');
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'success.password'));
             return $this->redirect(['//login']);
         }
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
     }
+
+    public function actionEmail($id)
+    {
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
+
+        $im = imagecreate(100, 100) or die("Cannot Initialize new GD image stream");
+        $background_color = imagecolorallocate($im, 0, 0, 0);
+
+        header('Content-Type: image/png');
+
+        imagepng($im);
+        imagedestroy($im);
+
+
+        $model = UserEmail::find()->where("key = {$id}")->one();
+        if ($model) {
+            $model->opened_at = time();
+            $model->save(false);
+        }
+
+
+    }
+
 }
 
 

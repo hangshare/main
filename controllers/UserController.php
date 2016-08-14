@@ -91,13 +91,13 @@ class UserController extends Controller
         if (isset($userSettings)) {
             $userSettings->verified_email = 1;
             $userSettings->save(false);
-            Yii::$app->getSession()->setFlash('success', 'تم تفعيل حسابك بنجاح ');
+            Yii::$app->getSession()->setFlash('success', Yii::t('app','user.verified.email'));
             $username = empty($userSettings->user->username) ? $userSettings->user->id : $userSettings->user->username;
             return $this->redirect(['view', 'id' => $username]);
         } else {
-            Yii::$app->getSession()->setFlash('danger', 'نعتذر حصل خطأ يرجى التواصل معنا.');
+            Yii::$app->getSession()->setFlash('danger', Yii::t('app','error.password.rest'));
         }
-        return $this->redirect(['//تواصل-معنا']);
+        return $this->redirect(['//' . Yii::t('app','ContactUs-url')]);
     }
 
     public function actionTransfer()
@@ -210,7 +210,7 @@ class UserController extends Controller
         $transaction->amount = $model->userStats->cantake_amount;
 
 
-        AwsEmail::queueUser($transaction->userId, 5, [
+        AwsEmail::queueUser($transaction->userId, 'money_request_received', [
             '__price__' => "{$model->userStats->cantake_amount}$"
         ]);
 
@@ -218,17 +218,12 @@ class UserController extends Controller
             var_dump($transaction->getErrors());
         }
         Yii::$app->db->createCommand("UPDATE `user_stats` SET `cantake_amount`=0 WHERE `userId`={$transaction->userId}")->execute();
-        AwsEmail::queueUser($transaction->userId, 5, [
-            '__price__' => "{$model->userStats->cantake_amount}$"
-        ]);
+
         AwsEmail::SendMail('info@hangshare.com', 'Money Request', "
             User Id : {$transaction->userId} ,
                 Amount : {$model->userStats->cantake_amount} ,
             Transaction id : {$transaction->id}");
-        AwsEmail::SendMail('hasania.khaled@gmail.com', 'Money Request', "
-            User Id : {$transaction->userId} ,
-                Amount : {$model->userStats->cantake_amount} ,
-            Transaction id : {$transaction->id}");
+
         return $this->redirect(['success', 'id' => $transaction->id]);
     }
 
@@ -299,14 +294,11 @@ class UserController extends Controller
      */
     public function actionManage()
     {
-
         if (Yii::$app->user->isGuest) {
             return $this->redirect(['/']);
         }
         $this->layout = 'usermanage';
-
         $model = $this->view->params['user'] = $this->findModel(Yii::$app->user->identity->id);
-
         if ($model->load(Yii::$app->request->post())) {
             if (isset($_POST['image']) && !empty($_POST['image'])) {
                 $model->image = str_replace('key', 'image', $_POST['image']);

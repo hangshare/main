@@ -46,7 +46,6 @@ class FaqController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'tit' => $tit
         ]);
     }
 
@@ -59,14 +58,14 @@ class FaqController extends Controller
     {
         $model = new Faq();
         $model->load(Yii::$app->request->post());
+        $model->lang = Yii::$app->language;
         if (!Yii::$app->user->isGuest)
             $model->userId = Yii::$app->user->id;
         if ($model->save()) {
             AwsEmail::SendMail('info@hangshare.com', 'New Frequently Asked Questions', $model->question);
-            AwsEmail::SendMail('hasania.khaled@gmail.com', 'New Frequently Asked Questions', $model->question);
         }
-        Yii::$app->getSession()->setFlash('success',  'تمت اضافة سؤالك بنجاح ، سوف يقوم فريقنا بالرد على سؤالكم واعلامكم.');
-        return $this->redirect(['//الأسئلة-الشائعة']);
+        Yii::$app->getSession()->setFlash('success',Yii::t('app','success.faq'));
+        return $this->redirect(['//' . Yii::t('app', 'Faqs-url')]);
     }
 
     /**
