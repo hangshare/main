@@ -29,13 +29,13 @@ use yii\helpers\Html;
                 <li class="divider"></li>
                 <li><?= Html::a(Yii::t('app', 'Privacy'), ['//' . Yii::t('app', 'privacy-url')]) ?></li>
                 <li class="divider"></li>
-                <li>
+<!--                <li>-->
                     <?php if (Yii::$app->language == 'en') : ?>
-                        <a class="changeLang" href="https://www.hangshare.com/">عربي</a>
+<!--                        <a class="changeLang" href="https://www.hangshare.com/">عربي</a>-->
                     <?php else : ?>
-                        <a class="changeLang" href="https://www.hangshare.com/en/">English</a>
+<!--                        <a class="changeLang" href="https://www.hangshare.com/en/">English</a>-->
                     <?php endif; ?>
-                </li>
+<!--                </li>-->
                 <li class="pull-right"><a class="btn btn-primary" href="https://www.facebook.com/Hangshare"
                                           target="_blank"><i
                             style="margin: 3px;" class="fa fa-fw fa-facebook"></i></a></li>
