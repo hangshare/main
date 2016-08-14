@@ -7,7 +7,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $name
- * @property string $name_ar
+ * @property string $lang
  */
 class Country extends \yii\db\ActiveRecord
 {
@@ -25,8 +25,9 @@ class Country extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'name_ar'], 'required'],
-            [['name', 'name_ar'], 'string', 'max' => 100]
+            [['name'], 'required'],
+            [['name'], 'string', 'max' => 100],
+            [['lang'], 'string', 'max' => 2]
         ];
     }
 
@@ -37,8 +38,8 @@ class Country extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'name_ar' => 'Name Ar',
+            'name' => Yii::t('app', 'Country.name'),
+            'lang' => Yii::t('app', 'Country.lang'),
         ];
     }
 }

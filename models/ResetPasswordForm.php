@@ -43,7 +43,7 @@ class ResetPasswordForm extends Model
     {
         return [
             [['password', 'repeat_password'], 'required'],
-            ['repeat_password', 'compare', 'compareAttribute' => 'password', 'message' => "كلمة المرور غير متطابقة"],
+            ['repeat_password', 'compare', 'compareAttribute' => 'password', 'message' => Yii::t('app','repeatpassword')],
             ['password', 'string', 'min' => 6],
         ];
     }
@@ -51,8 +51,8 @@ class ResetPasswordForm extends Model
     public function attributeLabels()
     {
         return [
-            'password' => Yii::t('app', 'كلمة المرور'),
-            'repeat_password' => Yii::t('app', 'تكرار كلمة المرور'),
+            'password' => Yii::t('app','RestPassword.password'),
+            'repeat_password' => Yii::t('app','RestPassword.repeat_password'),
         ];
     }
 

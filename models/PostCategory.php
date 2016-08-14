@@ -13,14 +13,14 @@ use Yii;
  *
  * @property Post $post
  */
-class PostTag extends \yii\db\ActiveRecord
+class PostCategory extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'post_tag';
+        return 'post_category';
     }
 
     /**
@@ -29,8 +29,8 @@ class PostTag extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'postId', 'tag'], 'required'],
-            [['id', 'postId'], 'integer'],
+            [['id', 'postId', 'categoryId'], 'required'],
+            [['id', 'postId', 'categoryId'], 'integer'],
             [['tag'], 'string', 'max' => 30]
         ];
     }
@@ -41,9 +41,9 @@ class PostTag extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'PostTag.id'),
-            'postId' => Yii::t('app', 'PostStats.postId'),
-            'tag' => Yii::t('app', 'PostStats.tag'),
+            'id' => Yii::t('app', 'PostCategory.id'),
+            'postId' => Yii::t('app', 'PostCategory.postId'),
+            'tag' => Yii::t('app', 'PostCategory.tag'),
         ];
     }
 
@@ -54,11 +54,12 @@ class PostTag extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Post::className(), ['id' => 'postId']);
     }
-        
+
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTags() {
-        return $this->hasOne(Tags::className(), ['id' => 'tag'])->select('id,name');
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'categoryId'])->select('id,title');
     }
 }

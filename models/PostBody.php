@@ -41,9 +41,9 @@ class PostBody extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'postId' => Yii::t('app', 'Post ID'),
-            'body' => Yii::t('app', 'Body'),
+            'id' => Yii::t('app', 'PostBody.id'),
+            'postId' => Yii::t('app', 'PostBody.postId'),
+            'body' => Yii::t('app', 'PostBody.body'),
         ];
     }
 

@@ -25,6 +25,11 @@ use Yii;
  * @property UserStats $userStats
  * @property UserTransactions[] $userTransactions
  * @property string auth_key
+ * @property string lang
+ * @property null password_reset_token
+ * @property int type
+ * @property int plan
+ * @property int transfer_type
  */
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
@@ -56,12 +61,13 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['email', 'username'], 'unique'],
             [['email'], 'email'],
             [['gender', 'plan', 'country', 'transfer_type'], 'integer'],
-            [['auth_key','dob', 'created_at', 'phone', 'password', 'scId', 'bio', 'plan', 'country', 'transfer_type', 'username'], 'safe'],
+            [['auth_key', 'dob', 'created_at', 'phone', 'password', 'scId', 'bio', 'plan', 'country', 'transfer_type', 'username','lang'], 'safe'],
             [['name', 'email'], 'string', 'max' => 50],
             [['username'], 'string', 'max' => 20],
             [['username', 'email'], 'filter', 'filter' => 'trim', 'skipOnArray' => true],
             ['username', 'match', 'pattern' => '/^[a-z0-9_-]{3,16}$/',
-                'message'=>'عنوان الصفحة يجب ان يتكون من الأحرف الانجليزية و الأرقام ويمكن اضافة  الشرطة الأفقية - فقط ، ولا يجب ان يبدأ برقم.'],
+                'message' => Yii::t('app', 'User.username.match.message')
+            ],
             [['image', 'bio'], 'string', 'max' => 250],
             [['email', 'password_hash'], 'unique', 'targetAttribute' => ['email', 'password_hash'], 'message' => 'The combination of Email, Paypal Email and Password Hash has already been taken.']
         ];
@@ -73,25 +79,25 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'الإسم'),
-            'email' => Yii::t('app', 'البريد الإلكتروني'),
-            'image' => Yii::t('app', 'الصورة الشخصية'),
-            'password_hash' => Yii::t('app', 'Password Hash'),
-            'password' => 'كلمة المرور',
-            'password_new' => 'كلمة المرور',
-            'password_re' => 'تأكيد كلمة المرور',
-            'gender' => Yii::t('app', 'الجنس'),
-            'dob' => Yii::t('app', 'تاريخ الميلاد'),
-            'password_old' => 'كلمة المرور الحالية',
-            'created_at' => Yii::t('app', 'Created At'),
-            'month' => 'الشهر',
-            'day' => 'اليوم',
-            'year' => 'السنة',
-            'bio' => 'نبذة مختصرة',
-            'country' => 'الدولة',
-            'phone' => 'رقم الهاتف',
-            'username' => 'عنوان الصفحة'
+            'id' => Yii::t('app', 'User.id'),
+            'name' => Yii::t('app', 'User.name'),
+            'email' => Yii::t('app', 'User.email'),
+            'image' => Yii::t('app', 'User.image'),
+            'password_hash' => Yii::t('app', 'User.passwordHash'),
+            'password' => Yii::t('app', 'User.password'),
+            'password_new' => Yii::t('app', 'User.newPassword'),
+            'password_re' => Yii::t('app', 'User.repeatedPassword'),
+            'gender' => Yii::t('app', 'User.gender'),
+            'dob' => Yii::t('app', 'User.dob'),
+            'password_old' => Yii::t('app', 'User.password_old'),
+            'created_at' => Yii::t('app', 'User.created_at'),
+            'month' => Yii::t('app', 'User.month'),
+            'day' => Yii::t('app', 'User.day'),
+            'year' => Yii::t('app', 'User.year'),
+            'bio' => Yii::t('app', 'User.bio'),
+            'country' => Yii::t('app', 'User.country'),
+            'phone' => Yii::t('app', 'User.phone'),
+            'username' => Yii::t('app', 'User.username')
         ];
     }
 
@@ -105,6 +111,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             $this->scId = '';
             $this->type = 1;
             $this->plan = 0;
+            $this->lang = Yii::$app->language;
+
             $this->auth_key = \Yii::$app->security->generateRandomString();
         }
 
@@ -131,7 +139,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             $stats->post_count = 0;
             $stats->save();
 
-            AwsEmail::queueUser($this->id, 1, [
+            AwsEmail::queueUser($this->id, 'welcome', [
                 '__LINK__' => Yii::$app->urlManager->createAbsoluteUrl(['//u/verify', 'key' => $settings->key])
             ]);
         }
@@ -204,7 +212,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $timestamp = (int)end($parts);
         return $timestamp + 300 >= time();
     }
-
 
 
     /**

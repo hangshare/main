@@ -9,12 +9,14 @@ use yii\data\ActiveDataProvider;
 /**
  * FaqSearch represents the model behind the search form about `app\models\Faq`.
  */
-class FaqSearch extends Faq {
+class FaqSearch extends Faq
+{
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['id', 'userId', 'categoryId'], 'integer'],
             [['question', 'answer', 'created_at'], 'safe'],
@@ -24,7 +26,8 @@ class FaqSearch extends Faq {
     /**
      * @inheritdoc
      */
-    public function scenarios() {
+    public function scenarios()
+    {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -36,7 +39,8 @@ class FaqSearch extends Faq {
      *
      * @return ActiveDataProvider
      */
-    public function search($params) {
+    public function search($params)
+    {
         $query = Faq::find()->select('id,question,answer,categoryId');
 
         $dataProvider = new ActiveDataProvider([
@@ -51,16 +55,17 @@ class FaqSearch extends Faq {
 
         if (isset($_GET['q']) && !empty($_GET['q'])) {
             $query->orFilterWhere(['like', 'question', $_GET['q']])
-                    ->orFilterWhere(['like', 'answer', $_GET['q']]);
+                ->orFilterWhere(['like', 'answer', $_GET['q']]);
         }
 
         $query->andFilterWhere([
             'categoryId' => $this->categoryId,
             'published' => 1,
+            'lang' => Yii::$app->language
         ]);
 
         $query->andFilterWhere(['like', 'question', $this->question])
-                ->andFilterWhere(['like', 'answer', $this->answer]);
+            ->andFilterWhere(['like', 'answer', $this->answer]);
 
         return $dataProvider;
     }

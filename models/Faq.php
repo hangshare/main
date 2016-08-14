@@ -15,32 +15,38 @@ use Yii;
  * @property string $created_at
  *
  * @property User $user
+ * @property string lang
  */
-class Faq extends \yii\db\ActiveRecord {
+class Faq extends \yii\db\ActiveRecord
+{
 
     public static $CategoryStr = [
-        '1' => 'أسئلة المالية',
-        '2' => 'أسئلة تقنية',
-        '3' => 'أسئلة عن المقالات',
-        '20' => 'غير ذلك',
+        '1' => 'Faq.money',
+        '2' => 'Faq.tech',
+        '3' => 'Faq.posts',
+        '20' => 'Faq.others',
     ];
+
 
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'faq';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
-            [['userId', 'categoryId' , 'published'], 'integer'],
+            [['userId', 'categoryId', 'published'], 'integer'],
             [['question'], 'required'],
             [['created_at'], 'safe'],
             [['question'], 'string', 'max' => 500],
+            [['lang'], 'string', 'max' => 2],
             [['answer'], 'string', 'max' => 3000]
         ];
     }
@@ -48,21 +54,23 @@ class Faq extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
-            'id' => 'ID',
-            'userId' => 'User',
-            'categoryId' => 'Type',
-            'question' => 'هل لديك سؤال جديد ؟',
-            'answer' => 'الإجابة',
-            'created_at' => 'Added on',
+            'id' => Yii::t('app', 'Faq.id'),
+            'userId' => Yii::t('app', 'Faq.user'),
+            'categoryId' => Yii::t('app', 'Faq.type'),
+            'question' => Yii::t('app', 'Faq.question'),
+            'answer' => Yii::t('app', 'Faq.answer'),
+            'created_at' => Yii::t('app', 'Faq.created_at'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser() {
+    public function getUser()
+    {
         return $this->hasOne(User::className(), ['id' => 'userId']);
     }
 

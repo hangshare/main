@@ -29,7 +29,7 @@ class PayPal extends Model {
      */
     public function attributeLabels() {
         return [
-            'email' => 'البريد الالكتروني الخاص لحساب PayPal',
+            'email' => Yii::t('app','PayPal.email'),
         ];
     }
 

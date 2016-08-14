@@ -28,7 +28,7 @@ class PasswordResetRequestForm extends Model
             ['email', 'email'],
             ['email', 'exist',
                 'targetClass' => '\app\models\User',
-                'message' => 'البريد الاكتروني غير مستخدم'
+                'message' => Yii::t('app','Password.email.exist.message')
             ],
         ];
     }
@@ -39,7 +39,7 @@ class PasswordResetRequestForm extends Model
     public function attributeLabels()
     {
         return [
-            'email' => Yii::t('app', 'البريد الالكتروني'),
+            'email' => Yii::t('app','Password.email'),
         ];
     }
 
@@ -59,9 +59,9 @@ class PasswordResetRequestForm extends Model
             $user->save(false);
 
             if (!empty($user->scId)) {
-                AwsEmail::queueUser($user->id, 8);
+                AwsEmail::queueUser($user->id, 'password_rest_sc');
             } else {
-                AwsEmail::queueUser($user->id, 7, [
+                AwsEmail::queueUser($user->id, 'password_rest', [
                     '__link__' => Yii::$app->urlManager->createAbsoluteUrl('//reset-password/?token=' . $user->password_reset_token)
                 ]);
             }

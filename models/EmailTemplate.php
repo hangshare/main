@@ -40,8 +40,8 @@ class EmailTemplate extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'subject' => 'Subject',
-            'body' => 'Body',
+            'subject' => Yii::t('app', 'Email.name'),
+            'body' => Yii::t('app', 'Email.body'),
         ];
     }
 }

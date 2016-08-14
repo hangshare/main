@@ -27,11 +27,11 @@ class BankTransfer extends Model {
      */
     public function attributeLabels() {
         return [
-            'name' => 'الاسم الرباعي',
-            'account' => 'رقم الحساب',
-            'bank_name' => 'اسم البنك',
-            'bank_branch' => 'فرع البنك المراد التحويل عليه',
-            'IBAN' => 'رقم الـ IBAN'
+            'name' => Yii::t('app','Bank.name'),
+            'account' =>Yii::t('app','Bank.account'),
+            'bank_name' =>Yii::t('app','Bank.bank_name'),
+            'bank_branch' =>Yii::t('app','Bank.bank_branch'),
+            'IBAN' =>Yii::t('app','Bank.IBAN')
         ];
     }
 

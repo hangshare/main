@@ -8,14 +8,16 @@ use yii\base\Model;
 /**
  * ContactForm is the model behind the contact form.
  */
-class CashierTransfer extends Model {
+class CashierTransfer extends Model
+{
 
     public $name, $phone, $address, $cashier_name;
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['name', 'phone', 'address', 'cashier_name'], 'required'],
             [['name', 'phone', 'address', 'cashier_name'], 'safe'],
@@ -25,12 +27,13 @@ class CashierTransfer extends Model {
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
-            'name' => 'الاسم الرباعي',
-            'phone' => 'رقم الهاتف',
-            'address' => 'العنوان ( اسم الدولة والمدينة و الحي)',
-            'cashier_name' => 'اسم الصراف المراد التحويل عليه'
+            'name' => Yii::t('app', 'Cashire.name'),
+            'phone' => Yii::t('app', 'Cashire.phone'),
+            'address' => Yii::t('app', 'Cashire.address'),
+            'cashier_name' => Yii::t('app', 'Cashire.cashier_name')
         ];
     }
 

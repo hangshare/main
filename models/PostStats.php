@@ -43,12 +43,12 @@ class PostStats extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'postId' => Yii::t('app', 'Post ID'),
-            'views' => Yii::t('app', 'Views'),
-            'fb_share' => Yii::t('app', 'Fb Share'),
-            'tw_share' => Yii::t('app', 'Tw Share'),
-            'g_share' => Yii::t('app', 'G Share'),
-            'comments' => Yii::t('app', 'Comments'),
+            'postId' => Yii::t('app', 'PostStats.postId'),
+            'views' => Yii::t('app', 'PostStats.Views'),
+            'fb_share' => Yii::t('app', 'PostStats.FbShare'),
+            'tw_share' => Yii::t('app', 'PostStats.TwShare'),
+            'g_share' => Yii::t('app', 'PostStats.GShare'),
+            'comments' => Yii::t('app', 'PostStats.comments'),
         ];
     }
 

@@ -29,7 +29,7 @@ class UserEmail extends \yii\db\ActiveRecord {
     public function rules() {
         return [
             [['userId', 'emailId', 'key'], 'required'],
-            [['userId', 'emailId', 'opened_at'], 'integer'],
+            [['userId', 'opened_at'], 'integer'],
             [['created_at'], 'safe'],
             [['key'], 'string', 'max' => 50]
         ];

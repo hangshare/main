@@ -70,9 +70,9 @@ class LoginForm extends Model
     public function attributeLabels()
     {
         return [
-            'username' => Yii::t('app', 'البريد الإلكتروني'),
-            'password' => Yii::t('app', 'كلمة المرور'),
-            'rememberMe' => Yii::t('app', 'تذكرني في المرة القادمة'),
+            'username' => Yii::t('app','Login.username'),
+            'password' => Yii::t('app','Login.password'),
+            'rememberMe' => Yii::t('app','Login.rememberMe'),
         ];
     }
 

@@ -36,8 +36,8 @@ class Tags extends \yii\db\ActiveRecord {
      */
     public function attributeLabels() {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'tag name'),
+            'id' => Yii::t('app', 'Tags.id'),
+            'name' => Yii::t('app', 'Tags.tagN+ame'),
         ];
     }
 

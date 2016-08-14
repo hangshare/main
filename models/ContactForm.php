@@ -32,10 +32,10 @@ class ContactForm extends Model {
      */
     public function attributeLabels() {
         return [
-            'name' => 'الإسم',
-            'email' => 'البريد الإلكتروني',
-            'subject' => 'عنوان الرسالة',
-            'body' => 'موضوع الرسالة',
+            'name' => Yii::t('app', 'Contact.name'),
+            'email' => Yii::t('app', 'Contact.email'),
+            'subject' =>Yii::t('app', 'Contact.subject'),
+            'body' =>Yii::t('app', 'Contact.body'),
         ];
     }
 

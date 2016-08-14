@@ -15,6 +15,8 @@ use Yii;
  * @property double $cantake_amount
  *
  * @property User $user
+ * @property int post_count
+ * @property int post_total_views
  */
 class UserStats extends \yii\db\ActiveRecord
 {
