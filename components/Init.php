@@ -74,10 +74,10 @@ class Init extends Component
         } elseif (isset($_COOKIE['userlanghangshare']) && $_COOKIE['userlanghangshare'] == 'en' && $this->isHome()) {
             $_GET['language'] = 'en';
             Yii::$app->homeUrl = Yii::getAlias('@web') . '/en/';
-            header("HTTP/1.1 302 Moved Permanently");
+            //header("HTTP/1.1 302 Moved Permanently");
             //header("Location: http://localhost/hangshare/web/en/");
-            header("Location: https://www.hangshare.com/en/");
-            exit(0);
+            //header("Location: https://www.hangshare.com/en/");
+            //exit(0);
         } else {
             //setcookie('userlanghangshare', 'ar', time() + 999999, "/");
         }
