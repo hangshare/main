@@ -69,7 +69,7 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                                             <?= Yii::t('app', 'Google+') ?>
                                         </a>
                                     </li>
-                                    <?php if (!Yii::$app->helper->isMobile()) : ?>
+                                    <?php if (Yii::$app->helper->isMobile()) : ?>
                                         <li>
                                             <a class="btn" href="whatsapp://send?text=<?= $model->url; ?>"
                                                style="color: #fff; background-color: #34af23;"
