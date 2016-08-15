@@ -82,12 +82,11 @@ $config = [
             'showScriptName' => false,
             'suffix' => '/',
             'rules' => [
-
-
                 '<language:en>/' => '/site/index',
                 '<language:en>/articles' => 'explore/all',
                 '<language:en>/articles/<category:.*?>' => 'explore/category',
                 '<language:en>/articles/<category:.*?>/<subcategory:.*?>' => 'explore/category',
+                '<language:en>/tags/<tags:.*?>' => 'explore/tags',
                 '<language:en>/user/<id:[^*]+>' => 'user/view',
                 '<language:en>/users' => 'user/index',
                 '<language:en>/register' => 'site/signup',
@@ -112,13 +111,11 @@ $config = [
                 '<language:en>/<controller>/<action>' => '<controller>/<action>',
                 '<language:en>/<controller>/<action>/<id:\d+>' => '<controller>/<action>',
                 '<language:en>/<slug:.*?>' => 'explore/view',
-
                 '/' => 'site/index',
                 'مواضيع' => 'explore/all',
                 'مواضيع/<category:.*?>' => 'explore/category',
                 'مواضيع/<category:.*?>/<subcategory:.*?>' => 'explore/category',
                 'tags/<tags:.*?>' => 'explore/tags',
-
                 'users' => 'user/index',
                 'register' => 'site/signup',
                 'plan' => 'site/plan',
