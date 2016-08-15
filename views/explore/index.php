@@ -5,8 +5,13 @@ use app\models\Tags;
 use yii\helpers\Html;
 use yii\widgets\ListView;
 
-$this->title = Yii::t('app', $cat->title);
-$this->description = Yii::t('app', $cat->title);
+if (isset($cat)) {
+    $this->title = Yii::t('app', $cat->title);
+    $this->description = Yii::t('app', $cat->title);
+} else {
+    $this->title = $tags;
+    $this->description = $tags;
+}
 ?>
 <div class="container m-t-25">
     <div class="row">
