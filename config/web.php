@@ -117,6 +117,7 @@ $config = [
                 'مواضيع' => 'explore/all',
                 'مواضيع/<category:.*?>' => 'explore/category',
                 'مواضيع/<category:.*?>/<subcategory:.*?>' => 'explore/category',
+                'tags/<tags:.*?>' => 'explore/tags',
 
                 'users' => 'user/index',
                 'register' => 'site/signup',
