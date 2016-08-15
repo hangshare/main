@@ -122,6 +122,49 @@ class ExploreController extends Controller
             ]);
         }
     }
+
+    public function actionTags($tags)
+    {
+
+        $pageSize = 10;
+        $query = Post::find();
+        $query->joinWith(['postTags', 'postTags.tags']);
+        $query->orderBy('post.created_at DESC');
+        $query->where("post.deleted=0 AND post.lang = '" . Yii::$app->language . "'");
+        $query->andWhere(['<>', 'post.cover', '']);
+        $query->andFilterWhere(['like', 'tags.name', $tags]);
+
+        $currentPage = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $currentPage = preg_replace("/tag=[^&]+/", "", $currentPage);
+        $currentPage = preg_replace("/&{2,}/", "&", $currentPage);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => array(
+                'defaultPageSize' => $pageSize,
+                'pageSize' => $pageSize,
+                'route' => $currentPage),
+        ]);
+        if (Yii::$app->request->isAjax) {
+            $this->layout = false;
+            $html = '';
+            $models = $dataProvider->getModels();
+            foreach ($models as $data) {
+                $html .= $this->render('_view', ['model' => $data]);
+            }
+            echo json_encode([
+                'html' => $html,
+                'total' => 40000,
+                'PageSize' => $pageSize
+            ]);
+        } else {
+            return $this->render('index', [
+                'dataProvider' => $dataProvider,
+                'cat' => $cat
+            ]);
+        }
+    }
+
+
     public function actionCategory($category)
     {
         $cat = Category::find()->where(['url_link' => $category])->one();
