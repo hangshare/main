@@ -156,12 +156,14 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                                 <div id="related-posts" data-id="<?= $model->id; ?>">
                                     <h3 class="underlined"><?= Yii::t('app', 'Related Posts') ?></h3>
                                 </div>
+                                <?php $tags_all = $model->postTags;
+                                if(count($tags_all) > 0) : ?>
                                 <div class="col-md-12">
                                     <div class="row">
                                         <h4 class="underlined"><?= Yii::t('app', 'Tags') ?></h4>
                                         <ul class="list-inline tags">
                                             <?php
-                                            foreach ($model->postTags as $tags) :
+                                            foreach ( $tags_all as $tags) :
                                                 if (isset($tags->tags)):
                                                     ?>
                                                     <li>
@@ -176,6 +178,7 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                                         </ul>
                                     </div>
                                 </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
