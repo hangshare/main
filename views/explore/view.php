@@ -191,7 +191,6 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                            href="<?= Yii::$app->urlManager->createUrl(['//' . Yii::t('app', 'ContactUs-url')]); ?>"><img
                                 src="https://s3.amazonaws.com/hangshare.static/assets/ads-arabic.jpg"
                                 alt="<?= Yii::t('app','Add your ads here') ?>"/></a>
-
                         <div id="hot-posts" data-id="<?= $model->id; ?>">
                             <h3 class="underlined"><?= Yii::t('app', 'Whats Hot') ?></h3>
                         </div>
