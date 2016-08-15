@@ -126,7 +126,7 @@ class ExploreController extends Controller
     public function actionTags($tags)
     {
         $pageSize = 10;
-        $this->title = $tags;
+        $tags = str_replace('-',' ', $tags);
         $query = Post::find();
         $query->joinWith(['postTags', 'postTags.tags']);
         $query->orderBy('post.created_at DESC');
@@ -158,7 +158,8 @@ class ExploreController extends Controller
             ]);
         } else {
             return $this->render('index', [
-                'dataProvider' => $dataProvider
+                'dataProvider' => $dataProvider,
+                'tags'=>$tags
             ]);
         }
     }
