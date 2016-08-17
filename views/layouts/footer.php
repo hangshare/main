@@ -2,19 +2,6 @@
 use yii\helpers\Html;
 
 ?>
-<?php if (Yii::$app->helper->isMobile()): ?>
-    <div class="footads">
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- Large mobile Banner - Mobile all pages -->
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:320px;height:80px"
-             data-ad-client="ca-pub-6288640194310142"
-             data-ad-slot="5787356113"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-<?php endif; ?>
 <?php if (!Yii::$app->helper->isMobile()): ?>
     <footer style="position: relative">
         <div class="container">
