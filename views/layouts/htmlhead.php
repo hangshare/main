@@ -14,7 +14,7 @@ $this->description = htmlentities($this->description);
 if (empty($this->ogImage)) {
     $this->ogImage = 'https://s3.amazonaws.com/hangshare.static/Screenshot+from+2016-02-05+03%3A38%3A33.png';
 }
-$canonical = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$canonical = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -28,12 +28,20 @@ $canonical = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     <meta property="og:title" content="<?= Html::encode($this->title) ?>"/>
     <meta property="og:site_name" content="hangshare"/>
     <meta property="og:url" content="<?= $canonical ?>"/>
-    <meta property="og:description" content="<?= $this->description; ?>"/>
+    <meta property="og:description" content="<?= Html::encode($this->description) ?>"/>
     <meta property="fb:app_id" content="1024611190883720"/>
     <meta property="og:image" content="<?= $this->ogImage; ?>"/>
     <meta property="og:type" content="article"/>
     <meta property="article:author" content="hangshare"/>
-    <meta property="article:publisher" content="http://www.hangshare.com"/>
+    <meta property="article:publisher" content="https://www.hangshare.com"/>
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:site" content="@hang_share" />
+    <meta property="twitter:title" content="<?= Html::encode($this->title) ?>" />
+    <meta property="twitter:description" content="<?= Html::encode($this->description) ?>" />
+    <meta property="twitter:image" content="<?= $this->ogImage; ?>" />
+    <meta property="twitter:url" content="<?= $canonical ?>" />
+    <meta name="twitter:domain" content="hangshare.com">
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <script>
