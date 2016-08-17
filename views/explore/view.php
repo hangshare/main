@@ -258,17 +258,24 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
 endif; ?>
 <?php if (Yii::$app->user->isGuest) : ?>
     <div id="slide-signup"
-         style=" width: 560px; margin-right: 28%; position: fixed; bottom:-250px; transition: bottom 2s; z-index: 1000; border: 3px solid #3d8eb9; border-bottom: 0;">
+         style="
+          margin-right: 7%;
+           position: fixed;
+            bottom:-250px;
+             transition: bottom 2s;
+              z-index: 1000; border: 3px solid #3d8eb9;
+               border-bottom: 0;
+">
         <div class="white text-center" style="height: 150px;">
                 <a href="javascript:void(0);" onclick="$(this).parent().parent().hide();" rel="nofollow"
                    style="color: #ccc; position: relative; top: -10px"><i
                         class="glyphicon glyphicon-remove-sign"></i></a>
                 <h4 class="text-center margin-0"><?= Yii::t('app', 'Share Posts and get instant profit') ?></h4>
                 <a href="<?= $fUrl; ?>" class="btn btn-primary"
-                   style="background-color: #3b5998;height: 30px;margin: 30px auto;
+                   style="background-color: #3b5998;height: 30px; margin: 15px auto;
     width: 50%;">
                     <i class="fa fa-fw fa-facebook pull-left signup-slide-fb"></i>
-                    <span class="pull-left"><?= Yii::t('app', 'Sign up NOW! Using your Facebook Account') ?></span>
+                    <span><?= Yii::t('app', 'Sign up NOW! Using your Facebook Account') ?></span>
                 </a>
 
         </div>
