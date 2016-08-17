@@ -49,7 +49,8 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                 <?php endif; ?>
                 <article data-id="<?= $model->id; ?>" data-userId="<?= $model->userId ?>"
                          data-plan="<?= $model->user->plan; ?>" style="margin-bottom: 100px;">
-                    <div class="container">
+                    <div <?php if (Yii::$app->helper->isMobile()) : ?> style="padding: 0;"
+                                                                       <?php endif; ?> class="container">
                         <?php if (!Yii::$app->helper->isMobile()) : ?>
                             <span class="pull-left"
                                   style="font-weight: bold; color: #999; font-size: 18px; margin-top: 3px;"><?= Yii::t('app', 'Share this Article') ?></span>
