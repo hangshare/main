@@ -64,11 +64,15 @@ class Helper extends Component
 
     public function metabody($bodyText)
     {
+        $bodyText = preg_replace("/&#?[a-z0-9]+;/i","", $bodyText);
         $bodyText = strip_tags($bodyText);
+        $bodyText = str_replace('(adsbygoogle = window.adsbygoogle || []).push({});',' ',$bodyText);
         $bodyText = preg_replace('/\s*\n\s*/', "\n", $bodyText);
         $bodyText = preg_replace('/[    ]+/', ' ', $bodyText);
-        $bodyText = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $bodyText);
-        return trim(substr($bodyText, 0, 250));
+        $regex = "@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?).*$)@";
+        $bodyText= preg_replace($regex, ' ', $bodyText);
+
+        return trim(substr($bodyText, 0, 200));
     }
 
     public function downloadFromUrl($url, $path)
