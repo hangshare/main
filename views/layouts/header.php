@@ -57,15 +57,13 @@ foreach ($menu as $menuData) {
                 <?= Yii::t('app', 'Google+') ?>
             </a>
         </li>
-        <?php if (!Yii::$app->helper->isMobile()) : ?>
-            <li>
-                <a class="btn" href="whatsapp://send?text=<?= $model->url; ?>"
-                   style="color: #fff; background-color: #34af23;"
-                   data-action="share/whatsapp/share">
-                    <i style="margin: 3px;" class="fa fa-whatsapp"></i>
-                    <?= Yii::t('app', 'Whatsapp') ?> </a>
-            </li>
-        <?php endif; ?>
+        <li>
+            <a class="btn" href="whatsapp://send?text=<?= $model->url; ?>"
+               style="color: #fff; background-color: #34af23;"
+               data-action="share/whatsapp/share">
+                <i style="margin: 3px;" class="fa fa-whatsapp"></i>
+                <?= Yii::t('app', 'Whatsapp') ?> </a>
+        </li>
     </ul>
 
     <?php if (!Yii::$app->user->isGuest) : ?>
