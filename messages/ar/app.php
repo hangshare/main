@@ -162,7 +162,7 @@ return [
     'one month offer' => '{price} دولار لشهر واحد',
     'three month offer' => '{price} دولار لثلاثة أشهر',
     'Share Posts and get instant profit' => 'انشر مواضيع واحصل على ربح فوري',
-    'Sign up NOW! Using your Facebook Account' => 'سجل الآن باستخدام حساب الفيسبوك',
+    'Sign up NOW! Using your Facebook Account' => 'سجل الآن',
     'Next Post' => 'الموضوع التالي',
     'Forget your username or password?' => 'هل نسيت كلمة المرور ؟',
     'Login' => 'تسجيل الدخول',
