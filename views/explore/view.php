@@ -17,7 +17,7 @@ $params = ['scope' => 'email,user_about_me'];
 $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params);
 ?>
 <?php if (Yii::$app->helper->isMobile()) : ?>
-    <div style="margin-top: 20px;">
+    <div style="margin-top: 100px;">
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <!-- responsive - new mobile upper post -->
         <ins class="adsbygoogle"
