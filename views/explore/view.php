@@ -30,7 +30,6 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
         </script>
     </div>
 <?php endif; ?>
-
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-9 res-nopadding" style="background-color: #fff;">
