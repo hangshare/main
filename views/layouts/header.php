@@ -8,7 +8,7 @@ use yii\bootstrap\NavBar;
 if (empty($this->title)) {
     $this->title = Yii::t('app', 'General Page Title');;
 }
-$canonical = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$canonical = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $this->registerLinkTag(['rel' => 'canonical', 'href' => $canonical]);
 $menu = Category::find()->where(['lang' => Yii::$app->language])->all();
 
