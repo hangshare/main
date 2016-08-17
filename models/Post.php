@@ -219,7 +219,7 @@ class Post extends \yii\db\ActiveRecord
                 }
             }
         }
-        $this->url = Url::toRoute("//{$this->urlTitle}", 'https');
+        $this->url = Url::toRoute("//{$this->urlTitle}", true);
         return TRUE;
     }
 
