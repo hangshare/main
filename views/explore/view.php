@@ -19,19 +19,18 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-9 res-nopadding" style="background-color: #fff;">
-<!--                <div class="ads1">-->
-<!--                    <script async-->
-<!--                            src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
-<!--                    <!-- Leaderboard - Post Upper -->-->
-<!--                    <ins class="adsbygoogle"-->
-<!--                         style="display:inline-block;width:728px;height:90px"-->
-<!--                         data-ad-client="ca-pub-6288640194310142"-->
-<!--                         data-ad-slot="1011333310"></ins>-->
-<!--                    <script>-->
-<!--                        (adsbygoogle = window.adsbygoogle || []).push({});-->
-<!--                    </script>-->
-<!--                </div>-->
-
+                <div class="ads1">
+                    <script async
+                            src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Leaderboard - Post Upper -->
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:728px;height:90px"
+                         data-ad-client="ca-pub-6288640194310142"
+                         data-ad-slot="1011333310"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
                 <article data-id="<?= $model->id; ?>" data-userId="<?= $model->userId ?>"
                          data-plan="<?= $model->user->plan; ?>" style="margin-bottom: 100px;">
                     <div class="container">
