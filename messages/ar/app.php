@@ -81,7 +81,7 @@ return [
     'Featured Posts' => 'مواضيع مميزة',
     'New Post' => 'مواضيع جديدة',
     'Most Visited' => 'الأكثر مشاهدة',
-    'Home page' => 'الصفحة الرئيسية',
+    'Home page' => 'الرئيسية',
     'About Us' => 'نبذه عنا',
     'Faqs' => 'الأسئلة الشائعة',
     'Contact Us' => 'تواصل معنا',
