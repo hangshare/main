@@ -158,6 +158,13 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        if (!\Yii::$app->user->isGuest) {
+            if (Yii::$app->language == 'ar')
+                return $this->redirect(['//مواضيع']);
+            if (Yii::$app->language == 'en')
+                return $this->redirect(['//articles']);
+        }
+
         $pageSize = 16;
         $newpost = Yii::$app->cache->get('home-new-posts-' . Yii::$app->language);
         if ($newpost === false) {
