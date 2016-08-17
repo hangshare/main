@@ -10,7 +10,7 @@ $this->title = Yii::t('app', 'user.success.payment');
         <br>
 
         <div class="text-center">
-            <?= Html::a(Yii::t('app', 'back.home'), 'http://www.hangshare.com/', ['class' => 'btn btn-default btn-lg']); ?>
+            <?= Html::a(Yii::t('app', 'back.home'), 'https://www.hangshare.com/', ['class' => 'btn btn-default btn-lg']); ?>
         </div>
     </div>
 </div>
