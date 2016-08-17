@@ -135,6 +135,9 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                                     Yii::$app->cache->set('post-body-' . $model->id, $bodys, 3000);
                                 }
                                 $this->description = Yii::$app->helper->metabody($bodys);
+                                if(empty($this->description)){
+                                    $this->description = $this->title;
+                                }
                                 echo $bodys;
                                 ?>
                                 <?php if (Yii::$app->helper->isMobile()): ?>
