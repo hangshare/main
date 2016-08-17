@@ -187,10 +187,15 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                 <?php if (!Yii::$app->helper->isMobile()): ?>
                 <div class="col-md-3">
                     <div class="m-t-8">
-                        <a onclick="ga('send',{hitType: 'event',eventCategory: 'Ads',eventAction:'Ads',eventLabel: 'postId : <?= $model->id; ?>'});"
-                           href="<?= Yii::$app->urlManager->createUrl(['//' . Yii::t('app', 'ContactUs-url')]); ?>"><img
-                                src="https://s3.amazonaws.com/hangshare.static/assets/ads-arabic.jpg"
-                                alt="<?= Yii::t('app','Add your ads here') ?>"/></a>
+                        <div style="float: left; margin: 0 20px 20px 0;"> <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <!-- MPU - Post page right Upper  -->
+                            <ins class="adsbygoogle"
+                                 style="display:inline-block;width:300px;height:250px; text-align: left;"
+                                 data-ad-client="ca-pub-6288640194310142"
+                                 data-ad-slot="1962272113"></ins>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script></div>
                         <div id="hot-posts" data-id="<?= $model->id; ?>">
                             <h3 class="underlined"><?= Yii::t('app', 'Whats Hot') ?></h3>
                         </div>
