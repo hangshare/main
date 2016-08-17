@@ -248,4 +248,6 @@ return [
     'Logout'=>'تسجيل الخروج',
     'Share this Article'=>'شارك هذا الموضوع',
     'Whats Hot'=>'مواضيع مميزة',
+    'Free Registrations'=>'تسجيل مجاني',
+    'Free'=>'مجاني',
 ];
