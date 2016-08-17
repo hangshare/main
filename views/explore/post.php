@@ -65,12 +65,13 @@ foreach ($model->postBodies as $data) {
             }
             $model->categories = $arr;
             ?>
+            <label for="post-categories" class="control-label"><?= Yii::t('app','Categories') ?></label>
             <?= $form->field($model, 'categories')->checkboxList(ArrayHelper::map(Category::find()
                 ->where("lang = '" . Yii::$app->language . "'")
                 ->select('id, title')
                 ->orderBy('id desc')
                 ->limit(50)
-                ->all(), 'id', 'title'))
+                ->all(), 'id', 'title'))->label(false)
             ?>
             <label><?= Yii::t('app', 'Tags') ?></label>
             <?php
