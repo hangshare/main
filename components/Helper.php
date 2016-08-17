@@ -67,7 +67,8 @@ class Helper extends Component
         $bodyText = strip_tags($bodyText);
         $bodyText = preg_replace('/\s*\n\s*/', "\n", $bodyText);
         $bodyText = preg_replace('/[    ]+/', ' ', $bodyText);
-        return trim(substr($bodyText, 0, 150));
+        $bodyText = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $bodyText);
+        return trim(substr($bodyText, 0, 250));
     }
 
     public function downloadFromUrl($url, $path)
