@@ -17,34 +17,36 @@ $params = ['scope' => 'email,user_about_me'];
 $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params);
 ?>
 <?php if (Yii::$app->helper->isMobile()) : ?>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- responsive - new mobile upper post -->
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-6288640194310142"
-         data-ad-slot="9020008518"
-         data-ad-format="auto"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+    <div style="margin-top: 20px;">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- responsive - new mobile upper post -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6288640194310142"
+             data-ad-slot="9020008518"
+             data-ad-format="auto"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 <?php endif; ?>
 
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-9 res-nopadding" style="background-color: #fff;">
                 <?php if (!Yii::$app->helper->isMobile()) : ?>
-                <div class="ads1">
-                    <script async
-                            src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- Leaderboard - Post Upper -->
-                    <ins class="adsbygoogle"
-                         style="display:inline-block;width:728px;height:90px"
-                         data-ad-client="ca-pub-6288640194310142"
-                         data-ad-slot="1011333310"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
+                    <div class="ads1">
+                        <script async
+                                src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- Leaderboard - Post Upper -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:728px;height:90px"
+                             data-ad-client="ca-pub-6288640194310142"
+                             data-ad-slot="1011333310"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
                 <?php endif; ?>
                 <article data-id="<?= $model->id; ?>" data-userId="<?= $model->userId ?>"
                          data-plan="<?= $model->user->plan; ?>" style="margin-bottom: 100px;">
