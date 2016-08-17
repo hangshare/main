@@ -22,50 +22,48 @@ foreach ($menu as $menuData) {
     }
 }
 ?>
+<?php $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
     <header>
-<?php if (Yii::$app->helper->isMobile()): ?>
-    <ul id="main-menu" class="mainmenu">
-        <?php foreach ($mainMenu as $mData) : ?>
-            <li <?php if (isset($mData['sub'])): ?><?php endif; ?>>
-                <a href="<?= Url::to(["//{$articlesurl}/{$mData['url']}"]) ?>"><?= $mData['title'] ?></a>
-            </li>
-        <?php endforeach; ?>
-    </ul>
+        <?php if (Yii::$app->helper->isMobile()): ?>
+            <ul id="main-menu" class="mainmenu">
+                <?php foreach ($mainMenu as $mData) : ?>
+                <li <?php if (isset($mData['sub'])): ?><?php endif; ?>>
+                    <a href="<?= Url::to(["//{$articlesurl}/{$mData['url']}"]) ?>"><?= $mData['title'] ?></a>
+                </li>
+            <?php endforeach; ?>
+            </ul>
     <?php if (Yii::$app->user->isGuest) : ?>
         <ul id="non-user-menu" class="mainmenu">
             <li><?= Html::a(Yii::t('app', 'Login'), Url::to(['//login'])); ?></li>
             <li><?= Html::a(Yii::t('app', 'Register'), Url::to(['//register'])); ?></li>
         </ul>
     <?php endif; ?>
-
-
     <ul id="page-share" class="mainmenu">
         <li><a class="btn btn-primary js-share js-share-fasebook" href="javascript:void(0);"
-               post-url="<?= $model->url; ?>">
+               post-url="<?= $actual_link; ?>">
                 <i style="margin: 3px;" class="fa fa-fw fa-facebook"></i>
                 <?= Yii::t('app', 'Facebook') ?>
             </a>
-        <li><a class="btn js-share js-share-twitter" post-url="<?= $model->url; ?>"
+        <li><a class="btn js-share js-share-twitter" post-url="<?= $actual_link; ?>"
                href="javascript:void(0);" style="color: #fff; background-color: #4099ff;">
                 <i style="margin: 3px;" class="fa fa-twitter"></i>
                 <?= Yii::t('app', 'twitter') ?>
             </a></li>
         <li>
-            <a class="btn js-share js-share-gpuls" post-url="<?= $model->url; ?>"
+            <a class="btn js-share js-share-gpuls" post-url="<?= $actual_link; ?>"
                href="javascript:void(0);" style="color: #fff; background-color: #e51717;">
                 <i style="margin: 3px;" class="fa fa-google-plus"></i>
                 <?= Yii::t('app', 'Google+') ?>
             </a>
         </li>
         <li>
-            <a class="btn" href="whatsapp://send?text=<?= $model->url; ?>"
+            <a class="btn" href="whatsapp://send?text=<?= $actual_link ; ?>"
                style="color: #fff; background-color: #34af23;"
                data-action="share/whatsapp/share">
                 <i style="margin: 3px;" class="fa fa-whatsapp"></i>
                 <?= Yii::t('app', 'Whatsapp') ?> </a>
         </li>
     </ul>
-
     <?php if (!Yii::$app->user->isGuest) : ?>
         <ul id="user-menu" class="mainmenu">
             <?php
@@ -287,22 +285,15 @@ foreach ($menu as $menuData) {
             </div>
             <div class="pull-right marg">
                 <ul class="list-inline">
-                    <?php if (isset($this->params['next'])) : ?>
-                        <li><a class="btn btn-primary"
-                               href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['//explore/view', 'id' => $this->params['next']->id, 'title' => $this->params['next']->title]); ?>"><span
-                                    class="pull-left"><?= Yii::t('app', 'Next Post') ?></span><i
-                                    class="fa fa-chevron-left pull-left"></i></a>
-                        </li>
-                    <?php endif; ?>
                     <li><a class="btn btn-primary js-share js-share-fasebook"
-                           post-url="<?php echo Url::current(['src' => null], true); ?>" href="javascript:void(0);"><i
+                           post-url="<?= $actual_link ?>" href="javascript:void(0);"><i
                                 class="fa fa-fw fa-facebook" style="margin: 3px;"></i></a></li>
                     <li><a style="color: #fff; background-color: #4099ff;"
-                           post-url="<?php echo Url::current(['src' => null], true); ?>" href="javascript:void(0);"
+                           post-url="<?= $actual_link; ?>" href="javascript:void(0);"
                            class="btn js-share js-share-twitter"><i class="fa fa-twitter" style="margin: 3px;"></i></a>
                     </li>
                     <li><a style="color: #fff; background-color: #e51717;"
-                           post-url="<?php echo Url::current(['src' => null], true); ?>" href="javascript:void(0);"
+                           post-url="<?= $actual_link ?>" href="javascript:void(0);"
                            class="btn js-share js-share-gpuls"><i class="fa fa-google-plus"
                                                                   style="margin: 3px;"></i></a>
                     </li>
