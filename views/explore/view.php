@@ -32,7 +32,7 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
         </div>
     </div>
 <?php endif; ?>
-    <div class="row">
+    <div <?php if (!Yii::$app->helper->isMobile()) : ?> class="row" <?php endif; ?>>
         <div class="col-md-12 res-nopadding">
             <div class="col-md-9 res-nopadding" style="background-color: #fff;">
                 <?php if (!Yii::$app->helper->isMobile()) : ?>
