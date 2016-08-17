@@ -16,18 +16,6 @@ $helper = $fb->getRedirectLoginHelper();
 $params = ['scope' => 'email,user_about_me'];
 $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params);
 ?>
-<?php if (Yii::$app->helper->isMobile()) : ?>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- responsive - new mobile upper post -->
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-6288640194310142"
-         data-ad-slot="9020008518"
-         data-ad-format="auto"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-<?php endif; ?>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-9 res-nopadding" style="background-color: #fff;">
@@ -135,62 +123,48 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                                     Yii::$app->cache->set('post-body-' . $model->id, $bodys, 3000);
                                 }
                                 $this->description = Yii::$app->helper->metabody($bodys);
-                                if(empty($this->description)){
+                                if (empty($this->description)) {
                                     $this->description = $this->title;
                                 }
                                 echo $bodys;
                                 ?>
-                                <?php if (Yii::$app->helper->isMobile()): ?>
-                                    <div class="col-md-12">
-                                        <script async
-                                                src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                                        <!-- Responsive - Mobile Post Bottom -->
-                                        <ins class="adsbygoogle"
-                                             style="display:block"
-                                             data-ad-client="ca-pub-6288640194310142"
-                                             data-ad-slot="9710171716"
-                                             data-ad-format="auto"></ins>
-                                        <script>
-                                            (adsbygoogle = window.adsbygoogle || []).push({});
-                                        </script>
-                                    </div>
-                                <?php endif; ?>
                                 <div class="clearfix"></div>
                                 <div id="related-posts" data-id="<?= $model->id; ?>">
                                     <h3 class="underlined"><?= Yii::t('app', 'Related Posts') ?></h3>
                                 </div>
                                 <?php $tags_all = $model->postTags;
-                                if(count($tags_all) > 0) : ?>
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <h4 class="underlined"><?= Yii::t('app', 'Tags') ?></h4>
-                                        <ul class="list-inline tags">
-                                            <?php
-                                            foreach ( $tags_all as $tags) :
-                                                if (isset($tags->tags)):
-                                                    ?>
-                                                    <li>
-                                                        <?php $ttaUrl = Yii::$app->helper->urlTitle($tags->tags->name); ?>
-                                                        <a href="<?= Yii::$app->urlManager->createUrl(["//tags/{$ttaUrl}"]) ?>"><label
-                                                                class="label label-default"><?php echo $tags->tags->name; ?></label></a>
-                                                    </li>
-                                                    <?php
-                                                endif;
-                                            endforeach;
-                                            ?>
-                                        </ul>
+                                if (count($tags_all) > 0) : ?>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <h4 class="underlined"><?= Yii::t('app', 'Tags') ?></h4>
+                                            <ul class="list-inline tags">
+                                                <?php
+                                                foreach ($tags_all as $tags) :
+                                                    if (isset($tags->tags)):
+                                                        ?>
+                                                        <li>
+                                                            <?php $ttaUrl = Yii::$app->helper->urlTitle($tags->tags->name); ?>
+                                                            <a href="<?= Yii::$app->urlManager->createUrl(["//tags/{$ttaUrl}"]) ?>"><label
+                                                                    class="label label-default"><?php echo $tags->tags->name; ?></label></a>
+                                                        </li>
+                                                        <?php
+                                                    endif;
+                                                endforeach;
+                                                ?>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
                                 <?php endif; ?>
                             </div>
                         </div>
                     </div>
                 </article>
             </div>
-                <?php if (!Yii::$app->helper->isMobile()): ?>
+            <?php if (!Yii::$app->helper->isMobile()): ?>
                 <div class="col-md-3">
                     <div class="m-t-8">
-                        <div style="float: left; margin: 0 20px 20px 0;"> <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <div style="float: left; margin: 0 20px 20px 0;">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                             <!-- MPU - Post page right Upper  -->
                             <ins class="adsbygoogle"
                                  style="display:inline-block;width:300px;height:250px; text-align: left;"
@@ -198,7 +172,8 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                                  data-ad-slot="1962272113"></ins>
                             <script>
                                 (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script></div>
+                            </script>
+                        </div>
                         <div id="hot-posts" data-id="<?= $model->id; ?>">
                             <h3 class="underlined"><?= Yii::t('app', 'Whats Hot') ?></h3>
                         </div>
@@ -267,16 +242,16 @@ endif; ?>
                border-bottom: 0;
 ">
         <div class="white text-center" style="height: 150px;">
-                <a href="javascript:void(0);" onclick="$(this).parent().parent().hide();" rel="nofollow"
-                   style="color: #ccc; position: relative; top: -10px"><i
-                        class="glyphicon glyphicon-remove-sign"></i></a>
-                <h4 class="text-center margin-0"><?= Yii::t('app', 'Share Posts and get instant profit') ?></h4>
-                <a href="<?= $fUrl; ?>" class="btn btn-primary"
-                   style="background-color: #3b5998;height: 30px; margin: 15px auto;
+            <a href="javascript:void(0);" onclick="$(this).parent().parent().hide();" rel="nofollow"
+               style="color: #ccc; position: relative; top: -10px"><i
+                    class="glyphicon glyphicon-remove-sign"></i></a>
+            <h4 class="text-center margin-0"><?= Yii::t('app', 'Share Posts and get instant profit') ?></h4>
+            <a href="<?= $fUrl; ?>" class="btn btn-primary"
+               style="background-color: #3b5998;height: 30px; margin: 15px auto;
     width: 50%;">
-                    <i class="fa fa-fw fa-facebook pull-left signup-slide-fb"></i>
-                    <span><?= Yii::t('app', 'Sign up NOW! Using your Facebook Account') ?></span>
-                </a>
+                <i class="fa fa-fw fa-facebook pull-left signup-slide-fb"></i>
+                <span><?= Yii::t('app', 'Sign up NOW! Using your Facebook Account') ?></span>
+            </a>
 
         </div>
     </div>
