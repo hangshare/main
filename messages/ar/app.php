@@ -254,4 +254,5 @@ return [
     'Post.ylink' => 'رابط فيديو YouTube أو vimeo',
     'Post.body' => 'محتوى الموضوع',
     'Categories' => 'التصنيفات',
+    'User.password'=>'كلمة المرور',
 ];
