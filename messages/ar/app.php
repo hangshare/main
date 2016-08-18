@@ -255,4 +255,5 @@ return [
     'Post.body' => 'محتوى الموضوع',
     'Categories' => 'التصنيفات',
     'User.password'=>'كلمة المرور',
+    'Forget your username or password?'=>'هل نسيت كلمة المرور ؟',
 ];
