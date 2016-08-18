@@ -20,7 +20,7 @@ class AwsEmail extends Component
     public static function queueUser($userId, $type, $params = [])
     {
         $lang = Yii::$app->language;
-        $email = EmailTemplate::find()->where("code = {$type} AND lang = {$lang}")->one();
+        $email = EmailTemplate::find()->where("code = '{$type}' AND lang = '{$lang}'")->one();
         if ($userId != 0) {
             $user = User::find()->where("id = {$userId}")->one();
             $name = $user->name;
