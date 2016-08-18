@@ -164,7 +164,6 @@ return [
     'Share Posts and get instant profit' => 'انشر مواضيع واحصل على ربح فوري',
     'Sign up NOW! Using your Facebook Account' => 'سجل الآن',
     'Next Post' => 'الموضوع التالي',
-    'Forget your username or password?' => 'هل نسيت كلمة المرور ؟',
     'Login' => 'تسجيل الدخول',
     'Signup using social networks' => 'التسجيل باستخدام مواقع التواصل',
     'Signin using your Facebook account' => 'تسحيل الدخول باستخدام حساب الفيسبوك',
@@ -255,5 +254,5 @@ return [
     'Post.body' => 'محتوى الموضوع',
     'Categories' => 'التصنيفات',
     'User.password'=>'كلمة المرور',
-    'Forget your username or password?'=>'هل نسيت كلمة المرور ؟',
+    'Forget your username or password?' =>'هل نسيت كلمة المرور ؟',
 ];
