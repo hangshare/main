@@ -35,7 +35,7 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                     <?= $form->field($model, 'password')->passwordInput() ?>
                     <?= $form->field($model, 'rememberMe')->checkbox() ?>
                     <div class="pull-right">
-                        <?= Html::a('Forget your username or password?', ['//request-password-reset']) ?>
+                        <?= Html::a(Yii::t('app','Forget your username or password?'), ['//request-password-reset']) ?>
                     </div>
 
                     <div class="form-group">
