@@ -20,7 +20,8 @@ class ExploreController extends Controller
     public $next;
     public $enableCsrfValidation = false;
 
-    public function actionHot(){
+    public function actionHot()
+    {
         $this->layout = false;
         $model = Post::featured(6);
         echo '<ul class="list-inline">';
@@ -29,16 +30,24 @@ class ExploreController extends Controller
         }
         echo '</ul>';
     }
+
     public function actionRelated()
     {
+        $request = Yii::$app->request->post();
+        if (!isset($request['id'])) {
+            $id = 333;
+        } else {
+            $id = $request['id'];
+        }
         $this->layout = false;
-        $model = Post::mostViewed(6);
+        $model = Post::related($id, 6);
         echo '<ul class="list-inline releated">';
         foreach ($model as $data) {
             echo $this->render('_related', ['model' => $data]);
         }
         echo '</ul>';
     }
+
     public function actionCountcheck()
     {
         session_write_close();
@@ -48,6 +57,7 @@ class ExploreController extends Controller
 //            AwsEmail::SendMail('hasania.khaled@gmail.com', '61', json_encode($_SERVER));
         }
     }
+
     public function actionUpload()
     {
 
@@ -80,6 +90,7 @@ class ExploreController extends Controller
             }
         }
     }
+
     public function actionSearch($q)
     {
         $pageSize = 14;
@@ -126,7 +137,7 @@ class ExploreController extends Controller
     public function actionTags($tags)
     {
         $pageSize = 10;
-        $tags = str_replace('-',' ', $tags);
+        $tags = str_replace('-', ' ', $tags);
         $query = Post::find();
         $query->joinWith(['postTags', 'postTags.tags']);
         $query->orderBy('post.created_at DESC');
@@ -159,7 +170,7 @@ class ExploreController extends Controller
         } else {
             return $this->render('index', [
                 'dataProvider' => $dataProvider,
-                'tags'=>$tags
+                'tags' => $tags
             ]);
         }
     }
@@ -205,6 +216,7 @@ class ExploreController extends Controller
             ]);
         }
     }
+
     public function actionAll()
     {
         $pageSize = 8;
@@ -243,10 +255,12 @@ class ExploreController extends Controller
             ]);
         }
     }
+
     public function actionResize()
     {
         Yii::$app->imageresize->PatchResize($_POST['bucket'], $_POST['key'], $_POST['type']);
     }
+
     public function actionS3crd()
     {
         $s3Bucket = 'hangshare-media';
@@ -304,6 +318,7 @@ class ExploreController extends Controller
         ];
         echo json_encode(['url' => $url, 'inputs' => $inputs]);
     }
+
     public function actionRed($id)
     {
         $post = Post::findOne(['id' => $id]);
@@ -314,6 +329,7 @@ class ExploreController extends Controller
         header("Location: {$post->url}");
         exit(0);
     }
+
     public function actionView($slug)
     {
         $model = $this->findModel($slug);
@@ -342,6 +358,7 @@ class ExploreController extends Controller
             'mostviewd' => $mostviewd
         ]);
     }
+
     protected function findModel($id)
     {
 
@@ -363,6 +380,7 @@ class ExploreController extends Controller
 
         return $model;
     }
+
     public function actionPost($id = '')
     {
         if (empty($id)) {
@@ -391,6 +409,7 @@ class ExploreController extends Controller
             ]);
         }
     }
+
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -404,14 +423,15 @@ class ExploreController extends Controller
             ]);
         }
     }
+
     public function actionDelete($id)
     {
         $model = Post::findOne(['id' => $id]);
         if (Yii::$app->user->id != $model->userId) {
-            throw new Exception(Yii::t('app','you are not allwoed to access this page'), '403');
+            throw new Exception(Yii::t('app', 'you are not allwoed to access this page'), '403');
         }
         Yii::$app->db->createCommand("UPDATE post SET deleted=1 WHERE id=$id")->query();
-        Yii::$app->getSession()->setFlash('success',Yii::t('app','Post has been deleted successfully'));
+        Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Post has been deleted successfully'));
         $username = empty($model->user->username) ? $model->user->id : $model->user->username;
         return $this->redirect(['/user/' . $username . '/']);
     }
