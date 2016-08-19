@@ -35,19 +35,31 @@ class Post extends \yii\db\ActiveRecord
         return 'post';
     }
 
-    public static function related($catId, $limit = 8)
+    public static function related($id, $limit = 8)
     {
-        $related = Yii::$app->cache->get('featured-posts-' . $catId . Yii::$app->language);
+        $related = Yii::$app->cache->get('related-posts-' . $id . 'num' . $limit . Yii::$app->language);
         if ($related === false) {
-            $related = Post::find()
-                ->joinWith(['postCategories'])
-                ->where("post.deleted=0 AND post.cover <> '' AND post.lang = '" . Yii::$app->language . "'")
-                ->andWhere(['=', 'post_category.categoryId', $catId])
-                ->select('id,cover,title, urlTitle')
-                ->orderBy(new Expression('rand()'))
-                ->limit($limit)
-                ->all();
-            Yii::$app->cache->set('featured-posts-' . $catId . Yii::$app->language, $related, 300);
+            $cat = PostCategory::find()
+                ->select('categoryId')
+                ->where(['postId' => $id])->all();
+            $ids = '';
+            $ars= [];
+            foreach ($cat as $ca) {
+                $ars[]=$ca->categoryId;
+            }
+            $ids = implode(',', $ars);
+            $query = Post::find();
+            $query->joinWith(['postCategories']);
+            $query->select('post.id,post.cover,post.title, post.urlTitle');
+            $query->where("post.deleted=0 AND post.lang = '" . Yii::$app->language . "'");
+            if ($ids)
+                $query->andWhere("post_category.categoryId IN ({$ids})");
+            $query->andWhere(['<>', 'post.cover', '']);
+            $query->orderBy(new Expression('rand()'));
+            $query->limit($limit);
+            $related = $query->all();
+
+            Yii::$app->cache->set('related-posts-' . $id . 'num' . $limit . Yii::$app->language, $related, 300);
         }
         return $related;
     }
