@@ -219,7 +219,6 @@ class ExploreController extends Controller
     {
         $pageSize = 8;
         $query = Post::find();
-        $query->joinWith(['user', 'postBodies']);
         $query->orderBy('created_at DESC');
         $query->where("post.deleted=0");
         $query->andWhere(['<>', 'cover', '']);
