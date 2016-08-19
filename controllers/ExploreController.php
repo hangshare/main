@@ -34,16 +34,14 @@ class ExploreController extends Controller
     public function actionRelated()
     {
         $request = Yii::$app->request->post();
-        if (!isset($request['id'])) {
-            $id = 333;
-        } else {
-            $id = $request['id'];
-        }
+        $id = $request['id'];
+
         $this->layout = false;
         $model = Post::related($id, 6);
         echo '<ul class="list-inline releated">';
         foreach ($model as $data) {
-            echo $this->render('_related', ['model' => $data]);
+            if ($id != $data->id)
+                echo $this->render('_related', ['model' => $data]);
         }
         echo '</ul>';
     }
