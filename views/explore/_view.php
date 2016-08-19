@@ -15,8 +15,14 @@ $thump = Yii::$app->imageresize->thump($model->cover, $width, $height, 'crop');
 ?>
 <li>
     <a href="<?= $model->url ?>" title="<?= Html::encode($model->title) ?>"
-       style="display: inline-block; border-bottom: 1px solid #eee; background-color: #fff; padding: 0 0 15px 0; max-width: 100%;
-       text-decoration: none; border-radius: 3px;">
+       style="display: inline-block;
+       border-bottom: 1px solid #eee;
+       background-color: #fff;
+       padding: 0 0 15px 0;
+       max-width: 100%;
+       min-width: 100%;
+       text-decoration: none;
+       border-radius: 3px;">
         <div class="col-md-3">
             <div class="row">
                 <?php echo Html::img($thump, ['class' => 'img-responsive zoom-tilt', 'style'=>'padding:25px;']); ?>
