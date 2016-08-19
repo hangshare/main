@@ -43,9 +43,9 @@ class Post extends \yii\db\ActiveRecord
                 ->select('categoryId')
                 ->where(['postId' => $id])->all();
             $ids = '';
-            $ars= [];
+            $ars = [];
             foreach ($cat as $ca) {
-                $ars[]=$ca->categoryId;
+                $ars[] = $ca->categoryId;
             }
             $ids = implode(',', $ars);
             $query = Post::find();
@@ -66,7 +66,7 @@ class Post extends \yii\db\ActiveRecord
 
     public static function featured($limit = 8)
     {
-        $featured = Yii::$app->cache->get('featured-posts-' . Yii::$app->language);
+        $featured = Yii::$app->cache->get('featured-posts-' . $limit . '-' . Yii::$app->language);
         if ($featured === false) {
             $featured = Post::find()
                 ->where("featured = 1 AND lang = '" . Yii::$app->language . "'")
