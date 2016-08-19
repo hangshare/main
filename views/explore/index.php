@@ -12,6 +12,10 @@ if (isset($cat)) {
     $this->title = $tags;
     $this->description = $tags;
 }
+if(empty($this->title)){
+    $this->title = Yii::t('app','post.header.title');
+    $this->description = Yii::t('app','post.header.description');
+}
 ?>
 <div class="container m-t-25">
     <div class="row">
