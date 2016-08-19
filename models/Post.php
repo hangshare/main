@@ -71,11 +71,11 @@ class Post extends \yii\db\ActiveRecord
             $featured = Post::find()
                 ->where("featured = 1 AND lang = '" . Yii::$app->language . "'")
                 ->select('id,cover,title, urlTitle')
-                ->orderBy(new Expression('rand()'))
+                ->orderBy('id desc')
                 ->limit($limit)
                 ->all();
 
-            Yii::$app->cache->set('featured-posts-' . Yii::$app->language, $featured, 300);
+            Yii::$app->cache->set('featured-posts-' . $limit . '-' . Yii::$app->language, $featured, 300);
         }
         return $featured;
     }
