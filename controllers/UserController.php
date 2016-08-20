@@ -59,23 +59,6 @@ class UserController extends Controller
         echo json_encode($responce);
     }
 
-    /**
-     * Finds the User model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return User the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = User::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
-
-
     public function actionMissing(){
         $model = $this->findModel(Yii::$app->user->identity->id);
 
@@ -83,7 +66,6 @@ class UserController extends Controller
             'model' => $model,
         ]);
     }
-
 
     public function actionVerify($key)
     {
@@ -330,5 +312,22 @@ class UserController extends Controller
 
         return $this->redirect(['index']);
     }
+
+    /**
+     * Finds the User model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return User the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
 
 }
