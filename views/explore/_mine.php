@@ -30,6 +30,12 @@ $thump = Yii::$app->imageresize->thump($model->cover, $width, $height, 'crop');
             $totalViews = $model->postStats->views;
             echo number_format($totalViews + 1);
             ?> <?= Yii::t('app', 'Views') ?> </b></span>
+            <?php if($model->published) : ?>
+                <span class="label label-success"><?= Yii::t('app','Published') ?></span>
+            <?php else  : ?>
+                <span class="label label-danger"><?= Yii::t('app','Pending') ?></span>
+            <?php endif; ?>
+
         </div>
     </a>
 </li>
