@@ -247,9 +247,9 @@ class UserController extends Controller
         }
 
         $view = 'guest';
-        $ades_query= '';
+        $ades_query = 'AND post.published = 1';
         if (!Yii::$app->user->isGuest && Yii::$app->user->identity->id == $model->id) {
-            $ades_query = 'AND post.published = 1';
+            $ades_query= '';
             $view = 'view';
         }
 
