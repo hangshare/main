@@ -326,8 +326,23 @@ class ExploreController extends Controller
     {
         $model = $this->findModel($slug);
         if ($model->deleted == 1) {
+
+            $pageSize = 8;
+            $query = Post::find();
+            $query->orderBy('created_at DESC');
+            $query->where("post.featured = 1 AND post.deleted=0 AND post.published=1  AND lang = '" . Yii::$app->language . "'");
+            $query->andWhere(['<>', 'cover', '']);
+            $dataProvider = new ActiveDataProvider([
+                'query' => $query,
+                'pagination' => array(
+                    'defaultPageSize' => $pageSize,
+                    'pageSize' => 10,
+                    'route' => 1
+                ),
+            ]);
+
             return $this->render('deleted', [
-                'model' => Post::mostViewed()
+                'dataProvider' => $dataProvider
             ]);
         } else {
             return $this->render('view', [
