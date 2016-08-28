@@ -51,7 +51,7 @@ class Post extends \yii\db\ActiveRecord
             $query = Post::find();
             $query->joinWith(['postCategories']);
             $query->select('post.id,post.cover,post.title, post.urlTitle');
-            $query->where("post.deleted=0 AND post.lang = '" . Yii::$app->language . "'");
+            $query->where("post.deleted=0 AND post.published=1 AND post.lang = '" . Yii::$app->language . "'");
             if ($ids)
                 $query->andWhere("post_category.categoryId IN ({$ids})");
             $query->andWhere(['<>', 'post.cover', '']);
@@ -69,7 +69,7 @@ class Post extends \yii\db\ActiveRecord
         $featured = Yii::$app->cache->get('featured-posts-' . $limit . '-' . Yii::$app->language);
         if ($featured === false) {
             $featured = Post::find()
-                ->where("featured = 1 AND lang = '" . Yii::$app->language . "'")
+                ->where("deleted=0 AND published=1 AND featured = 1 AND lang = '" . Yii::$app->language . "'")
                 ->select('id,cover,title, urlTitle')
                 ->orderBy('id desc')
                 ->limit($limit)
@@ -85,7 +85,7 @@ class Post extends \yii\db\ActiveRecord
         $most = Yii::$app->cache->get('mostViewed');
         if ($most === false) {
             $most = Post::find()
-                ->where("cover <> ''  AND lang = '" . Yii::$app->language . "'")
+                ->where("published=1 AND cover <> ''  AND lang = '" . Yii::$app->language . "'")
                 ->joinWith(['postStats'])
                 ->select('id,cover,title, urlTitle')
                 ->orderBy('post_stats.views desc')
@@ -109,7 +109,7 @@ class Post extends \yii\db\ActiveRecord
             [['cover_file'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'gif', 'jpeg'],
                 'maxSize' => 1024 * 1024 * 4],
             [['userId', 'type', 'deleted'], 'integer'],
-            [['created_at', 'body', 'featured', 'deleted', 'tags', 'keywords', 'cover_file', 'q', 'type', 'ylink', 'vidId', 'vidType'], 'safe'],
+            [['created_at', 'body', 'featured', 'deleted', 'tags', 'keywords', 'cover_file', 'q', 'type', 'ylink', 'vidId', 'vidType', 'published'], 'safe'],
             [['cover'], 'string', 'max' => 500],
             [['urlTitle'], 'string', 'max' => 200],
             [['title'], 'string', 'max' => 100],
@@ -160,6 +160,7 @@ class Post extends \yii\db\ActiveRecord
             }
             $this->urlTitle = $url;
             $this->lang = Yii::$app->language;
+            $this->published = 0;
         }
         return true;
     }
