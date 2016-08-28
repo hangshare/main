@@ -246,8 +246,15 @@ class UserController extends Controller
                 throw new NotFoundHttpException('The requested page does not exist.');
         }
 
+        $view = 'guest';
+        $ades_query= '';
+        if (!Yii::$app->user->isGuest && Yii::$app->user->identity->id == $model->id) {
+            $ades_query = 'AND post.published = 1';
+            $view = 'view';
+        }
+
         $query = Post::find()->orderBy('id desc');
-        $query->where("post.deleted = 0");
+        $query->where("post.deleted = 0 {$ades_query}");
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => array('pageSize' => 6),
@@ -256,10 +263,7 @@ class UserController extends Controller
             'userId' => $model->id
         ]);
 
-        $view = 'guest';
-        if (!Yii::$app->user->isGuest && Yii::$app->user->identity->id == $model->id) {
-            $view = 'view';
-        }
+
 
         Yii::$app->db->createCommand('UPDATE `user_stats` SET `profile_views`=`profile_views`+1 WHERE `userId`=' . $model->id)->query();
         return $this->render($view, [
