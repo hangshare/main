@@ -33,7 +33,7 @@ class AwsEmail extends Component
             $key = md5(microtime() . rand());
             $userEmail = new UserEmail;
             $userEmail->userId = $userId;
-            $userEmail->emailId = $type;
+            $userEmail->emailId = $email->id;
             $userEmail->key = $key;
             $userEmail->opened_at = 0;
             $userEmail->save();
