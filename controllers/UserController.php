@@ -231,6 +231,11 @@ class UserController extends Controller
         ]);
     }
 
+
+    public function actionSuspended(){
+        return $this->render('suspended');
+    }
+
     /**
      * Displays a single User model.
      * @param integer $id
