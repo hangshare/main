@@ -47,7 +47,7 @@ $this->description = Yii::t('app', 'description.deleted');
                 echo ListView::widget([
                     'dataProvider' => $dataProvider,
                     'itemView' => '_view',
-                    'layout' => "<ul class='list-unstyled inifi'>{items}\n</ul>",
+                    'layout' => "<ul class='list-unstyled'>{items}\n</ul>",
                     'itemOptions' => [
                         'tag' => false
                     ],
