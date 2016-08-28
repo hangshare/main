@@ -138,11 +138,13 @@ class Hitcounter extends Component
         $memcached = new \Memcache();
         $memcached->addserver('hangshare.jhis0g.cfg.use1.cache.amazonaws.com');
         $res = $memcached->get('hang_mem_views');
+
         $res[$id][$hashId] = [
             'country_code' => self::ip_details(),
             'ip' => self::getRemoteIPAddress(),
             'post_user_id' => $post_user_id,
             'plan' => $plan,
+            'lang'=>Yii::$app->language,
 //            'userAgent' => json_encode($_SERVER),
             'userId' => Yii::$app->user->isGuest ? 0 : Yii::$app->user->identity->id,
 //            'ip_info' => isset($_COOKIE['ip_info']) ? $_COOKIE['ip_info'] : ''
