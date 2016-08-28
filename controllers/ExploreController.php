@@ -51,14 +51,11 @@ class ExploreController extends Controller
         session_write_close();
         if (isset($_POST['id']) && isset($_POST['userid']) && isset($_POST['plan'])) {
             Yii::$app->hitcounter->addHit($_POST['id'], $_POST['userid'], $_POST['plan']);
-        } else {
-//            AwsEmail::SendMail('hasania.khaled@gmail.com', '61', json_encode($_SERVER));
         }
     }
 
     public function actionUpload()
     {
-
         if (isset($_FILES['file']) && !empty($_FILES['file']['name'])) {
             $file_path = date('Ydm');
             if (!is_dir(Yii::$app->basePath . '/web/media/' . $file_path)) {
@@ -93,10 +90,9 @@ class ExploreController extends Controller
     {
         $pageSize = 14;
         $search = filter_input(INPUT_POST | INPUT_GET, 'q', FILTER_SANITIZE_SPECIAL_CHARS);
-
         $query = Post::find();
         $query->orderBy('created_at DESC');
-        $query->where("post.deleted=0");
+        $query->where("post.published=1 AND post.deleted=0");
 //        $query->andWhere(['<>', 'cover', '']);
         $query->joinWith(['postTags', 'postTags.tags']);
         $query->orFilterWhere(['like', 'tags.name', $search]);
@@ -139,7 +135,7 @@ class ExploreController extends Controller
         $query = Post::find();
         $query->joinWith(['postTags', 'postTags.tags']);
         $query->orderBy('post.created_at DESC');
-        $query->where("post.deleted=0 AND post.lang = '" . Yii::$app->language . "'");
+        $query->where("post.published=1 AND post.deleted=0 AND post.lang = '" . Yii::$app->language . "'");
         $query->andWhere(['<>', 'post.cover', '']);
         $query->andFilterWhere(['like', 'tags.name', $tags]);
 
@@ -173,7 +169,6 @@ class ExploreController extends Controller
         }
     }
 
-
     public function actionCategory($category)
     {
         $cat = Category::find()->where(['url_link' => $category])->one();
@@ -181,7 +176,7 @@ class ExploreController extends Controller
         $query = Post::find();
         $query->joinWith(['postCategories']);
         $query->orderBy('post.created_at DESC');
-        $query->where("post.deleted=0 AND post.lang = '" . Yii::$app->language . "'");
+        $query->where("post.published=1 AND post.deleted=0 AND post.lang = '" . Yii::$app->language . "'");
         $query->andWhere(['<>', 'post.cover', '']);
         $query->andWhere(['=', 'post_category.categoryId', $cat->id]);
 
@@ -220,7 +215,7 @@ class ExploreController extends Controller
         $pageSize = 8;
         $query = Post::find();
         $query->orderBy('created_at DESC');
-        $query->where("post.deleted=0  AND lang = '" . Yii::$app->language . "'");
+        $query->where("post.deleted=0 AND post.published=1 AND lang = '" . Yii::$app->language . "'");
         $query->andWhere(['<>', 'cover', '']);
         $currentPage = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $currentPage = preg_replace("/tag=[^&]+/", "", $currentPage);
@@ -330,51 +325,36 @@ class ExploreController extends Controller
     public function actionView($slug)
     {
         $model = $this->findModel($slug);
-        $mostviewd = Post::mostViewed();
-        $this->view->params['next'] = Yii::$app->cache->get('next-' . $model->id);
-        if ($this->view->params['next'] == false) {
-            $this->view->params['next'] = Post::find()
-                ->where("id > $model->id AND lang = '" . Yii::$app->language . "'")
-                ->select('id,title, urlTitle')
-                ->orderBy('id desc')
-                ->one();
-
-            Yii::$app->cache->set('next-' . $model->id, $this->view->params['next'], 300);
+        if ($model->deleted == 1) {
+            return $this->render('deleted', [
+                'model' => Post::mostViewed()
+            ]);
+        } else {
+            return $this->render('view', [
+                'model' => $model
+            ]);
         }
-        $this->view->params['prev'] = Yii::$app->cache->get('prev-' . $model->id);
-        if ($this->view->params['prev'] == false) {
-            $this->view->params['prev'] = Post::find()
-                ->where("id < $model->id AND '" . Yii::$app->language . "'")
-                ->select('id,title, urlTitle')
-                ->orderBy('id desc')
-                ->one();
-            Yii::$app->cache->set('prev-' . $model->id, $this->view->params['prev'], 300);
-        }
-        return $this->render('view', [
-            'model' => $model,
-            'mostviewd' => $mostviewd
-        ]);
     }
 
     protected function findModel($id)
     {
-
         $lang = Yii::$app->language;
         $userId = Yii::$app->user->identity->id;
         $model = Yii::$app->cache->get($id);
         if ($model === false) {
             $qu = Post::find()->joinWith(['user', 'postTags', 'postTags.tags']);
-            if (!Yii::$app->user->isGuest)
+
+            if (!Yii::$app->user->isGuest) {
                 $model = $qu->where("post.urlTitle = '{$id}' AND (post.lang = '{$lang}' OR post.userId = '{$userId}')")->one();
-            else
+            } else {
                 $model = $qu->where(['post.urlTitle' => $id, 'post.lang' => Yii::$app->language])->one();
+            }
+
             Yii::$app->cache->set($id, $model, 3000);
         }
-
         if (!isset($model)) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-
         return $model;
     }
 
@@ -397,8 +377,6 @@ class ExploreController extends Controller
                 var_dump($model->getErrors());
                 die();
             }
-
-
             return $this->redirect(["/{$model->urlTitle}"]);
         } else {
             return $this->render('post', [
