@@ -161,8 +161,10 @@ class SiteController extends Controller
         if (!\Yii::$app->user->isGuest) {
             if (Yii::$app->language == 'ar')
                 return $this->redirect(['//مواضيع']);
-            if (Yii::$app->language == 'en')
-                return $this->redirect(['//en/articles']);
+            if (Yii::$app->language == 'en') {
+                Yii::$app->language = 'en';
+                return $this->redirect(['//articles']);
+            }
         }
 
         $pageSize = 16;
