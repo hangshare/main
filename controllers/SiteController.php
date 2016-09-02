@@ -163,7 +163,7 @@ class SiteController extends Controller
                 return $this->redirect(['//مواضيع']);
             if (Yii::$app->language == 'en') {
                 Yii::$app->language = 'en';
-                return $this->redirect(['//articles']);
+                return $this->redirect(['/en/articles']);
             }
         }
 
