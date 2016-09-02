@@ -1,10 +1,10 @@
 $(function () {
 
-    var url_lang = '';
+
     if ((location.hash == "#_=_" || location.href.slice(-1) == "#_=_")) {
         removeHash();
     }
-
+    var url_lang = '';
     if ($.Yii.getLang() == 'en') {
         url_lang = '/en';
     }
