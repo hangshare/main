@@ -24,6 +24,7 @@ class HangUrl extends \yii\web\UrlManager
             $url = str_replace('hangshare/web', 'hangshare/web/en', $url);
             $url = str_replace('?language=en', '', $url);
         }
+        $url = str_replace('en/en', 'en', $url);
         return $url;
     }
 }
