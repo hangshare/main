@@ -15,6 +15,10 @@ body {
     padding-top: 13px;
 }
 
+.top-menu > .container > .pull-right{
+    width: 400px;
+}
+
 .underlined{
     font-size: 20px;
     line-height: 1.3em;
