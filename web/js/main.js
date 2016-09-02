@@ -8,6 +8,8 @@ $(function () {
     if ($.Yii.getLang() == 'en') {
         url_lang = '/en';
     }
+
+    console.log(url_lang);
     //$('[data-toggle="tooltip"]').tooltip();
 
     $(".menu-category > li").on({
