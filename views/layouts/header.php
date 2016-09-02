@@ -205,7 +205,7 @@ foreach ($menu as $menuData) {
                                 <?php if (isset($mData['sub'])): ?>
                                     <ul class="supdropdown">
                                         <?php foreach ($mData['sub'] as $submenu) : ?>
-                                            <?php $subu = Url::to(["//{$articlesurl}/{$mData['url']}/{$submenu['url']}"]); ?>
+                                            <?php $subu = Url::to(["/{$articlesurl}/{$mData['url']}/{$submenu['url']}"]); ?>
                                             <li><?php echo Html::a($submenu['title'], $subu); ?></li>
                                         <?php endforeach; ?>
                                     </ul>
