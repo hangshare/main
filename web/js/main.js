@@ -1,7 +1,12 @@
 $(function () {
 
+    var url_lang = '';
     if ((location.hash == "#_=_" || location.href.slice(-1) == "#_=_")) {
         removeHash();
+    }
+
+    if ($.Yii.getLang() == 'en') {
+        url_lang = '/en';
     }
     //$('[data-toggle="tooltip"]').tooltip();
 
@@ -25,11 +30,11 @@ $(function () {
         $(".mainmenu").each(function (index, value) {
             console.log(da);
             console.log($(value).data().element);
-            if($(value).data().element != da){
-                $("#"+$(value).data().element).hide();
+            if ($(value).data().element != da) {
+                $("#" + $(value).data().element).hide();
             }
         });
-        $("#"+da).toggle();
+        $("#" + da).toggle();
     });
 
     $('.changeLang').on('click', function (e) {
@@ -87,7 +92,7 @@ $(function () {
             toolbarFixed: true,
             mediaManager: false,
             language: $.Yii.getLang(),
-            imageUploadURL: '/explore/upload/',
+            imageUploadURL: url_lang + '/explore/upload/',
             minHeight: 200,
             maxHeight: 800
         };
@@ -171,7 +176,7 @@ $(function () {
         });
         var credData;
         $.ajax({
-            url: '/explore/s3crd/',
+            url: url_lang+ '/explore/s3crd/',
             type: 'POST',
             dataType: 'JSON',
             data: {},
@@ -222,7 +227,7 @@ $(function () {
                         if (status === 'success') {
                             $("#cover_input").val('{"bucket":"' + Bucket + '", "key":"' + Key + '", "width": "' + widthCover + '", "height" : "' + heightCover + '"}');
                             $.ajax({
-                                url: "/explore/resize/",
+                                url: url_lang + "/explore/resize/",
                                 method: "POST",
                                 dataType: "json",
                                 data: {bucket: Bucket, key: Key, type: Type},
@@ -247,7 +252,7 @@ $(function () {
         rel_c = $("#user-country").attr('rel');
         if (rel_c === 'autoload') {
             $.ajax({
-                url: "/user/getcountry/",
+                url: url_lang + "/user/getcountry/",
                 method: "POST",
                 dataType: "json",
                 success: function (data) {
@@ -290,7 +295,7 @@ $(function () {
             return;
         }
         $.ajax({
-            url: "changepass",
+            url: url_lang + "changepass",
             method: "POST",
             dataType: "json",
             data: {password: password, old: old},
@@ -373,7 +378,7 @@ $(function () {
         var Dat = $('article').data();
         $.ajax({
             method: "POST",
-            url: "/explore/countcheck/?qt=" + random(),
+            url: url_lang + "/explore/countcheck/?qt=" + random(),
             data: Dat
         });
     }
@@ -382,7 +387,7 @@ $(function () {
         var Dat = $('article').data();
         $.ajax({
             method: "POST",
-            url: "/explore/hot/?qt=" + random(),
+            url:  url_lang + "/explore/hot/?qt=" + random(),
             data: Dat,
             success: function (data, textStatus, jqXHR) {
                 $('#hot-posts').append(data);
@@ -394,7 +399,7 @@ $(function () {
         var Dat = $('article').data();
         $.ajax({
             method: "POST",
-            url: "/explore/related/?qt=" + random(),
+            url: url_lang + "/explore/related/?qt=" + random(),
             data: Dat,
             success: function (data, textStatus, jqXHR) {
                 $('#related-posts').append(data);
