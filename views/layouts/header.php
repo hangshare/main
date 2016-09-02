@@ -27,7 +27,7 @@ foreach ($menu as $menuData) {
         <?php if (Yii::$app->helper->isMobile()): ?>
             <ul id="main-menu" class="mainmenu">
                 <?php foreach ($mainMenu as $mData) : ?>
-                    <li <?php if (isset($mData['sub'])): ?><?php endif; ?>>
+                    <li>
                         <a href="<?= Url::to(["//{$articlesurl}/{$mData['url']}"]) ?>"><?= $mData['title'] ?></a>
                     </li>
                 <?php endforeach; ?>
@@ -205,7 +205,8 @@ foreach ($menu as $menuData) {
                                 <?php if (isset($mData['sub'])): ?>
                                     <ul class="supdropdown">
                                         <?php foreach ($mData['sub'] as $submenu) : ?>
-                                            <li><?php echo Html::a($submenu['title'], Url::to(["//{$articlesurl}/{$mData['url']}/{$submenu['url']}"])); ?></li>
+                                            <?php $subu = Url::to(["//{$articlesurl}/{$mData['url']}/{$submenu['url']}"]); ?>
+                                            <li><?php echo Html::a($submenu['title'], $subu); ?></li>
                                         <?php endforeach; ?>
                                     </ul>
                                 <?php endif; ?>
