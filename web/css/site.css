@@ -51,7 +51,9 @@ summary {
     opacity: 1;
     display: block;
 }
-
+.top-menu > .container > .pull-right{
+    width: 450px;
+}
 .supdropdown li {
     display: block;
 }
