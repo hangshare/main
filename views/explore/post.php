@@ -93,7 +93,15 @@ foreach ($model->postBodies as $data) {
             ?>
 
             <br>
-            <?php $keywords = array(); ?>
+
+            <?php
+            $arr = [];
+            foreach ($model->postTags as $cat_selected) {
+                $arr[] = $cat_selected->tag;
+            }
+            $model->keywords = $arr;
+            ?>
+
             <?= $form->field($model, 'body')->textarea(['class' => 'froala-edit']) ?>
 
             <label><?= Yii::t('app', 'Tags') ?></label>
