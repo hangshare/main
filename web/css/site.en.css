@@ -4275,6 +4275,14 @@ hr {
     .homepost>li {
         width: 47%;
     }
+    .list-inline.releated>li{
+        height: auto;
+    }
+
+    .img-responsive.zoom-tilt {
+        margin-top: -50px;
+        padding: 0 !important;
+    }
     .twolines{
         margin-top: 5px;
         font-size: 18px;
@@ -4415,10 +4423,6 @@ hr {
     .inpage > li > .ex-all {
         height: 150px;
         width: 100%;
-    }
-
-    .img-responsive.zoom-tilt {
-        margin-top: -50px;
     }
 
     .res-hidden {
