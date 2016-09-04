@@ -351,28 +351,6 @@ class ExploreController extends Controller
         }
     }
 
-    protected function findModel($id)
-    {
-        $lang = Yii::$app->language;
-        $userId = Yii::$app->user->identity->id;
-        $model = Yii::$app->cache->get($id);
-        if ($model === false) {
-            $qu = Post::find()->joinWith(['user', 'postTags', 'postTags.tags']);
-
-            if (!Yii::$app->user->isGuest) {
-                $model = $qu->where("post.urlTitle = '{$id}' AND (post.lang = '{$lang}' OR post.userId = '{$userId}')")->one();
-            } else {
-                $model = $qu->where(['post.urlTitle' => $id, 'post.lang' => Yii::$app->language])->one();
-            }
-
-            Yii::$app->cache->set($id, $model, 3000);
-        }
-        if (!isset($model)) {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-        return $model;
-    }
-
     public function actionPost($id = '')
     {
         if (empty($id)) {
@@ -389,10 +367,8 @@ class ExploreController extends Controller
             }
             $model->saveExternal();
             if (!$model->save()) {
-                var_dump($model->getErrors());
-                die();
             }
-            return $this->redirect(["/{$model->urlTitle}"]);
+            return $this->redirect(["//{$model->urlTitle}"]);
         } else {
             return $this->render('post', [
                 'model' => $model,
@@ -403,6 +379,9 @@ class ExploreController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        if (Yii::$app->user->id != $model->userId) {
+            throw new Exception(Yii::t('app', 'you are not allwoed to access this page'), '403');
+        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->cache->delete('postView-' . $id);
             Yii::$app->cache->delete('post-body-' . $id);
@@ -426,4 +405,24 @@ class ExploreController extends Controller
         return $this->redirect(['/user/' . $username . '/']);
     }
 
+    protected function findModel($id)
+    {
+        $lang = Yii::$app->language;
+        $userId = Yii::$app->user->identity->id;
+        $model = Yii::$app->cache->get($id . $lang);
+        if ($model === false) {
+            $qu = Post::find()->joinWith(['user', 'postTags', 'postTags.tags']);
+
+            if (!Yii::$app->user->isGuest) {
+                $model = $qu->where("post.urlTitle = '{$id}' AND post.lang = '{$lang}'")->one();
+            } else {
+                $model = $qu->where(['post.urlTitle' => $id, 'post.lang' => Yii::$app->language])->one();
+            }
+            Yii::$app->cache->set($id . $lang, $model, 3000);
+        }
+        if (!isset($model)) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        return $model;
+    }
 }
