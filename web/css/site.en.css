@@ -4269,6 +4269,16 @@ hr {
         top: 0 !important;
     }
 
+    article{
+        padding: 15px;
+    }
+    .homepost>li {
+        width: 47%;
+    }
+    .twolines{
+        margin-top: 5px;
+        font-size: 18px;
+    }
     .titlein > h4 {
         font-size: 16px;
         margin-bottom: 2px;
