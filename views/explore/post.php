@@ -112,7 +112,7 @@ foreach ($model->postBodies as $data) {
                 'options' => ['multiple' => true, 'placeholder' => Yii::t('app', 'add tags')],
                 'pluginOptions' => [
                     'tags' => true,
-                    'maximumInputLength' => 20
+                    'maximumInputLength' => 30
                 ],
             ]);
             ?>
