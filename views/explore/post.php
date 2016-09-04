@@ -56,8 +56,6 @@ foreach ($model->postBodies as $data) {
             </div>
             <input id="cover_input" name="cover" type="hidden" value=""/>
             <br>
-            <?php $keywords = array(); ?>
-            <?= $form->field($model, 'body')->textarea(['class' => 'froala-edit']) ?>
             <?php
             $arr = [];
             foreach ($model->postCategories as $cat_selected) {
@@ -65,14 +63,39 @@ foreach ($model->postBodies as $data) {
             }
             $model->categories = $arr;
             ?>
-            <label for="post-categories" class="control-label"><?= Yii::t('app','Categories') ?></label>
-            <?= $form->field($model, 'categories')->checkboxList(ArrayHelper::map(Category::find()
+            <label for="post-categories" class="control-label"><?= Yii::t('app', 'Categories') ?></label>
+            <?php
+            $menu = Category::find()
                 ->where("lang = '" . Yii::$app->language . "'")
-                ->select('id, title')
-                ->orderBy('id desc')
-                ->limit(50)
-                ->all(), 'id', 'title'))->label(false)
+                ->all();
+            $mainMenu = [];
+            $i = 2;
+            foreach ($menu as $menuData) {
+                if ($menuData->parent) {
+                    $mainMenu[$menuData->parent][$menuData->id] = $menuData->title;
+                }
+            }
+            $catData = [];
+            foreach ($menu as $menuData) {
+                if (!$menuData->parent) {
+                    $catData[$menuData->title] = $mainMenu[$menuData->id];
+                }
+            }
+            echo Select2::widget([
+                'name' => 'Post[categories]',
+                'value' => $model->categories,
+                'data' => $catData,
+                'options' => ['multiple' => true, 'placeholder' => Yii::t('app', 'Categories')],
+                'pluginOptions' => [
+                    'tags' => false,
+                ],
+            ]);
             ?>
+
+            <br>
+            <?php $keywords = array(); ?>
+            <?= $form->field($model, 'body')->textarea(['class' => 'froala-edit']) ?>
+
             <label><?= Yii::t('app', 'Tags') ?></label>
             <?php
             echo Select2::widget([
@@ -85,7 +108,7 @@ foreach ($model->postBodies as $data) {
                 'options' => ['multiple' => true, 'placeholder' => Yii::t('app', 'add tags')],
                 'pluginOptions' => [
                     'tags' => true,
-                    'maximumInputLength' => 10
+                    'maximumInputLength' => 20
                 ],
             ]);
             ?>
