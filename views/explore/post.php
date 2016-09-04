@@ -108,7 +108,7 @@ foreach ($model->postBodies as $data) {
             <?php
             echo Select2::widget([
                 'name' => 'Post[keywords]',
-                'value' => $keywords,
+                'value' => $model->keywords,
                 'data' => ArrayHelper::map(Tags::find()
                     ->where("published = 1 AND lang = '" . Yii::$app->language . "'")
                     ->orderBy('name')
