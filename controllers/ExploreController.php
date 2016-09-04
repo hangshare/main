@@ -368,7 +368,8 @@ class ExploreController extends Controller
             $model->saveExternal();
             if (!$model->save()) {
             }
-            return $this->redirect(["//{$model->urlTitle}"]);
+            $lang = Yii::$app->language == 'en' ? 'en/' : '';
+            return $this->redirect(["//{$lang}{$model->urlTitle}"]);
         } else {
             return $this->render('post', [
                 'model' => $model,
