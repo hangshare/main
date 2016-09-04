@@ -102,11 +102,14 @@ foreach ($model->postBodies as $data) {
             <?= $form->field($model, 'body')->textarea(['class' => 'froala-edit']) ?>
             <label><?= Yii::t('app', 'Tags') ?></label>
             <?php
+            if($tags_string){
+                $tags_sql = "OR id IN ({$tags_string}";
+            }
             echo Select2::widget([
                 'name' => 'Post[keywords]',
                 'value' => $tags,
                 'data' => ArrayHelper::map(Tags::find()
-                    ->where("(published = 1 AND lang = '" . Yii::$app->language . "' )  OR id IN ({$tags_string})")
+                    ->where("published = 1 AND lang = '" . Yii::$app->language . "' ) $tags_sql")
                     ->orderBy('name')
                     ->all(), 'id', 'name'),
                 'options' => ['multiple' => true, 'placeholder' => Yii::t('app', 'add tags')],
