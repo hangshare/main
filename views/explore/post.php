@@ -91,25 +91,22 @@ foreach ($model->postBodies as $data) {
                 ],
             ]);
             ?>
-
             <br>
-
             <?php
             $tags = [];
             foreach ($model->postTags as $post_tag) {
-                $tags[] = $post_tag->id;
+                $tags[] = $post_tag->tag;
             }
+            $tags_string = implode(',',$tags);
             ?>
-
             <?= $form->field($model, 'body')->textarea(['class' => 'froala-edit']) ?>
-
             <label><?= Yii::t('app', 'Tags') ?></label>
             <?php
             echo Select2::widget([
                 'name' => 'Post[keywords]',
                 'value' => $tags,
                 'data' => ArrayHelper::map(Tags::find()
-                    ->where("published = 1 AND lang = '" . Yii::$app->language . "'")
+                    ->where("(published = 1 AND lang = '" . Yii::$app->language . "' )  OR id IN ({$tags_string})")
                     ->orderBy('name')
                     ->all(), 'id', 'name'),
                 'options' => ['multiple' => true, 'placeholder' => Yii::t('app', 'add tags')],
