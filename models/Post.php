@@ -269,13 +269,18 @@ class Post extends \yii\db\ActiveRecord
         }
 
         if (!empty($this->keywords)) {
+            Yii::$app->db->createCommand('DELETE FROM post_tag WHERE postId = ' . $this->id)->query();
             $insertrow = '';
+
             foreach ($this->keywords as $keywords) {
+
                 if (!is_numeric($keywords)) {
                     $nu = new Tags;
                     $nu->name = $keywords;
                     if ($nu->save()) {
                         $keywords = $nu->id;
+                    } else {
+                        $keywords = Yii::$app->db->createCommand("SELECT id FROM tags WHERE name LIKE '%{$keywords}%'")->queryScalar();
                     }
                 }
                 $insertrow .= "('{$this->id}','{$keywords}'),";
@@ -283,7 +288,6 @@ class Post extends \yii\db\ActiveRecord
             $insertrow = rtrim($insertrow, ",");
             Yii::$app->db->createCommand("INSERT INTO post_tag (postId, tag) VALUES $insertrow")->query();
         }
-
         $body->body = $this->body;
         $body->save();
     }
