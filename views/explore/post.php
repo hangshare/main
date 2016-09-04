@@ -95,11 +95,10 @@ foreach ($model->postBodies as $data) {
             <br>
 
             <?php
-            $arr = [];
-            foreach ($model->postTags as $cat_selected) {
-                $arr[] = $cat_selected->tag;
+            $tags = [];
+            foreach ($model->postTags as $post_tag) {
+                $tags[] = $post_tag->id;
             }
-            $model->keywords = $arr;
             ?>
 
             <?= $form->field($model, 'body')->textarea(['class' => 'froala-edit']) ?>
@@ -108,7 +107,7 @@ foreach ($model->postBodies as $data) {
             <?php
             echo Select2::widget([
                 'name' => 'Post[keywords]',
-                'value' => $model->keywords,
+                'value' => $tags,
                 'data' => ArrayHelper::map(Tags::find()
                     ->where("published = 1 AND lang = '" . Yii::$app->language . "'")
                     ->orderBy('name')
