@@ -251,4 +251,7 @@ return [
     'sucess.fb.fillcontent' => 'Please fill out the information required to complete at the bottom so that it can transform you money in the future. Has successfully completed the registration process',
     'user.verified.email' => 'Your email has been verified successfully.',
     'Add a post'=>'Add a post',
+    'Post.title'=>'Title',
+    'Post.ylink'=>'YouTube Link',
+    'Post.body'=>'Post Body',
 ];
