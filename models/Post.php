@@ -232,7 +232,7 @@ class Post extends \yii\db\ActiveRecord
                 }
             }
         }
-        $this->url = Yii::$app->urlManager->createAbsoluteUrl("//{$this->urlTitle}");
+        $this->url = Yii::$app->urlManager->createAbsoluteUrl(["//{$this->urlTitle}"]);
         return TRUE;
     }
 
