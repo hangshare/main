@@ -232,8 +232,16 @@ class ExploreController extends Controller
             $this->layout = false;
             $html = '';
             $models = $dataProvider->getModels();
+            $ads_count = 10;
+            if($currentPage == 1){
+                $ads_count = 5;
+            }
+            $i = 1;
             foreach ($models as $data) {
                 $html .= $this->render('_view', ['model' => $data]);
+                $i++;
+                if($i == $ads_count)
+                    $html .= $this->render('_innerads');
             }
             echo json_encode([
                 'html' => $html,
