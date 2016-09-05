@@ -77,7 +77,7 @@ if (empty($this->title)) {
             </script>
         </div>
         <div class="row m-t-20">
-            <div id="hot-posts" data-id="<?= $model->id; ?>">
+            <div id="hot-posts" data-id="1000">
                 <h3 class="underlined"><?= Yii::t('app', 'Whats Hot') ?></h3>
             </div>
         </div>
