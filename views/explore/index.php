@@ -12,9 +12,9 @@ if (isset($cat)) {
     $this->title = $tags;
     $this->description = $tags;
 }
-if(empty($this->title)){
-    $this->title = Yii::t('app','post.header.title');
-    $this->description = Yii::t('app','post.header.description');
+if (empty($this->title)) {
+    $this->title = Yii::t('app', 'post.header.title');
+    $this->description = Yii::t('app', 'post.header.description');
 }
 ?>
 <div class="container m-t-25">
@@ -64,34 +64,21 @@ if(empty($this->title)){
             </div>
         </div>
     </div>
-    <div class="col-md-3  res-hidden">
-        <div class="row m-b-20">
-            <div class="col-md-12">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- left right responsive categery -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-6288640194310142"
-                     data-ad-slot="8394999319"
-                     data-ad-format="auto"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
+    <div class="col-md-3 res-hidden">
+        <div class="row m-t-20">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- MPU - Category Right -->
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:300px;height:250px"
+                 data-ad-client="ca-pub-6288640194310142"
+                 data-ad-slot="9922641319"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
         <div class="row m-t-20">
-            <div style="position: relative">
-                <div class="m-t-25">
-                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- MPU - Category Right -->
-                    <ins class="adsbygoogle"
-                         style="display:inline-block;width:300px;height:250px"
-                         data-ad-client="ca-pub-6288640194310142"
-                         data-ad-slot="9922641319"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
+            <div id="hot-posts" data-id="<?= $model->id; ?>">
+                <h3 class="underlined"><?= Yii::t('app', 'Whats Hot') ?></h3>
             </div>
         </div>
     </div>
