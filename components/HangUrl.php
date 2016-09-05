@@ -21,11 +21,13 @@ class HangUrl extends \yii\web\UrlManager
                 $url = 'en' . $url;
             }
             $url = str_replace('/e/', '/en/', $url);
-            $url = str_replace('en/en', 'en', $url);
+
             $url = str_replace('earticles', 'en/articles', $url);
             $url = str_replace('een', 'en', $url);
             $url = str_replace('en/en', 'en', $url);
             $url = str_replace('en/een', 'en', $url);
+            $url = str_replace('en/e', 'en', $url);
+            $url = str_replace('en/en', 'en', $url);
         }
         return $url;
 
