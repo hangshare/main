@@ -26,7 +26,6 @@ class HangUrl extends \yii\web\UrlManager
 
         $url = str_replace('/e/', 'en', $url);
         $url = str_replace('en/en', 'en', $url);
-        var_dump($url);die();
         return $url;
 //        $url = parent::createUrl($params);
 //        if (Yii::$app->language == 'en') {
