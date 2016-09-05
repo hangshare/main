@@ -65,7 +65,7 @@ if (empty($this->title)) {
         </div>
     </div>
     <div class="col-md-3 res-hidden">
-        <div class="row m-t-20">
+        <div class="row" style="margin-top: 52px;">
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- MPU - Category Right -->
             <ins class="adsbygoogle"
