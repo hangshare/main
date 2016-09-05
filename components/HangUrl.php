@@ -30,6 +30,7 @@ class HangUrl extends \yii\web\UrlManager
 //            $url = str_replace('een', 'en', $url);
 
         }
+        $url = str_replace('en/en/en', 'en', $url);
         $url = str_replace('en/en', 'en', $url);
         return $url;
     }
