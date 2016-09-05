@@ -34,7 +34,8 @@ class HangUrl extends \yii\web\UrlManager
             $url = str_replace('en/en', 'en', $url);
             $url = str_replace('earticles', 'en/articles', $url);
             $url = str_replace('een', 'en', $url);
-
+            $url = str_replace('en/en', 'en', $url);
+            $url = str_replace('en/een', 'en', $url);
             return $url;
         }
         return parent::createUrl($params);
