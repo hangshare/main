@@ -23,7 +23,6 @@ class HangUrl extends \yii\web\UrlManager
             $url = str_replace('?language=en', '', $url);
             $url = '/en'.$url;
         }
-
         $url = str_replace('/e/', 'en', $url);
         $url = str_replace('en/en', 'en', $url);
         return $url;
@@ -31,7 +30,6 @@ class HangUrl extends \yii\web\UrlManager
 
     public function createAbsoluteUrl($params)
     {
-
         if (!isset($params['language']) && Yii::$app->language == 'en') {
             $params['language'] = Yii::$app->language;
         }
@@ -40,7 +38,6 @@ class HangUrl extends \yii\web\UrlManager
             $url = str_replace('?language=en', '', $url);
             $url = '/en'.$url;
         }
-
         $url = str_replace('/e/', 'en', $url);
         $url = str_replace('en/en', 'en', $url);
         return $url;
