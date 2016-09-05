@@ -415,7 +415,7 @@ class ExploreController extends Controller
             $qu = Post::find()->joinWith(['user', 'postTags', 'postTags.tags']);
 
             if (!Yii::$app->user->isGuest) {
-                $model = $qu->where("post.urlTitle = '{$id}' AND post.lang = '{$lang}' OR post.userId = {$userId}")->one();
+                $model = $qu->where("post.urlTitle = '{$id}' AND (post.lang = '{$lang}' OR post.userId = {$userId})")->one();
             } else {
                 $model = $qu->where(['post.urlTitle' => $id, 'post.lang' => Yii::$app->language])->one();
             }
