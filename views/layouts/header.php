@@ -216,8 +216,8 @@ foreach ($menu as $menuData) {
                 </div>
                 <?php if (Yii::$app->user->isGuest) : ?>
                     <div class="menu-signup-login pull-right">
-                        <?= Html::a(Yii::t('app', 'Login'), Url::to(['//login']), ['class' => 'btn btn-default']); ?>
-                        <?= Html::a(Yii::t('app', 'Register'), Url::to(['//plan']), ['class' => 'btn btn-primary']); ?>
+                        <?= Html::a(Yii::t('app', 'Login'), Url::to(['login']), ['class' => 'btn btn-default']); ?>
+                        <?= Html::a(Yii::t('app', 'Register'), Url::to(['plan']), ['class' => 'btn btn-primary']); ?>
                     </div>
                 <?php else :
                 $username = empty(Yii::$app->user->identity->username) ? Yii::$app->user->identity->id : Yii::$app->user->identity->username;
@@ -236,7 +236,7 @@ foreach ($menu as $menuData) {
                                         <?= Yii::t('app', 'Gold Status') ?>
                                     </a>
                                 <?php else: ?>
-                                    <a href="<?= Url::to(['//plan']); ?>"><span><i
+                                    <a href="<?= Url::to(['plan']); ?>"><span><i
                                                 class="glyphicon glyphicon-star"></i></span>
                                         <?= Yii::t('app', 'Go Premium') ?>
                                     </a>
