@@ -195,11 +195,10 @@ class ExploreController extends Controller
             $html = '';
             $models = $dataProvider->getModels();
             $i = 1;
-            $ads_count = $currentPage == 1 ? 5 : 10;
             foreach ($models as $data) {
                 $html .= $this->render('_view', ['model' => $data]);
                 $i++;
-                if ($i == $ads_count)
+                if ($i == 10)
                     $html .= $this->render('_innerads');
             }
             echo json_encode([
@@ -237,15 +236,11 @@ class ExploreController extends Controller
             $this->layout = false;
             $html = '';
             $models = $dataProvider->getModels();
-            $ads_count = 10;
-            if ($currentPage == 1) {
-                $ads_count = 5;
-            }
             $i = 1;
             foreach ($models as $data) {
                 $html .= $this->render('_view', ['model' => $data]);
                 $i++;
-                if ($i == $ads_count)
+                if ($i == 10)
                     $html .= $this->render('_innerads');
             }
             echo json_encode([
@@ -369,7 +364,11 @@ class ExploreController extends Controller
         if (empty($id)) {
             $model = new Post();
         } else {
-            $model = Post::findOne(['id' => $id, 'userId' => Yii::$app->user->identity->id]);
+            if (Yii::$app->user->identity->type) {
+                $model = Post::findOne(['id' => $id]);
+            } else {
+                $model = Post::findOne(['id' => $id, 'userId' => Yii::$app->user->identity->id]);
+            }
             if (!isset($model)) {
                 throw new NotFoundHttpException('The requested page does not exist.');
             }
@@ -410,7 +409,7 @@ class ExploreController extends Controller
     public function actionDelete($id)
     {
         $model = Post::findOne(['id' => $id]);
-        if (Yii::$app->user->id != $model->userId) {
+        if (Yii::$app->user->id != $model->userId && !Yii::$app->user->identity->type) {
             throw new Exception(Yii::t('app', 'you are not allwoed to access this page'), '403');
         }
         Yii::$app->db->createCommand("UPDATE post SET deleted=1 WHERE id=$id")->query();
