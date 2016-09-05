@@ -58,7 +58,7 @@ if (empty($this->title)) {
                     foreach ($models as $data) {
                         echo $this->render('_view', ['model' => $data]);
                         $i++;
-                        if ($i == 3)
+                        if ($i == 5)
                             echo $this->render('_innerads');
                     }
                     ?>
