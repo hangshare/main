@@ -28,14 +28,14 @@ foreach ($menu as $menuData) {
             <ul id="main-menu" class="mainmenu">
                 <?php foreach ($mainMenu as $mData) : ?>
                     <li>
-                        <a href="<?= Url::to(["//{$articlesurl}/{$mData['url']}"]) ?>"><?= $mData['title'] ?></a>
+                        <a href="<?= Yii::$app->urlManager->createUrl(["//{$articlesurl}/{$mData['url']}"]) ?>"><?= $mData['title'] ?></a>
                     </li>
                 <?php endforeach; ?>
             </ul>
             <?php if (Yii::$app->user->isGuest) : ?>
                 <ul id="non-user-menu" class="mainmenu">
-                    <li><?= Html::a(Yii::t('app', 'Login'), Url::to(['//login'])); ?></li>
-                    <li><?= Html::a(Yii::t('app', 'Register'), Url::to(['//register'])); ?></li>
+                    <li><?= Html::a(Yii::t('app', 'Login'), Yii::$app->urlManager->createUrl(['//login'])); ?></li>
+                    <li><?= Html::a(Yii::t('app', 'Register'), Yii::$app->urlManager->createUrl(['//register'])); ?></li>
                 </ul>
             <?php endif; ?>
             <ul id="page-share" class="mainmenu">
@@ -69,22 +69,22 @@ foreach ($menu as $menuData) {
                     <?php
                     $username = empty(Yii::$app->user->identity->username) ? Yii::$app->user->identity->id : Yii::$app->user->identity->username;
                     ?>
-                    <li><a href="<?= Url::to(['/user/view', 'id' => $username]); ?>"><i
+                    <li><a href="<?= Yii::$app->urlManager->createUrl(['/user/view', 'id' => $username]); ?>"><i
                                 class="fa fa-fw fa-user hidden-xs"></i>
                             <?= Yii::t('app', 'Profile') ?>
                         </a></li>
-                    <li><a href="<?= Url::to(['/u/manage']); ?>">
+                    <li><a href="<?= Yii::$app->urlManager->createUrl(['/u/manage']); ?>">
                             <i class="fa fa-fw fa-gear hidden-xs"></i>
                             <?= Yii::t('app', 'Settings') ?>
                         </a>
                     </li>
-                    <li><a href="<?= Url::to(['/u/transfer']); ?>"><i
+                    <li><a href="<?= Yii::$app->urlManager->createUrl(['/u/transfer']); ?>"><i
                                 class="fa fa-fw fa-gear hidden-xs"></i>
                             <?= Yii::t('app', 'Money Transfer') ?>
                         </a></li>
                     <li class="dropdown-header"></li>
                     <li class="divider"></li>
-                    <li><a data-method="post" href="<?= Url::to(['/site/logout']); ?>"><i
+                    <li><a data-method="post" href="<?= Yii::$app->urlManager->createUrl(['/site/logout']); ?>"><i
                                 class="fa fa-fw fa-sign-out hidden-xs"></i>
                             <?= Yii::t('app', 'Logout') ?>
                         </a>
@@ -201,7 +201,7 @@ foreach ($menu as $menuData) {
                     <ul class="menu-category">
                         <?php foreach ($mainMenu as $mData) : ?>
                             <li <?php if (isset($mData['sub'])): ?><?php endif; ?>>
-                                <a href="<?= Url::to(["//{$articlesurl}/{$mData['url']}"]) ?>"><?= $mData['title'] ?></a>
+                                <a href="<?= Yii::$app->urlManager->createUrl(["//{$articlesurl}/{$mData['url']}"]) ?>"><?= $mData['title'] ?></a>
                                 <?php if (isset($mData['sub'])): ?>
                                     <ul class="supdropdown">
                                         <?php foreach ($mData['sub'] as $submenu) : ?>
@@ -227,16 +227,16 @@ foreach ($menu as $menuData) {
                     <div class="collapse navbar-collapse" id="w2-collapse">
                         <ul class="navbar-nav navbar-right nav" id="w4">
                             <li class="add-post">
-                                <?= Html::a('<i class="fa fa-plus"></i> ' . Yii::t('app', 'Add a post'), Url::to(['//explore/post']), ['class' => '']); ?>
+                                <?= Html::a('<i class="fa fa-plus"></i> ' . Yii::t('app', 'Add a post'), Yii::$app->urlManager->createUrl(['//explore/post']), ['class' => '']); ?>
                             </li>
                             <li>
                                 <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->plan) : ?>
-                                    <a style="color: #edc400;" href="<?= Url::to(['//u/gold']); ?>"><span><i
+                                    <a style="color: #edc400;" href="<?= Yii::$app->urlManager->createUrl(['//u/gold']); ?>"><span><i
                                                 class="glyphicon glyphicon-star"></i></span>
                                         <?= Yii::t('app', 'Gold Status') ?>
                                     </a>
                                 <?php else: ?>
-                                    <a href="<?= Url::to(['plan']); ?>"><span><i
+                                    <a href="<?= Yii::$app->urlManager->createUrl(['plan']); ?>"><span><i
                                                 class="glyphicon glyphicon-star"></i></span>
                                         <?= Yii::t('app', 'Go Premium') ?>
                                     </a>
@@ -252,22 +252,22 @@ foreach ($menu as $menuData) {
                                     </span>
                                     <b class="caret"></b></a>
                                 <ul class="dropdown-menu" id="w5">
-                                    <li><a tabindex="-1" href="<?= Url::to(['/user/view', 'id' => $username]); ?>"><i
+                                    <li><a tabindex="-1" href="<?= Yii::$app->urlManager->createUrl(['/user/view', 'id' => $username]); ?>"><i
                                                 class="fa fa-fw fa-user hidden-xs"></i>
                                             <?= Yii::t('app', 'Profile') ?>
                                         </a></li>
-                                    <li><a tabindex="-1" href="<?= Url::to(['/u/manage']); ?>">
+                                    <li><a tabindex="-1" href="<?= Yii::$app->urlManager->createUrl(['/u/manage']); ?>">
                                             <i class="fa fa-fw fa-gear hidden-xs"></i>
                                             <?= Yii::t('app', 'Settings') ?>
                                         </a>
                                     </li>
-                                    <li><a tabindex="-1" href="<?= Url::to(['/u/transfer']); ?>"><i
+                                    <li><a tabindex="-1" href="<?= Yii::$app->urlManager->createUrl(['/u/transfer']); ?>"><i
                                                 class="fa fa-fw fa-gear hidden-xs"></i>
                                             <?= Yii::t('app', 'Money Transfer') ?>
                                         </a></li>
                                     <li class="dropdown-header"></li>
                                     <li class="divider"></li>
-                                    <li><a tabindex="-1" data-method="post" href="<?= Url::to(['/site/logout']); ?>"><i
+                                    <li><a tabindex="-1" data-method="post" href="<?= Yii::$app->urlManager->createUrl(['/site/logout']); ?>"><i
                                                 class="fa fa-fw fa-sign-out hidden-xs"></i>
                                             <?= Yii::t('app', 'Logout') ?>
                                         </a>
