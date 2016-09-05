@@ -24,10 +24,10 @@ class HangUrl extends \yii\web\UrlManager
 //            $url = str_replace('?language=en', '', $url);
 
             $url = 'en'.$url;
-            $url = str_replace('/e/', '/en/', $url);
-            $url = str_replace('en/en', 'en', $url);
-            $url = str_replace('earticles', 'en/articles', $url);
-            $url = str_replace('een', 'en', $url);
+//            $url = str_replace('/e/', '/en/', $url);
+//            $url = str_replace('en/en', 'en', $url);
+//            $url = str_replace('earticles', 'en/articles', $url);
+//            $url = str_replace('een', 'en', $url);
 
         }
         return $url;
