@@ -15,21 +15,27 @@ class HangUrl extends \yii\web\UrlManager
 {
     public function createUrl($params)
     {
-        $url = parent::createUrl($params);
-        if (Yii::$app->language == 'en') {
-            if (strpos('en/', $url) === false) {
-                $url = 'en' . $url;
-            }
-            $url = str_replace('/e/', '/en/', $url);
-
-            $url = str_replace('earticles', 'en/articles', $url);
-            $url = str_replace('een', 'en', $url);
-            $url = str_replace('en/en', 'en', $url);
-            $url = str_replace('en/een', 'en', $url);
-            $url = str_replace('en/e', 'en', $url);
-            $url = str_replace('en/en', 'en', $url);
+        if (!isset($params['language']) && Yii::$app->language == 'en') {
+            $params['language'] = Yii::$app->language;
         }
-        return $url;
+
+        return parent::createUrl($params);
+
+//        $url = parent::createUrl($params);
+//        if (Yii::$app->language == 'en') {
+//            if (strpos('en/', $url) === false) {
+//                $url = 'en' . $url;
+//            }
+//            $url = str_replace('/e/', '/en/', $url);
+//
+//            $url = str_replace('earticles', 'en/articles', $url);
+//            $url = str_replace('een', 'en', $url);
+//            $url = str_replace('en/en', 'en', $url);
+//            $url = str_replace('en/een', 'en', $url);
+//            $url = str_replace('en/e', 'en', $url);
+//            $url = str_replace('en/en', 'en', $url);
+//        }
+//        return $url;
 
 //        $url = parent::createUrl($params);
 //
