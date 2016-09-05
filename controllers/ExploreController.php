@@ -410,7 +410,7 @@ class ExploreController extends Controller
     {
         $model = Post::findOne(['id' => $id]);
         if (Yii::$app->user->id != $model->userId && !Yii::$app->user->identity->type) {
-            throw new Exception(Yii::t('app', 'you are not allwoed to access this page'), '403');
+            throw new Exception(Yii::t('app', 'You are not allowed to access this page'), '403');
         }
         Yii::$app->db->createCommand("UPDATE post SET deleted=1 WHERE id=$id")->query();
         Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Post has been deleted successfully'));
