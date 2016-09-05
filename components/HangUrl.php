@@ -18,9 +18,9 @@ class HangUrl extends \yii\web\UrlManager
         if (!isset($params['language']) && Yii::$app->language == 'en') {
             $params['language'] = Yii::$app->language;
         }
-
-        return parent::createUrl($params);
-
+        $url =parent::createUrl($params);
+        $url = str_replace('/e/', 'en', $url);
+        return $url;
 //        $url = parent::createUrl($params);
 //        if (Yii::$app->language == 'en') {
 //            if (strpos('en/', $url) === false) {
