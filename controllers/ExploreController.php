@@ -217,7 +217,7 @@ class ExploreController extends Controller
 
     public function actionAll()
     {
-        $pageSize = 8;
+        $pageSize = 10;
         $query = Post::find();
         $query->orderBy('created_at DESC');
         $query->where("post.deleted=0 AND post.published=1 AND lang = '" . Yii::$app->language . "'");
