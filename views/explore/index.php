@@ -51,16 +51,17 @@ if (empty($this->title)) {
         <hr class="nomargin m-b-20">
         <div class="row">
             <div class="col-md-12">
-                <?php
-                echo ListView::widget([
-                    'dataProvider' => $dataProvider,
-                    'itemView' => '_view',
-                    'layout' => "<ul class='list-unstyled inifi'>{items}\n</ul>",
-                    'itemOptions' => [
-                        'tag' => false
-                    ],
-                ]);
-                ?>
+                <ul class='list-unstyled inifi'>
+                    <?php
+                    $models = $dataProvider->getModels();
+                    $i = 1;
+                    foreach ($models as $data) {
+                        echo $this->render('_view', ['model' => $data]);
+                        if ($i == 3)
+                            echo $this->render('_innerads');
+                    }
+                    ?>
+                </ul>
             </div>
         </div>
     </div>
