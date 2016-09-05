@@ -25,6 +25,8 @@ class HangUrl extends \yii\web\UrlManager
         }
         $url = str_replace('/e/', 'en', $url);
         $url = str_replace('en/en', 'en', $url);
+        $url = str_replace('enarticles', '/en/articles', $url);
+
         return $url;
     }
 
@@ -40,6 +42,7 @@ class HangUrl extends \yii\web\UrlManager
         }
         $url = str_replace('/e/', 'en', $url);
         $url = str_replace('en/en', 'en', $url);
+        $url = str_replace('enarticles', '/en/articles', $url);
         return $url;
     }
 }
