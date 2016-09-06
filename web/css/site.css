@@ -440,7 +440,7 @@ footer > div > .list-inline.text-center a {
 }
 
 .center {
-    margin: 0 auto;
+    margin: 0 auto !important;
     display: table;
 }
 
