@@ -10,16 +10,20 @@ if (empty($this->title)) {
 }
 $canonical = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $this->registerLinkTag(['rel' => 'canonical', 'href' => $canonical]);
-$menu = Category::find()->where(['lang' => Yii::$app->language])->all();
 
-$articlesurl = Yii::t('app', 'articles-url');
-$mainMenu = [];
-foreach ($menu as $menuData) {
-    if ($menuData->parent) {
-        $mainMenu[$menuData->parent]['sub'][] = ['id' => $menuData->id, 'title' => $menuData->title, 'url' => $menuData->url_link];
-    } else {
-        $mainMenu[$menuData->id] = ['id' => $menuData->id, 'title' => $menuData->title, 'url' => $menuData->url_link];
+$mainMenu = Yii::$app->cache->get('media-data-' . Yii::$app->language);
+if ($mainMenu == false) {
+    $menu = Category::find()->where(['lang' => Yii::$app->language])->all();
+    $articlesurl = Yii::t('app', 'articles-url');
+    $mainMenu = [];
+    foreach ($menu as $menuData) {
+        if ($menuData->parent) {
+            $mainMenu[$menuData->parent]['sub'][] = ['id' => $menuData->id, 'title' => $menuData->title, 'url' => $menuData->url_link];
+        } else {
+            $mainMenu[$menuData->id] = ['id' => $menuData->id, 'title' => $menuData->title, 'url' => $menuData->url_link];
+        }
     }
+    Yii::$app->cache->set($mainMenu, 'media-data-' . Yii::$app->language, 3600);
 }
 ?>
 <?php $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
