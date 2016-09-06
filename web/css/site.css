@@ -439,11 +439,6 @@ footer > div > .list-inline.text-center a {
     text-decoration: none;
 }
 
-.center {
-    margin: 0 auto !important;
-    display: table;
-}
-
 audio:not([controls]) {
     display: none;
     height: 0;
@@ -8917,4 +8912,8 @@ nav {
         width: 640px;
         height: 90px;
     }
+}
+.center {
+    margin: 0 auto !important;
+    display: table;
 }
