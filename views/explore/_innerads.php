@@ -1,4 +1,4 @@
-<li>
+<li class="center">
     <?php if (!Yii::$app->helper->isMobile()): ?>
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <!-- Leaderboard - Category Upper -->
