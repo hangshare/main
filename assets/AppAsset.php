@@ -40,14 +40,16 @@ class AppAsset extends AssetBundle
 
         if (\Yii::$app->controller->action->id == 'post') {
             $this->js[] = 'css/editor/js/froala_editor.min.js';
-            $this->js[] = 'css/editor/js/froala_editor.min.js';
             $this->js[] = 'css/editor/js/plugins/char_counter.min.js';
             $this->js[] = 'css/editor/js/plugins/video.min.js';
+            if (Yii::$app->language == 'ar') {
+                $this->js[] = 'css/editor/js/langs/froala_editor_ar.js';
+                $this->js[] = 'https://s3.amazonaws.com/hangshare.static/assets/ar.min.js';
+            }
             $this->css [] = 'css/font-awesome/css/font-awesome.min.css';
             $this->css [] = "css/editor/css/froala_editor.min.css";
             $this->css [] = "css/editor/css/froala_style.min.css";
-            if (Yii::$app->language == 'ar')
-                $this->js[] = 'css/editor/js/langs/ar.js';
+
         }
 
         if (Yii::$app->language == 'en') {
