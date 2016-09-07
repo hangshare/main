@@ -90,10 +90,13 @@ $(function () {
     });
     if ($.isFunction($.fn.editable)) {
         var options = {
+            fontFamilySelection: true,
+            buttons: ['paragraphStyle', 'paragraphFormat', 'align', 'outdent', 'indent', 'createLink', 'insertImage', 'insertVideo', 'undo', 'redo'],
             inlineMode: false,
+            shortcutsHint: false,
             toolbarFixed: true,
             mediaManager: false,
-            language: $.Yii.getLang(),
+            language: 'ar', // $.Yii.getLang(),
             imageUploadURL: url_lang + '/explore/upload/',
             minHeight: 200,
             maxHeight: 800
