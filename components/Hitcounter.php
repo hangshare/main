@@ -10,7 +10,7 @@ use Memcached;
 class Hitcounter extends Component
 {
 
-    const HIT_OLD_AFTER_SECONDS = 80000; // 1 day.
+    const HIT_OLD_AFTER_SECONDS = 1000; // 1 day.
     const IGNORE_SEARCH_BOTS = true;
     const HONOR_DO_NOT_TRACK = false;
     const VIEW_PRICE = [
