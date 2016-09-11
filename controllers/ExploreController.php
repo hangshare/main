@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\components\AwsEmail;
 use app\models\Category;
+use app\models\Comments;
 use app\models\Post;
 use app\models\PostSearch;
 use Yii;
@@ -19,6 +20,40 @@ class ExploreController extends Controller
 {
     public $next;
     public $enableCsrfValidation = false;
+
+    public function actionAddcomment()
+    {
+        $this->layout = false;
+        $request = Yii::$app->request->post();
+        $post = Post::model()->find()->where(['id' => $request['id']])->one();
+        $model = new Comments;
+        $model->postId = $request['id'];
+        $model->comment = $request['text'];
+        $model->save(false);
+        if (Yii::$app->user->identity->id != $post->id) {
+            AwsEmail::queueUser($post->userId, 'post_comment', [
+                '__title__' => "{$post->title}",
+                '__url__' => $post->url . '#comments',
+                '__user__' => Yii::$app->user->identity->name,
+            ]);
+        }
+        echo $this->render('_commentview', ['model' => $model]);
+    }
+
+    public function actionComments()
+    {
+        $request = Yii::$app->request->post();
+        $id = $request['id'];
+        $this->layout = false;
+        $model = Comments::find()->where(['postId' => $id])->orderBy('id desc')->limit(20)->all();
+        echo '<ul id="commentsCont" class="list-unstyled">';
+        foreach ($model as $data) {
+            if ($id != $data->id)
+                echo $this->render('_commentview', ['model' => $data]);
+        }
+        echo '</ul>';
+    }
+
 
     public function actionHot()
     {
