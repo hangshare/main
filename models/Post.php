@@ -232,7 +232,10 @@ class Post extends \yii\db\ActiveRecord
                 }
             }
         }
-        $this->url = Yii::$app->urlManager->createAbsoluteUrl(["//{$this->urlTitle}"]);
+        if ($this->lang == 'en')
+            $this->url = Yii::$app->urlManager->createAbsoluteUrl(["//en/{$this->urlTitle}"]);
+        else
+            $this->url = Yii::$app->urlManager->createAbsoluteUrl(["//{$this->urlTitle}"]);
         return TRUE;
     }
 
