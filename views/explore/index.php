@@ -9,8 +9,10 @@ if (isset($cat)) {
     $this->title = Yii::t('app', $cat->title);
     $this->description = Yii::t('app', $cat->title);
 } else {
-    $this->title = $tags;
-    $this->description = $tags;
+    if (isset($tags)) { // BUG
+        $this->title = $tags;
+        $this->description = $tags;
+    }
 }
 if (empty($this->title)) {
     $this->title = Yii::t('app', 'post.header.title');
