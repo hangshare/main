@@ -25,7 +25,7 @@ class ExploreController extends Controller
     {
         $this->layout = false;
         $request = Yii::$app->request->post();
-        $post = Post::model()->find()->where(['id' => $request['id']])->one();
+        $post = Post::find()->where(['id' => $request['id']])->one();
         $model = new Comments;
         $model->postId = $request['id'];
         $model->comment = $request['text'];
