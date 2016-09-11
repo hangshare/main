@@ -37,6 +37,9 @@ class ExploreController extends Controller
                 '__user__' => Yii::$app->user->identity->name,
             ]);
         }
+
+        Yii::$app->db->createCommand("UPDATE `post_stats` SET `comments`=`comments`+1 WHERE `postId`= {$post->id}")->query();
+
         echo $this->render('_commentview', ['model' => $model]);
     }
 
