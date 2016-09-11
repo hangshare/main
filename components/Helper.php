@@ -10,11 +10,11 @@ class Helper extends Component
 
     function str_insert($str, $search, $insert)
     {
-        $dom = new \DOMDocument;
-        $dom->loadHTML($str);
+        $dom = new \DOMDocument('1.0', 'UTF-8');
+        $internalErrors = libxml_use_internal_errors(true);
+        @$dom->loadHTML($str);
+        libxml_use_internal_errors($internalErrors);
         $tag_count = $dom->getElementsByTagName('p')->length;
-
-
         $index = strpos($str, $search);
         if ($tag_count > 2) {
             $index = strpos($str, $search, $index + strlen($search));
