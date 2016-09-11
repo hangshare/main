@@ -693,16 +693,22 @@ class SiteController extends Controller
 
     public function actionEmail($id)
     {
-        $im = imagecreate(100, 100) or die("Cannot Initialize new GD image stream");
-        $background_color = imagecolorallocate($im, 0, 0, 0);
-        header('Content-Type: image/png');
-        imagepng($im);
+        $this->layout = false;
+        $im = imagecreatetruecolor(120, 20);
+        $text_color = imagecolorallocate($im, 233, 14, 91);
+        imagestring($im, 1, 5, 5,  'A Simple Text String', $text_color);
+        header('Content-type: image/jpeg');
+        header("Cache-Control: public");
+        header("Pragma: public");
+        imagejpeg($im);
         imagedestroy($im);
-        $model = UserEmail::find()->where("key LIKE '{$id}'")->one();
+
+        $model = UserEmail::find()->where(["key" => $id])->one();
         if ($model) {
             $model->opened_at = time();
             $model->save(false);
         }
+
     }
 
 }
