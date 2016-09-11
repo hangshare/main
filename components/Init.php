@@ -12,7 +12,6 @@ class Init extends Component
 
     public function init()
     {
-
         if (!Yii::$app->user->isGuest) {
             if (Yii::$app->user->identity->deleted) {
                 if (strpos(Yii::$app->request->url,'u/suspended') === false)
