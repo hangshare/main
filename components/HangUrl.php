@@ -30,7 +30,7 @@ class HangUrl extends \yii\web\UrlManager
         return $url;
     }
 
-    public function createAbsoluteUrl($params)
+    public function createAbsoluteUrl($params, $scheme = NULL)
     {
         if (!isset($params['language']) && Yii::$app->language == 'en') {
             $params['language'] = Yii::$app->language;
