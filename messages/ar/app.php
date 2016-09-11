@@ -265,4 +265,8 @@ return [
     'h1.suspended' => 'تم ايقاف هذا الحساب',
     'This account has been suspended due to illigal usage of hangshare website' => 'تم ايقاف هذا الحساب بسبب الاستخدام الخاطئ لموقع هانج شير',
     'Please contact us if you feel there is a mistake' => 'اذا كنت تعتقد انه يوجد خطأ ما يرجى مراسلتنا على info@hangshare.com',
+    'Write a comment ...' => 'أكتب تعليقا ... ',
+    'Publish' => 'انشر',
+    'Comments' => 'آراء الأعضاء',
+
 ];
