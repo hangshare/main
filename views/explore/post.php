@@ -102,6 +102,7 @@ foreach ($model->postBodies as $data) {
             <?= $form->field($model, 'body')->textarea(['class' => 'froala-edit']) ?>
             <label><?= Yii::t('app', 'Tags') ?></label>
             <?php
+            $tags_sql = '';
             if($tags_string){
                 $tags_sql = "OR id IN ({$tags_string})";
             }
