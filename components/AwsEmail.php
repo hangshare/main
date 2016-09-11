@@ -39,7 +39,7 @@ class AwsEmail extends Component
             $userEmail->save();
             $params['__user_name__ '] = $name;
             $body = strtr($email->body, $params);
-            $body .= "<img src='https://www.hangshare.com/site/email/{$key}/' width='1' height='1' />";
+            $body .= "<img src='https://www.hangshare.com/site/email/?id={$key}' width='1' height='1' />";
             self::SendMail($email_to, $email->subject, $body);
         }
     }
@@ -52,48 +52,47 @@ class AwsEmail extends Component
 
     public static function SendMail($to, $subject, $body, $from = 'info@hangshare.com')
     {
-        if (!YII_DEBUG || $to = 'hasania.khaled@gmail.com') {
-            $client = SesClient::factory(array(
-                'credentials' => array(
-                    'key' => self::$__accessKey,
-                    'secret' => self::$__secretKey,
+        $client = SesClient::factory(array(
+            'credentials' => array(
+                'key' => self::$__accessKey,
+                'secret' => self::$__secretKey,
+            ),
+            'region' => 'us-east-1',
+            'version' => '2010-12-01'
+        ));
+        $allowed_domians = ['hotmail.com', 'yahoo.com', 'gmail.com', 'outlook.com', 'live.com', 'hangshare.com'];
+        try {
+            if (!filter_var($to, FILTER_VALIDATE_EMAIL) || !in_array(self::getDomainFromEmail($to), $allowed_domians)) {
+                return false;
+            }
+            $client->sendEmail(array(
+                'Source' => "HangShare.com <no-reply@hangshare.com>",
+                'Destination' => array(
+                    'ToAddresses' => array($to)
                 ),
-                'region' => 'us-east-1',
-                'version' => '2010-12-01'
-            ));
-            $allowed_domians = ['hotmail.com', 'yahoo.com', 'gmail.com', 'outlook.com', 'live.com', 'hangshare.com'];
-            try {
-                if (!filter_var($to, FILTER_VALIDATE_EMAIL) || !in_array(self::getDomainFromEmail($to), $allowed_domians)) {
-                    return false;
-                }
-                $client->sendEmail(array(
-                    'Source' => "HangShare.com <no-reply@hangshare.com>",
-                    'Destination' => array(
-                        'ToAddresses' => array($to)
+                'Message' => array(
+                    'Subject' => array(
+                        'Data' => $subject,
+                        'Charset' => 'UTF-8',
                     ),
-                    'Message' => array(
-                        'Subject' => array(
-                            'Data' => $subject,
+                    'Body' => array(
+                        'Text' => array(
+                            'Data' => $body,
                             'Charset' => 'UTF-8',
                         ),
-                        'Body' => array(
-                            'Text' => array(
-                                'Data' => $body,
-                                'Charset' => 'UTF-8',
-                            ),
-                            'Html' => array(
-                                'Data' => $body,
-                                'Charset' => 'UTF-8',
-                            ),
+                        'Html' => array(
+                            'Data' => $body,
+                            'Charset' => 'UTF-8',
                         ),
                     ),
-                    'ReplyToAddresses' => array('info@hangshare.com'),
-                    'ReturnPath' => 'info@hangshare.com'
-                ));
-            } catch (Exception $exc) {
-                print $exc->getTraceAsString() . chr(10);
-            }
+                ),
+                'ReplyToAddresses' => array('info@hangshare.com'),
+                'ReturnPath' => 'info@hangshare.com'
+            ));
+        } catch (Exception $exc) {
+            print $exc->getTraceAsString() . chr(10);
         }
+
     }
 
 }
