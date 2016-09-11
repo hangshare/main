@@ -287,6 +287,7 @@ class ExploreController extends Controller
         } else {
             return $this->render('index', [
                 'dataProvider' => $dataProvider,
+
             ]);
         }
     }
