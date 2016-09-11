@@ -456,7 +456,7 @@ class ExploreController extends Controller
     protected function findModel($id)
     {
         $lang = Yii::$app->language;
-        $userId = Yii::$app->user->identity->id;
+        $userId = !Yii::$app->user->isGuest ? Yii::$app->user->identity->id : 0;
         $model = Yii::$app->cache->get($id . $lang);
         if ($model === false) {
             $qu = Post::find()->joinWith(['user', 'postTags', 'postTags.tags']);
