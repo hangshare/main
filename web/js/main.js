@@ -1,5 +1,6 @@
 $(function () {
-
+    var base_url = window.location.origin;
+    var hrefLoc = window.location.href;
 
     if ((location.hash == "#_=_" || location.href.slice(-1) == "#_=_")) {
         removeHash();
@@ -9,7 +10,11 @@ $(function () {
         url_lang = '/en';
     }
 
-    console.log(url_lang);
+    if (base_url == 'http://localhost') {
+        url_lang = 'http://localhost/hangshare/web' + url_lang;
+    }
+
+
     //$('[data-toggle="tooltip"]').tooltip();
 
     $(".menu-category > li").on({
@@ -181,7 +186,7 @@ $(function () {
         });
         var credData;
         $.ajax({
-            url: url_lang+ '/explore/s3crd/',
+            url: url_lang + '/explore/s3crd/',
             type: 'POST',
             dataType: 'JSON',
             data: {},
@@ -392,13 +397,48 @@ $(function () {
         var Dat = $('article').data();
         $.ajax({
             method: "POST",
-            url:  url_lang + "/explore/hot/?qt=" + random(),
+            url: url_lang + "/explore/hot/?qt=" + random(),
             data: Dat,
             success: function (data, textStatus, jqXHR) {
                 $('#hot-posts').append(data);
             }
         });
     }
+
+    if ($('#comments').length > 0) {
+        var Dat = $('article').data();
+        $.ajax({
+            method: "POST",
+            url: url_lang + "/explore/comments/?qt=" + random(),
+            data: Dat,
+            success: function (data, textStatus, jqXHR) {
+                $('#comments').append(data);
+            }
+        });
+    }
+
+    if ($('#addcomment').length > 0) {
+        $(document).on('click', '#addcomment', function (e) {
+            e.preventDefault();
+
+            var id = $('#comment-body').attr('date-id');
+            var text = $('#comment-body').val();
+            $('#comment-body').val('');
+            if (text.trim() != '') {
+                $.ajax({
+                    method: "POST",
+                    url: url_lang + "/explore/addcomment/",
+                    data: {'text': text, 'id': id},
+                    success: function (data, textStatus, jqXHR) {
+                        $('#addcomment').unbind('click');
+                        $('#commentsCont').prepend(data);
+                        $('#commentsCont > li:first-child').hide().fadeIn();
+                    }
+                });
+            }
+        });
+    }
+
 
     if ($('#related-posts').length > 0) {
         var Dat = $('article').data();
