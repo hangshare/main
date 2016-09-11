@@ -17,7 +17,7 @@ $thump = Yii::$app->imageresize->thump($model->user->image, 80, 80, 'crop');
         </div>
         <div style="display: inline-block; vertical-align: top; font-size: 14px; ">
             <a style="display: block;"><?= Html::encode($model->user->name) ?></a>
-            <?= date('M d', $model->created_at); ?>
+            <?= date('M d', strtotime($model->created_at)); ?>
         </div>
     </div>
     <p><?= nl2br(Html::encode($model->comment)) ?></p>
