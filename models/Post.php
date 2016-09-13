@@ -102,7 +102,7 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'body', 'categories'], 'required'],
+            [['title', 'body'], 'required'],
             [['urlTitle'], 'unique'],
             [['cover_file', 'ylink'], 'either'],
             ['ylink', 'match', 'pattern' => '/^https?:\/\/(?:.*?)\.?(youtube|vimeo)\.com\/(watch\?[^#]*v=([\w-]+)|(\d+)).*$/'],
