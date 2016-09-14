@@ -5,10 +5,20 @@ use yii\widgets\ListView;
 $this->title = Yii::t('app', 'Home Title');
 $this->description = Yii::t('app', 'Homepage.Description');
 ?>
+
+
 <section id="quick-signup-post">
-    <div class="container">
-        <div class="spacer"></div>
-        <h1 class="header-index">
+    <div id="banner-video">
+        <video width="100%" muted="" loop="" autoplay=""
+               poster="https://s3-eu-west-1.amazonaws.com/hangshare-media/aff-intro.jpg">
+            <source type="video/mp4"
+                    src="https://cdn-5.lifehack.org/wp-content/themes/lifehack-theme/videos/contribute_banner.mp4"></source>
+            <source type="video/webm"
+                    src="https://cdn-5.lifehack.org/wp-content/themes/lifehack-theme/videos/contribute_banner.webm"></source>
+        </video>
+    </div>
+    <div class="overlay">
+        <h1 class="header-index" style="margin-top: 70px;">
             <?= Yii::t('app', 'welcome 1') ?>
             <aside>
                 <?= Yii::t('app', 'welcome 2') ?>
@@ -26,6 +36,32 @@ $this->description = Yii::t('app', 'Homepage.Description');
         <h4 style="color: #fff; text-align: center; margin-bottom: 75px;">
             <?= Yii::t('app', 'Create your post > Share on social media > Get money for every view') ?>
         </h4>
+        <?= Html::a(Yii::t('app', 'Signup Now'), Yii::$app->urlManager->createUrl(['plan']), ['class' => 'btn btn-primary btn-lg']); ?>
+    </div>
+</section>
+<section id="numbers">
+    <div class="container">
+        <div class="counter-row row text-center wow fadeInUp animated" style="visibility: visible;">
+            <?php $dif = (time() - 1473885430) / 60; ?>
+            <div class="col-md-4 col-sm-6 fact-container">
+                <div class="fact">
+                    <span class="counter highlight"><?= number_format(($dif * 1) + 25000) ?></span>
+                    <h4><?= Yii::t('app', 'Number of Users') ?></h4>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 fact-container">
+                <div class="fact">
+                    <span class="counter highlight"><?= number_format(($dif * 2) + 55000) ?></span>
+                    <h4><?= Yii::t('app', 'Blog Posts') ?></h4>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 fact-container">
+                <div class="fact">
+                    <span class="counter highlight">$<?= number_format(($dif * 0.5) + 9300) ?></span>
+                    <h4><?= Yii::t('app', 'Total Earning') ?></h4>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 <section>
@@ -52,18 +88,6 @@ $this->description = Yii::t('app', 'Homepage.Description');
         <div class="clearfix"></div>
         <div class="container">
             <div class="col-md-8">
-                <div class="col-md-12 m-t-25 m-b-20">
-                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- Responsive - Home Page Upper -->
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-6288640194310142"
-                         data-ad-slot="7108775712"
-                         data-ad-format="auto"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
                 <h3 class="underlined"><?= Yii::t('app', 'New Post') ?></h3>
                 <?php
                 echo ListView::widget([
@@ -78,56 +102,40 @@ $this->description = Yii::t('app', 'Homepage.Description');
             </div>
             <?php if (!Yii::$app->helper->isMobile()) : ?>
                 <div class="col-md-4">
-                    <div class="m-t-25 text-center">
-                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <!-- Wide Skyscraper - Home Page Upper -->
-                        <ins class="adsbygoogle"
-                             style="display:inline-block;width:160px;height:600px"
-                             data-ad-client="ca-pub-6288640194310142"
-                             data-ad-slot="8585508919"></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
                     <?php if (Yii::$app->user->isGuest) : ?>
-                        <div class="row">
-                            <div class="white text-center ressocal">
-                                <div class="col-md-12">
-                                    <h3><?= Yii::t('app', 'Gold Account') ?></h3>
-
-                                    <p><?= Yii::t('app', 'Limited Time Offer') ?></p>
-                                    <select id="goldtime">
-                                        <option
-                                            value="b"><?= Yii::t('app', 'one month offer', ['price' => '10']) ?></option>
-                                        <option
-                                            value="c"><?= Yii::t('app', 'three month offer', ['price' => '25']) ?></option>
-                                    </select>
-                                    <ul class="list-unstyled">
-                                        <?php echo $this->render('//plan/gold'); ?>
-                                    </ul>
-                                    <div id="planb">
-                                        <?=
-                                        Html::a(Yii::t('app', 'Register'), [Yii::$app->user->isGuest ? '//register/' : '//site/plangold'], [
-                                            'class' => 'btn gold-btn btn-block',
-                                            'data' => [
-                                                'method' => 'post',
-                                                'params' => ['plan' => 'b'],
-                                            ]
-                                        ])
-                                        ?>
-                                    </div>
-                                    <div id="planc" style="display: none;">
-                                        <?=
-                                        Html::a(Yii::t('app', 'Register'), [Yii::$app->user->isGuest ? '//register/' : '//site/plangold'], [
-                                            'class' => 'btn gold-btn btn-block',
-                                            'data' => [
-                                                'method' => 'post',
-                                                'params' => ['plan' => 'c'],
-                                            ]
-                                        ])
-                                        ?>
-                                    </div>
-                                </div>
+                        <div class="white-box" style="margin-top: 40px">
+                            <h3><?= Yii::t('app', 'Gold Account') ?></h3>
+                            <p><?= Yii::t('app', 'Limited Time Offer') ?></p>
+                            <select id="goldtime">
+                                <option
+                                    value="b"><?= Yii::t('app', 'one month offer', ['price' => '10']) ?></option>
+                                <option
+                                    value="c"><?= Yii::t('app', 'three month offer', ['price' => '25']) ?></option>
+                            </select>
+                            <ul class="list-unstyled">
+                                <?php echo $this->render('//plan/gold'); ?>
+                            </ul>
+                            <div id="planb">
+                                <?=
+                                Html::a(Yii::t('app', 'Register'), [Yii::$app->user->isGuest ? '//register/' : '//site/plangold'], [
+                                    'class' => 'btn gold-btn btn-block',
+                                    'data' => [
+                                        'method' => 'post',
+                                        'params' => ['plan' => 'b'],
+                                    ]
+                                ])
+                                ?>
+                            </div>
+                            <div id="planc" style="display: none;">
+                                <?=
+                                Html::a(Yii::t('app', 'Register'), [Yii::$app->user->isGuest ? '//register/' : '//site/plangold'], [
+                                    'class' => 'btn gold-btn btn-block',
+                                    'data' => [
+                                        'method' => 'post',
+                                        'params' => ['plan' => 'c'],
+                                    ]
+                                ])
+                                ?>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -138,19 +146,6 @@ $this->description = Yii::t('app', 'Homepage.Description');
                                 <?php echo $this->render('//explore/_hot', ['model' => $postData]); ?>
                             <?php endforeach; ?>
                         </ul>
-                    </div>
-                    <div class="rela">
-                        <div class="row m-t-25 text-center">
-                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                            <!-- faq ad -->
-                            <ins class="adsbygoogle"
-                                 style="display:inline-block;width:336px;height:280px"
-                                 data-ad-client="ca-pub-6288640194310142"
-                                 data-ad-slot="4022492110"></ins>
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
-                        </div>
                     </div>
                 </div>
             <?php endif; ?>
