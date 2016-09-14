@@ -174,11 +174,12 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                                     </div>
                                 <?php endif; ?>
 
-
-                                <div class="m-t-25">
-                                    <h3 class="underlined"><?= Yii::t('app', 'Comments') ?></h3>
-                                    <?php echo $this->render('//explore/_commentform', ['id' => $model->id]); ?>
-                                    <div id="comments" data-id="<?= $model->id; ?>"></div>
+                                <div class="row">
+                                    <div class="col-md-12 m-t-25">
+                                        <h3 class="underlined"><?= Yii::t('app', 'Comments') ?></h3>
+                                        <?php echo $this->render('//explore/_commentform', ['id' => $model->id]); ?>
+                                        <div id="comments" data-id="<?= $model->id; ?>"></div>
+                                    </div>
                                 </div>
 
                             </div>
