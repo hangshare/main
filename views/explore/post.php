@@ -47,12 +47,9 @@ foreach ($model->postBodies as $data) {
                         <span><?= Yii::t('app', 'Choose a picture') ?></span>
                     </button>
                 </div>
-                <div class="col-md-1">
-                    <span style="font-size: 30px;top: 22px; position: relative;"><?= Yii::t('app', 'or') ?></span>
-                </div>
-                <div class="col-md-9">
-                    <?= $form->field($model, 'ylink')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'youtube ex')]) ?>
-                </div>
+<!--                <div class="col-md-9">-->
+                    <?php //echo $form->field($model, 'ylink')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'youtube ex')]) ?>
+<!--                </div>-->
             </div>
             <input id="cover_input" name="cover" type="hidden" value=""/>
             <br>
