@@ -86,7 +86,7 @@ class SiteController extends Controller
     public function actionSitemapxml()
     {
         header("Content-type: text/xml");
-        $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle, t.created_at FROM  post t WHERE t.deleted = 0 AND t.lang='ar' ORDER BY t.id DESC LIMIT 10000;")->queryAll();
+        $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle, t.created_at FROM  post t WHERE t.deleted = 0 AND t.published = 1 AND t.lang='ar' ORDER BY t.id DESC LIMIT 10000;")->queryAll();
         $sitemap = new \DomDocument('1.0', 'UTF-8');
         $sitemap->preserveWhiteSpace = false;
         $sitemap->formatOutput = true;
@@ -147,7 +147,7 @@ class SiteController extends Controller
             'pagination' => array('pageSize' => 100),
         ]);
         $postProvider = new ActiveDataProvider([
-            'query' => Post::find()->orderBy('id desc'),
+            'query' => Post::find()->where('deleted = 0 AND published = 1')->orderBy('id desc'),
             'pagination' => array('pageSize' => 100),
         ]);
         return $this->render('sitemap', [
