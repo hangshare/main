@@ -85,8 +85,9 @@ class SiteController extends Controller
 
     public function actionSitemapxml()
     {
+        header("Expires: " . date("D, j M Y", strtotime("tomorrow")) . " 02:00:00 GMT");
         header("Content-type: text/xml");
-        $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle, t.created_at FROM  post t WHERE t.deleted = 0 AND t.published = 1 AND t.lang='ar' ORDER BY t.id DESC LIMIT 10000;")->queryAll();
+        $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle, t.created_at FROM  post t WHERE t.deleted = 0 AND t.published = 1 AND t.lang='ar' ORDER BY t.id DESC LIMIT 50000;")->queryAll();
         $sitemap = new \DomDocument('1.0', 'UTF-8');
         $sitemap->preserveWhiteSpace = false;
         $sitemap->formatOutput = true;
@@ -113,29 +114,29 @@ class SiteController extends Controller
             $changefreq_text = $sitemap->createTextNode("weekly");
             $changefreq->appendChild($changefreq_text);
         }
-        $users = Yii::$app->db->createCommand("SELECT t.id, t.username, t.created_at, t.name FROM user t WHERE 1 ORDER BY t.id DESC LIMIT 10000;")->queryAll();
-        foreach ($users as $user) {
-            $username = empty($user['username']) ? $user['id'] : $user['username'];
-            $link = "https://www.hangshare.com/user/{$username}/";
-            $url = $sitemap->createElement('url');
-            $root->appendChild($url);
-
-            $loc = $sitemap->createElement("loc");
-            $lastmod = $sitemap->createElement("lastmod");
-            $changefreq = $sitemap->createElement("changefreq");
-
-            $url->appendChild($loc);
-            $url_text = $sitemap->createTextNode($link);
-            $loc->appendChild($url_text);
-
-            $url->appendChild($lastmod);
-            $lastmod_text = $sitemap->createTextNode(date("Y-m-d", strtotime($user['created_at'])));
-            $lastmod->appendChild($lastmod_text);
-
-            $url->appendChild($changefreq);
-            $changefreq_text = $sitemap->createTextNode("weekly");
-            $changefreq->appendChild($changefreq_text);
-        }
+//        $users = Yii::$app->db->createCommand("SELECT t.id, t.username, t.created_at, t.name FROM user t WHERE 1 ORDER BY t.id DESC LIMIT 10000;")->queryAll();
+//        foreach ($users as $user) {
+//            $username = empty($user['username']) ? $user['id'] : $user['username'];
+//            $link = "https://www.hangshare.com/user/{$username}/";
+//            $url = $sitemap->createElement('url');
+//            $root->appendChild($url);
+//
+//            $loc = $sitemap->createElement("loc");
+//            $lastmod = $sitemap->createElement("lastmod");
+//            $changefreq = $sitemap->createElement("changefreq");
+//
+//            $url->appendChild($loc);
+//            $url_text = $sitemap->createTextNode($link);
+//            $loc->appendChild($url_text);
+//
+//            $url->appendChild($lastmod);
+//            $lastmod_text = $sitemap->createTextNode(date("Y-m-d", strtotime($user['created_at'])));
+//            $lastmod->appendChild($lastmod_text);
+//
+//            $url->appendChild($changefreq);
+//            $changefreq_text = $sitemap->createTextNode("weekly");
+//            $changefreq->appendChild($changefreq_text);
+//        }
         echo $sitemap->saveXML();
         exit;
     }
