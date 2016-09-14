@@ -448,7 +448,7 @@ class ExploreController extends Controller
     public function actionDelete($id)
     {
         $model = Post::findOne(['id' => $id]);
-        if (Yii::$app->user->id != $model->userId && !Yii::$app->user->identity->type) {
+        if (Yii::$app->user->id != $model->userId && Yii::$app->user->identity->type != 1) {
             throw new Exception(Yii::t('app', 'You are not allowed to access this page'), '403');
         }
         Yii::$app->db->createCommand("UPDATE post SET deleted=1 WHERE id=$id")->query();
