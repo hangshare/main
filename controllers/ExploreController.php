@@ -256,7 +256,7 @@ class ExploreController extends Controller
     {
         $pageSize = 10;
         $query = Post::find();
-        $query->orderBy('created_at DESC');
+        $query->orderBy('sort DESC');
         $query->where("post.deleted=0 AND post.published=1 AND lang = '" . Yii::$app->language . "'");
         $query->andWhere(['<>', 'cover', '']);
         $currentPage = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -414,7 +414,7 @@ class ExploreController extends Controller
         }
         if ($model->load(Yii::$app->request->post())) {
             if (!empty($model->ylink)) {
-                $model->type = 1;
+                //$model->type = 1;
             }
             $model->saveExternal();
             if (!$model->save()) {
