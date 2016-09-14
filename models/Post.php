@@ -12,6 +12,7 @@ use yii\helpers\Url;
  *
  * @property integer $id
  * @property integer $userId
+ * @property integer $score
  * @property string $cover
  * @property string $title
  * @property string $created_at
@@ -69,7 +70,7 @@ class Post extends \yii\db\ActiveRecord
         $featured = Yii::$app->cache->get('featured-posts-' . $limit . '-' . Yii::$app->language);
         if ($featured === false) {
             $featured = Post::find()
-                ->where("deleted=0 AND published=1 AND featured = 1 AND lang = '" . Yii::$app->language . "'")
+                ->where("deleted=0 AND published=1 AND score = 5 AND lang = '" . Yii::$app->language . "'")
                 ->select('id,cover,title, urlTitle')
                 ->orderBy('id desc')
                 ->limit($limit)
@@ -108,8 +109,8 @@ class Post extends \yii\db\ActiveRecord
             ['ylink', 'match', 'pattern' => '/^https?:\/\/(?:.*?)\.?(youtube|vimeo)\.com\/(watch\?[^#]*v=([\w-]+)|(\d+)).*$/'],
             [['cover_file'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'gif', 'jpeg'],
                 'maxSize' => 1024 * 1024 * 4],
-            [['userId', 'type', 'deleted'], 'integer'],
-            [['created_at', 'body', 'featured', 'deleted', 'tags', 'keywords', 'cover_file', 'q', 'type', 'ylink', 'vidId', 'vidType', 'published'], 'safe'],
+            [['userId', 'type', 'deleted', 'score'], 'integer'],
+            [['created_at', 'body', 'featured', 'score', 'deleted', 'tags', 'keywords', 'cover_file', 'q', 'type', 'ylink', 'vidId', 'vidType', 'published'], 'safe'],
             [['cover'], 'string', 'max' => 500],
             [['urlTitle'], 'string', 'max' => 200],
             [['title'], 'string', 'max' => 100],
