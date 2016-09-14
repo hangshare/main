@@ -268,5 +268,8 @@ return [
     'Write a comment ...' => 'أكتب تعليقا ... ',
     'Publish' => 'انشر',
     'Comments' => 'آراء الأعضاء',
-
+    'Signup Now' => 'سجل مجانا الآن',
+    'Total Earning' => 'إجمالي الربح لجميع المستخدمين',
+    'Blog Posts' => 'عدد المواضيع المنشورة',
+    'Number of Users' => 'عدد المستخدمين',
 ];
