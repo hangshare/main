@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 
 $thump = Yii::$app->imageresize->thump($model->user->image, 80, 80, 'crop');
-$username = empty($model->username) ? $model->id : $model->username;
+$username = empty($model->user->username) ? $model->userId : $model->user->username;
 ?>
 
 <li style="border-radius: 3px;  margin-bottom: 0;
