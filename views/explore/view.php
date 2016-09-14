@@ -104,7 +104,8 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                                 $totalViews = $model->postStats->views;
                                 echo number_format($totalViews + 1);
                                 ?></li>
-                            <?php if (!Yii::$app->user->isGuest && (Yii::$app->user->identity->id == $model->userId || Yii::$app->user->identity->type)) : ?>
+                            <?php
+                            if (!Yii::$app->user->isGuest && (Yii::$app->user->identity->id == $model->userId || Yii::$app->user->identity->type == 1)) : ?>
                                 <li class="divider"></li>
                                 <li><?= Html::a(Yii::t('app', 'Edit Post'), ['//explore/post', 'id' => $model->id]); ?></li>
                                 <li class="divider"></li>
