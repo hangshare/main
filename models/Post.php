@@ -156,6 +156,7 @@ class Post extends \yii\db\ActiveRecord
             $exist = Yii::$app->db->createCommand("SELECT id FROM post WHERE urlTitle = '{$url}' LIMIT 1")->queryOne();
             if ($exist) {
                 $rand = uniqid(rand(), true);
+                $rand = substr($rand, 0, 8);
                 $url .= "-{$rand}";
             }
             $this->urlTitle = $url;
