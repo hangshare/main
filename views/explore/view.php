@@ -105,14 +105,14 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                                 echo number_format($totalViews + 1);
                                 ?></li>
                             <?php
-                            //if (!Yii::$app->user->isGuest && (Yii::$app->user->identity->id == $model->userId || Yii::$app->user->identity->type == 1)) : ?>
-<!--                                <li class="divider"></li>-->
-<!--                                <li>--><?php//= Html::a(Yii::t('app', 'Edit Post'), ['//explore/post', 'id' => $model->id]); ?><!--</li>-->
-<!--                                <li class="divider"></li>-->
-<!--                                <li>--><?php//= Html::a(Yii::t('app', 'Delete Post'), ['//explore/delete', 'id' => $model->id], [
-//                                        'data' => ['method' => 'post'],
-//                                        'style' => 'color:red;']); ?><!--</li>-->
-                            <?php // endif; ?>
+                            if (!Yii::$app->user->isGuest && (Yii::$app->user->identity->id == $model->userId || Yii::$app->user->identity->type == 1)) : ?>
+                                <li class="divider"></li>
+                                <li><?= Html::a(Yii::t('app', 'Edit Post'), ['//explore/post', 'id' => $model->id]); ?></li>
+                                <li class="divider"></li>
+                                <li><?= Html::a(Yii::t('app', 'Delete Post'), ['//explore/delete', 'id' => $model->id], [
+                                        'data' => ['method' => 'post'],
+                                        'style' => 'color:red;']); ?></li>
+                            <?php endif; ?>
                         </ul>
                         <div class="post-body">
                             <div class="chebody">
