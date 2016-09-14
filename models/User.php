@@ -109,7 +109,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             $this->transfer_type = 0;
             $this->password_reset_token = sha1(time() . rand(2, 200));
             $this->scId = '';
-            $this->type = 1;
+            $this->type = 0;
             $this->plan = 0;
             $this->lang = Yii::$app->language;
 
