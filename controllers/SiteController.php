@@ -86,7 +86,7 @@ class SiteController extends Controller
     public function actionSitemapxml()
     {
         header("Content-type: text/xml");
-        $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle, t.created_at FROM  post t WHERE t.deleted = 0 ORDER BY t.id DESC LIMIT 10000;")->queryAll();
+        $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle, t.created_at FROM  post t WHERE t.deleted = 0 AND t.lang='ar' ORDER BY t.id DESC LIMIT 10000;")->queryAll();
         $sitemap = new \DomDocument('1.0', 'UTF-8');
         $sitemap->preserveWhiteSpace = false;
         $sitemap->formatOutput = true;
