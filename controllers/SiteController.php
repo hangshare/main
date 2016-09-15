@@ -91,13 +91,18 @@ class SiteController extends Controller
 
 
         $sitemap = new \DomDocument('1.0', 'UTF-8');
- //       $sitemap->preserveWhiteSpace = false;
-///        $sitemap->formatOutput = true;
+        $sitemap->preserveWhiteSpace = false;
+        $sitemap->formatOutput = true;
         $root = $sitemap->createElement("urlset");
         $sitemap->appendChild($root);
         $root_attr = $sitemap->createAttribute('xmlns:image');
         $root_attr->value = "http://www.google.com/schemas/sitemap-image/1.1";
         $root->appendChild($root_attr);
+
+        $xmlns = $sitemap->createAttribute('xmlns');
+        $root->appendChild($xmlns);
+        $xmlns->value = "http://www.sitemaps.org/schemas/sitemap/0.9";
+        $root->appendChild($xmlns);
 
         foreach ($posts as $post) {
             $thump = Yii::$app->imageresize->thump($post['cover'], 400, 250, 'crop');
