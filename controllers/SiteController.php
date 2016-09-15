@@ -87,7 +87,7 @@ class SiteController extends Controller
     {
         header("Expires: " . date("D, j M Y", strtotime("tomorrow")) . " 02:00:00 GMT");
         header("Content-type: text/xml");
-        $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle,t.cover, t.created_at FROM  post t WHERE t.deleted = 0 AND t.published = 1 AND t.lang='ar' AND t.cover != '' ORDER BY t.id DESC LIMIT 50000;")->queryAll();
+        $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle,t.cover, t.created_at FROM  post t WHERE t.deleted = 0 AND t.published = 1 AND t.lang='ar' AND t.cover != '' ORDER BY t.id DESC LIMIT 50;")->queryAll();
 
 
         $sitemap = new \DomDocument('1.0', 'UTF-8');
