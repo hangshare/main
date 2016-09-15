@@ -13,6 +13,7 @@ use Yii;
  * @property integer $tw_share
  * @property integer $g_share
  * @property integer $comments
+ * @property double $profit
  *
  * @property Post $post
  */
@@ -33,7 +34,8 @@ class PostStats extends \yii\db\ActiveRecord
     {
         return [
             [['postId', 'views', 'fb_share', 'tw_share', 'g_share', 'comments'], 'required'],
-            [['postId', 'views', 'fb_share', 'tw_share', 'g_share', 'comments'], 'integer']
+            [['postId', 'views', 'fb_share', 'tw_share', 'g_share', 'comments'], 'integer'],
+            [['profit'], 'number'],
         ];
     }
 
