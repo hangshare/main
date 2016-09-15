@@ -85,9 +85,9 @@ class SiteController extends Controller
 
     public function actionImagesxml()
     {
-        header("Expires: " . date("D, j M Y", strtotime("tomorrow")) . " 02:00:00 GMT");
+        header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + (60 * 60)));
         header("Content-type: text/xml");
-        $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle,t.cover, t.created_at FROM  post t WHERE t.deleted = 0 AND t.published = 1 AND t.lang='ar' AND t.cover != '' ORDER BY t.id DESC LIMIT 50;")->queryAll();
+        $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle,t.cover, t.created_at FROM  post t WHERE t.deleted = 0 AND t.published = 1 AND t.lang='ar' AND t.cover != '' ORDER BY t.id DESC LIMIT 50000;")->queryAll();
 
 
         $sitemap = new \DomDocument('1.0', 'UTF-8');
@@ -138,7 +138,7 @@ class SiteController extends Controller
 
     public function actionSitemapxml()
     {
-        header("Expires: " . date("D, j M Y", strtotime("tomorrow")) . " 02:00:00 GMT");
+        header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + (60 * 60)));
         header("Content-type: text/xml");
         $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle, t.created_at FROM  post t WHERE t.deleted = 0 AND t.published = 1 AND t.lang='ar' ORDER BY t.id DESC LIMIT 50000;")->queryAll();
         $sitemap = new \DomDocument('1.0', 'UTF-8');
@@ -146,10 +146,12 @@ class SiteController extends Controller
         $sitemap->formatOutput = true;
         $root = $sitemap->createElement("urlset");
         $sitemap->appendChild($root);
-        $root_attr = $sitemap->createAttribute('xmlns');
-        $root->appendChild($root_attr);
-        $root_attr_text = $sitemap->createTextNode('http://www.sitemaps.org/schemas/sitemap/0.9');
-        $root_attr->appendChild($root_attr_text);
+
+        $xmlns = $sitemap->createAttribute('xmlns');
+        $root->appendChild($xmlns);
+        $xmlns->value = "http://www.sitemaps.org/schemas/sitemap/0.9";
+        $root->appendChild($xmlns);
+
         foreach ($posts as $post) {
             $link = "https://www.hangshare.com/{$post['urlTitle']}/";
             $url = $sitemap->createElement('url');
