@@ -42,6 +42,8 @@ RewriteRule !/elbcheck.html https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{REQUEST_URI}  !\.(php|html?|gif|GIF|css|CSS|js|JS|jpg|JPG|jpeg|woff2|ico|ICO|ttf|TTF|JPEG|png|PNG|txt|bmp|BMP|TXT|xml|XML)$
 RewriteRule ^(.*)([^/])$ https://www.%{HTTP_HOST}/$1$2/ [L,R=301]
 
+RewriteRule ^sitemap.xml$ sitemap.xml/ [L]
+
 
 # RewriteCond %{REQUEST_URI}  !\.(php|html?|jpg|JPG|gif|GIF|css|js|png|PNG|woff2|ico|ICO|ttf|TTF|xml|XML|JPEG|jpeg|bmp|BMP|TXT|txt)$
 # RewriteRule ^(.*)([^/])$ https://www.%{HTTP_HOST}/$1$2/ [L,R=301]
