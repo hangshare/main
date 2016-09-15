@@ -85,7 +85,11 @@ class SiteController extends Controller
 
     public function actionImagesxml()
     {
-        header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + (60 * 60)));
+        $seconds_to_cache = 60 * 60 * 6;
+        header('Cache-Control: public');
+        header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + $seconds_to_cache));
+        header("Pragma: cache");
+        header("Cache-Control: max-age=$seconds_to_cache");
         header("Content-type: text/xml");
         $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle,t.cover, t.created_at FROM  post t WHERE t.deleted = 0 AND t.published = 1 AND t.lang='ar' AND t.cover != '' ORDER BY t.id DESC LIMIT 50000;")->queryAll();
 
@@ -138,8 +142,13 @@ class SiteController extends Controller
 
     public function actionSitemapxml()
     {
-        header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + (60 * 60)));
+        $seconds_to_cache = 60 * 60 * 6;
+        header('Cache-Control: public');
+        header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + $seconds_to_cache));
+        header("Pragma: cache");
+        header("Cache-Control: max-age=$seconds_to_cache");
         header("Content-type: text/xml");
+
         $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle, t.created_at FROM  post t WHERE t.deleted = 0 AND t.published = 1 AND t.lang='ar' ORDER BY t.id DESC LIMIT 50000;")->queryAll();
         $sitemap = new \DomDocument('1.0', 'UTF-8');
         $sitemap->preserveWhiteSpace = false;
