@@ -87,16 +87,18 @@ class SiteController extends Controller
     {
         header("Expires: " . date("D, j M Y", strtotime("tomorrow")) . " 02:00:00 GMT");
         header("Content-type: text/xml");
-        $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle,t.cover, t.created_at FROM  post t WHERE t.deleted = 0 AND t.published = 1 AND t.lang='ar' AND t.cover != '' ORDER BY t.id DESC LIMIT 50;")->queryAll();
+        $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle,t.cover, t.created_at FROM  post t WHERE t.deleted = 0 AND t.published = 1 AND t.lang='ar' AND t.cover != '' ORDER BY t.id DESC LIMIT 50000;")->queryAll();
+
+
         $sitemap = new \DomDocument('1.0', 'UTF-8');
-        $sitemap->preserveWhiteSpace = false;
-        $sitemap->formatOutput = true;
+//        $sitemap->preserveWhiteSpace = false;
+//        $sitemap->formatOutput = true;
         $root = $sitemap->createElement("urlset");
         $sitemap->appendChild($root);
         $root_attr = $sitemap->createAttribute('xmlns:image');
+        $root_attr->value = "http://www.google.com/schemas/sitemap-image/1.1";
         $root->appendChild($root_attr);
-        $root_attr_text = $sitemap->createTextNode('http://www.google.com/schemas/sitemap-image/1.1');
-        $root_attr->appendChild($root_attr_text);
+
         foreach ($posts as $post) {
             $thump = Yii::$app->imageresize->thump($post['cover'], 400, 250, 'crop');
             $thump = str_replace('/400x250-crop', '', $thump);
