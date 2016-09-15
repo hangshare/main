@@ -83,6 +83,36 @@ class SiteController extends Controller
         $this->redirect('http://hangadmin.hangshare.com');
     }
 
+    public function actionImagesxml()
+    {
+        header("Expires: " . date("D, j M Y", strtotime("tomorrow")) . " 02:00:00 GMT");
+        header("Content-type: text/xml");
+        $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle,t.cover, t.created_at FROM  post t WHERE t.deleted = 0 AND t.published = 1 AND t.lang='ar' AND t.cover != '' ORDER BY t.id DESC LIMIT 50000;")->queryAll();
+        $sitemap = new \DomDocument('1.0', 'UTF-8');
+        $sitemap->preserveWhiteSpace = false;
+        $sitemap->formatOutput = true;
+        $root = $sitemap->createElement("urlset");
+        $sitemap->appendChild($root);
+        $root_attr = $sitemap->createAttribute('xmlns:image');
+        $root->appendChild($root_attr);
+        $root_attr_text = $sitemap->createTextNode('http://www.google.com/schemas/sitemap-image/1.1');
+        $root_attr->appendChild($root_attr_text);
+        foreach ($posts as $post) {
+            $thump = Yii::$app->imageresize->thump($post['cover'], 400, 250, 'crop');
+            $link = "https://www.hangshare.com/{$post['urlTitle']}/";
+            $url = $sitemap->createElement('url');
+            $root->appendChild($url);
+            $loc = $sitemap->createElement("loc");
+            $url->appendChild($loc);
+            $img = $sitemap->createElement('image:image');
+            $url_text = $sitemap->createTextNode('image:loc');
+            $url_text->appendChild($thump);
+            //<image:title>image 1</image:title>
+        }
+        echo $sitemap->saveXML();
+        exit;
+    }
+
     public function actionSitemapxml()
     {
         header("Expires: " . date("D, j M Y", strtotime("tomorrow")) . " 02:00:00 GMT");
@@ -697,7 +727,7 @@ class SiteController extends Controller
         $this->layout = false;
         $im = imagecreatetruecolor(120, 20);
         $text_color = imagecolorallocate($im, 233, 14, 91);
-        imagestring($im, 1, 5, 5,  'A Simple Text String', $text_color);
+        imagestring($im, 1, 5, 5, 'A Simple Text String', $text_color);
         header('Content-type: image/jpeg');
         header("Cache-Control: public");
         header("Pragma: public");
