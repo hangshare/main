@@ -3,3 +3,5 @@ Allow: /
 
 Sitemap: https://www.hangshare.com/sitemap.xml/
 Sitemap: https://www.hangshare.com/en/sitemap.xml/
+Sitemap: https://www.hangshare.com/en/site/imagesxml/
+Sitemap: https://www.hangshare.com/site/imagesxml/
