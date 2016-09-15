@@ -30,14 +30,14 @@ AddDefaultCharset UTF-8
 RewriteEngine on
 RewriteBase /
 
-# Ensure www.
-#RewriteCond %{HTTP_HOST} !^www\. [NC]
-#RewriteRule !/elbcheck.html https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-#
-## Ensure https
-#RewriteCond %{HTTP:X-Forwarded-Proto} !https
-#RewriteCond %{HTTPS} off
-#RewriteRule !/elbcheck.html https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+ #Ensure www.
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule !/elbcheck.html https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Ensure https
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteCond %{HTTPS} off
+RewriteRule !/elbcheck.html https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 RewriteCond %{REQUEST_URI}  !\.(php|html?|gif|GIF|css|CSS|js|JS|jpg|JPG|jpeg|woff2|ico|ICO|ttf|TTF|JPEG|png|PNG|txt|bmp|BMP|TXT|xml|XML)$
 RewriteRule ^(.*)([^/])$ https://www.%{HTTP_HOST}/$1$2/ [L,R=301]
