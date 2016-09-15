@@ -339,7 +339,7 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getPostStats()
     {
-        return $this->hasOne(PostStats::className(), ['postId' => 'id'])->select('views');
+        return $this->hasOne(PostStats::className(), ['postId' => 'id'])->select('views,profit');
     }
 
     /**
