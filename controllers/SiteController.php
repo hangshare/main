@@ -100,14 +100,25 @@ class SiteController extends Controller
         foreach ($posts as $post) {
             $thump = Yii::$app->imageresize->thump($post['cover'], 400, 250, 'crop');
             $link = "https://www.hangshare.com/{$post['urlTitle']}/";
+            $title = $post['title'];
+
             $url = $sitemap->createElement('url');
             $root->appendChild($url);
+
             $loc = $sitemap->createElement("loc");
             $url->appendChild($loc);
-            $img = $sitemap->createElement('image:image');
-            $url_text = $sitemap->createTextNode('image:loc');
-            $url_text->appendChild($thump);
-            //<image:title>image 1</image:title>
+            $url_text = $sitemap->createTextNode($link);
+            $loc->appendChild($url_text);
+
+            $img = $url->createElement("image:image");
+
+
+
+//            $img_loc = $img->createTextNode('image:loc');
+//            $img_loc->appendChild($thump);
+//            $img_title = $img->createTextNode('image:title');
+//            $img_title->appendChild($title);
+
         }
         echo $sitemap->saveXML();
         exit;
