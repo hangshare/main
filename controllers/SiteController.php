@@ -87,7 +87,7 @@ class SiteController extends Controller
     {
         header("Expires: " . date("D, j M Y", strtotime("tomorrow")) . " 02:00:00 GMT");
         header("Content-type: text/xml");
-        $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle,t.cover, t.created_at FROM  post t WHERE t.deleted = 0 AND t.published = 1 AND t.lang='ar' AND t.cover != '' ORDER BY t.id DESC LIMIT 50000;")->queryAll();
+        $posts = Yii::$app->db->createCommand("SELECT t.id, t.title, t.urlTitle,t.cover, t.created_at FROM  post t WHERE t.deleted = 0 AND t.published = 1 AND t.lang='ar' AND t.cover != '' ORDER BY t.id DESC LIMIT 50;")->queryAll();
         $sitemap = new \DomDocument('1.0', 'UTF-8');
         $sitemap->preserveWhiteSpace = false;
         $sitemap->formatOutput = true;
@@ -99,6 +99,7 @@ class SiteController extends Controller
         $root_attr->appendChild($root_attr_text);
         foreach ($posts as $post) {
             $thump = Yii::$app->imageresize->thump($post['cover'], 400, 250, 'crop');
+            $thump = str_replace('/400x250-crop', '', $thump);
             $link = "https://www.hangshare.com/{$post['urlTitle']}/";
             $title = $post['title'];
 
@@ -110,14 +111,18 @@ class SiteController extends Controller
             $url_text = $sitemap->createTextNode($link);
             $loc->appendChild($url_text);
 
-            $img = $url->createElement("image:image");
+            $img = $sitemap->createElement("image:image");
+            $url->appendChild($img);
 
+            $img_loc = $sitemap->createElement("image:loc");
+            $img->appendChild($img_loc);
+            $img_link = $sitemap->createTextNode($thump);
+            $img_loc->appendChild($img_link);
 
-
-//            $img_loc = $img->createTextNode('image:loc');
-//            $img_loc->appendChild($thump);
-//            $img_title = $img->createTextNode('image:title');
-//            $img_title->appendChild($title);
+            $img_title = $sitemap->createElement("image:title");
+            $img->appendChild($img_title);
+            $img_t = $sitemap->createTextNode($title);
+            $img_title->appendChild($img_t);
 
         }
         echo $sitemap->saveXML();
