@@ -30,6 +30,13 @@ $thump = Yii::$app->imageresize->thump($model->cover, $width, $height, 'crop');
             $totalViews = $model->postStats->views;
             echo number_format($totalViews + 1);
             ?> <?= Yii::t('app', 'Views') ?> </b></span>
+            <span style="color: #999;"> | </span>
+            <span style="color: #999;">
+            <?php
+            echo '$'.number_format($model->postStats->profit, 2);
+            ?> <?= Yii::t('app', 'Revenu') ?> </b></span>
+            <span style="color: #999;"> | </span>
+
             <?php if($model->published) : ?>
                 <span class="label label-success"><?= Yii::t('app','Published') ?></span>
             <?php else  : ?>
