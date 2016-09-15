@@ -145,8 +145,8 @@ $config = [
                 'عنا' => 'site/privacy',
                 'request-password-reset' => 'site/reset',
                 'reset-password' => 'site/resetpassword',
-                '<slug:.*?>' => 'explore/view',
                 'sitemap.xml' => 'site/sitemapxml',
+                '<slug:.*?>' => 'explore/view',
             ],
         ],
         'request' => [
