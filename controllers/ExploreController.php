@@ -373,7 +373,6 @@ class ExploreController extends Controller
     {
         $model = $this->findModel($slug);
         if ($model->deleted == 1) {
-
             $pageSize = 8;
             $query = Post::find();
             $query->orderBy('created_at DESC');
@@ -389,7 +388,9 @@ class ExploreController extends Controller
             ]);
 
             return $this->render('deleted', [
-                'dataProvider' => $dataProvider
+                'dataProvider' => $dataProvider,
+                'model' => $model,
+
             ]);
         } else {
             return $this->render('view', [
