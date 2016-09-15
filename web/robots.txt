@@ -1,6 +1,5 @@
 User-agent: * 
 Allow: /
 
-
-Sitemap: http://www.hangshare.com/sitemap.xml
-Sitemap: http://www.hangshare.com/en/sitemap.xml
+Sitemap: https://www.hangshare.com/sitemap.xml
+Sitemap: https://www.hangshare.com/en/sitemap.xml
