@@ -91,8 +91,8 @@ class SiteController extends Controller
 
 
         $sitemap = new \DomDocument('1.0', 'UTF-8');
-//        $sitemap->preserveWhiteSpace = false;
-//        $sitemap->formatOutput = true;
+        $sitemap->preserveWhiteSpace = false;
+        $sitemap->formatOutput = true;
         $root = $sitemap->createElement("urlset");
         $sitemap->appendChild($root);
         $root_attr = $sitemap->createAttribute('xmlns:image');
