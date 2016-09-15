@@ -5,7 +5,16 @@ use app\models\Tags;
 use yii\helpers\Html;
 use yii\widgets\ListView;
 
-$this->title = Yii::t('app', 'title.deleted');
+$this->title = $model->title;
+$bodys = '';
+foreach ($model->postBodies as $data) {
+    $bodys .= $data->body;
+}
+$this->description = Yii::$app->helper->metabody($bodys);
+if (empty($this->description)) {
+    $this->description = $this->title;
+}
+
 $this->description = Yii::t('app', 'description.deleted');
 
 ?>
