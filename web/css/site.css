@@ -8485,6 +8485,22 @@ hr {
     margin-top: 10px;
 }
 
+@media (device-height: 568px)
+and (device-width: 320px)
+and (-webkit-min-device-pixel-ratio: 2)
+    /* and (orientation : todo: you can add orientation or delete this comment)*/ {
+    /*IPhone 5 only CSS here*/
+    .res-nopadding {
+        padding: 0 !important;
+    }
+
+    h1 {
+        font-size: 20px;
+        line-height: 30px;
+        margin-bottom: 20px;
+    }
+}
+
 @media only screen and (max-width: 640px) {
 
     .res-nopadding {
