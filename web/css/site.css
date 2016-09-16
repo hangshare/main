@@ -8498,9 +8498,33 @@ and (-webkit-min-device-pixel-ratio: 2)
         line-height: 30px;
         margin-bottom: 20px;
     }
+    #banner-video, .overlay{
+        height: 185px;
+    }
+    .header-index aside{
+        margin-top: 5px;
+        font-size: 16px;
+    }
+    .col-md-4.col-md-offset-4.m-t-25.m-b-20{
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 640px) {
+
+    .col-md-4.col-md-offset-4.m-t-25.m-b-20, .overlay > h4{
+        display: none;
+    }
+
+    .header-index aside{
+        margin-top: 5px;
+        font-size: 16px;
+    }
+
+    #banner-video, .overlay{
+        height: 185px;
+    }
+
     article h1 {
         font-size: 20px;
         line-height: 30px;
