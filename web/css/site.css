@@ -108,6 +108,10 @@ summary {
     width: 15%;
 }
 
+iframe {
+    max-width: 100% !important;
+}
+
 .mainmenu {
     background-color: rgba(91, 154, 243, 0.94);
     height: 800px;
@@ -259,27 +263,32 @@ summary {
     height: 550px;
     overflow: hidden;
 }
+
 .fact-container {
     padding-bottom: 30px;
     padding-top: 40px;
 }
+
 .counter {
-    font-family: "Montserrat",sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 65px;
     font-weight: 700;
     letter-spacing: 0;
     line-height: 65px;
     margin: 0;
 }
+
 .fact {
     text-align: center;
 }
+
 .fact h4 {
     font-size: 14px;
     margin-bottom: 0;
     font-weight: bold;
     text-align: center;
 }
+
 #numbers {
     display: table;
     height: 100%;
@@ -8477,6 +8486,11 @@ hr {
 }
 
 @media only screen and (max-width: 640px) {
+
+    .res-nopadding {
+        padding: 0 !important;
+    }
+
     .res-full {
         width: 100%;
     }
