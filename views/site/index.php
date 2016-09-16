@@ -7,16 +7,18 @@ $this->description = Yii::t('app', 'Homepage.Description');
 ?>
 
 
-<section id="quick-signup-post">
-    <div id="banner-video">
-        <video width="100%" muted="" loop="" autoplay=""
-               poster="https://s3-eu-west-1.amazonaws.com/hangshare-media/aff-intro.jpg">
-            <source type="video/mp4"
-                    src="https://cdn-5.lifehack.org/wp-content/themes/lifehack-theme/videos/contribute_banner.mp4"></source>
-            <source type="video/webm"
-                    src="https://cdn-5.lifehack.org/wp-content/themes/lifehack-theme/videos/contribute_banner.webm"></source>
-        </video>
-    </div>
+<section id="quick-signup-post" <?php if (Yii::$app->helper->isMobile()): ?> style="background-image: url('https://s3-eu-west-1.amazonaws.com/hangshare-media/aff-intro.jpg');" <?php endif; ?>>
+    <?php if (!Yii::$app->helper->isMobile()): ?>
+        <div id="banner-video">
+            <video width="100%" muted="" loop="" autoplay=""
+                   poster="https://s3-eu-west-1.amazonaws.com/hangshare-media/aff-intro.jpg">
+                <source type="video/mp4"
+                        src="https://cdn-5.lifehack.org/wp-content/themes/lifehack-theme/videos/contribute_banner.mp4"></source>
+                <source type="video/webm"
+                        src="https://cdn-5.lifehack.org/wp-content/themes/lifehack-theme/videos/contribute_banner.webm"></source>
+            </video>
+        </div>
+    <?php endif ?>
     <div class="overlay">
         <h1 class="header-index" style="margin-top: 70px;">
             <?= Yii::t('app', 'welcome 1') ?>
