@@ -34,7 +34,7 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
 <?php endif; ?>
     <div <?php if (!Yii::$app->helper->isMobile()) : ?> class="row" <?php endif; ?>>
         <div class="col-md-12 res-nopadding">
-            <div class="col-md-9 res-nopadding" style="background-color: #fff;">
+            <div class="col-md-9" style="background-color: #fff;">
                 <?php if (!Yii::$app->helper->isMobile()) : ?>
                     <div class="ads1">
                         <script async
@@ -92,7 +92,7 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                         <?php
                         $username = empty($model->user->username) ? $model->user->id : $model->user->username;
                         ?>
-                        <ul class="list-inline">
+                        <ul class="list-inline res-hidden">
                             <li><b><?= Yii::t('app', 'Author') ?></b> <a
                                     href="<?= Yii::$app->urlManager->createUrl(['//user/view', 'id' => $username]) ?>"
                                     title="<?= $model->user->name; ?>"><?= $model->user->name; ?></a></li>
