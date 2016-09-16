@@ -7,7 +7,7 @@ $form = ActiveForm::begin([
     'method' => 'GET',
 ]);
 ?>
-<input id="q" class="serchq" value="<?= isset($_GET['q']) ? Html::encode($_GET['q']) : '' ?>" name="q"
+<input id="q" action="<?= Yii::$app->urlManager->createUrl(['//explore/search']) ?>" class="serchq" value="<?= isset($_GET['q']) ? Html::encode($_GET['q']) : '' ?>" name="q"
        placeholder="<?= Yii::t('app','Search') ?>"/>
 <?= Html::submitButton('<i class="glyphicon glyphicon-search"></i>', ['class' => 'btn btn-search']) ?>
 <?php ActiveForm::end(); ?>
