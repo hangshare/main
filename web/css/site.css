@@ -8493,8 +8493,7 @@ and (-webkit-min-device-pixel-ratio: 2)
     .res-nopadding {
         padding: 0 !important;
     }
-
-    h1 {
+    article h1 {
         font-size: 20px;
         line-height: 30px;
         margin-bottom: 20px;
@@ -8502,15 +8501,17 @@ and (-webkit-min-device-pixel-ratio: 2)
 }
 
 @media only screen and (max-width: 640px) {
-
+    article h1 {
+        font-size: 20px;
+        line-height: 30px;
+        margin-bottom: 20px;
+    }
     .res-nopadding {
         padding: 0 !important;
     }
-
     .res-full {
         width: 100%;
     }
-
     .ads1 {
         margin-top: 3px;
         height: 70px;
