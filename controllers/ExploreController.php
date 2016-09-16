@@ -30,14 +30,13 @@ class ExploreController extends Controller
         $model->postId = $request['id'];
         $model->comment = $request['text'];
         $model->save(false);
-        if (Yii::$app->user->identity->id != $post->id) {
-            AwsEmail::queueUser($post->userId, 'post_comment', [
-                '__title__' => "{$post->title}",
-                '__url__' => $post->url . '#comments',
-                '__user__' => Yii::$app->user->identity->name,
-            ]);
-        }
-
+//        if (Yii::$app->user->identity->id != $post->id) {
+//            AwsEmail::queueUser($post->userId, 'post_comment', [
+//                '__title__' => "{$post->title}",
+//                '__url__' => $post->url . '#comments',
+//                '__user__' => Yii::$app->user->identity->name,
+//            ]);
+//        }
         Yii::$app->db->createCommand("UPDATE `post_stats` SET `comments`=`comments`+1 WHERE `postId`= {$post->id}")->query();
 
         echo $this->render('_commentview', ['model' => $model]);
