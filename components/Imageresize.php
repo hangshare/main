@@ -51,14 +51,14 @@ class Imageresize extends Component
             return [
                 'width' => $json->width,
                 'height' => $json->height,
-                'url' => $json->image,
+                'url' => 'https://s3-eu-west-1.amazonaws.com/hangshare-media'.$json->image,
             ];
         } else {
             if (empty($file) || $file === 0)
-                $file = 'other/no-profile-image.jpg';
+                $file = 'https://s3-eu-west-1.amazonaws.com/hangshare-media/other/no-profile-image.jpg';
             return [
-                'width' => '',
-                'height' => '',
+                'width' => '200',
+                'height' => '200',
                 'url' => $file,
             ];
         }
