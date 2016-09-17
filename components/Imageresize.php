@@ -45,6 +45,25 @@ class Imageresize extends Component
         $this->mediaFile = Yii::$app->basePath . $this->mediaFile;
     }
 
+    public function original($file)
+    {
+        if ($json = $this->isJson($file)) {
+            return [
+                'width' => $json->width,
+                'height' => $json->height,
+                'url' => $json->image,
+            ];
+        } else {
+            if (empty($file) || $file === 0)
+                $file = 'other/no-profile-image.jpg';
+            return [
+                'width' => '',
+                'height' => '',
+                'url' => $file,
+            ];
+        }
+    }
+
     public function thump($file, $width, $height, $method)
     {
 
@@ -126,14 +145,12 @@ class Imageresize extends Component
     public function PatchResize($bucket, $key, $type = 'post')
     {
         $path = $this->s3->downloadFile($bucket, $key);
-
         $array = "{$type}_sizes";
         foreach ($this->$array as $size) {
             $this->s3Resize($path, $size['width'], $size['height'], $size['method']);
         }
         @unlink($path);
         return true;
-
     }
 
     protected function thumpName($width, $height, $method)
