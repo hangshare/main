@@ -271,7 +271,7 @@ class SiteController extends Controller
             $featured = Yii::$app->cache->get('home-featured-' . Yii::$app->language);
             if ($featured === false) {
                 $queryfeatured = Post::find()
-                    ->where("type=0 AND cover <> '' AND featured = 1 AND lang = '" . Yii::$app->language . "'")
+                    ->where("deleted=0 AND published=1 AND score = 5 AND lang = '" . Yii::$app->language . "'")
                     ->select('id, cover, title, urlTitle')
                     ->limit(21)
                     ->orderBy('rand();');
