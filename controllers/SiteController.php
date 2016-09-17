@@ -236,7 +236,7 @@ class SiteController extends Controller
         $newpost = Yii::$app->cache->get('home-new-posts-' . Yii::$app->language);
         if ($newpost === false) {
             $querypost = Post::find()
-                ->where("post.deleted=0 AND post.cover <> '' AND post.lang = '" . Yii::$app->language . "'")
+                ->where("post.deleted=0 AND published = 1 AND post.cover <> '' AND post.lang = '" . Yii::$app->language . "'")
                 ->joinWith(['user'])
                 ->select('post.id,post.title , post.cover ,user.id as userId, post.urlTitle')
                 ->orderBy('id desc');
