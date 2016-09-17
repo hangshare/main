@@ -32,104 +32,104 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
         </div>
     </div>
 <?php endif; ?>
-    <div <?php if (!Yii::$app->helper->isMobile()) : ?> class="row" <?php endif; ?>>
-        <div class="col-md-12 res-nopadding">
-            <div class="col-md-9" style="background-color: #fff;">
-                <?php if (!Yii::$app->helper->isMobile()) : ?>
-                    <div class="ads1">
-                        <script async
-                                src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <!-- Leaderboard - Post Upper -->
-                        <ins class="adsbygoogle"
-                             style="display:inline-block;width:728px;height:90px"
-                             data-ad-client="ca-pub-6288640194310142"
-                             data-ad-slot="1011333310"></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
-                <?php endif; ?>
-                <article data-id="<?= $model->id; ?>" data-userId="<?= $model->userId ?>"
-                         data-plan="<?= $model->user->plan; ?>" style="margin-bottom: 100px;">
-                    <div class="container res-nopadding">
-                        <?php if (!Yii::$app->helper->isMobile()) : ?>
-                            <span class="pull-left"
-                                  style="font-weight: bold; color: #999; font-size: 18px; margin-top: 3px;"><?= Yii::t('app', 'Share this Article') ?></span>
-                            <div class="pull-left" style="margin: 0 15px;">
-                                <ul class="list-inline shareer">
-                                    <li><a class="btn btn-primary js-share js-share-fasebook" href="javascript:void(0);"
-                                           post-url="<?= $model->url; ?>">
-                                            <i style="margin: 3px;" class="fa fa-fw fa-facebook"></i>
-                                            <?= Yii::t('app', 'Facebook') ?>
-                                        </a>
-                                    <li><a class="btn js-share js-share-twitter" post-url="<?= $model->url; ?>"
-                                           href="javascript:void(0);" style="color: #fff; background-color: #4099ff;">
-                                            <i style="margin: 3px;" class="fa fa-twitter"></i>
-                                            <?= Yii::t('app', 'twitter') ?>
-                                        </a></li>
+<div <?php if (!Yii::$app->helper->isMobile()) : ?> class="row" <?php endif; ?>>
+    <div class="col-md-12 res-nopadding">
+        <div class="col-md-9" style="background-color: #fff;">
+            <?php if (!Yii::$app->helper->isMobile()) : ?>
+                <div class="ads1">
+                    <script async
+                            src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Leaderboard - Post Upper -->
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:728px;height:90px"
+                         data-ad-client="ca-pub-6288640194310142"
+                         data-ad-slot="1011333310"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            <?php endif; ?>
+            <article data-id="<?= $model->id; ?>" data-userId="<?= $model->userId ?>"
+                     data-plan="<?= $model->user->plan; ?>" style="margin-bottom: 100px;">
+                <div class="container res-nopadding">
+                    <?php if (!Yii::$app->helper->isMobile()) : ?>
+                        <span class="pull-left"
+                              style="font-weight: bold; color: #999; font-size: 18px; margin-top: 3px;"><?= Yii::t('app', 'Share this Article') ?></span>
+                        <div class="pull-left" style="margin: 0 15px;">
+                            <ul class="list-inline shareer">
+                                <li><a class="btn btn-primary js-share js-share-fasebook" href="javascript:void(0);"
+                                       post-url="<?= $model->url; ?>">
+                                        <i style="margin: 3px;" class="fa fa-fw fa-facebook"></i>
+                                        <?= Yii::t('app', 'Facebook') ?>
+                                    </a>
+                                <li><a class="btn js-share js-share-twitter" post-url="<?= $model->url; ?>"
+                                       href="javascript:void(0);" style="color: #fff; background-color: #4099ff;">
+                                        <i style="margin: 3px;" class="fa fa-twitter"></i>
+                                        <?= Yii::t('app', 'twitter') ?>
+                                    </a></li>
+                                <li>
+                                    <a class="btn js-share js-share-gpuls" post-url="<?= $model->url; ?>"
+                                       href="javascript:void(0);" style="color: #fff; background-color: #e51717;">
+                                        <i style="margin: 3px;" class="fa fa-google-plus"></i>
+                                        <?= Yii::t('app', 'Google+') ?>
+                                    </a>
+                                </li>
+                                <?php if (Yii::$app->helper->isMobile()) : ?>
                                     <li>
-                                        <a class="btn js-share js-share-gpuls" post-url="<?= $model->url; ?>"
-                                           href="javascript:void(0);" style="color: #fff; background-color: #e51717;">
-                                            <i style="margin: 3px;" class="fa fa-google-plus"></i>
-                                            <?= Yii::t('app', 'Google+') ?>
-                                        </a>
+                                        <a class="btn" href="whatsapp://send?text=<?= $model->url; ?>"
+                                           style="color: #fff; background-color: #34af23;"
+                                           data-action="share/whatsapp/share">
+                                            <i style="margin: 3px;" class="fa fa-whatsapp"></i>
+                                            <?= Yii::t('app', 'Whatsapp') ?> </a>
                                     </li>
-                                    <?php if (Yii::$app->helper->isMobile()) : ?>
-                                        <li>
-                                            <a class="btn" href="whatsapp://send?text=<?= $model->url; ?>"
-                                               style="color: #fff; background-color: #34af23;"
-                                               data-action="share/whatsapp/share">
-                                                <i style="margin: 3px;" class="fa fa-whatsapp"></i>
-                                                <?= Yii::t('app', 'Whatsapp') ?> </a>
-                                        </li>
-                                    <?php endif; ?>
-                                </ul>
-                            </div>
-                            <div class="clearfix"></div>
-                        <?php endif; ?>
+                                <?php endif; ?>
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                    <?php endif; ?>
 
-                        <h1 class="post-header" style="margin: 10px 0 0px 0"><?= Html::encode($this->title) ?></h1>
+                    <h1 class="post-header" style="margin: 10px 0 0px 0"><?= Html::encode($this->title) ?></h1>
+                    <?php
+                    $username = empty($model->user->username) ? $model->user->id : $model->user->username;
+                    ?>
+                    <ul class="list-inline res-hidden">
+                        <li><b><?= Yii::t('app', 'Author') ?></b> <a
+                                href="<?= Yii::$app->urlManager->createUrl(['//user/view', 'id' => $username]) ?>"
+                                title="<?= $model->user->name; ?>"><?= $model->user->name; ?></a></li>
+                        <li class="divider"></li>
+                        <li><b><?= Yii::t('app', 'created_at') ?> </b>
+                            <span><?php echo date('Y-m-d', strtotime($model->created_at)); ?></span></li>
+                        <li class="divider"></li>
+                        <li><b><?= Yii::t('app', 'Views') ?> </b> <?php
+                            $totalViews = $model->postStats->views;
+                            echo number_format($totalViews + 1);
+                            ?></li>
                         <?php
-                        $username = empty($model->user->username) ? $model->user->id : $model->user->username;
-                        ?>
-                        <ul class="list-inline res-hidden">
-                            <li><b><?= Yii::t('app', 'Author') ?></b> <a
-                                    href="<?= Yii::$app->urlManager->createUrl(['//user/view', 'id' => $username]) ?>"
-                                    title="<?= $model->user->name; ?>"><?= $model->user->name; ?></a></li>
+                        if (!Yii::$app->user->isGuest && (Yii::$app->user->identity->id == $model->userId || Yii::$app->user->identity->type == 1)) : ?>
                             <li class="divider"></li>
-                            <li><b><?= Yii::t('app', 'created_at') ?> </b>
-                                <span><?php echo date('Y-m-d', strtotime($model->created_at)); ?></span></li>
+                            <li><?= Html::a(Yii::t('app', 'Edit Post'), ['//explore/post', 'id' => $model->id]); ?></li>
                             <li class="divider"></li>
-                            <li><b><?= Yii::t('app', 'Views') ?> </b> <?php
-                                $totalViews = $model->postStats->views;
-                                echo number_format($totalViews + 1);
-                                ?></li>
+                            <li><?= Html::a(Yii::t('app', 'Delete Post'), ['//explore/delete', 'id' => $model->id], [
+                                    'data' => ['method' => 'post'],
+                                    'style' => 'color:red;']); ?></li>
+                        <?php endif; ?>
+                    </ul>
+                    <div class="post-body">
+                        <div class="chebody">
                             <?php
-                            if (!Yii::$app->user->isGuest && (Yii::$app->user->identity->id == $model->userId || Yii::$app->user->identity->type == 1)) : ?>
-                                <li class="divider"></li>
-                                <li><?= Html::a(Yii::t('app', 'Edit Post'), ['//explore/post', 'id' => $model->id]); ?></li>
-                                <li class="divider"></li>
-                                <li><?= Html::a(Yii::t('app', 'Delete Post'), ['//explore/delete', 'id' => $model->id], [
-                                        'data' => ['method' => 'post'],
-                                        'style' => 'color:red;']); ?></li>
-                            <?php endif; ?>
-                        </ul>
-                        <div class="post-body">
-                            <div class="chebody">
-                                <?php
-                                if ($model->type) {
-                                    echo $this->render('//explore/_external', ['data' => $model]);
+                            if ($model->type) {
+                                echo $this->render('//explore/_external', ['data' => $model]);
+                            }
+                            ?>
+                            <?php
+                            $bodys = Yii::$app->cache->get('mmpost-body-' . $model->id);
+                            if ($bodys == false) {
+                                $bodys = '';
+                                foreach ($model->postBodies as $data) {
+                                    $bodys .= $data->body;
                                 }
-                                ?>
-                                <?php
-                                $bodys = Yii::$app->cache->get('mmpost-body-' . $model->id);
-                                if ($bodys == false) {
-                                    $bodys = '';
-                                    foreach ($model->postBodies as $data) {
-                                        $bodys .= $data->body;
-                                    }
-                                    $bodys = Yii::$app->helper->replaceLinks($bodys);
-                                    $bodys = Yii::$app->helper->str_insert($bodys, '</p>', '<div style="float: left; margin: 0 20px 20px 0;"> <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                $bodys = Yii::$app->helper->replaceLinks($bodys);
+                                $bodys = Yii::$app->helper->str_insert($bodys, '</p>', '<div style="float: left; margin: 0 20px 20px 0;"> <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <!-- MPU - Post page right Upper  -->
                     <ins class="adsbygoogle"
                          style="display:inline-block;width:300px;height:250px; text-align: left;"
@@ -138,75 +138,75 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                     <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     </script></div>');
-                                    Yii::$app->cache->set('post-body-' . $model->id, $bodys, 3000);
-                                }
-                                $this->description = Yii::$app->helper->metabody($bodys);
-                                if (empty($this->description)) {
-                                    $this->description = $this->title;
-                                }
-                                echo $bodys;
-                                ?>
-                                <div class="clearfix"></div>
-                                <div id="related-posts" data-id="<?= $model->id; ?>">
-                                    <h3 class="underlined"><?= Yii::t('app', 'Related Posts') ?></h3>
+                                Yii::$app->cache->set('post-body-' . $model->id, $bodys, 3000);
+                            }
+                            $this->description = Yii::$app->helper->metabody($bodys);
+                            if (empty($this->description)) {
+                                $this->description = $this->title;
+                            }
+                            echo $bodys;
+                            ?>
+                            <div class="clearfix"></div>
+                            <div id="related-posts" data-id="<?= $model->id; ?>">
+                                <h3 class="underlined"><?= Yii::t('app', 'Related Posts') ?></h3>
+                            </div>
+                            <?php $tags_all = $model->postTags;
+                            if (count($tags_all) > 0) : ?>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <h4 class="underlined"><?= Yii::t('app', 'Tags') ?></h4>
+                                        <ul class="list-inline tags">
+                                            <?php
+                                            foreach ($tags_all as $tags) :
+                                                if (isset($tags->tags)):
+                                                    ?>
+                                                    <li>
+                                                        <?php $ttaUrl = Yii::$app->helper->urlTitle($tags->tags->name); ?>
+                                                        <a href="<?= Yii::$app->urlManager->createUrl(["//tags/{$ttaUrl}"]) ?>"><label
+                                                                class="label label-default"><?php echo $tags->tags->name; ?></label></a>
+                                                    </li>
+                                                    <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <?php $tags_all = $model->postTags;
-                                if (count($tags_all) > 0) : ?>
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <h4 class="underlined"><?= Yii::t('app', 'Tags') ?></h4>
-                                            <ul class="list-inline tags">
-                                                <?php
-                                                foreach ($tags_all as $tags) :
-                                                    if (isset($tags->tags)):
-                                                        ?>
-                                                        <li>
-                                                            <?php $ttaUrl = Yii::$app->helper->urlTitle($tags->tags->name); ?>
-                                                            <a href="<?= Yii::$app->urlManager->createUrl(["//tags/{$ttaUrl}"]) ?>"><label
-                                                                    class="label label-default"><?php echo $tags->tags->name; ?></label></a>
-                                                        </li>
-                                                        <?php
-                                                    endif;
-                                                endforeach;
-                                                ?>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                <?php endif; ?>
-                                <div class="row">
-                                    <div class="col-md-12 m-t-25">
-                                        <h3 class="underlined"><?= Yii::t('app', 'Comments') ?></h3>
-                                        <?php echo $this->render('//explore/_commentform', ['id' => $model->id]); ?>
-                                        <div id="comments" data-id="<?= $model->id; ?>"></div>
-                                    </div>
+                            <?php endif; ?>
+                            <div class="row">
+                                <div class="col-md-12 m-t-25">
+                                    <h3 class="underlined"><?= Yii::t('app', 'Comments') ?></h3>
+                                    <?php echo $this->render('//explore/_commentform', ['id' => $model->id]); ?>
+                                    <div id="comments" data-id="<?= $model->id; ?>"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </article>
-            </div>
-            <?php if (!Yii::$app->helper->isMobile()): ?>
-                <div class="col-md-3">
-                    <div class="m-t-8">
-                        <div style="float: left; margin: 0 20px 20px 0;">
-                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                            <!-- MPU - Post page right Upper  -->
-                            <ins class="adsbygoogle"
-                                 style="display:inline-block;width:300px;height:250px; text-align: left;"
-                                 data-ad-client="ca-pub-6288640194310142"
-                                 data-ad-slot="1962272113"></ins>
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
-                        </div>
-                        <div id="hot-posts" data-id="<?= $model->id; ?>">
-                            <h3 class="underlined"><?= Yii::t('app', 'Whats Hot') ?></h3>
-                        </div>
+                </div>
+            </article>
+        </div>
+        <?php if (!Yii::$app->helper->isMobile()): ?>
+            <div class="col-md-3">
+                <div class="m-t-8">
+                    <div style="float: left; margin: 0 20px 20px 0;">
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- MPU - Post page right Upper  -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:300px;height:250px; text-align: left;"
+                             data-ad-client="ca-pub-6288640194310142"
+                             data-ad-slot="1962272113"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                    <div id="hot-posts" data-id="<?= $model->id; ?>">
+                        <h3 class="underlined"><?= Yii::t('app', 'Whats Hot') ?></h3>
                     </div>
                 </div>
-            <?php endif; ?>
-        </div>
+            </div>
+        <?php endif; ?>
     </div>
+</div>
 <?php if (!Yii::$app->user->isGuest):
     if ((time() - strtotime($model->created_at) < 40000) && Yii::$app->user->identity->id == $model->userId):
         ?>
@@ -278,4 +278,45 @@ endif; ?>
 
 
 
+
+<?php
+$img = Yii::$app->imageresize->original($model->cover);
+?>
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "<?= $model->url ?>"
+  },
+  "headline": "<?= $model->title ?>",
+  "image": {
+    "@type": "ImageObject",
+    "url": "<?= $img['url'] ?>",
+    "height": <?= $img['width'] ?>,
+    "width": <?= $img['height'] ?>
+  },
+  "datePublished": "<?= date('Y-m-d h:i', strtotime($model->created_at)); ?>",
+  "dateModified": "<?= date('Y-m-d h:i', strtotime($model->created_at)); ?>",
+  "author": {
+    "@type": "Person",
+    "name": "<?= $model->user->name; ?>"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Hangshare",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://s3-eu-west-1.amazonaws.com/hangshare-media/hangshare-logo.png",
+      "width": 135,
+      "height": 32
+    }
+  },
+  "description": "<?= $this->description ?>"
+}
+
+</script>
 
