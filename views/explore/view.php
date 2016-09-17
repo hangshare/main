@@ -296,8 +296,8 @@ $img = Yii::$app->imageresize->original($model->cover);
   "image": {
     "@type": "ImageObject",
     "url": "<?= $img['url'] ?>",
-    "height": <?= $img['width'] ?>,
-    "width": <?= $img['height'] ?>
+    "height": <?= empty($img['height']) ? 200 : $img['height'] ?>,
+    "width":  <?= empty($img['width']) ? 200 : $img['width'] ?>,
   },
   "datePublished": "<?= date('Y-m-d h:i', strtotime($model->created_at)); ?>",
   "dateModified": "<?= date('Y-m-d h:i', strtotime($model->created_at)); ?>",
@@ -317,6 +317,7 @@ $img = Yii::$app->imageresize->original($model->cover);
   },
   "description": "<?= $this->description ?>"
 }
+
 
 </script>
 
