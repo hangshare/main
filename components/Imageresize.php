@@ -48,10 +48,12 @@ class Imageresize extends Component
     public function original($file)
     {
         if ($json = $this->isJson($file)) {
+            $img = 'https://s3-eu-west-1.amazonaws.com/hangshare-media/'.$json->image;
+            $img = str_replace('//','/',$img);
             return [
                 'width' => $json->width,
                 'height' => $json->height,
-                'url' => 'https://s3-eu-west-1.amazonaws.com/hangshare-media'.$json->image,
+                'url' => $img,
             ];
         } else {
             if (empty($file) || $file === 0)
