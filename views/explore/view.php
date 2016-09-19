@@ -296,8 +296,8 @@ $img = Yii::$app->imageresize->original($model->cover);
   "image": {
     "@type": "ImageObject",
     "url": "<?= 'https://s3-eu-west-1.amazonaws.com/hangshare-media/' . $img['url'] ?>",
-    "height": <?= empty($img['height']) ? "200" : "{$img['height']}" ?>,
-    "width":  <?= empty($img['width']) ? "200" : "{$img['width']}" ?>
+    "height": <?= empty($img['height']) ? "200" : (string)$img['height'] ?>,
+    "width":  <?= empty($img['width']) ? "200" : (string)$img['width'] ?>
   },
   "datePublished": "<?= date('Y-m-d h:i', strtotime($model->created_at)); ?>",
   "dateModified": "<?= date('Y-m-d h:i', strtotime($model->created_at)); ?>",
@@ -317,6 +317,8 @@ $img = Yii::$app->imageresize->original($model->cover);
   },
   "description": "<?= $this->description ?>"
 }
+
+
 
 
 
