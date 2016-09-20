@@ -370,8 +370,8 @@ class ExploreController extends Controller
 
     public function actionView($slug)
     {
-        $model = $this->findModel($slug);
-        if ($model->deleted == 1) {
+        $model = $this->findModel($slug, false);
+        if (!isset($model) || $model->deleted == 1) {
             $pageSize = 8;
             $query = Post::find();
             $query->orderBy('created_at DESC');
@@ -457,7 +457,7 @@ class ExploreController extends Controller
         return $this->redirect(['/user/' . $username . '/']);
     }
 
-    protected function findModel($id)
+    protected function findModel($id ,$er_404 = true)
     {
         $lang = Yii::$app->language;
         $userId = !Yii::$app->user->isGuest ? Yii::$app->user->identity->id : 0;
@@ -472,7 +472,7 @@ class ExploreController extends Controller
             }
             Yii::$app->cache->set($id . $lang, $model, 3000);
         }
-        if (!isset($model)) {
+        if (!isset($model) && $er_404) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
         return $model;
