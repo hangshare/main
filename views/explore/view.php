@@ -287,18 +287,19 @@ $img = Yii::$app->imageresize->original($model->cover);
 <script type="application/ld+json">
 {
   "@context": "http://schema.org",
-  "@type": "NewsArticle",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "<?= $model->url ?>"
-  },
   "headline": "<?= $model->title ?>",
+  "description": "<?= $this->description ?>",
+  "url":"<?= $model->url ?>",
+  "keywords":["abortion-access","lifestyle","abortion-rights","reproductive-rights","uk","isle-of-man","abortion","work-play"],
+  "@type": "Article",
   "image": {
     "@type": "ImageObject",
     "url": "<?= 'https://s3-eu-west-1.amazonaws.com/hangshare-media/' . $img['url'] ?>",
     "height": <?= empty($img['height']) ? "200" : (string)$img['height'] ?>,
     "width":  <?= empty($img['width']) ? "200" : (string)$img['width'] ?>
   },
+  "mainEntityOfPage":"True",
+  "articleSection":"lifestyle",
   "datePublished": "<?= date('Y-m-d h:i', strtotime($model->created_at)); ?>",
   "dateModified": "<?= date('Y-m-d h:i', strtotime($model->created_at)); ?>",
   "author": {
@@ -308,20 +309,15 @@ $img = Yii::$app->imageresize->original($model->cover);
   "publisher": {
     "@type": "Organization",
     "name": "Hangshare",
+    "url":"https://www.hangshare.com/",
     "logo": {
       "@type": "ImageObject",
       "url": "https://s3-eu-west-1.amazonaws.com/hangshare-media/hangshare-logo.png",
       "width": 135,
       "height": 32
     }
-  },
-  "description": "<?= $this->description ?>"
+  }
 }
-
-
-
-
-
-
 </script>
+
 
