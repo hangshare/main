@@ -56,7 +56,6 @@ class ExploreController extends Controller
         echo '</ul>';
     }
 
-
     public function actionHot()
     {
         $this->layout = false;
@@ -208,14 +207,33 @@ class ExploreController extends Controller
 
     public function actionCategory($category)
     {
-        $cat = Category::find()->where(['url_link' => $category])->one();
+
         $pageSize = 10;
         $query = Post::find();
         $query->joinWith(['postCategories']);
         $query->orderBy('post.created_at DESC');
         $query->where("post.published=1 AND post.deleted=0 AND post.lang = '" . Yii::$app->language . "'");
         $query->andWhere(['<>', 'post.cover', '']);
-        $query->andWhere(['=', 'post_category.categoryId', $cat->id]);
+
+
+        if (strpos($category, '/') !== false) {
+            //sub category
+
+            $sub_cat = explode('/', $category);
+            $category = $sub_cat[1];
+            $cat = Yii::$app->db->createCommand("SELECT id,title FROM `category` WHERE url_link LIKE '{$category}%'")->queryOne();
+            $query->andWhere(['=', 'post_category.categoryId', $cat['id']]);
+        } else {
+            //main category
+            $cat = Yii::$app->db->createCommand("SELECT id,title FROM `category` WHERE url_link LIKE '{$category}%'")->queryOne();
+            $subcats = Yii::$app->db->createCommand("SELECT id FROM `category` WHERE parent = {$cat['id']}")->queryAll();
+            $qa = [];
+            foreach ($subcats as $subcats) {
+                $qa[] = $subcats['id'];
+            }
+            $query->andWhere(['in', 'post_category.categoryId', $qa]);
+        }
+
 
         $currentPage = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $currentPage = preg_replace("/tag=[^&]+/", "", $currentPage);
@@ -457,7 +475,7 @@ class ExploreController extends Controller
         return $this->redirect(['/user/' . $username . '/']);
     }
 
-    protected function findModel($id ,$er_404 = true)
+    protected function findModel($id, $er_404 = true)
     {
         $lang = Yii::$app->language;
         $userId = !Yii::$app->user->isGuest ? Yii::$app->user->identity->id : 0;
