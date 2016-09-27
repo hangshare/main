@@ -6,8 +6,8 @@ use yii\helpers\Html;
 use yii\widgets\ListView;
 
 if (isset($cat)) {
-    $this->title = Yii::t('app', $cat->title);
-    $this->description = Yii::t('app', $cat->title);
+    $this->title = Yii::t('app', $cat['title']);
+    $this->description = Yii::t('app', $cat['title']);
 } else {
     if (isset($tags)) { // BUG
         $this->title = $tags;
@@ -49,7 +49,7 @@ if (empty($this->title)) {
     <div class="col-md-9">
         <?php if (isset($cat)) : //bug ?>
             <div class="row">
-                <h1 class="normal"><?= $cat->title ?></h1>
+                <h1 class="normal"><?= $cat['title'] ?></h1>
             </div>
         <?php endif; ?>
         <hr class="nomargin m-b-20">
