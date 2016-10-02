@@ -30,7 +30,7 @@ class Testonomial extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['userId'], 'integer'],
+            [['userId', 'show_on_home'], 'integer'],
             [['lang'], 'string', 'max' => 2],
             [['userTitle'], 'string', 'max' => 200],
             [['bodyText'], 'string', 'max' => 1000],
