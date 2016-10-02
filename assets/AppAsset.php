@@ -49,22 +49,27 @@ class AppAsset extends AssetBundle
             $this->css [] = 'css/font-awesome/css/font-awesome.min.css';
             $this->css [] = "css/editor/css/froala_editor.min.css";
             $this->css [] = "css/editor/css/froala_style.min.css";
-
         }
 
         if (Yii::$app->language == 'en') {
             $assests->assetMap['bootstrap.css'] = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css';
             //$assests->assetMap['bootstrap.js'] = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js';
-
             $this->css [] = YII_DEBUG ? 'css/site.en.css' : 'css/site.en.min.css';
         } else {
             $this->css [] = YII_DEBUG ? 'css/site.css' : 'css/site.min.css';
         }
 
         $this->js[] = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js';
-
         $this->css [] = 'css/font-awesome/css/font-awesome.min.css';
+        $this->js[] = "js/jquery.viewportchecker.js";
+        $this->js[] = "flot/jquery.flot.js";
+        $this->js[] = "flot/jquery.flot.pie.js";
+        $this->js[] = 'js/jq-ui.js';
+        $this->css [] = "css/animate.css";
+        $this->js[] = "Volar_files/wow.js";
+        $this->css [] = "owl/owl.carousel.css";
+        $this->css [] = "owl/owl.theme.css";
+        $this->js[] = "owl/owl.carousel.js";
         $this->js[] = YII_DEBUG ? 'js/main.js' : '/js/main.1.1.min.js';
-
     }
 }
