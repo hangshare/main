@@ -33,7 +33,7 @@ RewriteBase /
 RewriteRule sitemap.xml site/sitemapxml/$1 [L]
 
 
-RewriteCond %{REQUEST_URI}  !\.(php|html?|gif|GIF|css|CSS|js|JS|jpg|JPG|jpeg|woff2|ico|ICO|ttf|TTF|JPEG|png|PNG|txt|bmp|BMP|TXT|xml|XML)$
+RewriteCond %{REQUEST_URI}  !\.(php|html?|gif|GIF|css|CSS|js|JS|SVG|svg|jpg|JPG|jpeg|woff2|ico|ICO|ttf|TTF|JPEG|png|PNG|txt|bmp|BMP|TXT|xml|XML)$
 RewriteRule ^(.*)([^/])$ https://%{HTTP_HOST}/$1$2/ [L,R=301]
 
  #Ensure www.
