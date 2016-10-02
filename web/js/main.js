@@ -592,23 +592,26 @@ $(function () {
             color: '#FAC51C'
         }
     ];
+
     var placeholder = $("#pi1");
-    placeholder.unbind();
-    $.plot(placeholder, data, {
-        series: {
-            pie: {
-                show: true,
-                label: {
+    if (placeholder.length > 0) {
+        placeholder.unbind();
+        $.plot(placeholder, data, {
+            series: {
+                pie: {
                     show: true,
-                    radius: 0.5,
-                    formatter: function (label, series) {
-                        var percent = Math.round(series.percent);
-                        return ('&nbsp;<span style="color: #fff;">' + percent + '%</span><br/>');
+                    label: {
+                        show: true,
+                        radius: 0.5,
+                        formatter: function (label, series) {
+                            var percent = Math.round(series.percent);
+                            return ('&nbsp;<span style="color: #fff;">' + percent + '%</span><br/>');
+                        }
                     }
                 }
-            }
-        },
-    });
+            },
+        });
+    }
 
     $(window).load(function () {
         var wow = new WOW({
