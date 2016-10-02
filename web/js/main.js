@@ -35,8 +35,6 @@ $(function () {
         var da = $(this).data().element;
 
         $(".mainmenu").each(function (index, value) {
-            console.log(da);
-            console.log($(value).data().element);
             if ($(value).data().element != da) {
                 $("#" + $(value).data().element).hide();
             }
@@ -108,7 +106,7 @@ $(function () {
         };
         if ($.Yii.getLang() === 'ar')
             options['direction'] = 'rtl';
-        console.log(options);
+
         $('.froala-edit').editable(options);
     }
     input = document.getElementById("post-cover_file");
