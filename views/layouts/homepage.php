@@ -1,4 +1,4 @@
-<?php use kartik\alert\Alert; ?>
+
 <?php
 $this->beginContent('@app/views/layouts/htmlhead.php');
 $this->endContent();

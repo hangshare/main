@@ -2,38 +2,42 @@
 use yii\helpers\Html;
 
 ?>
-<?php if (!Yii::$app->helper->isMobile()): ?>
-    <footer style="position: relative">
-        <div class="container">
-            <ul class="list-inline pull-left" style="width: 100%;padding-right: 70px;">
-                <li><?= Html::a(Yii::t('app', 'Home page'), Yii::$app->homeUrl) ?></li>
-                <li class="divider"></li>
-                <li><?= Html::a(Yii::t('app', 'About Us'), ['//' . Yii::t('app', 'About-Us-url')]) ?></li>
-                <li class="divider"></li>
-                <li><?= Html::a(Yii::t('app', 'Faqs'), ['//' . Yii::t('app', 'Faqs-url')]) ?></li>
-                <li class="divider"></li>
-                <li><?= Html::a(Yii::t('app', 'Contact Us'), ['//' . Yii::t('app', 'ContactUs-url')]) ?></li>
-                <li class="divider"></li>
-                <li><?= Html::a(Yii::t('app', 'Privacy'), ['//' . Yii::t('app', 'privacy-url')]) ?></li>
-                <li class="divider"></li>
-                <li>
-                    <?php if (Yii::$app->language == 'en') : ?>
-                        <a class="changeLang" href="https://www.hangshare.com/">عربي</a>
-                    <?php else : ?>
-                        <a class="changeLang" href="https://www.hangshare.com/en/">English</a>
-                    <?php endif; ?>
-                </li>
-                <li class="pull-right"><a class="btn btn-primary" href="https://www.facebook.com/Hangshare"
-                                          target="_blank"><i
-                            style="margin: 3px;" class="fa fa-fw fa-facebook"></i></a></li>
-                <li class="pull-right"><a class="btn" href="https://www.twitter.com/hang_share" target="_blank"
-                                          style="color: #fff; background-color: #4099ff;"><i style="margin: 3px;"
-                                                                                             class="fa fa-twitter"></i></a>
-                </li>
-            </ul>
-        </div>
-    </footer>
-<?php endif; ?>
+
+
+<footer class="footer-section section no-padding-bottom"
+        style="position: relative;z-index: 2; height: 250px; padding: 20px 0; ">
+    <div class="footer-logo" style="padding: 0px; text-align: center;">
+        <a href="<?= Yii::$app->homeUrl ?>">
+            <?php if (Yii::$app->language == 'ar') : ?>
+                <img width="135"
+                     src="https://s3-eu-west-1.amazonaws.com/hangshare-media/hangshare-logo.png"/>
+            <?php else : ?>
+                <img width="135"
+                     src="https://s3-eu-west-1.amazonaws.com/hangshare-media/hangshare-logo-en.png"/>
+            <?php endif; ?>
+        </a>
+    </div>
+    <div class="footer-social text-center" style="height: 80px;margin-top: 30px;padding: 0;">
+        <a target="_blank" style="visibility: visible; animation-delay: 0s; animation-name: fadeIn;"
+           href="https://www.facebook.com/Hangshare"
+           class="fa fa-facebook-square wow fadeIn animated" data-wow-offset="150" data-wow-delay="0s"></a>
+        <a target="_blank" style="visibility: visible; animation-delay: 0.15s; animation-name: fadeIn;"
+           href="https://twitter.com/hang_share"
+           class="fa fa-twitter wow fadeIn animated" data-wow-offset="150" data-wow-delay=".15s"></a>
+        <a target="_blank" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeIn;"
+           href="https://www.youtube.com/channel/UC33wy618vyFr3iP3ywcabwg"
+           class="fa fa-google-plus wow fadeIn animated" data-wow-offset="150" data-wow-delay=".3s"></a>
+        <a target="_blank" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeIn;"
+           href="https://www.youtube.com/channel/UC33wy618vyFr3iP3ywcabwg"
+           class="fa fa-youtube-play wow fadeIn animated" data-wow-offset="150" data-wow-delay=".6s"></a>
+    </div>
+    <div class="footer-bottom">
+        <span class="text-white"><?= Yii::t('app', 'All Right Reserved.'); ?>.</span>
+        <a href="<?= Yii::$app->homeUrl ?>"
+           class="footer-bottom-text font-second text-white"><?= Yii::t('app', 'Hangshare') ?></a>
+        &copy; <?= date('Y') ?>
+    </div>
+</footer>
 <?php $this->endBody() ?>
 </body>
 </html>
