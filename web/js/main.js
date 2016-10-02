@@ -274,6 +274,7 @@ $(function () {
 
 
     $(document).on('click', '#main-post', function (e) {
+        $('#cover_error').hide();
         if ($('#post-ylink').val() === "" && $("#cover_input").val() === "" && $("#covercheck").val() === "") {
             e.preventDefault();
             var body = $("html, body");
@@ -569,5 +570,94 @@ $(function () {
         }
     };
     scrolltotop.init();
+
+
+    ////////////////////////////////////////////
+
+
+    var data = [
+        {
+            label: $.Yii.t('Post Rating'),
+            data: 60,
+            color: '#EF7061'
+        },
+        {
+            label: $.Yii.t('Traffic Source'),
+            data: 30,
+            color: '#2C82C9'
+        },
+        {
+            label: $.Yii.t('Traffic Quality'),
+            data: 10,
+            color: '#FAC51C'
+        }
+    ];
+    var placeholder = $("#pi1");
+    placeholder.unbind();
+    $.plot(placeholder, data, {
+        series: {
+            pie: {
+                show: true,
+                label: {
+                    show: true,
+                    radius: 0.5,
+                    formatter: function (label, series) {
+                        var percent = Math.round(series.percent);
+                        return ('&nbsp;<span style="color: #fff;">' + percent + '%</span><br/>');
+                    }
+                }
+            }
+        },
+    });
+
+    $(window).load(function () {
+        var wow = new WOW({
+            boxClass: 'wow',
+            animateClass: 'animated',
+            offset: 0,
+            mobile: true,
+            live: true,
+            callback: function (box) {
+                // the callback is fired every time an animation is started
+                // the argument that is passed in is the DOM node being animated
+            },
+            scrollContainer: null
+        });
+        wow.init();
+    });
+
+    $('.counter').viewportChecker({
+        classToAdd: 'visible',
+        offset: 20,
+        repeat: false,
+        callbackFunction: function (elem, action) {
+            ii = elem.data('content');
+
+            animateNumbers(elem, ii);
+        }
+    });
+
+    function animateNumbers(obj, end) {
+        $({countNum: 0}).animate({countNum: end}, {
+            duration: 4000,
+            easing: 'easeOutExpo',
+            step: function () {
+                obj.text(commaSeparateNumber(Math.floor(this.countNum) + 1));
+            }
+        });
+    }
+
+    function commaSeparateNumber(val) {
+        while (/(\d+)(\d{3})/.test(val.toString())) {
+            val = val.toString().replace(/(\d+)(\d{3})/, '$1' + ',' + '$2');
+        }
+        return val;
+    }
+
+    $('#testimonials').owlCarousel({
+        items: 1,
+        rtl: true
+    });
+
 });
 
