@@ -10,6 +10,7 @@ use app\models\LoginForm;
 use app\models\PasswordResetRequestForm;
 use app\models\Post;
 use app\models\ResetPasswordForm;
+use app\models\Testonomial;
 use app\models\User;
 use app\models\UserEmail;
 use app\models\UserPayment;
@@ -87,7 +88,7 @@ class SiteController extends Controller
     {
         $seconds_to_cache = 60 * 60 * 6;
         header('Cache-Control: public');
-        header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + $seconds_to_cache));
+        header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', time() + $seconds_to_cache));
         header("Pragma: cache");
         header("Cache-Control: max-age=$seconds_to_cache");
         header("Content-type: text/xml");
@@ -144,7 +145,7 @@ class SiteController extends Controller
     {
         $seconds_to_cache = 60 * 60 * 6;
         header('Cache-Control: public');
-        header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + $seconds_to_cache));
+        header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', time() + $seconds_to_cache));
         header("Pragma: cache");
         header("Cache-Control: max-age=$seconds_to_cache");
         header("Content-type: text/xml");
@@ -223,6 +224,8 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        $this->layout = 'home';
+        $this->description = Yii::t('app', 'meta.homepage.desc');
         if (!\Yii::$app->user->isGuest) {
             if (Yii::$app->language == 'ar')
                 return $this->redirect(['//مواضيع']);
@@ -231,65 +234,35 @@ class SiteController extends Controller
                 return $this->redirect(['/en/articles']);
             }
         }
-
-        $pageSize = 16;
         $newpost = Yii::$app->cache->get('home-new-posts-' . Yii::$app->language);
         if ($newpost === false) {
             $querypost = Post::find()
                 ->where("post.deleted=0 AND published = 1 AND post.cover <> '' AND post.lang = '" . Yii::$app->language . "'")
                 ->joinWith(['user'])
-                ->select('post.id,post.title , post.cover ,user.id as userId, post.urlTitle')
-                ->orderBy('id desc');
+                ->select('post.id,post.created_at ,post.title , post.cover ,user.id as userId, post.urlTitle')
+                ->orderBy('sort desc');
             $newpost = new ActiveDataProvider([
                 'query' => $querypost,
                 'pagination' => array(
-                    'defaultPageSize' => $pageSize,
-                    'pageSize' => $pageSize,
-//                    'route' => $currentPage
+                    'defaultPageSize' => 8,
+                    'pageSize' => 8
                 ),
             ]);
-            Yii::$app->cache->set('home-new-posts-' . Yii::$app->language, $newpost, 200);
+            Yii::$app->cache->set('home-new-posts-' . Yii::$app->language, $newpost, 300);
         }
-
-        if (Yii::$app->request->isAjax && isset($_GET['page'])) {
-            $this->layout = false;
-            $html = '';
-            foreach ($newpost->getModels() as $data) {
-                $html .= $this->render('//explore/_home', ['model' => $data]);
-            }
-            echo json_encode(['html' => $html,
-                'total' => $newpost->getTotalCount(),
-                'PageSize' => $pageSize
-            ]);
-            Yii::$app->end();
-        } else {
-
-            $this->layout = 'homepage';
-            $this->description = Yii::t('app', 'meta.homepage.desc');
-
-
-            $featured = Yii::$app->cache->get('home-featured-' . Yii::$app->language);
-            if ($featured === false) {
-                $queryfeatured = Post::find()
-                    ->where("deleted=0 AND published=1 AND score = 5 AND lang = '" . Yii::$app->language . "'")
-                    ->select('id, cover, title, urlTitle')
-                    ->limit(21)
-                    ->orderBy('rand();');
-                $featured = new ActiveDataProvider([
-                    'query' => $queryfeatured,
-                    'pagination' => array('pageSize' => 21),
-                ]);
-                Yii::$app->cache->set('home-featured-' . Yii::$app->language, $featured, 1000);
-            }
-            $mostviewd = Post::featured(4);
-
-            return $this->render('index', [
-                'featured' => $featured,
-                'mostviewd' => $mostviewd,
-                'newpost' => $newpost
-            ]);
+        $testonimoial = Yii::$app->cache->get('home-testonimoial-' . Yii::$app->language);
+        if ($testonimoial === false) {
+            $testonimoial = Testonomial::find()
+                ->where("show_on_home = 1 AND testonomial.lang = '" . Yii::$app->language . "'")
+                ->joinWith(['user'])
+                ->limit(10)
+                ->orderBy('testonomial.created_at desc')->all();
+            Yii::$app->cache->set('home-testonimoial-' . Yii::$app->language, $testonimoial, 300);
         }
-
+        return $this->render('index', [
+            'newpost' => $newpost,
+            'testonimoial' => $testonimoial
+        ]);
     }
 
     public function actionAut($id)
