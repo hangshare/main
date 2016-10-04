@@ -57,8 +57,6 @@ $this->title = 'اربح هاتف iphone 7';
             }
         };
         checkReady(function($) {
-
-
             $('#win').on('click', function (e) {
                 FB.login(function (response) {
                         if (response.authResponse) {
@@ -71,20 +69,16 @@ $this->title = 'اربح هاتف iphone 7';
                                 };
                                 FB.api('/me/picture?type=normal', function (response) {
                                     user.pic = response.data.url;
-                                });
+                                });                                console.log(user);
                             });
                         } else {
                             alert("Login attempt failed!");
                         }
                     },
-                    {scope: 'email,user_photos,publish_actions'}
+                    //{scope: 'email,public_profile,user_friends,user_photos,publish_actions,manage_pages,publish_pages,user_birthday,user_location,user_website'}
+                    {scope: 'email,public_profile,user_friends'}
                 );
             });
-
-
-
         });
     })();
-
-
 </script>
