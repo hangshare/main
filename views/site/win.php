@@ -57,6 +57,8 @@ $this->title = 'اربح هاتف iphone 7';
             $('#win').on('click', function (e) {
                 FB.login(function (response) {
                         if (response.authResponse) {
+                            var rec = FB.getAuthResponse();
+                            console.log(rec);
                             FB.api('/me?fields=name,email', function (response) {
                                 var user = {
                                     'id': response.id,
@@ -66,10 +68,7 @@ $this->title = 'اربح هاتف iphone 7';
                                 };
                                 FB.api('/me/picture?type=normal', function (response) {
                                     user.pic = response.data.url;
-                                });
-
-
-
+                                })
 
                                 console.log(user);
                             });
