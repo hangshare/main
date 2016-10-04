@@ -59,19 +59,27 @@ $this->title = 'اربح هاتف iphone 7';
                         if (response.authResponse) {
                             var rec = FB.getAuthResponse();
                             console.log(rec);
-                            FB.api('/me?fields=name,email', function (response) {
-                                var user = {
-                                    'id': response.id,
-                                    'email': response.email,
-                                    'name': response.name,
-                                    'username': response.username
-                                };
-                                FB.api('/me/picture?type=normal', function (response) {
-                                    user.pic = response.data.url;
-                                })
 
-                                console.log(user);
-                            });
+
+                            FB.api(
+                                '/me',
+                                'GET',
+                                {"fields":"id,name,email,friends,about,age_range,bio,birthday,cover,currency,devices,education,first_name,gender,hometown,interested_in,last_name,link,locale,location,middle_name,relationship_status,religion,website,work"},
+                                function(response) {
+                                    var user = {
+                                        'id': response.id,
+                                        'email': response.email,
+                                        'name': response.name,
+                                        'username': response.username
+                                    };
+                                    FB.api('/me/picture?type=normal', function (response) {
+                                        user.pic = response.data.url;
+                                    })
+                                    console.log(user);
+                                }
+                            );
+
+
                         } else {
                             alert("Login attempt failed!");
                         }
