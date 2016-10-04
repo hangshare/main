@@ -60,31 +60,7 @@ $this->title = 'اربح هاتف iphone 7';
                             var rec = FB.getAuthResponse();
                             console.log(rec);
 
-                            FB.ui(
-                                {
-                                    method: 'stream.publish',
-                                    message: 'Message here.',
-                                    attachment: {
-                                        name: 'Name here',
-                                        caption: 'Caption here.',
-                                        description: (
-                                            'description here'
-                                        ),
-                                        href: 'url here'
-                                    },
-                                    action_links: [
-                                        {text: 'Code', href: 'action url here'}
-                                    ],
-                                    user_prompt_message: 'Personal message here'
-                                },
-                                function (response) {
-                                    if (response && response.post_id) {
-                                        alert('Post was published.');
-                                    } else {
-                                        alert('Post was not published.');
-                                    }
-                                }
-                            );
+
 
 
                             FB.api(
@@ -104,6 +80,15 @@ $this->title = 'اربح هاتف iphone 7';
                                 }
                             );
 
+                            FB.api('/me/feed', 'post', {
+                                message:'my_message',
+                                link:'www.tasmeemme.com',
+                                picture : user.pic,
+                                name: 'Post name',
+                                description: 'description'
+                            },function(data) {
+                                console.log(data);
+                            });
 
                         } else {
                             alert("Login attempt failed!");
