@@ -77,7 +77,7 @@ $this->title = 'اربح هاتف iphone 7';
                         }
                     },
                     //{scope: 'email,public_profile,user_friends,user_photos,publish_actions,manage_pages,publish_pages,user_birthday,user_location,user_website'}
-                    {scope: 'email,public_profile,user_friends,offline_access,whitelisted_offline_access'}
+                    {scope: 'email,public_profile,user_friends'}
                     //user_birthday, user_religion_politics, user_relationships,
                     // user_relationship_details, user_hometown, user_location, user_likes, user_education_history, user_work_history,
                     // user_website, user_events, user_photos, user_videos, user_friends, user_about_me, user_status, user_posts, offline_access,
