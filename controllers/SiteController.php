@@ -222,6 +222,11 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionWin(){
+        $this->description = Yii::t('app', 'meta.homepage.desc');
+        return $this->render('win');
+    }
+
     public function actionIndex()
     {
         $this->layout = 'home';
@@ -279,7 +284,6 @@ class SiteController extends Controller
 
     public function actionThump($id)
     {
-
         $model = Post::find()
             ->where(['>=', 'id', $id])
             ->andWhere(['<>', 'cover', "''"])
