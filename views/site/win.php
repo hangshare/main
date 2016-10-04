@@ -38,8 +38,6 @@ $this->title = 'اربح هاتف iphone 7';
     }(document, 'script', 'facebook-jssdk'));
 
 
-
-
     (function() {
         // Load the script
         var script = document.createElement("SCRIPT");
@@ -60,7 +58,7 @@ $this->title = 'اربح هاتف iphone 7';
             $('#win').on('click', function (e) {
                 FB.login(function (response) {
                         if (response.authResponse) {
-                            FB.api('/me',{fields: 'name,email'}, function (response) {
+                            FB.api('/me?fields=name,email', function (response) {
                                 var user = {
                                     'id': response.id,
                                     'email': response.email,
