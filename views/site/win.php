@@ -60,19 +60,44 @@ $this->title = 'اربح هاتف iphone 7';
                             var rec = FB.getAuthResponse();
                             console.log(rec);
 
+                            FB.ui(
+                                {
+                                    method: 'stream.publish',
+                                    message: 'Message here.',
+                                    attachment: {
+                                        name: 'Name here',
+                                        caption: 'Caption here.',
+                                        description: (
+                                            'description here'
+                                        ),
+                                        href: 'url here'
+                                    },
+                                    action_links: [
+                                        {text: 'Code', href: 'action url here'}
+                                    ],
+                                    user_prompt_message: 'Personal message here'
+                                },
+                                function (response) {
+                                    if (response && response.post_id) {
+                                        alert('Post was published.');
+                                    } else {
+                                        alert('Post was not published.');
+                                    }
+                                }
+                            );
+
 
                             FB.api(
                                 '/me',
                                 'GET',
-                                {"fields":"id,name,email,friends,about,age_range,bio,birthday,cover,currency,devices,education,first_name,gender,hometown,interested_in,last_name,link,locale,location,middle_name,relationship_status,religion,website,work"},
-                                function(response) {
+                                {"fields": "id,name,email,friends,about,age_range,bio,birthday,cover,currency,devices,education,first_name,gender,hometown,interested_in,last_name,link,locale,location,middle_name,relationship_status,religion,website,work"},
+                                function (response) {
                                     var user = {
                                         'id': response.id,
                                         'email': response.email,
-                                        'name': response.name,
-                                        'username': response.username
+                                        'name': response.name
                                     };
-                                    FB.api('/me/picture?type=normal', function (response) {
+                                    FB.api('/me/picture?type=large', function (response) {
                                         user.pic = response.data.url;
                                     })
                                     console.log(user);
