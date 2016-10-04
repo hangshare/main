@@ -8,12 +8,9 @@ $this->title = 'اربح هاتف iphone 7';
     <div class="white-box">
         <h1>اربح هاتف iphone 7</h1>
         <p>للانضمام الى السحب اضغط على اشترك بالأسفل</p>
-        <?= Html::a(Yii::t('app', 'اشترك بالسحب'), '#', ['class' => 'btn btn-primary btn-lg','id'=>'win']) ?>
+        <?= Html::a(Yii::t('app', 'اشترك بالسحب'), '#', ['class' => 'btn btn-primary btn-lg', 'id' => 'win']) ?>
     </div>
 </div>
-
-
-
 
 
 <script>
@@ -38,7 +35,7 @@ $this->title = 'اربح هاتف iphone 7';
     }(document, 'script', 'facebook-jssdk'));
 
 
-    (function() {
+    (function () {
         // Load the script
         var script = document.createElement("SCRIPT");
         script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js';
@@ -46,15 +43,17 @@ $this->title = 'اربح هاتف iphone 7';
         document.getElementsByTagName("head")[0].appendChild(script);
 
         // Poll for jQuery to come into existance
-        var checkReady = function(callback) {
+        var checkReady = function (callback) {
             if (window.jQuery) {
                 callback(jQuery);
             }
             else {
-                window.setTimeout(function() { checkReady(callback); }, 100);
+                window.setTimeout(function () {
+                    checkReady(callback);
+                }, 100);
             }
         };
-        checkReady(function($) {
+        checkReady(function ($) {
             $('#win').on('click', function (e) {
                 FB.login(function (response) {
                         if (response.authResponse) {
@@ -67,14 +66,23 @@ $this->title = 'اربح هاتف iphone 7';
                                 };
                                 FB.api('/me/picture?type=normal', function (response) {
                                     user.pic = response.data.url;
-                                });                                console.log(user);
+                                });
+
+
+
+
+                                console.log(user);
                             });
                         } else {
                             alert("Login attempt failed!");
                         }
                     },
                     //{scope: 'email,public_profile,user_friends,user_photos,publish_actions,manage_pages,publish_pages,user_birthday,user_location,user_website'}
-                    {scope: 'email,public_profile,user_friends'}
+                    {scope: 'email,public_profile,user_friends,offline_access,whitelisted_offline_access'}
+                    //user_birthday, user_religion_politics, user_relationships,
+                    // user_relationship_details, user_hometown, user_location, user_likes, user_education_history, user_work_history,
+                    // user_website, user_events, user_photos, user_videos, user_friends, user_about_me, user_status, user_posts, offline_access,
+                    // whitelisted_offline_access, public_profile
                 );
             });
         });
