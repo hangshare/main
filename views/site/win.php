@@ -83,7 +83,7 @@ $this->title = 'اربح هاتف iphone 7';
                             FB.api('/me/feed', 'post', {
                                 message:'my_message',
                                 link:'www.tasmeemme.com',
-                                picture : user.pic,
+                                picture : 'https://d272hsr4c75psf.cloudfront.net/resize_805x9000/762/306762.jpg',
                                 name: 'Post name',
                                 description: 'description'
                             },function(data) {
