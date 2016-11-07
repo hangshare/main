@@ -83,10 +83,8 @@ class SiteController extends Controller
         $user = User::find()->where("scId != '' AND id >= {$id}")->limit(10)->all();
         foreach ($user as $user) {
             $url = "https://graph.facebook.com/{$user->scId}/picture?type=large";
-
             $image = preg_replace('/(\d{4})-(\d{2})-(\d{2})$/', '', $user->name) . '-' . uniqid() . '.jpg';
             $user->image = 'user/' . $image;
-
             $imagecontent = file_get_contents($url);
             $imageFile = Yii::$app->basePath . '/media/' . $user->image;
             if (!is_dir(Yii::$app->basePath . '/media/user')) {
@@ -95,9 +93,8 @@ class SiteController extends Controller
             file_put_contents($imageFile, $imagecontent);
             Yii::$app->customs3->uploadFromPath($imageFile, 'hangshare-media', 'fa/' . $user->image);
             Yii::$app->imageresize->PatchResize('hangshare-media', 'fa/' . $user->image, 'user');
-            echo $user->id;
+            echo $user->id . '<br>';
             $user->save(false);
-            die();
         }
     }
 
