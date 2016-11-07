@@ -87,9 +87,11 @@ class SiteController extends Controller
             $image = preg_replace('/(\d{4})-(\d{2})-(\d{2})$/', '', $user->name) . '-' . uniqid() . '.jpg';
             $user->image = 'user/' . $image;
 
-
             $imagecontent = file_get_contents($url);
             $imageFile = Yii::$app->basePath . '/media/' . $user->image;
+            if (!is_dir(Yii::$app->basePath . '/media/user')) {
+                mkdir(Yii::$app->basePath . '/media/user', 0777, true);
+            }
             file_put_contents($imageFile, $imagecontent);
             Yii::$app->customs3->uploadFromPath($imageFile, 'hangshare-media', 'fa/' . $user->image);
             Yii::$app->imageresize->PatchResize('hangshare-media', 'fa/' . $user->image, 'user');
