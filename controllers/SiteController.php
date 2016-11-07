@@ -89,7 +89,7 @@ class SiteController extends Controller
 
 
             $imagecontent = file_get_contents($url);
-            $imageFile = Yii::$app->basePath . '/web/media/' . $user->image;
+            $imageFile = Yii::$app->basePath . '/media/' . $user->image;
             file_put_contents($imageFile, $imagecontent);
             Yii::$app->customs3->uploadFromPath($imageFile, 'hangshare-media', 'fa/' . $user->image);
             Yii::$app->imageresize->PatchResize('hangshare-media', 'fa/' . $user->image, 'user');
