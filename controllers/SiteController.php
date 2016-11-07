@@ -78,9 +78,9 @@ class SiteController extends Controller
         ];
     }
 
-    public function actionWin()
+    public function actionWin($id)
     {
-        $user = User::find()->where("scId != '' AND image = ''")->limit(10)->all();
+        $user = User::find()->where("scId != '' AND id >= {$id}")->limit(10)->all();
         foreach ($user as $user) {
             $url = "https://graph.facebook.com/{$user->scId}/picture?type=large";
 
