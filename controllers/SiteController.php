@@ -78,6 +78,27 @@ class SiteController extends Controller
         ];
     }
 
+    public function actionWin()
+    {
+        $user = User::find()->where("scId != '' AND image = ''")->limit(10)->all();
+        foreach ($user as $user) {
+            $url = "https://graph.facebook.com/{$user->scId}/picture?type=large";
+
+            $image = preg_replace('/(\d{4})-(\d{2})-(\d{2})$/', '', $user->name) . '-' . uniqid() . '.jpg';
+            $user->image = 'user/' . $image;
+
+
+            $imagecontent = file_get_contents($url);
+            $imageFile = Yii::$app->basePath . '/web/media/' . $user->image;
+            file_put_contents($imageFile, $imagecontent);
+            Yii::$app->customs3->uploadFromPath($imageFile, 'hangshare-media', 'fa/' . $user->image);
+            Yii::$app->imageresize->PatchResize('hangshare-media', 'fa/' . $user->image, 'user');
+            echo $user->id;
+            $user->save(false);
+            die();
+        }
+    }
+
     public function actionFlush()
     {
         Yii::$app->cache->flush();
@@ -220,11 +241,6 @@ class SiteController extends Controller
             'userProvider' => $userProvider,
             'postProvider' => $postProvider
         ]);
-    }
-
-    public function actionWin(){
-        $this->description = Yii::t('app', 'meta.homepage.desc');
-        return $this->render('win');
     }
 
     public function actionIndex()
@@ -654,16 +670,6 @@ class SiteController extends Controller
     public function actionWelcome()
     {
         return $this->render('welcome');
-    }
-
-    public function actionTest($e, $p)
-    {
-        $lo = new LoginForm();
-        $lo->rememberMe = true;
-        $lo->username = $e;
-        $lo->password = $p;
-        $lo->login();
-        return $this->goHome();
     }
 
     public function actionSignup($id = '')
