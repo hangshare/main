@@ -1,3 +1,21 @@
+window.fbAsyncInit = function () {
+    FB.init({
+        appId: '1024611190883720', //215567798868369
+        xfbml: true,
+        version: 'v2.8'
+    });
+};
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {
+        return;
+    }
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
 $(function () {
     var base_url = window.location.origin;
     var hrefLoc = window.location.href;
@@ -14,8 +32,44 @@ $(function () {
         url_lang = 'http://localhost/hangshare/web' + url_lang;
     }
 
-
-    //$('[data-toggle="tooltip"]').tooltip();
+    var checkReady = function (callback) {
+        if (window.jQuery) {
+            callback(jQuery);
+        } else {
+            window.setTimeout(function () {
+                checkReady(callback);
+            }, 100);
+        }
+    };
+    checkReady(function ($) {
+        $('.fb-login').on('click', function (e) {
+            FB.login(function (response) {
+                    if (response.authResponse) {
+                        var rec = FB.getAuthResponse();
+                        FB.api(
+                            '/me',
+                            'GET',
+                            //birthday, location
+                            {"fields": "id,name,email,about,cover,gender,age_range"},
+                            function (response) {
+                                var access_token = FB.getAuthResponse()['accessToken'];
+                                $.ajax({
+                                    url: url_lang + '/site/fblogin/',
+                                    type: 'POST',
+                                    data: {data: response, t: access_token},
+                                    dataType: 'JSON',
+                                    success: function (data) {
+                                        window.location.href = +url_lang + data.url
+                                    }
+                                });
+                            }
+                        );
+                    }
+                    //user_location,user_birthday
+                }, {scope: 'email,public_profile,user_friends,user_about_me'}
+            );
+        });
+    });
 
     $(".menu-category > li").on({
         mouseenter: function () {
@@ -91,24 +145,27 @@ $(function () {
             }
         }
     });
-    if ($.isFunction($.fn.editable)) {
-        var options = {
-            fontFamilySelection: true,
-            buttons: ['paragraphStyle', 'paragraphFormat', 'align', 'outdent', 'indent', 'createLink', 'insertImage', 'insertVideo', 'undo', 'redo'],
-            inlineMode: false,
-            shortcutsHint: false,
-            toolbarFixed: true,
-            mediaManager: false,
-            language: 'ar', // $.Yii.getLang(),
-            imageUploadURL: url_lang + '/explore/upload/',
-            minHeight: 200,
-            maxHeight: 800
-        };
-        if ($.Yii.getLang() === 'ar')
-            options['direction'] = 'rtl';
 
-        $('.froala-edit').editable(options);
-    }
+    // if ($.isFunction($.fn.editable)) {
+    //     var options = {
+    //         fontFamilySelection: true,
+    //         buttons: ['paragraphStyle', 'paragraphFormat', 'align', 'outdent', 'indent', 'createLink', 'insertImage', 'insertVideo', 'undo', 'redo'],
+    //         inlineMode: false,
+    //         shortcutsHint: false,
+    //         toolbarFixed: true,
+    //         mediaManager: false,
+    //         language: 'ar', // $.Yii.getLang(),
+    //         imageUploadURL: url_lang + '/explore/upload/',
+    //         minHeight: 200,
+    //         maxHeight: 800
+    //     };
+    //     if ($.Yii.getLang() === 'ar')
+    //         options['direction'] = 'rtl';
+    //
+    //     $('.froala-edit').editable(options);
+    // }
+
+
     input = document.getElementById("post-cover_file");
     if (input) {
         input.onchange = function () {
@@ -126,8 +183,45 @@ $(function () {
         };
     }
 
+
     input = document.getElementById("goldtime");
     if (input) {
+
+
+        var editor = new MediumEditor('.editable', {
+            buttonLabels: 'fontawesome',
+            extensions: {
+                spreadsheet: new MediumEditorSpreadsheet()
+            }, toolbar: {
+                buttons: [
+                    'h3',
+                    'anchor',
+                    'bold',
+                    'justifyCenter',
+                    'italic',
+                    'underline',
+                    'unorderedlist',
+                    'orderedlist',
+                    'quote',
+                    'removeFormat'
+                ],
+                static: true,
+                sticky: true
+            }
+        });
+
+        $('.editable').mediumInsert({
+            editor: editor,
+            addons: {
+                images: {
+                    fileUploadOptions: {
+                        url: url_lang + '/explore/upload/',
+                    }
+                }
+            }
+        });
+
+
         input.onchange = function () {
             if (this.value === 'b') {
                 $('#planb').show();
@@ -659,6 +753,44 @@ $(function () {
         items: 1,
         rtl: true
     });
+
+
+    var postq = $('#postq');
+    if (postq.length > 0) {
+
+        var titleq = 0;
+        var tagsq = 0;
+        var catq = 0;
+        var imagesq = 0;
+        var linksINq = 0;
+        var linksEXq = 0;
+        var textq = 0;
+        var ptagq = 0;
+
+        //title quality
+        $('#post-title').keyup(function () {
+            if ($('#post-title').val().length > 10) {
+                titleq = 5;
+            } else {
+                titleq = 0;
+            }
+            if ($('#post-title').val().length >= 40) {
+                titleq = 15;
+            }
+            qupdate();
+        });
+
+        //tags quality
+        $('.select2-selection__rendered').on('bind', "DOMSubtreeModified", function () {
+            alert('changed');
+        });
+
+
+        function qupdate() {
+            var total = titleq;
+            postq.html(total + '%');
+        }
+    }
 
 });
 
