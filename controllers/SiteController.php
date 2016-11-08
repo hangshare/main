@@ -14,14 +14,18 @@ use app\models\Testonomial;
 use app\models\User;
 use app\models\UserEmail;
 use app\models\UserPayment;
+use app\models\UserSettings;
 use Facebook;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+
 
 /**
  * Site controller
@@ -315,8 +319,146 @@ class SiteController extends Controller
         }
     }
 
+    public function actionAddemail($id)
+    {
+        $userId = base64_decode($id);
+        $model = User::findOne($userId);
+        if ($model === null) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        if ($data = Yii::$app->request->post()) {
+            $model = User::findOne("id = {$userId}");
+            $model->email = $data['email'];
+            $model->username = $this->usernameemail($model->email);
+            $model->save(false);
 
-    public function actionFblogin(){
+            $settings = UserSettings::findOne("userId = {$model->id}");
+            AwsEmail::queueUser($model->id, 'welcome', [
+                '__LINK__' => Yii::$app->urlManager->createAbsoluteUrl(['//u/verify', 'key' => $settings->key])
+            ]);
+
+            if (Yii::$app->language == 'ar')
+                return $this->redirect(['//مواضيع']);
+
+            if (Yii::$app->language == 'en') {
+                Yii::$app->language = 'en';
+                return $this->redirect(['/en/articles']);
+            }
+        }
+        return $this->render('noemail');
+    }
+
+    public function actionFblogin()
+    {
+        $req = Yii::$app->request->post();
+        $req = $req['data'];
+        if (isset($req['id'])) {
+            $email = '';
+            $sqEmail = '';
+            $username = '';
+            if (isset($req['email'])) {
+                $email = strtolower($req['email']);
+                $username = $this->usernameemail($email);
+                $model = User::find()
+                    ->where('email = :email', [':email' => $email])
+                    ->orWhere('scId = :scId', [':scId' => $req['id']])
+                    ->one();
+            } else {
+                $model = User::find()
+                    ->where('scId = :scId', [':scId' => $req['id']])
+                    ->one();
+            }
+
+            if (!$model) {
+                $model = new User;
+                $model->name = $req['name'];
+                $model->scId = (string)$req['id'];
+                $model->accessToken = $_POST['t'];
+                $model->username = $username;
+                $model->password = $req['id'];
+                $model->email = $email;
+                $model->gender = $req['gender'] == 'male' ? 1 : 2;
+                if (isset($req['birthday']))
+                    $model->dob = date('Y-m-d', strtotime($req['birthday']));
+                $model->bio = isset($req['about']) ? $req['about'] : '';
+                $image = strtolower(date('Mds', time()) . uniqid() . '.jpg');
+                $model->image = 'user/' . $image;
+                if(!$model->save(false)){
+//                    var_dump($model->scId);
+//                    var_dump($model->getErrors());
+//                    die();
+                }
+                if (!YII_DEBUG) {
+                    if (!is_dir(Yii::$app->basePath . '/media/user')) {
+                        mkdir(Yii::$app->basePath . '/media/user', 0777, true);
+                    }
+                    $url = "https://graph.facebook.com/{$req['id']}/picture?type=large";
+                    $imagecontent = file_get_contents($url);
+                    $imageFile = Yii::$app->basePath . '/media/' . $model->image;
+                    @file_put_contents($imageFile, $imagecontent);
+                    Yii::$app->customs3->uploadFromPath($imageFile, 'hangshare-media', $model->image);
+                    Yii::$app->imageresize->PatchResize('hangshare-media', $model->image, 'user');
+                }
+            }
+            if (!empty($model->email) && filter_var($model->email, FILTER_VALIDATE_EMAIL)) {
+                $login = new LoginForm();
+                $login->rememberMe = true;
+                $login->username = $model->email;
+                $login->password = $model->password_hash;
+                $status = $login->login();
+                if ($status) {
+                    $respomse = ['status' => true, 'url' => Url::to("/{$model->username}"), 'msg' => Yii::t('app', 'Login success')];
+                } else {
+                    $respomse = ['status' => false, 'url' => Url::to('/login'), 'msg' => Yii::t('app', 'Login failed')];
+                }
+            } else {
+                $id = base64_encode($model->id);
+                $respomse = ['status' => false, 'url' => Url::to('/site/addemail', ['id' => $id]), 'msg' => Yii::t('app', 'No Email failed')];
+            }
+        } else {
+            $respomse = ['status' => false, 'url' => Url::to('/login'), 'msg' => Yii::t('app', 'Login failed no data')];
+        }
+        echo json_encode($respomse);
+    }
+
+    public function usernameemail($email)
+    {
+        $parts = explode("@", $email);
+        $uuesername = $parts[0];
+        $username = str_replace('.', '', $uuesername);
+        $username = str_replace('-', '', $username);
+        $username = str_replace('_', '', $username);
+        $username = str_replace('+', '', $username);
+        $username = str_replace("'", '', $username);
+        $username = str_replace("/", '', $username);
+        $username = str_replace(" ", '', $username);
+        $username = str_replace("@", '', $username);
+        $username = str_replace("!", '', $username);
+        $username = str_replace("'", '', $username);
+        $username = str_replace("!", '', $username);
+        $username = str_replace("@", '', $username);
+        $username = str_replace("#", '', $username);
+        $username = str_replace("$", '', $username);
+        $username = str_replace("%", '', $username);
+        $username = str_replace("^", '', $username);
+        $username = str_replace("&", '', $username);
+        $username = str_replace("*", '', $username);
+        $username = str_replace("{", '', $username);
+        $username = str_replace("}", '', $username);
+        $username = str_replace("(", '', $username);
+        $username = str_replace(")", '', $username);
+
+        if (empty($username)) {
+            $username = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 5) . substr(uniqid(rand(), true), 0, 6);
+        }
+
+        $check = Yii::$app->db->createCommand("SELECT 1 FROM user WHERE username LIKE '{$username}'")->queryOne();
+        if ($check) {
+            $digits = 3;
+            $username = $username . rand(pow(10, $digits - 1), pow(10, $digits) - 1);
+        }
+
+        return $username;
 
     }
 
