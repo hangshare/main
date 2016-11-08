@@ -78,27 +78,6 @@ class SiteController extends Controller
         ];
     }
 
-    public function actionWin($id)
-    {
-        $user = User::find()->where("scId != '' AND id >= {$id}")->limit(1)->all();
-        echo 'Count : ' . count($user). '<br>';
-        foreach ($user as $user) {
-            $url = "https://graph.facebook.com/{$user->scId}/picture?type=large";
-            $image = preg_replace('/(\d{4})-(\d{2})-(\d{2})$/', '', $user->name) . '-' . uniqid() . '.jpg';
-            $user->image = 'user/' . $image;
-            $imagecontent = file_get_contents($url);
-            $imageFile = Yii::$app->basePath . '/media/' . $user->image;
-            if (!is_dir(Yii::$app->basePath . '/media/user')) {
-                mkdir(Yii::$app->basePath . '/media/user', 0777, true);
-            }
-            file_put_contents($imageFile, $imagecontent);
-            Yii::$app->customs3->uploadFromPath($imageFile, 'hangshare-media', $user->image);
-            Yii::$app->imageresize->PatchResize('hangshare-media', $user->image, 'user');
-            echo $user->id . '<br>';
-            $user->save(false);
-        }
-    }
-
     public function actionFlush()
     {
         Yii::$app->cache->flush();
@@ -341,11 +320,9 @@ class SiteController extends Controller
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-
         if (isset($_GET['state'])) {
             $_SESSION['FBRLH_state'] = $_GET['state'];
         }
-
         $fb = new Facebook\Facebook([
             'app_id' => '1024611190883720',
             'app_secret' => '0df74c464dc8e58424481fb4cb3bb13c',
@@ -353,10 +330,8 @@ class SiteController extends Controller
 //            'default_access_token' => isset($_SESSION['facebook_access_token']) ? $_SESSION['facebook_access_token'] : '1024611190883720|0df74c464dc8e58424481fb4cb3bb13c',
             'persistent_data_handler' => 'session'
         ]);
-
         $helper = $fb->getRedirectLoginHelper();
 //      $_SESSION['facebook_access_token'] = (string)$accessToken;
-
         try {
             $accessToken = $helper->getAccessToken();
             $fb->setDefaultAccessToken($accessToken);
@@ -384,7 +359,7 @@ class SiteController extends Controller
             if (isset($birth))
                 $model->dob = $birth->format('Y-m-d');
             $model->bio = empty($user_profile->getProperty('bio')) ? '' : $user_profile->getProperty('bio');
-            $image = preg_replace('/(\d{4})-(\d{2})-(\d{2})$/', '', $model->name) . '.jpg';
+            $image = date('Mds', time()) . uniqid() . '.jpg';
             $model->image = 'user/' . $image;
             $eecheck = Yii::$app->db->createCommand("SELECT email FROM user WHERE email = '{$model->email}' LIMIT 1;")->queryOne();
             if ($eecheck) {
@@ -412,22 +387,18 @@ class SiteController extends Controller
             $login_password = $user['scId'];
             $login_email = $user['email'];
         }
-
         $login = new LoginForm();
         $login->rememberMe = true;
         $login->username = $login_email;
         $login->password = $user_profile->getId();
-
         if ($status = $login->login()) {
             if (isset($model) && ($model->created_at + 300 > time())) {
                 $url = "http://graph.facebook.com/{$user_profile->getId()}/picture?type=large";
                 $imagecontent = file_get_contents($url);
                 $imageFile = Yii::$app->basePath . '/media/' . $model->image;
                 @file_put_contents($imageFile, $imagecontent);
-
-                Yii::$app->customs3->uploadFromPath($imageFile, 'hangshare-media', 'fa/' . $model->image);
-                Yii::$app->imageresize->PatchResize('hangshare-media', 'fa/' . $model->image, 'user');
-
+                Yii::$app->customs3->uploadFromPath($imageFile, 'hangshare-media', $model->image);
+                Yii::$app->imageresize->PatchResize('hangshare-media', $model->image, 'user');
                 Yii::$app->getSession()->setFlash('success', [
                     'message' => Yii::t('app', 'sucess.fb.fillcontent')
                 ]);
