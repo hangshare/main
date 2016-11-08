@@ -407,7 +407,7 @@ class SiteController extends Controller
                 $login->password = $model->password_hash;
                 $status = $login->login();
                 if ($status) {
-                    $respomse = ['status' => true, 'url' => Url::to("/{$model->username}"), 'msg' => Yii::t('app', 'Login success')];
+                    $respomse = ['status' => true, 'url' => Url::to("/user/{$model->username}"), 'msg' => Yii::t('app', 'Login success')];
                 } else {
                     $respomse = ['status' => false, 'url' => Url::to('/login'), 'msg' => Yii::t('app', 'Login failed')];
                 }
