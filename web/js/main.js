@@ -59,7 +59,7 @@ $(function () {
                                     data: {data: response, t: access_token},
                                     dataType: 'JSON',
                                     success: function (data) {
-                                        window.location.href = +url_lang + data.url
+                                        window.location.href = url_lang + data.url
                                     }
                                 });
                             }
