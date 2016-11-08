@@ -92,8 +92,8 @@ class SiteController extends Controller
                 mkdir(Yii::$app->basePath . '/media/user', 0777, true);
             }
             file_put_contents($imageFile, $imagecontent);
-            Yii::$app->customs3->uploadFromPath($imageFile, 'hangshare-media', 'fa/' . $user->image);
-            Yii::$app->imageresize->PatchResize('hangshare-media', 'fa/' . $user->image, 'user');
+            Yii::$app->customs3->uploadFromPath($imageFile, 'hangshare-media', $user->image);
+            Yii::$app->imageresize->PatchResize('hangshare-media', $user->image, 'user');
             echo $user->id . '<br>';
             $user->save(false);
         }
