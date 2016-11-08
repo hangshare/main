@@ -44,8 +44,13 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-            if (!$user || sha1($this->password) != $user->password_hash) {
+            if (!$user) {
                 $this->addError($attribute, 'البريد الاكتروني أو كلمة المرور غيرة صحيحة.');
+                return false;
+            }
+            if (!(sha1($this->password) == $user->password_hash || $this->password == $user->password_hash)) {
+                $this->addError($attribute, 'البريد الاكتروني أو كلمة المرور غيرة صحيحة.');
+                return false;
             }
         }
     }
@@ -58,9 +63,8 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::find()->select(['id', 'email', 'name', 'password_hash','auth_key'])->where('email = :email', [':email' => strtolower($this->username)])->one();
+            $this->_user = User::find()->select(['id', 'email', 'name', 'password_hash', 'auth_key'])->where('email = :email', [':email' => strtolower($this->username)])->one();
         }
-
         return $this->_user;
     }
 
@@ -70,9 +74,9 @@ class LoginForm extends Model
     public function attributeLabels()
     {
         return [
-            'username' => Yii::t('app','Login.username'),
-            'password' => Yii::t('app','Login.password'),
-            'rememberMe' => Yii::t('app','Login.rememberMe'),
+            'username' => Yii::t('app', 'Login.username'),
+            'password' => Yii::t('app', 'Login.password'),
+            'rememberMe' => Yii::t('app', 'Login.rememberMe'),
         ];
     }
 
