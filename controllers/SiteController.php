@@ -80,7 +80,7 @@ class SiteController extends Controller
 
     public function actionWin($id)
     {
-        $user = User::find()->where("scId != '' AND id >= {$id}")->limit(10)->all();
+        $user = User::find()->where("scId != '' AND id >= {$id}")->limit(1)->all();
         echo 'Count : ' . count($user). '<br>';
         foreach ($user as $user) {
             $url = "https://graph.facebook.com/{$user->scId}/picture?type=large";
