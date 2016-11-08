@@ -359,7 +359,7 @@ class SiteController extends Controller
             if (isset($birth))
                 $model->dob = $birth->format('Y-m-d');
             $model->bio = empty($user_profile->getProperty('bio')) ? '' : $user_profile->getProperty('bio');
-            $image = date('Mds', time()) . uniqid() . '.jpg';
+            $image = strtolower(date('Mds', time()) . uniqid() . '.jpg');
             $model->image = 'user/' . $image;
             $eecheck = Yii::$app->db->createCommand("SELECT email FROM user WHERE email = '{$model->email}' LIMIT 1;")->queryOne();
             if ($eecheck) {
@@ -393,12 +393,13 @@ class SiteController extends Controller
         $login->password = $user_profile->getId();
         if ($status = $login->login()) {
             if (isset($model) && ($model->created_at + 300 > time())) {
-                $url = "http://graph.facebook.com/{$user_profile->getId()}/picture?type=large";
+                $url = "https://graph.facebook.com/{$user_profile->getId()}/picture?type=large";
                 $imagecontent = file_get_contents($url);
                 $imageFile = Yii::$app->basePath . '/media/' . $model->image;
                 @file_put_contents($imageFile, $imagecontent);
                 Yii::$app->customs3->uploadFromPath($imageFile, 'hangshare-media', $model->image);
                 Yii::$app->imageresize->PatchResize('hangshare-media', $model->image, 'user');
+
                 Yii::$app->getSession()->setFlash('success', [
                     'message' => Yii::t('app', 'sucess.fb.fillcontent')
                 ]);
@@ -412,7 +413,6 @@ class SiteController extends Controller
             ]);
             return $this->redirect(['//login']);
         }
-
     }
 
     public function actionLogin()
