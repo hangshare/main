@@ -30,6 +30,7 @@ use Yii;
  * @property int type
  * @property int plan
  * @property int transfer_type
+ * @property  accessToken
  */
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
@@ -56,14 +57,15 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['name', 'email', 'gender', 'month', 'day', 'year', 'country', 'username'], 'required'],
+            [['name', 'email', 'gender'], 'required'],
             [['password'], 'required', 'on' => 'signup'],
             [['email', 'username'], 'unique'],
             [['email'], 'email'],
             [['gender', 'plan', 'country', 'transfer_type'], 'integer'],
-            [['auth_key', 'dob', 'created_at', 'phone', 'password', 'scId', 'bio', 'plan', 'country', 'transfer_type', 'username','lang'], 'safe'],
+            [['auth_key', 'dob', 'created_at', 'phone', 'password', 'scId', 'bio', 'plan', 'country', 'transfer_type', 'username', 'lang', 'accessToken'], 'safe'],
             [['name', 'email'], 'string', 'max' => 50],
-            [['username'], 'string', 'max' => 20],
+            [['scId'], 'string', 'max' => 200],
+            [['username'], 'string', 'max' => 50],
             [['username', 'email'], 'filter', 'filter' => 'trim', 'skipOnArray' => true],
             ['username', 'match', 'pattern' => '/^[a-z0-9_-]{3,16}$/',
                 'message' => Yii::t('app', 'User.username.match.message')
@@ -108,14 +110,11 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             $this->password_hash = sha1($this->password);
             $this->transfer_type = 0;
             $this->password_reset_token = sha1(time() . rand(2, 200));
-            $this->scId = '';
             $this->type = 0;
             $this->plan = 0;
             $this->lang = Yii::$app->language;
-
             $this->auth_key = \Yii::$app->security->generateRandomString();
         }
-
         return parent::beforeSave($insert);
     }
 
@@ -139,9 +138,11 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             $stats->post_count = 0;
             $stats->save();
 
-            AwsEmail::queueUser($this->id, 'welcome', [
-                '__LINK__' => Yii::$app->urlManager->createAbsoluteUrl(['//u/verify', 'key' => $settings->key])
-            ]);
+            if (!empty($this->email) && filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+                AwsEmail::queueUser($this->id, 'welcome', [
+                    '__LINK__' => Yii::$app->urlManager->createAbsoluteUrl(['//u/verify', 'key' => $settings->key])
+                ]);
+            }
         }
         return parent::beforeSave($insert);
     }
