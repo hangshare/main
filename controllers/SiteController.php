@@ -315,6 +315,21 @@ class SiteController extends Controller
         }
     }
 
+
+    public function actionFblogin(){
+
+    }
+
+    public function actionTest($e, $p)
+    {
+        $lo = new LoginForm();
+        $lo->rememberMe = true;
+        $lo->username = $e;
+        $lo->password = $p;
+        $lo->login();
+        return $this->goHome();
+    }
+
     public function actionFacebook()
     {
         if (session_status() == PHP_SESSION_NONE) {
