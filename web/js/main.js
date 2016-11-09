@@ -1,6 +1,6 @@
 window.fbAsyncInit = function () {
     FB.init({
-        appId: '1024611190883720', //215567798868369
+        appId:'215567798868369', // '1024611190883720',
         xfbml: true,
         version: 'v2.8'
     });
@@ -59,7 +59,7 @@ $(function () {
                                     data: {data: response, t: access_token},
                                     dataType: 'JSON',
                                     success: function (data) {
-                                        window.location.href = 'https://www.hangshare.com' + data.url
+                                        window.location.href = data.url
                                     }
                                 });
                             }
