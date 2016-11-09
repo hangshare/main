@@ -43,7 +43,7 @@ class AppAsset extends AssetBundle
             //old
             $this->js[] = 'css/editor/js/froala_editor.min.js';
             $this->js[] = 'css/editor/js/froala_editor.min.js';
-            $this->js[] = 'css/editor/js/langs/ar.js';
+            $this->js[] = 'css/editor/js/langs/ar.min.js';
             $this->js[] = 'css/editor/js/plugins/char_counter.min.js';
             $this->js[] = 'css/editor/js/plugins/video.min.js';
             $this->css[] = 'css/font-awesome/css/font-awesome.min.css';
