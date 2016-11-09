@@ -321,7 +321,6 @@ class SiteController extends Controller
 
     public function actionAddemail($id){
         $userId = base64_decode($id);
-        die($userId);
         $model = User::findOne($userId);
         if ($model === null) {
             throw new NotFoundHttpException('The requested page does not exist.');
