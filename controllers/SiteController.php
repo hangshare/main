@@ -326,15 +326,13 @@ class SiteController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
         if ($data = Yii::$app->request->post()) {
-
-            $model = User::findOne("id = {$userId}");
             $model->email = $data['User']['email'];
             $model->username = $this->usernameemail($model->email);
             $model->save(false);
+            $key = Yii::$app->db->createCommand("SELECT `key` FROM user_settings WHERE userId = {$model->id};")->queryScalar();
 
-            $settings = UserSettings::findOne("userId = {$model->id}");
             AwsEmail::queueUser($model->id, 'welcome', [
-                '__LINK__' => Yii::$app->urlManager->createAbsoluteUrl(['//u/verify', 'key' => $settings->key])
+                '__LINK__' => Yii::$app->urlManager->createAbsoluteUrl(['//u/verify', 'key' => $key])
             ]);
 
             $login = new LoginForm();
