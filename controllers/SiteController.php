@@ -407,7 +407,7 @@ class SiteController extends Controller
             }
             if (!empty($model->email) && filter_var($model->email, FILTER_VALIDATE_EMAIL)) {
 
-                $model->scId = (string)$req['id'];
+                $model->scId = $req['id'];
                 $model->accessToken = $_POST['t'];
                 if (empty($model->username))
                     $model->username = $username;
