@@ -242,6 +242,7 @@ $articlesurl = Yii::t('app', 'articles-url');
                                 Html::a(Yii::t('app', 'Go Premium'), [Yii::$app->user->isGuest ? '//register/' : 'site/plangold'], [
                                     'class' => 'btn btn-default',
                                     'style' => 'background-color: #ffd700;border: 0 none;border-radius: 0;color: #fff;text-transform: uppercase;',
+                                    'rel' => 'nofollow',
                                     'data' => [
                                         'method' => 'post',
                                         'params' => ['plan' => 'b'],
@@ -291,22 +292,22 @@ $articlesurl = Yii::t('app', 'articles-url');
 
 
 <script type="text/javascript">
-        window.$zopim || (function (d, s) {
-            var z = $zopim = function (c) {
-                z._.push(c)
-            }, $ = z.s =
-                d.createElement(s), e = d.getElementsByTagName(s)[0];
-            z.set = function (o) {
-                z.set._.push(o)
-            };
-            z._ = [];
-            z.set._ = [];
-            $.async = !0;
-            $.setAttribute('charset', 'utf-8');
-            $.src = '//v2.zopim.com/?4Djyp0FocsEjBAeTYUm1jZQhm9JE1bH3';
-            z.t = +new Date;
-            $.type = 'text/javascript';
-            e.parentNode.insertBefore($, e)
-        })(document, 'script');
+    window.$zopim || (function (d, s) {
+        var z = $zopim = function (c) {
+            z._.push(c)
+        }, $ = z.s =
+            d.createElement(s), e = d.getElementsByTagName(s)[0];
+        z.set = function (o) {
+            z.set._.push(o)
+        };
+        z._ = [];
+        z.set._ = [];
+        $.async = !0;
+        $.setAttribute('charset', 'utf-8');
+        $.src = '//v2.zopim.com/?4Djyp0FocsEjBAeTYUm1jZQhm9JE1bH3';
+        z.t = +new Date;
+        $.type = 'text/javascript';
+        e.parentNode.insertBefore($, e)
+    })(document, 'script');
 </script>
 <!--End of Zopim Live Chat Script-->
