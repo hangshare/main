@@ -16,7 +16,13 @@ $model = new User;
                     <?=
                     Html::submitButton(Yii::t('app', 'Add Email'), [
                         'class' => 'btn btn-primary res-full',
-                        'name' => 'login-button'
+                        'name' => 'login-button',
+                        'onClick' => "ga('send', {
+                            hitType: 'event',
+                            eventCategory: 'NO email',
+                            eventAction: 'noemail',
+                            eventLabel: 'noemail'
+                        });",
                     ]) ?>
                 </div>
                 <?php ActiveForm::end(); ?>
