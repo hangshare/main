@@ -319,7 +319,8 @@ class SiteController extends Controller
         }
     }
 
-    public function actionAddemail($id){
+    public function actionAddemail($id)
+    {
         $userId = base64_decode($id);
         $model = User::findOne($userId);
         if ($model === null) {
@@ -405,13 +406,22 @@ class SiteController extends Controller
                 }
             }
             if (!empty($model->email) && filter_var($model->email, FILTER_VALIDATE_EMAIL)) {
+
+                $model->scId = (string)$req['id'];
+                $model->accessToken = $_POST['t'];
+                if (empty($model->username))
+                    $model->username = $username;
+                $model->save(false);
+
                 $login = new LoginForm();
                 $login->rememberMe = true;
                 $login->username = $model->email;
                 $login->password = $model->password_hash;
                 $status = $login->login();
+
+                $uuId= empty($model->username) ? $model->id : $model->username;
                 if ($status) {
-                    $respomse = ['status' => true, 'url' => Yii::$app->urlManager->createUrl(['/user/view', 'id' => $model->username]), 'msg' => Yii::t('app', 'Login success')];
+                    $respomse = ['status' => true, 'url' => Yii::$app->urlManager->createUrl(['/user/view', 'id' => $uuId]), 'msg' => Yii::t('app', 'Login success')];
                 } else {
                     $respomse = ['status' => false, 'url' => Yii::$app->urlManager->createUrl(['//login']), 'msg' => Yii::t('app', 'Login failed')];
                 }
