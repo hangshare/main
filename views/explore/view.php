@@ -262,13 +262,18 @@ endif; ?>
                style="color: #ccc; position: relative; top: -10px"><i
                     class="glyphicon glyphicon-remove-sign"></i></a>
             <h4 class="text-center margin-0"><?= Yii::t('app', 'Share Posts and get instant profit') ?></h4>
-            <a onClick="ga('send', {
-                                    hitType: 'event',
-                                    eventCategory: 'Sign Up',
-                                    eventAction: 'Facebook',
-                                    eventLabel: 'Sign Up Page'
-                                });" href="<?= $fUrl; ?>" class="btn btn-primary" style="background-color: #3b5998;height: 30px; margin: 15px auto;
-    width: 50%;">
+<!--            <a onClick="ga('send', {-->
+<!--                                    hitType: 'event',-->
+<!--                                    eventCategory: 'Sign Up',-->
+<!--                                    eventAction: 'Facebook',-->
+<!--                                    eventLabel: 'Sign Up Page'-->
+<!--                                });" href="--><?//= $fUrl; ?><!--" class="btn btn-primary" style="background-color: #3b5998;height: 30px; margin: 15px auto;-->
+<!--    width: 50%;">-->
+<!--                <i class="fa fa-fw fa-facebook pull-left signup-slide-fb"></i>-->
+<!--                <span>--><?//= Yii::t('app', 'Sign up NOW! Using your Facebook Account') ?><!--</span>-->
+<!--            </a>-->
+
+            <a onClick="ga('send', {hitType: 'event',eventCategory: 'Sign Up',eventAction: 'Facebook',eventLabel: 'Blog View'});" href="javascript:void(0);" rel="nofollow" class="btn btn-primary" style="background-color: #3b5998;height: 30px; margin: 15px auto;width: 50%;">
                 <i class="fa fa-fw fa-facebook pull-left signup-slide-fb"></i>
                 <span><?= Yii::t('app', 'Sign up NOW! Using your Facebook Account') ?></span>
             </a>
