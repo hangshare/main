@@ -383,7 +383,7 @@ class SiteController extends Controller
                 $model->bio = isset($req['about']) ? $req['about'] : '';
                 $image = strtolower(date('Mds', time()) . uniqid() . '.jpg');
                 $model->image = 'user/' . $image;
-                if(!$model->save(false)){
+                if (!$model->save(false)) {
 //                    var_dump($model->scId);
 //                    var_dump($model->getErrors());
 //                    die();
@@ -407,16 +407,16 @@ class SiteController extends Controller
                 $login->password = $model->password_hash;
                 $status = $login->login();
                 if ($status) {
-                    $respomse = ['status' => true, 'url' => Url::to("/user/{$model->username}"), 'msg' => Yii::t('app', 'Login success')];
+                    $respomse = ['status' => true, 'url' => Yii::$app->urlManager->createUrl(['/user/view', 'id' => $model->username]), 'msg' => Yii::t('app', 'Login success')];
                 } else {
-                    $respomse = ['status' => false, 'url' => Url::to('/login'), 'msg' => Yii::t('app', 'Login failed')];
+                    $respomse = ['status' => false, 'url' => Yii::$app->urlManager->createUrl(['//login']), 'msg' => Yii::t('app', 'Login failed')];
                 }
             } else {
                 $id = base64_encode($model->id);
-                $respomse = ['status' => false, 'url' => Url::to('/site/addemail', ['id' => $id]), 'msg' => Yii::t('app', 'No Email failed')];
+                $respomse = ['status' => false, 'url' => Yii::$app->urlManager->createUrl(['//site/addemail', 'id' => $id]), 'msg' => Yii::t('app', 'No Email failed')];
             }
         } else {
-            $respomse = ['status' => false, 'url' => Url::to('/login'), 'msg' => Yii::t('app', 'Login failed no data')];
+            $respomse = ['status' => false, 'url' => Yii::$app->urlManager->createUrl(['//login']), 'msg' => Yii::t('app', 'Login failed no data')];
         }
         echo json_encode($respomse);
     }
