@@ -337,6 +337,12 @@ class SiteController extends Controller
                 '__LINK__' => Yii::$app->urlManager->createAbsoluteUrl(['//u/verify', 'key' => $settings->key])
             ]);
 
+            $login = new LoginForm();
+            $login->rememberMe = true;
+            $login->username = $model->email;
+            $login->password = $model->password_hash;
+            $login->login();
+
             if (Yii::$app->language == 'ar')
                 return $this->redirect(['//مواضيع']);
 
