@@ -280,15 +280,7 @@ endif; ?>
         </div>
     </div>
 <?php endif; ?>
-
-
-
-
-<?php
-$img = Yii::$app->imageresize->original($model->cover);
-?>
-
-
+<?php $img = Yii::$app->imageresize->original($model->cover); ?>
 <script type="application/ld+json">
 {
   "@context": "http://schema.org",
