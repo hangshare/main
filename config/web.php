@@ -82,6 +82,7 @@ $config = [
             'showScriptName' => false,
             'suffix' => '/',
             'rules' => [
+
                 '<language:en>/' => '/site/index',
                 '<language:en>/articles' => 'explore/all',
                 '<language:en>/articles/<category:.*?>' => 'explore/category',
@@ -99,7 +100,7 @@ $config = [
                 '<language:en>/u/gold' => 'user/gold',
                 '<language:en>/u/request' => 'user/request',
                 '<language:en>/u/missing' => 'user/missing',
-                '<language:en>/u/suspended'=>'user/suspended',
+                '<language:en>/u/suspended' => 'user/suspended',
                 '<language:en>/u/success/<id:\d+>' => 'user/success',
                 '<language:en>/faq' => 'faq/index',
                 '<language:en>/sitemap' => 'site/sitemap',
@@ -111,6 +112,7 @@ $config = [
                 '<language:en>/<controller>/<action>' => '<controller>/<action>',
                 '<language:en>/<controller>/<action>/<id:\d+>' => '<controller>/<action>',
                 '<language:en>/<slug:.*?>' => 'explore/view',
+
                 '/' => 'site/index',
                 'مواضيع' => 'explore/all',
                 'مواضيع/<category:.*?>' => 'explore/category',
@@ -128,9 +130,10 @@ $config = [
                 'u/gold' => 'user/gold',
                 'u/request' => 'user/request',
                 'u/missing' => 'user/missing',
-                'u/suspended'=>'user/suspended',
+                'u/suspended' => 'user/suspended',
                 'u/success/<id:\d+>' => 'user/success',
                 'explore/<id:\d+>' => 'explore/red',
+
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
@@ -138,6 +141,7 @@ $config = [
                 '<controller:\w+>/<id:\d+>/<title:[^*]+>' => '<controller>/view',
                 '<controller:\w+>s' => '<controller>/index',
                 'الأسئلة-الشائعة/<category:[^*]+>' => 'faq/index',
+                'addemail/<id:.*?>'=>'site/addemail',
                 'الأسئلة-الشائعة' => 'faq/index',
                 'خريطة-الموقع' => 'site/sitemap',
                 'تواصل-معنا' => 'site/contact',
@@ -147,6 +151,7 @@ $config = [
                 'reset-password' => 'site/resetpassword',
                 'sitemap.xml' => 'site/sitemapxml',
                 '<slug:.*?>' => 'explore/view',
+
             ],
         ],
         'request' => [
@@ -155,10 +160,10 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\MemCache',
             'servers' => [
-                ['host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 60],
-                ['host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 40],
-//                ['host' => 'localhost', 'port' => 11211, 'weight' => 60],
-//                ['host' => 'localhost', 'port' => 11211, 'weight' => 40],
+//                ['host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 60],
+//                ['host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 40],
+                ['host' => 'localhost', 'port' => 11211, 'weight' => 60],
+                ['host' => 'localhost', 'port' => 11211, 'weight' => 40],
             ],
         ],
         'session' => [
