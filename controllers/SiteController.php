@@ -326,8 +326,9 @@ class SiteController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
         if ($data = Yii::$app->request->post()) {
+
             $model = User::findOne("id = {$userId}");
-            $model->email = $data['email'];
+            $model->email = $data['User']['email'];
             $model->username = $this->usernameemail($model->email);
             $model->save(false);
 
