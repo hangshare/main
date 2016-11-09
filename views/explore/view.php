@@ -273,7 +273,7 @@ endif; ?>
 <!--                <span>--><?//= Yii::t('app', 'Sign up NOW! Using your Facebook Account') ?><!--</span>-->
 <!--            </a>-->
 
-            <a onClick="ga('send', {hitType: 'event',eventCategory: 'Sign Up',eventAction: 'Facebook',eventLabel: 'Blog View'});" href="javascript:void(0);" rel="nofollow" class="btn btn-primary" style="background-color: #3b5998;height: 30px; margin: 15px auto;width: 50%;">
+            <a onClick="ga('send', {hitType: 'event',eventCategory: 'Sign Up',eventAction: 'Facebook',eventLabel: 'Blog View'});" href="javascript:void(0);" rel="nofollow" class="btn btn-primary fb-login" style="background-color: #3b5998;height: 30px; margin: 15px auto;width: 50%;">
                 <i class="fa fa-fw fa-facebook pull-left signup-slide-fb"></i>
                 <span><?= Yii::t('app', 'Sign up NOW! Using your Facebook Account') ?></span>
             </a>
