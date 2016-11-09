@@ -319,8 +319,7 @@ class SiteController extends Controller
         }
     }
 
-    public function actionAddemail($id)
-    {
+    public function actionAddemail($id){
         $userId = base64_decode($id);
         $model = User::findOne($userId);
         if ($model === null) {
