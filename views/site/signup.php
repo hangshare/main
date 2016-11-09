@@ -4,54 +4,31 @@
     }
 </style>
 <?php
-
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Country;
-
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \app\models\SignupForm */
-
 $this->title = Yii::t('app', 'New Account');
 $this->params['breadcrumbs'][] = $this->title;
-
 $thump = Yii::$app->imageresize->thump($model->image, 100, 80, 'crop');
-
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
-$fb = new Facebook\Facebook([
-    'app_id' => '1024611190883720',
-    'app_secret' => '0df74c464dc8e58424481fb4cb3bb13c',
-    'default_graph_version' => 'v2.4',
-    'persistent_data_handler' => 'session'
-]);
-$helper = $fb->getRedirectLoginHelper();
-
-$params = ['scope' => 'email,user_about_me'];
-$fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params);
-
-
 ?>
 <div class="container m-t-25">
     <div class="center w-600">
         <div class="white-box">
             <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
-            <?php if (!isset($_GET['id'])) : ?>
+
+            <?php if (!isset($_GET['id']) && ($plan != 'b')) : ?>
                 <div class="center text-center">
-                    <a onClick="ga('send', {
-                                    hitType: 'event',
-                                    eventCategory: 'Sign Up',
-                                    eventAction: 'Facebook',
-                                    eventLabel: 'Sign Up Page'
-                                });" href="<?= $fUrl; ?>" rel="nofollow"
-                       class="btn btn-primary btn-block fb-btn">
+                    <a onClick="ga('send', {hitType: 'event',eventCategory: 'Sign Up',eventAction: 'Facebook',eventLabel: 'Sign Up Page'});"
+                       href="javascript:void(0);" rel="nofollow" class="btn btn-primary fb-login"
+                       style="background-color: #3b5998;">
                         <i class="fa fa-fw fa-facebook pull-left fb-icon"></i>
                         <span class="pull-left"><?= Yii::t('app', 'Grab your data from your Facebook account') ?></span>
                     </a>
+
                 </div>
             <?php endif; ?>
         </div>
