@@ -77,15 +77,15 @@ foreach ($model->postBodies as $data) {
                     $catData[$menuData->title] = $mainMenu[$menuData->id];
                 }
             }
-            echo Select2::widget([
-                'name' => 'Post[categories]',
-                'value' => $model->categories,
-                'data' => $catData,
-                'options' => ['multiple' => true, 'placeholder' => Yii::t('app', 'Categories')],
-                'pluginOptions' => [
-                    'tags' => false,
-                ],
-            ]);
+//            echo Select2::widget([
+//                'name' => 'Post[categories]',
+//                'value' => $model->categories,
+//                'data' => $catData,
+//                'options' => ['multiple' => true, 'placeholder' => Yii::t('app', 'Categories')],
+//                'pluginOptions' => [
+//                    'tags' => false,
+//                ],
+//            ]);
             ?>
             <br>
             <?php
@@ -102,20 +102,20 @@ foreach ($model->postBodies as $data) {
             if($tags_string){
                 $tags_sql = "OR id IN ({$tags_string})";
             }
-            echo Select2::widget([
-                'name' => 'Post[keywords]',
-                'value' => $tags,
-                'data' => ArrayHelper::map(Tags::find()
-                    ->where("(published = 1 AND lang = '" . Yii::$app->language . "' ) $tags_sql")
-                    ->select('id, name')
-                    ->orderBy('name')
-                    ->all(), 'id', 'name'),
-                'options' => ['multiple' => true, 'placeholder' => Yii::t('app', 'add tags')],
-                'pluginOptions' => [
-                    'tags' => true,
-                    'maximumInputLength' => 30
-                ],
-            ]);
+//            echo Select2::widget([
+//                'name' => 'Post[keywords]',
+//                'value' => $tags,
+//                'data' => ArrayHelper::map(Tags::find()
+//                    ->where("(published = 1 AND lang = '" . Yii::$app->language . "' ) $tags_sql")
+//                    ->select('id, name')
+//                    ->orderBy('name')
+//                    ->all(), 'id', 'name'),
+//                'options' => ['multiple' => true, 'placeholder' => Yii::t('app', 'add tags')],
+//                'pluginOptions' => [
+//                    'tags' => true,
+//                    'maximumInputLength' => 30
+//                ],
+//            ]);
             ?>
             <div class="form-group m-t-25">
                 <?php
