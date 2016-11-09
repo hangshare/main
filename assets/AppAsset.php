@@ -39,16 +39,35 @@ class AppAsset extends AssetBundle
         $assests = Yii::$app->assetManager;
 
         if (\Yii::$app->controller->action->id == 'post') {
-            $this->js[] = 'css/editor/js/froala_editor.min.js';
-            $this->js[] = 'css/editor/js/plugins/char_counter.min.js';
-            $this->js[] = 'css/editor/js/plugins/video.min.js';
+            $this->js[] = 'medium/js/jquery.ui.widget.js';
+            $this->js[] = 'medium/js/jquery.iframe-transport.js';
+            $this->js[] = 'medium/js/jquery.fileupload.js';
+            $this->js[] = 'medium/js/medium-editor.js';
+            $this->js[] = 'medium/js/medium-editor-handsontable.js';
+            $this->js[] = 'medium/js/handlebars.runtime.min.js';
+            $this->js[] = 'medium/js/jquery-sortable-min.js';
+            $this->js[] = 'medium/js/jquery.cycle2.min.js';
+            $this->js[] = 'medium/js/jquery.cycle2.center.min.js';
+
+
+            $this->js[] = 'medium/js/medium-editor-insert-plugin.js';
+
+            $this->css [] = "medium/css/medium-editor.css";
+            $this->css [] = "medium/css/themes/default.min.css";
+            $this->css [] = "medium/css/medium-editor-insert-plugin.min.css";
+
+
+
+//            $this->js[] = 'css/editor/js/froala_editor.min.js';
+//            $this->js[] = 'css/editor/js/plugins/char_counter.min.js';
+//            $this->js[] = 'css/editor/js/plugins/video.min.js';
             if (Yii::$app->language == 'ar') {
-                $this->js[] = 'css/editor/js/langs/froala_editor_ar.js';
+//                $this->js[] = 'css/editor/js/langs/froala_editor_ar.js';
                 $this->js[] = 'https://s3.amazonaws.com/hangshare.static/assets/ar.min.js';
             }
             $this->css [] = 'css/font-awesome/css/font-awesome.min.css';
-            $this->css [] = "css/editor/css/froala_editor.min.css";
-            $this->css [] = "css/editor/css/froala_style.min.css";
+//            $this->css [] = "css/editor/css/froala_editor.min.css";
+//            $this->css [] = "css/editor/css/froala_style.min.css";
         }
 
         if (Yii::$app->language == 'en') {
@@ -70,6 +89,6 @@ class AppAsset extends AssetBundle
         $this->css [] = "owl/owl.carousel.css";
         $this->css [] = "owl/owl.theme.css";
         $this->js[] = "owl/owl.carousel.js";
-        $this->js[] = YII_DEBUG ? 'js/main.js' : '/js/main.1.1.min.js';
+        $this->js[] = YII_DEBUG ? 'js/main.js' : '/js/main.1.2.min.js';
     }
 }
