@@ -1,49 +1,21 @@
-<IfModule mod_headers.c>
-    RewriteCond "%{HTTP:Accept-encoding}" "gzip"
-    RewriteCond "%{REQUEST_FILENAME}\.gz" -s
-    RewriteRule "^(.*)\.css" "$1\.css\.gz" [QSA]
-    RewriteCond "%{HTTP:Accept-encoding}" "gzip"
-    RewriteCond "%{REQUEST_FILENAME}\.gz" -s
-    RewriteRule "^(.*)\.js" "$1\.js\.gz" [QSA]
-    RewriteRule "\.css\.gz$" "-" [T=text/css,E=no-gzip:1]
-    RewriteRule "\.js\.gz$" "-" [T=text/javascript,E=no-gzip:1]
-    <FilesMatch "(\.js\.gz|\.css\.gz)$">
-      Header append Content-Encoding gzip
-      Header append Vary Accept-Encoding
-    </FilesMatch>
-</IfModule>
-<IfModule mod_expires.c>
-    ExpiresActive On
-    ExpiresByType image/jpg "access 1 year"
-    ExpiresByType image/jpeg "access 1 year"
-    ExpiresByType image/gif "access 1 year"
-    ExpiresByType image/png "access 1 year"
-    ExpiresByType text/css "access 15 days"
-    ExpiresByType application/pdf "access 1 month"
-    ExpiresByType text/x-javascript "access 1 month"
-    ExpiresByType text/javascript "access 1 month"
-    ExpiresByType image/x-icon "access 1 year"
-    ExpiresDefault "access 8 days"
-</IfModule>
-
 AddDefaultCharset UTF-8
 RewriteEngine on
-RewriteBase /
+#RewriteBase /
 
-RewriteRule sitemap.xml site/sitemapxml/$1 [L]
-
-
-RewriteCond %{REQUEST_URI}  !\.(php|html?|gif|GIF|css|CSS|js|JS|SVG|svg|jpg|JPG|jpeg|woff2|ico|ICO|ttf|TTF|JPEG|png|PNG|txt|bmp|BMP|TXT|xml|XML)$
-RewriteRule ^(.*)([^/])$ https://%{HTTP_HOST}/$1$2/ [L,R=301]
-
- #Ensure www.
-RewriteCond %{HTTP_HOST} !^www\. [NC]
-RewriteRule !/elbcheck.html https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-# Ensure https
-RewriteCond %{HTTP:X-Forwarded-Proto} !https
-RewriteCond %{HTTPS} off
-RewriteRule !/elbcheck.html https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#RewriteRule sitemap.xml site/sitemapxml/$1 [L]
+#
+#
+#RewriteCond %{REQUEST_URI}  !\.(php|html?|gif|GIF|css|CSS|js|JS|SVG|svg|jpg|JPG|jpeg|woff2|ico|ICO|ttf|TTF|JPEG|png|PNG|txt|bmp|BMP|TXT|xml|XML)$
+#RewriteRule ^(.*)([^/])$ https://%{HTTP_HOST}/$1$2/ [L,R=301]
+#
+# #Ensure www.
+#RewriteCond %{HTTP_HOST} !^www\. [NC]
+#RewriteRule !/elbcheck.html https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#
+## Ensure https
+#RewriteCond %{HTTP:X-Forwarded-Proto} !https
+#RewriteCond %{HTTPS} off
+#RewriteRule !/elbcheck.html https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 
 RewriteCond %{REQUEST_FILENAME} !-f

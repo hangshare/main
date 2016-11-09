@@ -93,10 +93,10 @@ class Init extends Component
 
     protected function isHome()
     {
-        $controller = Yii::$app->controller;
-        $default_controller = Yii::$app->defaultRoute;
-        $isHome = (($controller->id === $default_controller) && ($controller->action->id === $controller->defaultAction)) ? true : false;
-        return $isHome;
+//        $controller = Yii::$app->controller;
+//        $default_controller = Yii::$app->defaultRoute;
+//        $isHome = (($controller->id === $default_controller) && ($controller->action->id === $controller->defaultAction)) ? true : false;
+//        return $isHome;
     }
 
     public function get_string_between($string, $start, $end)

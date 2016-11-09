@@ -59,6 +59,11 @@ $canonical = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
         ga('create', 'UA-68983967-1', 'auto');
         ga('send', 'pageview');
+        <?php if (!Yii::$app->user->isGuest): ?>
+            var dimensionValue = '<?= empty(Yii::$app->user->username) ? Yii::$app->user->id : Yii::$app->user->username ?>';
+            ga('set', 'dimension1', dimensionValue);
+            ga('set', 'userId', '<?= empty(Yii::$app->user->username) ? Yii::$app->user->id : Yii::$app->user->username ?>');
+        <?php endif; ?>
     </script>
     <!-- Facebook Pixel Code -->
     <script>
