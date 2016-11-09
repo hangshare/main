@@ -39,6 +39,19 @@ class AppAsset extends AssetBundle
         $assests = Yii::$app->assetManager;
 
         if (\Yii::$app->controller->action->id == 'post') {
+
+            //old
+            $this->js[] = 'css/editor/js/froala_editor.min.js';
+            $this->js[] = 'css/editor/js/froala_editor.min.js';
+            $this->js[] = 'css/editor/js/langs/ar.js';
+            $this->js[] = 'css/editor/js/plugins/char_counter.min.js';
+            $this->js[] = 'css/editor/js/plugins/video.min.js';
+            $this->css[] = 'css/font-awesome/css/font-awesome.min.css';
+            $this->css[] = "css/editor/css/froala_editor.min.css";
+            $this->css[] = "css/editor/css/froala_style.min.css";
+            //old
+
+
             $this->js[] = 'medium/js/jquery.ui.widget.js';
             $this->js[] = 'medium/js/jquery.iframe-transport.js';
             $this->js[] = 'medium/js/jquery.fileupload.js';
@@ -55,7 +68,6 @@ class AppAsset extends AssetBundle
             $this->css [] = "medium/css/medium-editor.css";
             $this->css [] = "medium/css/themes/default.min.css";
             $this->css [] = "medium/css/medium-editor-insert-plugin.min.css";
-
 
 
 //            $this->js[] = 'css/editor/js/froala_editor.min.js';
