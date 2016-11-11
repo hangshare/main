@@ -26,6 +26,15 @@ class Init extends Component
             exit(0);
         }
 
+        if (strpos(Yii::$app->request->url, 'explore/index') !== false) {
+            $url = Yii::$app->urlManager->createUrl(["//مواضيع"]);
+            header("HTTP/1.1 301 Moved Permanently");
+            header("Location: {$url}");
+            exit(0);
+        }
+
+
+
         $this->language();
 
         if (strpos(Yii::$app->request->url, 'explore/') !== false && strpos(Yii::$app->request->url, 'title') !== false) {
