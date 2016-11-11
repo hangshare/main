@@ -160,10 +160,10 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\MemCache',
             'servers' => [
-//                ['host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 60],
-//                ['host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 40],
-                ['host' => 'localhost', 'port' => 11211, 'weight' => 60],
-                ['host' => 'localhost', 'port' => 11211, 'weight' => 40],
+               ['host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 60],
+              ['host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 40],
+         //       ['host' => 'localhost', 'port' => 11211, 'weight' => 60],
+         //       ['host' => 'localhost', 'port' => 11211, 'weight' => 40],
             ],
         ],
         'session' => [
@@ -181,7 +181,7 @@ $config = [
             'errorAction' => 'site/error',
         ],
         'log' => [
-            'traceLevel' => 3, //YII_DEBUG ? 3 : 0,
+            'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
