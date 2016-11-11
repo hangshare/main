@@ -19,19 +19,15 @@ class Init extends Component
             }
         }
 
+        if (strpos(Yii::$app->request->url, 'tag=') !== false) {
+            $url = Yii::$app->urlManager->createUrl(["//tags/{$_GET['tag']}"]);
+            header("HTTP/1.1 301 Moved Permanently");
+            header("Location: {$url}");
+            exit(0);
+        }
+
         $this->language();
 
-//        if (!Yii::$app->user->isGuest) {
-//            if(strpos(Yii::$app->request->url, 'missing/') === false) {
-//                if (!filter_var(Yii::$app->user->identity->email, FILTER_VALIDATE_EMAIL)) {
-//                    header("Location: https://www.hangshare.com/u/missing/");
-//                    exit(0);
-//                }
-//            }
-//        }
-        if (strpos(Yii::$app->request->url, 'tag=') !== false) {
-            Yii::$app->getResponse()->redirect(["//tags/{$_GET['tag']}/"], true, 301);
-        }
         if (strpos(Yii::$app->request->url, 'explore/') !== false && strpos(Yii::$app->request->url, 'title') !== false) {
             $id = $this->get_string_between(Yii::$app->request->url, 'id=', '&');
             if (!is_numeric($id)) {
