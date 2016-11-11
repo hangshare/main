@@ -29,6 +29,9 @@ class Init extends Component
 //                }
 //            }
 //        }
+        if (strpos(Yii::$app->request->url, 'tag=') !== false ) {
+            Yii::$app->getResponse()->redirect(["//tags/{$_GET['tag']}/"]);
+        }
         if (strpos(Yii::$app->request->url, 'explore/') !== false && strpos(Yii::$app->request->url, 'title') !== false) {
             $id = $this->get_string_between(Yii::$app->request->url, 'id=', '&');
             if (!is_numeric($id)) {
