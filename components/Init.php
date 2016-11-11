@@ -14,7 +14,7 @@ class Init extends Component
     {
         if (!Yii::$app->user->isGuest) {
             if (Yii::$app->user->identity->deleted) {
-                if (strpos(Yii::$app->request->url,'u/suspended') === false)
+                if (strpos(Yii::$app->request->url, 'u/suspended') === false)
                     Yii::$app->getResponse()->redirect(['//u/suspended']);
             }
         }
@@ -29,8 +29,8 @@ class Init extends Component
 //                }
 //            }
 //        }
-        if (strpos(Yii::$app->request->url, 'tag=') !== false ) {
-            Yii::$app->getResponse()->redirect(["//tags/{$_GET['tag']}/"]);
+        if (strpos(Yii::$app->request->url, 'tag=') !== false) {
+            Yii::$app->getResponse()->redirect(["//tags/{$_GET['tag']}/"], true, 301);
         }
         if (strpos(Yii::$app->request->url, 'explore/') !== false && strpos(Yii::$app->request->url, 'title') !== false) {
             $id = $this->get_string_between(Yii::$app->request->url, 'id=', '&');
