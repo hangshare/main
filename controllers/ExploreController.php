@@ -226,12 +226,14 @@ class ExploreController extends Controller
         } else {
             //main category
             $cat = Yii::$app->db->createCommand("SELECT id,title FROM `category` WHERE url_link LIKE '{$category}%'")->queryOne();
-            $subcats = Yii::$app->db->createCommand("SELECT id FROM `category` WHERE parent = {$cat['id']}")->queryAll();
-            $qa = [];
-            foreach ($subcats as $subcats) {
-                $qa[] = $subcats['id'];
+            if($cat) {
+                $subcats = Yii::$app->db->createCommand("SELECT id FROM `category` WHERE parent = {$cat['id']}")->queryAll();
+                $qa = [];
+                foreach ($subcats as $subcats) {
+                    $qa[] = $subcats['id'];
+                }
+                $query->andWhere(['in', 'post_category.categoryId', $qa]);
             }
-            $query->andWhere(['in', 'post_category.categoryId', $qa]);
         }
 
 
