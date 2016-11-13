@@ -262,7 +262,7 @@ class UserController extends Controller
         if (is_numeric($id)) {
             $model = $this->findModel($id);
             if (!empty($model->username)) {
-                return $this->redirect(["//{$model->username}"]);
+                return $this->redirect(["//user/{$model->username}"],301);
             }
         } else {
             $model = User::findByUsername($id);
