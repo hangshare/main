@@ -43,7 +43,8 @@ class UserController extends Controller
         ];
     }
 
-    public function actionVerifyaccount(){
+    public function actionVerifyaccount()
+    {
         $sent = false;
         if ($data = Yii::$app->request->post()) {
             $user_setting = UserSettings::findOne(['userId' => Yii::$app->user->identity->id]);
@@ -260,6 +261,9 @@ class UserController extends Controller
     {
         if (is_numeric($id)) {
             $model = $this->findModel($id);
+            if (!empty($model->username)) {
+                return $this->redirect(["//{$model->username}"]);
+            }
         } else {
             $model = User::findByUsername($id);
             if (!$model->id)
