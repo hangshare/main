@@ -131,6 +131,7 @@ $config = [
                 'u/request' => 'user/request',
                 'u/missing' => 'user/missing',
                 'u/suspended' => 'user/suspended',
+                'u/verifyaccount' => 'user/verifyaccount',
                 'u/success/<id:\d+>' => 'user/success',
                 'explore/<id:\d+>' => 'explore/red',
 
@@ -141,7 +142,7 @@ $config = [
                 '<controller:\w+>/<id:\d+>/<title:[^*]+>' => '<controller>/view',
                 '<controller:\w+>s' => '<controller>/index',
                 'الأسئلة-الشائعة/<category:[^*]+>' => 'faq/index',
-                'addemail/<id:.*?>'=>'site/addemail',
+                'addemail/<id:.*?>' => 'site/addemail',
                 'الأسئلة-الشائعة' => 'faq/index',
                 'خريطة-الموقع' => 'site/sitemap',
                 'تواصل-معنا' => 'site/contact',
@@ -151,7 +152,6 @@ $config = [
                 'reset-password' => 'site/resetpassword',
                 'sitemap.xml' => 'site/sitemapxml',
                 '<slug:.*?>' => 'explore/view',
-
             ],
         ],
         'request' => [
@@ -160,10 +160,10 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\MemCache',
             'servers' => [
-               ['host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 60],
-              ['host' => 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com', 'port' => 11211, 'weight' => 40],
-         //       ['host' => 'localhost', 'port' => 11211, 'weight' => 60],
-         //       ['host' => 'localhost', 'port' => 11211, 'weight' => 40],
+                ['host' => YII_DEBUG ? 'localhost' : 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com',
+                    'port' => 11211, 'weight' => 60],
+                ['host' => YII_DEBUG ? 'localhost' : 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com',
+                    'port' => 11211, 'weight' => 40],
             ],
         ],
         'session' => [
