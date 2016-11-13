@@ -125,8 +125,14 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             $settings->userId = $this->id;
             $settings->newsletter = 1;
             $settings->key = md5(uniqid($this->id, true));
-            $settings->verified_email = 0;
-            $settings->save();
+
+            if ($this->scId && $this->email)
+                $settings->verified_email = 1;
+            else
+                $settings->verified_email = 0;
+
+            $settings->save(false);
+
             $stats = new UserStats;
             $stats->userId = $this->id;
             $stats->post_views = 0;
