@@ -35,65 +35,67 @@ $canonical = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     <meta property="article:author" content="hangshare"/>
     <meta property="article:publisher" content="https://www.hangshare.com"/>
 
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:site" content="@hang_share" />
-    <meta property="twitter:title" content="<?= Html::encode($this->title) ?>" />
-    <meta property="twitter:description" content="<?= Html::encode($this->description) ?>" />
-    <meta property="twitter:image" content="<?= $this->ogImage; ?>" />
-    <meta property="twitter:url" content="<?= $canonical ?>" />
+    <meta property="twitter:card" content="summary_large_image"/>
+    <meta property="twitter:site" content="@hang_share"/>
+    <meta property="twitter:title" content="<?= Html::encode($this->title) ?>"/>
+    <meta property="twitter:description" content="<?= Html::encode($this->description) ?>"/>
+    <meta property="twitter:image" content="<?= $this->ogImage; ?>"/>
+    <meta property="twitter:url" content="<?= $canonical ?>"/>
     <meta name="twitter:domain" content="hangshare.com">
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    <?php if (!YII_DEBUG) : ?>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', 'UA-68983967-1', 'auto');
-        ga('send', 'pageview');
-        <?php if (!Yii::$app->user->isGuest): ?>
+            ga('create', 'UA-68983967-1', 'auto');
+            ga('send', 'pageview');
+            <?php if (!Yii::$app->user->isGuest): ?>
             var dimensionValue = '<?= empty(Yii::$app->user->username) ? Yii::$app->user->id : Yii::$app->user->username ?>';
             ga('set', 'dimension1', dimensionValue);
             ga('set', 'userId', '<?= empty(Yii::$app->user->username) ? Yii::$app->user->id : Yii::$app->user->username ?>');
-        <?php endif; ?>
-    </script>
-    <!-- Facebook Pixel Code -->
-    <script>
-        !function (f, b, e, v, n, t, s) {
-            if (f.fbq)
-                return;
-            n = f.fbq = function () {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq)
-                f._fbq = n;
-            n.push = n;
-            n.loaded = !0;
-            n.version = '2.0';
-            n.queue = [];
-            t = b.createElement(e);
-            t.async = !0;
-            t.src = v;
-            s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window,
-            document, 'script', '//connect.facebook.net/en_US/fbevents.js');
+            <?php endif; ?>
+        </script>
+        <!-- Facebook Pixel Code -->
+        <script>
+            !function (f, b, e, v, n, t, s) {
+                if (f.fbq)
+                    return;
+                n = f.fbq = function () {
+                    n.callMethod ?
+                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                };
+                if (!f._fbq)
+                    f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = '2.0';
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s)
+            }(window,
+                document, 'script', '//connect.facebook.net/en_US/fbevents.js');
 
-        fbq('init', '1713055775580604');
-        fbq('track', "PageView");</script>
-    <noscript><img height="1" width="1" style="display:none"
-                   src="https://www.facebook.com/tr?id=1713055775580604&ev=PageView&noscript=1"
-        /></noscript>
-    <!-- End Facebook Pixel Code -->
+            fbq('init', '1713055775580604');
+            fbq('track', "PageView");</script>
+        <noscript><img height="1" width="1" style="display:none"
+                       src="https://www.facebook.com/tr?id=1713055775580604&ev=PageView&noscript=1"
+            /></noscript>
+        <!-- End Facebook Pixel Code -->
+    <?php endif; ?>
 </head>
 <body>
 <?php foreach (Yii::$app->session->getAllFlashes() as $message):; ?>
