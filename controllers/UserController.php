@@ -47,9 +47,9 @@ class UserController extends Controller
         $sent = false;
         if ($data = Yii::$app->request->post()) {
             $user_setting = UserSettings::findOne(['userId' => Yii::$app->user->identity->id]);
-//            AwsEmail::queueUser(Yii::$app->user->identity->id, 'welcome', [
-//                '__LINK__' => Yii::$app->urlManager->createAbsoluteUrl(['//u/verify', 'key' => $user_setting->key])
-//            ]);
+            AwsEmail::queueUser(Yii::$app->user->identity->id, 'welcome', [
+                '__LINK__' => Yii::$app->urlManager->createAbsoluteUrl(['//u/verify', 'key' => $user_setting->key])
+            ]);
             $sent = true;
         }
         return $this->render('verifyaccount', ['sent' => $sent]);
