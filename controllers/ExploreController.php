@@ -7,6 +7,7 @@ use app\models\Category;
 use app\models\Comments;
 use app\models\Post;
 use app\models\PostSearch;
+use app\models\UserSettings;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -422,6 +423,12 @@ class ExploreController extends Controller
 
     public function actionPost($id = '')
     {
+        $user_setting = UserSettings::findOne(['userId' => Yii::$app->user->identity->id]);
+        if(!$user_setting->verified_email){
+            $lang = Yii::$app->language == 'en' ? 'en/' : '';
+            return $this->redirect(["//{$lang}u/verifyaccount"]);
+        }
+
         if (empty($id)) {
             $model = new Post();
         } else {
