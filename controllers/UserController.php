@@ -15,6 +15,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use app\models\UserSettings;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -27,7 +28,7 @@ class UserController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::classname(),
-                'only' => ['transfer'],
+                'only' => ['transfer', 'verifyaccount'],
                 'rules' => [[
                     'allow' => true,
                     'roles' => ['@']
@@ -40,6 +41,18 @@ class UserController extends Controller
                 ],
             ],
         ];
+    }
+
+    public function actionVerifyaccount(){
+        $sent = false;
+        if ($data = Yii::$app->request->post()) {
+            $user_setting = UserSettings::findOne(['userId' => Yii::$app->user->identity->id]);
+//            AwsEmail::queueUser(Yii::$app->user->identity->id, 'welcome', [
+//                '__LINK__' => Yii::$app->urlManager->createAbsoluteUrl(['//u/verify', 'key' => $user_setting->key])
+//            ]);
+            $sent = true;
+        }
+        return $this->render('verifyaccount', ['sent' => $sent]);
     }
 
     public function actionChangepass()
@@ -59,7 +72,8 @@ class UserController extends Controller
         echo json_encode($responce);
     }
 
-    public function actionMissing(){
+    public function actionMissing()
+    {
         $model = $this->findModel(Yii::$app->user->identity->id);
 
         return $this->render('missing', [
@@ -73,13 +87,13 @@ class UserController extends Controller
         if (isset($userSettings)) {
             $userSettings->verified_email = 1;
             $userSettings->save(false);
-            Yii::$app->getSession()->setFlash('success', Yii::t('app','user.verified.email'));
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'user.verified.email'));
             $username = empty($userSettings->user->username) ? $userSettings->user->id : $userSettings->user->username;
             return $this->redirect(['view', 'id' => $username]);
         } else {
-            Yii::$app->getSession()->setFlash('danger', Yii::t('app','error.password.rest'));
+            Yii::$app->getSession()->setFlash('danger', Yii::t('app', 'error.password.rest'));
         }
-        return $this->redirect(['//' . Yii::t('app','ContactUs-url')]);
+        return $this->redirect(['//' . Yii::t('app', 'ContactUs-url')]);
     }
 
     public function actionTransfer()
@@ -232,7 +246,8 @@ class UserController extends Controller
     }
 
 
-    public function actionSuspended(){
+    public function actionSuspended()
+    {
         return $this->render('suspended');
     }
 
@@ -254,7 +269,7 @@ class UserController extends Controller
         $view = 'guest';
         $ades_query = 'AND post.published = 1';
         if (!Yii::$app->user->isGuest && Yii::$app->user->identity->id == $model->id) {
-            $ades_query= '';
+            $ades_query = '';
             $view = 'view';
         }
 
@@ -267,7 +282,6 @@ class UserController extends Controller
         $query->andFilterWhere([
             'userId' => $model->id
         ]);
-
 
 
         Yii::$app->db->createCommand('UPDATE `user_stats` SET `profile_views`=`profile_views`+1 WHERE `userId`=' . $model->id)->query();
