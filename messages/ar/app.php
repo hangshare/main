@@ -300,5 +300,10 @@ return [
     'Popular' => 'الحساب المجاني',
     'Now' => 'الآن',
     'no email title' => 'لم نستطع الحصول على البريد الكتروني الخاص بك ، لاكمال عملية التسجيل يرجى اضافة البريد الاكتروني الخاص بك.',
-    'Add Email'=>'اضف البريد الاكتروني',
+    'Add Email' => 'اضف البريد الاكتروني',
+    'We have sent you an verification email' => 'قمنا بارسال لك بريد الكتروني مع معلومات تفعيل الحساب.',
+    'Send verification key' => 'ارسل رابط التفعيل',
+    'Please verify your email' => 'يرجى تفعيل الحساب',
+    'In order to add post and use full features of habgshare website' => 'لكي تستطيع نشر مواضيع و استخدام كافة ميزات موقع هانج شير يرجى منك تفعيل البريد الاكتروني الخاص بحسابك.',
+    'Verify account' => 'تفعيل الحساب موقع هانج شير',
 ];
