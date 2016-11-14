@@ -150,6 +150,14 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                             <div id="related-posts" data-id="<?= $model->id; ?>">
                                 <h3 class="underlined"><?= Yii::t('app', 'Related Posts') ?></h3>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-12 m-t-25">
+                                    <h3 class="underlined"><?= Yii::t('app', 'Comments') ?></h3>
+                                    <?php echo $this->render('//explore/_commentform', ['id' => $model->id]); ?>
+                                    <div id="comments" data-id="<?= $model->id; ?>"></div>
+                                </div>
+                            </div>
                             <?php $tags_all = $model->postTags;
                             if (count($tags_all) > 0) : ?>
                                 <div class="col-md-12">
@@ -173,13 +181,6 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                                     </div>
                                 </div>
                             <?php endif; ?>
-                            <div class="row">
-                                <div class="col-md-12 m-t-25">
-                                    <h3 class="underlined"><?= Yii::t('app', 'Comments') ?></h3>
-                                    <?php echo $this->render('//explore/_commentform', ['id' => $model->id]); ?>
-                                    <div id="comments" data-id="<?= $model->id; ?>"></div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
