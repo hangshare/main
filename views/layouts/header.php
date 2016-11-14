@@ -170,13 +170,13 @@ if ($mainMenu == false) {
                         <ul class="list-inline pull-right">
                             <li><?= Html::a(Yii::t('app', 'Home page'), Yii::$app->homeUrl) ?></li>
                             <li class="divider"></li>
-                            <li><?= Html::a(Yii::t('app', 'About Us'), ['//' . Yii::t('app', 'About-Us-url')]) ?></li>
+                            <li><?= Html::a(Yii::t('app', 'About Us'), ['//' . Yii::t('app', 'About-Us-url')],['rel'=>'nofollow']) ?></li>
                             <li class="divider"></li>
-                            <li><?= Html::a(Yii::t('app', 'Faqs'), ['//' . Yii::t('app', 'Faqs-url')]) ?></li>
+                            <li><?= Html::a(Yii::t('app', 'Faqs'), ['//' . Yii::t('app', 'Faqs-url')],['rel'=>'nofollow']) ?></li>
                             <li class="divider"></li>
-                            <li><?= Html::a(Yii::t('app', 'Contact Us'), ['//' . Yii::t('app', 'ContactUs-url')]) ?></li>
+                            <li><?= Html::a(Yii::t('app', 'Contact Us'), ['//' . Yii::t('app', 'ContactUs-url')],['rel'=>'nofollow']) ?></li>
                             <li class="divider"></li>
-                            <li><?= Html::a(Yii::t('app', 'Privacy'), ['//' . Yii::t('app', 'privacy-url')]) ?></li>
+                            <li><?= Html::a(Yii::t('app', 'Privacy'), ['//' . Yii::t('app', 'privacy-url')],['rel'=>'nofollow']) ?></li>
                         </ul>
                     </div>
                 </div>
