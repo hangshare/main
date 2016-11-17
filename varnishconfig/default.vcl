@@ -80,6 +80,14 @@ vrt_magic_string_end
 }
 sub vcl_recv {
 
+   if (req.url ~ "^/(plan|explore/post)/") {
+       return(pass);
+   }
+
+   if (req.http.X-Requested-With == "XMLHttpRequest"){
+       return (pass);
+   }
+
 if (req.restarts == 0) {
 if (req.http.X-Forwarded-For) {
 set req.http.X-Forwarded-For =
@@ -148,20 +156,18 @@ if (client.ip ~ crawler_acl ||
 req.http.User-Agent ~ "^(?:ApacheBench/.*|.*Googlebot.*|JoeDog/.*Siege.*|magespeedtest\.com|Nexcessnet_Turpentine/.*)$") {
 set req.http.Cookie = "_identity=crawler-session";
 } else {
-call generate_session;
+    call generate_session;
 }
 }
-if (true &&
-req.url ~ ".*\.(?:css|js|jpg|jpe?g|png|gif|ico|swf)(?=\?|&|$)") {
-unset req.http.Cookie;
-unset req.http.X-Varnish-Faked-Session;
-set req.http.X-Varnish-Static = 1;
-return (lookup);
-}
-if (true &&
-req.url ~ "(?:[?&](?:__SID|XDEBUG_PROFILE)(?=[&=]|$))") {
-return (pass);
-}
+    if (true && req.url ~ ".*\.(?:css|js|jpg|jpe?g|png|gif|ico|swf)(?=\?|&|$)") {
+        unset req.http.Cookie;
+        unset req.http.X-Varnish-Faked-Session;
+        set req.http.X-Varnish-Static = 1;
+        return (lookup);
+    }
+    if (true && req.url ~ "(?:[?&](?:__SID|XDEBUG_PROFILE)(?=[&=]|$))") {
+        return (pass);
+    }
 if (true && req.url ~ "[?&](utm_source|utm_medium|utm_campaign|utm_content|utm_term|gclid|cx|ie|cof|siteurl)=") {
 set req.url = regsuball(req.url, "(?:(\?)?|&)(?:utm_source|utm_medium|utm_campaign|utm_content|utm_term|gclid|cx|ie|cof|siteurl)=[^&]+", "\1");
 set req.url = regsuball(req.url, "(?:(\?)&|\?$)", "\1");
@@ -279,6 +285,7 @@ set beresp.ttl = 3600s;
 return (deliver);
 }
 }
+
 sub vcl_deliver {
 if (req.http.X-Varnish-Faked-Session) {
 call generate_session_expires;
