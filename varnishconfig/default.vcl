@@ -119,11 +119,18 @@ set req.http.Host = "www.hangshare.com";
 if (!true || req.http.Authorization ||
 req.request !~ "^(GET|HEAD|OPTIONS)$" ||
 req.http.Cookie ~ "varnish_bypass=1") {
+if (req.url ~ "^(/ae\-en/|/sa\-en/|/ae\-ar/|/sa\-ar/|/skin/|/js/|/)(?:(?:index|litespeed)\.php/)?superuser") {
+set req.backend = admin;
+}
 return (pipe);
 }
 set req.url = regsuball(req.url, "([^:])//+", "\1/");
 if (req.url ~ "^(/ae\-en/|/sa\-en/|/ae\-ar/|/sa\-ar/|/skin/|/js/|/)(?:(?:index|litespeed)\.php/)?") {
 set req.http.X-Turpentine-Secret-Handshake = "1";
+if (req.url ~ "^(/ae\-en/|/sa\-en/|/ae\-ar/|/sa\-ar/|/skin/|/js/|/)(?:(?:index|litespeed)\.php/)?superuser") {
+set req.backend = admin;
+return (pipe);
+}
 if (req.http.Cookie ~ "\bcurrency=") {
 set req.http.X-Varnish-Currency = regsub(
 req.http.Cookie, ".*\bcurrency=([^;]*).*", "\1");
@@ -152,11 +159,15 @@ call generate_session;
 }
 }
 if (true &&
-req.url ~ ".*\.(?:css|js|jpg|jpe?g|png|gif|ico|swf)(?=\?|&|$)") {
+req.url ~ ".*\.(?:css|js|jpe?g|png|gif|ico|swf)(?=\?|&|$)") {
 unset req.http.Cookie;
 unset req.http.X-Varnish-Faked-Session;
 set req.http.X-Varnish-Static = 1;
 return (lookup);
+}
+if (req.url ~ "^(/ae\-en/|/sa\-en/|/ae\-ar/|/sa\-ar/|/skin/|/js/|/)(?:(?:index|litespeed)\.php/)?(?:superuser|api|cron\.php|checkout/cart|checkout/onepage|customer|checkout|marketplace|onestepcheckout|sales|customer/account/createpost|ajaxcart/catalog/product/view/|ajaxcart/index/add/uenc/aHR0cHM6Ly93d3cueWFsbGFzaG9wcGluZy5jb20vYWUtZW4v|ajaxcart/index/add/uenc/.*|checkout/cart/add/uenc/.*|customer/account/.*|mob/cart/.*|mob/api/test/.*|superuser|index.php/admin/.*|/ae-en/ajaxcart/index/add/uenc/.*|checkout/onepage/.*|payfort/.*)" ||
+req.url ~ "\?.*__from_store=") {
+return (pipe);
 }
 if (true &&
 req.url ~ "(?:[?&](?:__SID|XDEBUG_PROFILE)(?=[&=]|$))") {
