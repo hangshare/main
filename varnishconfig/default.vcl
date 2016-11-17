@@ -115,7 +115,7 @@ set req.http.X-Normalized-User-Agent = "opera";
 } else {
 set req.http.X-Normalized-User-Agent = "other";
 }
-set req.http.Host = "www.dev.yallashopping.com";
+set req.http.Host = "www.hangshare.com";
 if (!true || req.http.Authorization ||
 req.request !~ "^(GET|HEAD|OPTIONS)$" ||
 req.http.Cookie ~ "varnish_bypass=1") {
@@ -302,7 +302,7 @@ set resp.http.Set-Cookie = resp.http.Set-Cookie +
 } else {
 if(req.http.Host ~ "[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)") {
 set resp.http.Set-Cookie = resp.http.Set-Cookie +
-"; domain=www.dev.yallashopping.com";
+"; domain=www.hangshare.com";
 } else {
 set resp.http.Set-Cookie = resp.http.Set-Cookie +
 "; domain=" + regsub(req.http.Host, ":\d+$", "");
