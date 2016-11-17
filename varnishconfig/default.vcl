@@ -11,7 +11,7 @@ long b = lrand48();
 long c = lrand48();
 long d = lrand48();
 pthread_mutex_unlock(&lrand_mutex);
-sprintf(buf, "frontend=%08lx%04lx%04lx%04lx%04lx%08lx",
+sprintf(buf, "_identity=%08lx%04lx%04lx%04lx%04lx%08lx",
 a,
 b & 0xffff,
 (b & ((long)0x0fff0000) >> 16) | 0x4000,
@@ -43,7 +43,7 @@ acl debug_acl {
 sub generate_session {
 if (req.url ~ ".*[&?]SID=([^&]+).*") {
 set req.http.X-Varnish-Faked-Session = regsub(
-req.url, ".*[&?]SID=([^&]+).*", "frontend=\1");
+req.url, ".*[&?]SID=([^&]+).*", "_identity=\1");
 } else {
 C{
 char uuid_buf [50];
@@ -127,10 +127,6 @@ return (pipe);
 set req.url = regsuball(req.url, "([^:])//+", "\1/");
 if (req.url ~ "^(/ae\-en/|/sa\-en/|/ae\-ar/|/sa\-ar/|/skin/|/js/|/)(?:(?:index|litespeed)\.php/)?") {
 set req.http.X-Turpentine-Secret-Handshake = "1";
-if (req.url ~ "^(/ae\-en/|/sa\-en/|/ae\-ar/|/sa\-ar/|/skin/|/js/|/)(?:(?:index|litespeed)\.php/)?superuser") {
-set req.backend = admin;
-return (pipe);
-}
 if (req.http.Cookie ~ "\bcurrency=") {
 set req.http.X-Varnish-Currency = regsub(
 req.http.Cookie, ".*\bcurrency=([^;]*).*", "\1");
@@ -150,24 +146,20 @@ error 403 "External ESI requests are not allowed";
 }
 }
 
-if (req.http.Cookie !~ "frontend=" && !req.http.X-Varnish-Esi-Method) {
+if (req.http.Cookie !~ "_identity=" && !req.http.X-Varnish-Esi-Method) {
 if (client.ip ~ crawler_acl ||
 req.http.User-Agent ~ "^(?:ApacheBench/.*|.*Googlebot.*|JoeDog/.*Siege.*|magespeedtest\.com|Nexcessnet_Turpentine/.*)$") {
-set req.http.Cookie = "frontend=crawler-session";
+set req.http.Cookie = "_identity=crawler-session";
 } else {
 call generate_session;
 }
 }
 if (true &&
-req.url ~ ".*\.(?:css|js|jpe?g|png|gif|ico|swf)(?=\?|&|$)") {
+req.url ~ ".*\.(?:css|js|jpg|jpe?g|png|gif|ico|swf)(?=\?|&|$)") {
 unset req.http.Cookie;
 unset req.http.X-Varnish-Faked-Session;
 set req.http.X-Varnish-Static = 1;
 return (lookup);
-}
-if (req.url ~ "^(/ae\-en/|/sa\-en/|/ae\-ar/|/sa\-ar/|/skin/|/js/|/)(?:(?:index|litespeed)\.php/)?(?:superuser|api|cron\.php|checkout/cart|checkout/onepage|customer|checkout|marketplace|onestepcheckout|sales|customer/account/createpost|ajaxcart/catalog/product/view/|ajaxcart/index/add/uenc/aHR0cHM6Ly93d3cueWFsbGFzaG9wcGluZy5jb20vYWUtZW4v|ajaxcart/index/add/uenc/.*|checkout/cart/add/uenc/.*|customer/account/.*|mob/cart/.*|mob/api/test/.*|superuser|index.php/admin/.*|/ae-en/ajaxcart/index/add/uenc/.*|checkout/onepage/.*|payfort/.*)" ||
-req.url ~ "\?.*__from_store=") {
-return (pipe);
 }
 if (true &&
 req.url ~ "(?:[?&](?:__SID|XDEBUG_PROFILE)(?=[&=]|$))") {
@@ -218,8 +210,8 @@ if (req.http.X-Varnish-Store || req.http.X-Varnish-Currency) {
 hash_data("s=" + req.http.X-Varnish-Store + "&c=" + req.http.X-Varnish-Currency);
 }
 if (req.http.X-Varnish-Esi-Access == "private" &&
-req.http.Cookie ~ "frontend=") {
-hash_data(regsub(req.http.Cookie, "^.*?frontend=([^;]*);*.*$", "\1"));
+req.http.Cookie ~ "_identity=") {
+hash_data(regsub(req.http.Cookie, "^.*?_identity=([^;]*);*.*$", "\1"));
 hash_data(client.ip);
 hash_data(req.http.Via);
 hash_data(req.http.X-Forwarded-For);
@@ -265,9 +257,9 @@ set beresp.ttl = 28800s;
 set beresp.http.Cache-Control = "max-age=28800";
 } elseif (req.http.X-Varnish-Esi-Method) {
 if (req.http.X-Varnish-Esi-Access == "private" &&
-req.http.Cookie ~ "frontend=") {
+req.http.Cookie ~ "_identity=") {
 set beresp.http.X-Varnish-Session = regsub(req.http.Cookie,
-"^.*?frontend=([^;]*);*.*$", "\1");
+"^.*?_identity=([^;]*);*.*$", "\1");
 }
 if (req.http.X-Varnish-Esi-Method == "ajax" &&
 req.http.X-Varnish-Esi-Access == "public") {
