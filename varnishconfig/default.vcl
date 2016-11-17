@@ -80,14 +80,6 @@ vrt_magic_string_end
 }
 sub vcl_recv {
 
-   if (req.url ~ "^/(plan|explore/post)/") {
-       return(pass);
-   }
-
-   if (req.http.X-Requested-With == "XMLHttpRequest"){
-       return (pass);
-   }
-
 if (req.restarts == 0) {
 if (req.http.X-Forwarded-For) {
 set req.http.X-Forwarded-For =
@@ -127,47 +119,49 @@ set req.http.Host = "www.hangshare.com";
 if (!true || req.http.Authorization ||
 req.request !~ "^(GET|HEAD|OPTIONS)$" ||
 req.http.Cookie ~ "varnish_bypass=1") {
-    return (pipe);
+return (pipe);
 }
 set req.url = regsuball(req.url, "([^:])//+", "\1/");
-if (req.url ~ "^(/js/|/)(?:(?:index|litespeed)\.php/)?") {
+if (req.url ~ "^(/ae\-en/|/sa\-en/|/ae\-ar/|/sa\-ar/|/skin/|/js/|/)(?:(?:index|litespeed)\.php/)?") {
 set req.http.X-Turpentine-Secret-Handshake = "1";
-    if (req.http.Cookie ~ "\bcurrency=") {
-        set req.http.X-Varnish-Currency = regsub(
-        req.http.Cookie, ".*\bcurrency=([^;]*).*", "\1");
-    }
-    if (req.http.Cookie ~ "\bstore=") {
-        set req.http.X-Varnish-Store = regsub(
-        req.http.Cookie, ".*\bstore=([^;]*).*", "\1");
-    }
-    if (req.url ~ "/turpentine/esi/get(?:Block|FormKey)/") {
-        set req.http.X-Varnish-Esi-Method = regsub(
-        req.url, ".*/method/(\w+)/.*", "\1");
-        set req.http.X-Varnish-Esi-Access = regsub(
-        req.url, ".*/access/(\w+)/.*", "\1");
-        if (req.http.X-Varnish-Esi-Method == "esi" && req.esi_level == 0 &&
-        !(true || client.ip ~ debug_acl)) {
-            error 403 "External ESI requests are not allowed";
-        }
-    }
+if (req.http.Cookie ~ "\bcurrency=") {
+set req.http.X-Varnish-Currency = regsub(
+req.http.Cookie, ".*\bcurrency=([^;]*).*", "\1");
+}
+if (req.http.Cookie ~ "\bstore=") {
+set req.http.X-Varnish-Store = regsub(
+req.http.Cookie, ".*\bstore=([^;]*).*", "\1");
+}
+if (req.url ~ "/turpentine/esi/get(?:Block|FormKey)/") {
+set req.http.X-Varnish-Esi-Method = regsub(
+req.url, ".*/method/(\w+)/.*", "\1");
+set req.http.X-Varnish-Esi-Access = regsub(
+req.url, ".*/access/(\w+)/.*", "\1");
+if (req.http.X-Varnish-Esi-Method == "esi" && req.esi_level == 0 &&
+!(true || client.ip ~ debug_acl)) {
+error 403 "External ESI requests are not allowed";
+}
+}
 
 if (req.http.Cookie !~ "_identity=" && !req.http.X-Varnish-Esi-Method) {
 if (client.ip ~ crawler_acl ||
 req.http.User-Agent ~ "^(?:ApacheBench/.*|.*Googlebot.*|JoeDog/.*Siege.*|magespeedtest\.com|Nexcessnet_Turpentine/.*)$") {
 set req.http.Cookie = "_identity=crawler-session";
 } else {
-    call generate_session;
+call generate_session;
 }
 }
-    if (true && req.url ~ ".*\.(?:css|js|jpg|jpe?g|png|gif|ico|swf)(?=\?|&|$)") {
-        unset req.http.Cookie;
-        unset req.http.X-Varnish-Faked-Session;
-        set req.http.X-Varnish-Static = 1;
-        return (lookup);
-    }
-    if (true && req.url ~ "(?:[?&](?:__SID|XDEBUG_PROFILE)(?=[&=]|$))") {
-        return (pass);
-    }
+if (true &&
+req.url ~ ".*\.(?:css|js|jpg|jpe?g|png|gif|ico|swf)(?=\?|&|$)") {
+unset req.http.Cookie;
+unset req.http.X-Varnish-Faked-Session;
+set req.http.X-Varnish-Static = 1;
+return (lookup);
+}
+if (true &&
+req.url ~ "(?:[?&](?:__SID|XDEBUG_PROFILE)(?=[&=]|$))") {
+return (pass);
+}
 if (true && req.url ~ "[?&](utm_source|utm_medium|utm_campaign|utm_content|utm_term|gclid|cx|ie|cof|siteurl)=") {
 set req.url = regsuball(req.url, "(?:(\?)?|&)(?:utm_source|utm_medium|utm_campaign|utm_content|utm_term|gclid|cx|ie|cof|siteurl)=[^&]+", "\1");
 set req.url = regsuball(req.url, "(?:(\?)&|\?$)", "\1");
@@ -231,7 +225,7 @@ sub vcl_fetch {
 set req.grace = 15s;
 set beresp.http.X-Varnish-Host = req.http.host;
 set beresp.http.X-Varnish-URL = req.url;
-if (req.url ~ "^(/js/|/)(?:(?:index|litespeed)\.php/)?") {
+if (req.url ~ "^(/ae\-en/|/sa\-en/|/ae\-ar/|/sa\-ar/|/skin/|/js/|/)(?:(?:index|litespeed)\.php/)?") {
 unset beresp.http.Vary;
 set beresp.do_gzip = true;
 if (beresp.status != 200 && beresp.status != 404) {
@@ -285,7 +279,6 @@ set beresp.ttl = 3600s;
 return (deliver);
 }
 }
-
 sub vcl_deliver {
 if (req.http.X-Varnish-Faked-Session) {
 call generate_session_expires;
@@ -308,27 +301,27 @@ set resp.http.Set-Cookie = resp.http.Set-Cookie +
 set resp.http.Set-Cookie = resp.http.Set-Cookie + "; httponly";
 unset resp.http.X-Varnish-Cookie-Expires;
 }
-    if (req.http.X-Varnish-Esi-Method == "ajax" && req.http.X-Varnish-Esi-Access == "private") {
-      set resp.http.Cache-Control = "no-cache";
-    }
-    if (true || client.ip ~ debug_acl) {
-        set resp.http.X-Varnish-Hits = obj.hits;
-        set resp.http.X-Varnish-Esi-Method = req.http.X-Varnish-Esi-Method;
-        set resp.http.X-Varnish-Esi-Access = req.http.X-Varnish-Esi-Access;
-        set resp.http.X-Varnish-Currency = req.http.X-Varnish-Currency;
-        set resp.http.X-Varnish-Store = req.http.X-Varnish-Store;
-    } else {
-        unset resp.http.X-Varnish;
-        unset resp.http.Via;
-        unset resp.http.X-Powered-By;
-        unset resp.http.Server;
-        unset resp.http.X-Turpentine-Cache;
-        unset resp.http.X-Turpentine-Esi;
-        unset resp.http.X-Turpentine-Flush-Events;
-        unset resp.http.X-Turpentine-Block;
-        unset resp.http.X-Varnish-Session;
-        unset resp.http.X-Varnish-Host;
-        unset resp.http.X-Varnish-URL;
-        unset resp.http.X-Varnish-Set-Cookie;
-    }
+if (req.http.X-Varnish-Esi-Method == "ajax" && req.http.X-Varnish-Esi-Access == "private") {
+set resp.http.Cache-Control = "no-cache";
+}
+if (true || client.ip ~ debug_acl) {
+set resp.http.X-Varnish-Hits = obj.hits;
+set resp.http.X-Varnish-Esi-Method = req.http.X-Varnish-Esi-Method;
+set resp.http.X-Varnish-Esi-Access = req.http.X-Varnish-Esi-Access;
+set resp.http.X-Varnish-Currency = req.http.X-Varnish-Currency;
+set resp.http.X-Varnish-Store = req.http.X-Varnish-Store;
+} else {
+unset resp.http.X-Varnish;
+unset resp.http.Via;
+unset resp.http.X-Powered-By;
+unset resp.http.Server;
+unset resp.http.X-Turpentine-Cache;
+unset resp.http.X-Turpentine-Esi;
+unset resp.http.X-Turpentine-Flush-Events;
+unset resp.http.X-Turpentine-Block;
+unset resp.http.X-Varnish-Session;
+unset resp.http.X-Varnish-Host;
+unset resp.http.X-Varnish-URL;
+unset resp.http.X-Varnish-Set-Cookie;
+}
 }
