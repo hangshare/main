@@ -87,7 +87,7 @@ class AwsEmail extends Component
                     ),
                 ),
                 'ReplyToAddresses' => array('info@hangshare.com'),
-                'ReturnPath' => 'info@hangshare.com'
+                'ReturnPath' => 'no-reply@hangshare.com'
             ));
         } catch (Exception $exc) {
             print $exc->getTraceAsString() . chr(10);
