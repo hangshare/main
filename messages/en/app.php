@@ -116,6 +116,7 @@ return [
     'Add-Post-Note-1' => 'We will be reviewing the article and check before officially published on the site',
     'Tips' => 'Tips',
     'Account Settings' => 'Account Settings',
+    'Settings'=>'Personal Info',
     'total.amount.title' => 'Total balance : {dollar} dollar & {cent} cent',
     'Balance.retractable.title' => 'Balance Retractable : {dollar} dollar & {cent} cent',
     'total amount' => 'Total Amount',

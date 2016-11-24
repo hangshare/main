@@ -242,7 +242,7 @@ return [
     'user.verified.email' => 'تم تفعيل حسابك بنجاح ',
     'Add a post' => 'أضف موضوع',
     'Profile' => 'الصفحة الشخصية',
-    'Settings' => 'الاعدادت',
+    'Settings' => 'المعلومات الشخصية',
     'Money Transfer' => 'طرق تحويل النقود',
     'Logout' => 'تسجيل الخروج',
     'Share this Article' => 'شارك هذا الموضوع',
