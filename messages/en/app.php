@@ -87,7 +87,7 @@ return [
     'Save' => 'Save',
     'or' => 'Or',
     'youtube ex' => 'ex. https://www.youtube.com/watch?v=K5sqorZ9x7o',
-    'welcome 1' => 'Share your posts & articles and make easy money',
+
     'welcome 2' => 'Go premium to trible your revenue',
     'Certified By Paypal' => 'Certified By Paypal',
     'Create your post > Share on social media > Make profit for every view' => 'Create your post > Share on social media > Make money for every view',
@@ -261,4 +261,36 @@ return [
     'freetips2' => 'Attach your articles in the monthly newsletter of the site.',
     'freetips3' => 'The possibility of withdrawing the profit after reaching $ 100.',
 
+
+    // Homepage
+    'welcome 1' => 'Post Share and make profit',
+    'Signup Now' => 'Sign Up Now',
+    'how is our work' => 'How the website works?',
+    'process' => 'Work',
+    'flow' => 'Steps',
+    'Write a post' => 'Sign up and add your first post',
+    'Write a post info' => 'You can write articles and post them on Hangshare. those articles should meet the quality standards as the website validates them before they are published.',
+    'Share your post' => 'Share your posts on Social Media',
+    'Share your post info' => 'Share your posts on the social media or any website or blog to generate views on your articles, each view increase your earnings.',
+    'Gain Profit' => 'Make profit',
+    'Gain Profit info' => 'You are eligible to take the profit once they reach $100, the money is to be transferred to you via Paypal, bank, or wire transfer.',
+    'Number of Users' => 'Number of users',
+    'Blog Posts' => 'Count of published posts',
+    'Total Earning' => 'Current amount or revenue for all users',
+    'How calculating Profits' => 'How do we calculate the views profits?',
+    'Post Rating' => 'Post evaluation',
+    'post rating info' => 'The system automatically evaluates the articles that you post on the site, and the assessment is calculated based on several criteria, including: the post alignment, how unique is the post, the quality of the content and other things. Be careful not to copy threads from other sites and you will get a high evaluation and thus, higher income in Hangshare.',
+    'Traffic Source' => 'The source of the views',
+    'Traffic Source info' => 'Since you are using the English version of Hangshare, it\'s better to share your posts on social media and the views to come from English speaking countries.',
+    'Traffic Quality' => 'The quality of the views',
+    'Traffic Quality info' => 'Our system evaluates the quality of the traffic you are bringing to the website by various criteria including time spent on site, bounce rate,  ..etc',
+    'hear them out' => 'The Feedback from the users',
+    'What People Say About Us' => 'What do users say about us?',
+    'posts from ' => 'Posts from',
+    'our users' => 'our users',
+    'go to the blog' => 'Browse posts',
+    'Sign Up Now'=>'Sign up Now',
+
+
+    //''=>'I signed up in Hangshare and it was a unique experience, and I now generate more than $500 a month by sharing posts on my Facebook pages.',
 ];
