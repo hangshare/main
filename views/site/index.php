@@ -52,21 +52,21 @@ $articlesurl = Yii::t('app', 'articles-url');
                     <div class="row margin-top-40">
                         <div class="col-md-4 text-center animated wow flipInX" data-wow-duration="1s"
                              data-wow-delay=".5s">
-                            <img width="120" src="svg/edit.svg" alt="FreeLance writing"/>
+                            <img width="120" src="/svg/edit.svg" alt="FreeLance writing"/>
                             <h4 class="text-center margin-top-30"
                                 style="font-weight: bold;"><?= Yii::t('app', 'Write a post') ?></h4>
                             <p class="text-center"><?= Yii::t('app', 'Write a post info') ?></p>
                         </div>
                         <div class="col-md-4 text-center animated wow flipInX" data-wow-duration="1s"
                              data-wow-delay="1s">
-                            <img width="120" src="svg/share.svg" alt="FreeLance writing"/>
+                            <img width="120" src="/svg/share.svg" alt="FreeLance writing"/>
                             <h4 class="text-center margin-top-30"
                                 style="font-weight: bold;"><?= Yii::t('app', 'Share your post') ?></h4>
                             <p class="text-center"><?= Yii::t('app', 'Share your post info') ?></p>
                         </div>
                         <div class="col-md-4 text-center animated wow flipInX" data-wow-duration="1s"
                              data-wow-delay="1.5s">
-                            <img width="120" src="svg/get-money.svg" alt="Gain Profit, Get Money"/>
+                            <img width="120" src="/svg/get-money.svg" alt="Gain Profit, Get Money"/>
                             <h4 class="text-center margin-top-30"
                                 style="font-weight: bold;"><?= Yii::t('app', 'Gain Profit') ?></h4>
                             <p class="text-center"><?= Yii::t('app', 'Gain Profit info') ?></p>
