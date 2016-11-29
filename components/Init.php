@@ -88,7 +88,7 @@ class Init extends Component
             Yii::$app->language = 'en';
             Yii::$app->homeUrl = Yii::getAlias('@web') . '/en/';
             $_GET['language'] = 'en';
-            setcookie("userlanghangshare", "en", $date_of_expiry);
+            setcookie("userlanghangshare", "en", $date_of_expiry,'/');
         } else {
             Yii::$app->language = 'ar';
             Yii::$app->homeUrl = Yii::getAlias('@web');
