@@ -97,7 +97,7 @@ class Init extends Component
             setcookie("userlanghangshare", "en", $date_of_expiry, '/', '.hangshare.com');
         } else {
             Yii::$app->language = 'ar';
-            Yii::$app->homeUrl = Yii::getAlias('@web');
+            Yii::$app->homeUrl = '/';
             $_GET['language'] = 'ar';
             setcookie("userlanghangshare", "ar", $date_of_expiry, '/', '.hangshare.com');
         }
