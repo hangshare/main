@@ -81,13 +81,17 @@ class Init extends Component
     {
 
         $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-        if(strpos(Yii::$app->request->url, 'en/') === false && $lang == 'en' && Yii::$app->request->url == '/' && !isset($_COOKIE['userlanghangshare'])){
+        if (strpos(Yii::$app->request->url, 'en/') === false && $lang == 'en' && Yii::$app->request->url == '/' && !isset($_COOKIE['userlanghangshare'])) {
             header("Location: https://www.hangshare.com/en/");
             exit(0);
         }
-        if (strpos(Yii::$app->request->url, 'en/') === false && isset($_COOKIE['userlanghangshare']) && $_COOKIE['userlanghangshare'] == 'en') {
-//            header("Location: https://www.hangshare.com/en/");
-//            exit(0);
+        if (strpos(Yii::$app->request->url, 'en/') === false &&
+            isset($_COOKIE['userlanghangshare']) &&
+            $_COOKIE['userlanghangshare'] == 'en' &&
+            Yii::$app->request->url == '/'
+        ) {
+            header("Location: https://www.hangshare.com/en/");
+            exit(0);
         }
         $date_of_expiry = time() + 5184000;
         if (strpos(Yii::$app->request->url, 'en/') !== false || strpos(Yii::$app->request->url, '/web/en') !== false) {
