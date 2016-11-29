@@ -1,6 +1,6 @@
 window.fbAsyncInit = function () {
     FB.init({
-        appId: '215567798868369', // '1024611190883720',
+        appId: '1024611190883720', // '215567798868369',
         xfbml: true,
         version: 'v2.8'
     });
@@ -81,7 +81,7 @@ $(function () {
     });
 
     var delete_cookie = function (name) {
-        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        $.cookie(name, null, {path: "/", domain: ".hangshare.com"});
     };
 
 
@@ -96,10 +96,10 @@ $(function () {
         $("#" + da).toggle();
     });
 
-    $(document).on('click', '.changeLang', function (e) {
+    $(document).on('click', '#changeLang', function (e) {
         e.preventDefault();
         delete_cookie("userlanghangshare");
-        window.location.href = $(this).attr("href");
+        window.location.href = $(this).attr("data-url");
     });
 
 
