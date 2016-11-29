@@ -455,6 +455,12 @@ iframe {
     margin-right: 16.6667%;
 }
 
+.header-index3 {
+    line-height: 31px;
+    margin-right: 107px;
+    margin-top: 4px;
+}
+
 .pricing-table {
     background: #ffffff none repeat scroll 0 0;
     border-color: #f5f5fa;
@@ -683,12 +689,14 @@ a {
     background-image: url('https://s3.amazonaws.com/hangshare.static/home-bg-11.jpg');
     background-attachment: fixed;
 }
+
 .ui-tabs .ui-tabs-panel {
     display: block;
     border-width: 0;
     padding: 1em 1.4em;
     background: 0
 }
+
 ul.categorychecklist li {
     line-height: 22px;
     margin: 0;
@@ -704,6 +712,7 @@ ul.categorychecklist li {
     overflow: auto;
     padding: 0 0.9em;
 }
+
 .select2-selection__choice {
     float: right !important;
 }
@@ -715,15 +724,19 @@ ul.categorychecklist li {
     text-align: center;
 }
 
-.medium-editor-insert-plugin .medium-insert-buttons button{
+.medium-editor-insert-plugin .medium-insert-buttons button {
     padding: 4px 7px;
 }
 
-
 /* webkit solution */
-::-webkit-input-placeholder { text-align:right; }
+::-webkit-input-placeholder {
+    text-align: right;
+}
+
 /* mozilla solution */
-input:-moz-placeholder { text-align:right; }
+input:-moz-placeholder {
+    text-align: right;
+}
 
 .footer-social > .fa {
     text-align: center;
@@ -1549,9 +1562,12 @@ h1.font-18 {
     margin-bottom: 25px;
 }
 
-.pi1{
-    width: 450px; height: 350px; margin-top: 30px;
+.pi1 {
+    width: 450px;
+    height: 350px;
+    margin-top: 30px;
 }
+
 input,
 button,
 select,
@@ -2262,6 +2278,10 @@ pre code {
 
 .text-mega {
     font-size: 48px;
+}
+
+.p-t-170 {
+    padding-top: 170px !important;
 }
 
 .brd--b {
@@ -8722,7 +8742,9 @@ hr {
     text-decoration: none;
 }
 
-.homepie{padding: 45px;}
+.homepie {
+    padding: 45px;
+}
 
 .postindex > li > a {
     display: block;
@@ -9055,38 +9077,50 @@ and (-webkit-min-device-pixel-ratio: 2)
     }
 }
 
-.header-index{
-    margin-top: 70px; margin-bottom: 20px;
+.header-index {
+    margin-top: 15px;
+    margin-bottom: 20px;
 }
+
 @media only screen and (max-width: 640px) {
     article h1 {
         font-size: 20px;
         line-height: 30px;
         margin-bottom: 20px;
     }
+
     .home-section {
         margin-top: 40px;
         background-image: url('https://s3-eu-west-1.amazonaws.com/hangshare-media/aff-intro.jpg');
     }
+
     .col-md-4.col-md-offset-4.m-t-25.m-b-20.wow.animated.fadeInLeftBig.animated {
         margin: 50px 0 105px 0px;
     }
+
     .fact-item {
         width: 100%;
     }
-    .col-sm-offset-2, .popular.col-sm-4.margin-bottom-xs-40.wow.fadeInUpScale.animated.animated{
+
+    .col-sm-offset-2, .popular.col-sm-4.margin-bottom-xs-40.wow.fadeInUpScale.animated.animated {
         margin: 20px 0 0 0;
         max-width: 100%;
     }
-    .col-sm-6.animated.wow.fadeInUpRightScale.homepeie.animated{
-        margin: 0;padding: 0;
+
+    .col-sm-6.animated.wow.fadeInUpRightScale.homepeie.animated {
+        margin: 0;
+        padding: 0;
     }
 
     .res-nopadding {
         padding: 0 !important;
     }
-    .homepie{padding: 0px;}
-    .pi1{
+
+    .homepie {
+        padding: 0px;
+    }
+
+    .pi1 {
         width: 350px !important;
     }
 
@@ -9094,13 +9128,16 @@ and (-webkit-min-device-pixel-ratio: 2)
         margin-top: 40px;
         margin-bottom: 20px;
     }
+
     .res-full {
         width: 100%;
     }
+
     .ads1 {
         margin-top: 3px;
         height: 70px;
     }
+
     /* responsive */
     .homepost_contaner > .container > .col-md-8 {
         padding: 0;
@@ -9481,7 +9518,7 @@ and (-webkit-min-device-pixel-ratio: 2)
         max-width: 100%;
     }
 
-    .col-xs-6.col-xs-offset-3{
+    .col-xs-6.col-xs-offset-3 {
         width: 100%;
         margin: 0;
     }
@@ -9581,6 +9618,7 @@ nav {
         width: 640px;
         height: 90px;
     }
+
     .col-xs-6.col-xs-offset-3 {
         margin: 0;
         width: 100%;
