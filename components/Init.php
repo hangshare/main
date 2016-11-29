@@ -79,7 +79,8 @@ class Init extends Component
 
     protected function language()
     {
-        if (strpos(Yii::$app->request->url, 'en/') === false && isset($_COOKIE['userlanghangshare']) && $_COOKIE['userlanghangshare'] == 'en' && $this->isHome()) {
+        $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        if ($lang == 'en' && $this->isHome() && !isset($_COOKIE['userlanghangshare']) || strpos(Yii::$app->request->url, 'en/') === false && isset($_COOKIE['userlanghangshare']) && $_COOKIE['userlanghangshare'] == 'en' && $this->isHome()) {
             header("Location: https://www.hangshare.com/en/");
             exit(0);
         }
