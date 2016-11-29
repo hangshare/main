@@ -25,7 +25,7 @@ class Sendsms extends Component
         ));
 
         $payload = array(
-            'TopicArn' => 'arn:aws:sns:us-east-1:754841271985:SMS_Test:c44a611e-8f75-443f-9b74-7f6b7f5d27ef',
+            'TopicArn' => 'arn:aws:sns:us-east-1:754841271985:SMS_Test',
             'Message' => $message,
             'MessageStructure' => 'string',
         );
