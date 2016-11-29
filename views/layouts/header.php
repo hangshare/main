@@ -40,6 +40,14 @@ if ($mainMenu == false) {
         <ul id="non-user-menu" class="mainmenu">
             <li><?= Html::a(Yii::t('app', 'Login'), Yii::$app->urlManager->createUrl(['//login'])); ?></li>
             <li><?= Html::a(Yii::t('app', 'Register'), Yii::$app->urlManager->createUrl(['//register'])); ?></li>
+            <li>
+                <hr/>
+            </li>
+            <?php if (Yii::$app->language == 'en'): ?>
+                <li><?= Html::a('عربي', 'javascript:void(0);', ['data-url' => '/', 'rel' => 'nofollow', 'id' => 'changeLang']) ?></li>
+            <?php else: ?>
+                <li><?= Html::a('English', 'javascript:void(0);', ['data-url' => '/en/', 'rel' => 'nofollow', 'id' => 'changeLang']) ?></li>
+            <?php endif; ?>
         </ul>
     <?php endif; ?>
     <ul id="page-share" class="mainmenu">
