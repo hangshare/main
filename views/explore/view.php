@@ -129,7 +129,8 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                                     $bodys .= $data->body;
                                 }
                                 $bodys = Yii::$app->helper->replaceLinks($bodys);
-                                $bodys = Yii::$app->helper->str_insert($bodys, '</p>', '<div style="float: left; margin: 0 20px 20px 0;"> <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                if (!Yii::$app->helper->isMobile()) {
+                                    $bodys = Yii::$app->helper->str_insert($bodys, '</p>', '<div style="float: left; margin: 0 20px 20px 0;"> <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <!-- MPU - Post page right Upper  -->
                     <ins class="adsbygoogle"
                          style="display:inline-block;width:300px;height:250px; text-align: left;"
@@ -138,7 +139,8 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                     <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     </script></div>');
-                                Yii::$app->cache->set('post-body-' . $model->id, $bodys, 3000);
+                                    Yii::$app->cache->set('post-body-' . $model->id, $bodys, 3000);
+                                }
                             }
                             $this->description = Yii::$app->helper->metabody($bodys);
                             if (empty($this->description)) {
@@ -146,6 +148,17 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                             }
                             echo $bodys;
                             ?>
+                            <?php if (Yii::$app->helper->isMobile()): ?>
+                                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                <!-- MPU - Post page right Upper  -->
+                                <ins class="adsbygoogle"
+                                     style="display:inline-block;width:300px;height:250px; text-align: left;"
+                                     data-ad-client="ca-pub-6288640194310142"
+                                     data-ad-slot="1962272113"></ins>
+                                <script>
+                                    (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            <?php endif; ?>
                             <div class="clearfix"></div>
                             <div id="related-posts" data-id="<?= $model->id; ?>">
                                 <h3 class="underlined"><?= Yii::t('app', 'Related Posts') ?></h3>
@@ -263,18 +276,22 @@ endif; ?>
                style="color: #ccc; position: relative; top: -10px"><i
                     class="glyphicon glyphicon-remove-sign"></i></a>
             <h4 class="text-center margin-0"><?= Yii::t('app', 'Share Posts and get instant profit') ?></h4>
-<!--            <a onClick="ga('send', {-->
-<!--                                    hitType: 'event',-->
-<!--                                    eventCategory: 'Sign Up',-->
-<!--                                    eventAction: 'Facebook',-->
-<!--                                    eventLabel: 'Sign Up Page'-->
-<!--                                });" href="--><?//= $fUrl; ?><!--" class="btn btn-primary" style="background-color: #3b5998;height: 30px; margin: 15px auto;-->
-<!--    width: 50%;">-->
-<!--                <i class="fa fa-fw fa-facebook pull-left signup-slide-fb"></i>-->
-<!--                <span>--><?//= Yii::t('app', 'Sign up NOW! Using your Facebook Account') ?><!--</span>-->
-<!--            </a>-->
+            <!--            <a onClick="ga('send', {-->
+            <!--                                    hitType: 'event',-->
+            <!--                                    eventCategory: 'Sign Up',-->
+            <!--                                    eventAction: 'Facebook',-->
+            <!--                                    eventLabel: 'Sign Up Page'-->
+            <!--                                });" href="-->
+            <? //= $fUrl; ?><!--" class="btn btn-primary" style="background-color: #3b5998;height: 30px; margin: 15px auto;-->
+            <!--    width: 50%;">-->
+            <!--                <i class="fa fa-fw fa-facebook pull-left signup-slide-fb"></i>-->
+            <!--                <span>-->
+            <? //= Yii::t('app', 'Sign up NOW! Using your Facebook Account') ?><!--</span>-->
+            <!--            </a>-->
 
-            <a onClick="ga('send', {hitType: 'event',eventCategory: 'Sign Up',eventAction: 'Facebook',eventLabel: 'Blog View'});" href="javascript:void(0);" rel="nofollow" class="btn btn-primary fb-login" style="background-color: #3b5998;height: 30px; margin: 15px auto;width: 50%;">
+            <a onClick="ga('send', {hitType: 'event',eventCategory: 'Sign Up',eventAction: 'Facebook',eventLabel: 'Blog View'});"
+               href="javascript:void(0);" rel="nofollow" class="btn btn-primary fb-login"
+               style="background-color: #3b5998;height: 30px; margin: 15px auto;width: 50%;">
                 <i class="fa fa-fw fa-facebook pull-left signup-slide-fb"></i>
                 <span><?= Yii::t('app', 'Sign up NOW! Using your Facebook Account') ?></span>
             </a>
@@ -316,6 +333,11 @@ endif; ?>
     }
   }
 }
+
+
+
+
+
 </script>
 
 
