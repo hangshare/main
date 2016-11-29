@@ -10,7 +10,7 @@ $articlesurl = Yii::t('app', 'articles-url');
 <div id="page" class="animsition equal">
     <section id="home-section" class="home-section full-screen">
         <div class="hs-content">
-            <div class="overlay">
+            <div class="overlay p-t-170">
                 <div class="wow animated fadeInRightBig" data-wow-duration="1s">
                     <h1 class="header-index"><?= Yii::t('app', 'welcome 1') ?></h1>
                 </div>
@@ -18,7 +18,7 @@ $articlesurl = Yii::t('app', 'articles-url');
                      data-wow-delay=".5s">
                     <img width="100" class="pull-left"
                          src="https://s3-eu-west-1.amazonaws.com/hangshare-media/paypal_verified.png"/>
-                    <h3 class="header-index" style="line-height: 31px;margin-right: 107px;margin-top: 4px;">
+                    <h3 class="header-index header-index3">
                         <?= Yii::t('app', 'Certified By Paypal') ?>
                     </h3>
                 </div>
