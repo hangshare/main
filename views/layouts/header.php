@@ -177,9 +177,9 @@ if ($mainMenu == false) {
                             <li><?= Html::a(Yii::t('app', 'Privacy'), ['//' . Yii::t('app', 'privacy-url')], ['rel' => 'nofollow']) ?></li>
                             <li class="divider"></li>
                             <?php if (Yii::$app->language == 'en'): ?>
-                                <li><?= Html::a('عربي', '/', ['rel' => 'nofollow', 'class' => 'changeLang']) ?></li>
+                                <li><?= Html::a('عربي', 'javascript:void(0);', ['data-url' => '/', 'rel' => 'nofollow', 'id' => 'changeLang']) ?></li>
                             <?php else: ?>
-                                <li><?= Html::a('English', ['//en'], ['rel' => 'nofollow', 'class' => 'changeLang']) ?></li>
+                                <li><?= Html::a('English', 'javascript:void(0);', ['data-url' => '/en/', 'rel' => 'nofollow', 'id' => 'changeLang']) ?></li>
                             <?php endif; ?>
                         </ul>
                     </div>
