@@ -80,7 +80,7 @@ class Init extends Component
     protected function language()
     {
         $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-        if (($lang != 'ar' && strpos($lang, 'ar-') === false) && $this->isHome() && !isset($_COOKIE['userlanghangshare']) || strpos(Yii::$app->request->url, 'en/') === false && isset($_COOKIE['userlanghangshare']) && $_COOKIE['userlanghangshare'] == 'en' && $this->isHome()) {
+        if ($lang != 'ar' && $this->isHome() && !isset($_COOKIE['userlanghangshare']) || strpos(Yii::$app->request->url, 'en/') === false && isset($_COOKIE['userlanghangshare']) && $_COOKIE['userlanghangshare'] == 'en' && $this->isHome()) {
             header("Location: https://www.hangshare.com/en/");
             exit(0);
         }
@@ -100,8 +100,7 @@ class Init extends Component
 
     protected function isHome()
     {
-        $isHome = Yii::$app->request->url == Yii::getAlias('@web') || Yii::$app->request->url == Yii::getAlias('@web') . '/en/';
-        return $isHome;
+        return Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index';
     }
 
     public function get_string_between($string, $start, $end)
