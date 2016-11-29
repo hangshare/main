@@ -80,20 +80,18 @@ class Init extends Component
 
     protected function language()
     {
-        if (strpos(Yii::$app->request->url, 'en/') !== false || strpos(Yii::$app->request->url, '/web/en') !== false) {
-            Yii::$app->language = 'en';
-            Yii::$app->homeUrl = Yii::getAlias('@web') . '/en/';
-            setcookie('userlanghangshare', 'en', time() + 999999, "/");
-            $_GET['language'] = 'en';
-        } else {
-            $_GET['language'] = 'ar';
-            setcookie('userlanghangshare', 'ar', time() + 999999, "/");
-            Yii::$app->language = 'ar';
-        }
-
         if (isset($_COOKIE['userlanghangshare']) && $_COOKIE['userlanghangshare'] == 'en' && $this->isHome()) {
             header("Location: https://www.hangshare.com/en/");
             exit(0);
+        }
+        if (strpos(Yii::$app->request->url, 'en/') !== false || strpos(Yii::$app->request->url, '/web/en') !== false) {
+            Yii::$app->language = 'en';
+            Yii::$app->homeUrl = Yii::getAlias('@web') . '/en/';
+            $_GET['language'] = 'en';
+        } else {
+            Yii::$app->language = 'ar';
+            Yii::$app->homeUrl = Yii::getAlias('@web');
+            $_GET['language'] = 'ar';
         }
     }
 
