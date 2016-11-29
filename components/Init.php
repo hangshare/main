@@ -83,7 +83,7 @@ class Init extends Component
             header("Location: https://www.hangshare.com/en/");
             exit(0);
         }
-        $date_of_expiry = time() + 60 * 60 * 24 * 60;
+        $date_of_expiry = time() + 5184000;
         if (strpos(Yii::$app->request->url, 'en/') !== false || strpos(Yii::$app->request->url, '/web/en') !== false) {
             Yii::$app->language = 'en';
             Yii::$app->homeUrl = Yii::getAlias('@web') . '/en/';
