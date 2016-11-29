@@ -102,5 +102,7 @@ class AppAsset extends AssetBundle
         $this->css [] = "owl/owl.theme.css";
         $this->js[] = "owl/owl.carousel.js";
         $this->js[] = YII_DEBUG ? 'js/main.js' : '/js/main.1.2.min.js';
+
+        $this->js[] = 'https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js';
     }
 }
