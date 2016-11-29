@@ -82,6 +82,11 @@ class SiteController extends Controller
         ];
     }
 
+    public function actionSms()
+    {
+        Yii::$app->sendsms->send('kkk', 'a');
+    }
+
     public function actionFlush()
     {
         Yii::$app->cache->flush();
