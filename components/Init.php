@@ -34,7 +34,6 @@ class Init extends Component
         }
 
 
-
         $this->language();
 
         if (strpos(Yii::$app->request->url, 'explore/') !== false && strpos(Yii::$app->request->url, 'title') !== false) {
@@ -84,14 +83,17 @@ class Init extends Component
             header("Location: https://www.hangshare.com/en/");
             exit(0);
         }
+        $date_of_expiry = time() + 60 * 60 * 24 * 60;
         if (strpos(Yii::$app->request->url, 'en/') !== false || strpos(Yii::$app->request->url, '/web/en') !== false) {
             Yii::$app->language = 'en';
             Yii::$app->homeUrl = Yii::getAlias('@web') . '/en/';
             $_GET['language'] = 'en';
+            setcookie("userlanghangshare", "en", $date_of_expiry);
         } else {
             Yii::$app->language = 'ar';
             Yii::$app->homeUrl = Yii::getAlias('@web');
             $_GET['language'] = 'ar';
+            setcookie("userlanghangshare", "ar", $date_of_expiry);
         }
     }
 
