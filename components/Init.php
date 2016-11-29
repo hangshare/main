@@ -79,7 +79,7 @@ class Init extends Component
 
     protected function language()
     {
-        if (strpos(Yii::$app->request->url, 'en/') === false && isset($_COOKIE['userlanghangshare']) && $_COOKIE['userlanghangshare'] == 'en') {
+        if (strpos(Yii::$app->request->url, 'en/') === false && isset($_COOKIE['userlanghangshare']) && $_COOKIE['userlanghangshare'] == 'en' && $this->isHome()) {
             header("Location: https://www.hangshare.com/en/");
             exit(0);
         }
@@ -88,20 +88,18 @@ class Init extends Component
             Yii::$app->language = 'en';
             Yii::$app->homeUrl = Yii::getAlias('@web') . '/en/';
             $_GET['language'] = 'en';
-            setcookie("userlanghangshare", "en", $date_of_expiry,'/');
+            setcookie("userlanghangshare", "en", $date_of_expiry, '/', '.hangshare.com');
         } else {
             Yii::$app->language = 'ar';
             Yii::$app->homeUrl = Yii::getAlias('@web');
             $_GET['language'] = 'ar';
-//            setcookie("userlanghangshare", "ar", $date_of_expiry);
+            setcookie("userlanghangshare", "ar", $date_of_expiry, '/', '.hangshare.com');
         }
     }
 
     protected function isHome()
     {
-        $controller = Yii::$app->controller;
-        $default_controller = Yii::$app->defaultRoute;
-        $isHome = (($controller->id === $default_controller) && ($controller->action->id === $controller->defaultAction)) ? true : false;
+        $isHome = Yii::$app->request->url == Yii::getAlias('@web') || Yii::$app->request->url == Yii::getAlias('@web') . '/en/';
         return $isHome;
     }
 
