@@ -85,26 +85,24 @@ class Init extends Component
             Yii::$app->homeUrl = Yii::getAlias('@web') . '/en/';
             setcookie('userlanghangshare', 'en', time() + 999999, "/");
             $_GET['language'] = 'en';
-
-        } elseif (isset($_COOKIE['userlanghangshare']) && $_COOKIE['userlanghangshare'] == 'en' && $this->isHome()) {
-            $_GET['language'] = 'en';
-            Yii::$app->homeUrl = Yii::getAlias('@web') . '/en/';
-            //header("HTTP/1.1 302 Moved Permanently");
-            //header("Location: http://localhost/hangshare/web/en/");
-            header("Location: https://www.hangshare.com/en/");
-            exit(0);
         } else {
+            $_GET['language'] = 'ar';
             setcookie('userlanghangshare', 'ar', time() + 999999, "/");
             Yii::$app->language = 'ar';
+        }
+
+        if (isset($_COOKIE['userlanghangshare']) && $_COOKIE['userlanghangshare'] == 'en' && $this->isHome()) {
+            header("Location: https://www.hangshare.com/en/");
+            exit(0);
         }
     }
 
     protected function isHome()
     {
-//        $controller = Yii::$app->controller;
-//        $default_controller = Yii::$app->defaultRoute;
-//        $isHome = (($controller->id === $default_controller) && ($controller->action->id === $controller->defaultAction)) ? true : false;
-//        return $isHome;
+        $controller = Yii::$app->controller;
+        $default_controller = Yii::$app->defaultRoute;
+        $isHome = (($controller->id === $default_controller) && ($controller->action->id === $controller->defaultAction)) ? true : false;
+        return $isHome;
     }
 
     public function get_string_between($string, $start, $end)
