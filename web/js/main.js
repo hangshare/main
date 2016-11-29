@@ -1,6 +1,6 @@
 window.fbAsyncInit = function () {
     FB.init({
-        appId:'215567798868369', // '1024611190883720',
+        appId: '215567798868369', // '1024611190883720',
         xfbml: true,
         version: 'v2.8'
     });
@@ -96,15 +96,10 @@ $(function () {
         $("#" + da).toggle();
     });
 
-    $('.changeLang').on('click', function (e) {
-        var name = "userlanghangshare";
-        var pathBits = location.pathname.split('/');
-        var pathCurrent = ' path=';
-        document.cookie = name + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT;';
-        for (var i = 0; i < pathBits.length; i++) {
-            pathCurrent += ((pathCurrent.substr(-1) != '/') ? '/' : '') + pathBits[i];
-            document.cookie = name + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT;' + pathCurrent + ';';
-        }
+    $(document).on('click', '.changeLang', function (e) {
+        e.preventDefault();
+        delete_cookie("userlanghangshare");
+        window.location.href = $(this).attr("href");
     });
 
 
