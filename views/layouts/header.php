@@ -168,15 +168,19 @@ if ($mainMenu == false) {
                 <div class="row">
                     <div class="links" style="color: #fff;">
                         <ul class="list-inline pull-right">
-                            <li><?= Html::a(Yii::t('app', 'Home page'), Yii::$app->homeUrl) ?></li>
+                            <li><?= Html::a(Yii::t('app', 'About Us'), ['//' . Yii::t('app', 'About-Us-url')], ['rel' => 'nofollow']) ?></li>
                             <li class="divider"></li>
-                            <li><?= Html::a(Yii::t('app', 'About Us'), ['//' . Yii::t('app', 'About-Us-url')],['rel'=>'nofollow']) ?></li>
+                            <li><?= Html::a(Yii::t('app', 'Faqs'), ['//' . Yii::t('app', 'Faqs-url')], ['rel' => 'nofollow']) ?></li>
                             <li class="divider"></li>
-                            <li><?= Html::a(Yii::t('app', 'Faqs'), ['//' . Yii::t('app', 'Faqs-url')],['rel'=>'nofollow']) ?></li>
+                            <li><?= Html::a(Yii::t('app', 'Contact Us'), ['//' . Yii::t('app', 'ContactUs-url')], ['rel' => 'nofollow']) ?></li>
                             <li class="divider"></li>
-                            <li><?= Html::a(Yii::t('app', 'Contact Us'), ['//' . Yii::t('app', 'ContactUs-url')],['rel'=>'nofollow']) ?></li>
+                            <li><?= Html::a(Yii::t('app', 'Privacy'), ['//' . Yii::t('app', 'privacy-url')], ['rel' => 'nofollow']) ?></li>
                             <li class="divider"></li>
-                            <li><?= Html::a(Yii::t('app', 'Privacy'), ['//' . Yii::t('app', 'privacy-url')],['rel'=>'nofollow']) ?></li>
+                            <?php if (Yii::$app->language == 'en'): ?>
+                                <li><?= Html::a('عربي', '/', ['rel' => 'nofollow', 'class' => 'changeLang']) ?></li>
+                            <?php else: ?>
+                                <li><?= Html::a('English', ['//en'], ['rel' => 'nofollow', 'class' => 'changeLang']) ?></li>
+                            <?php endif; ?>
                         </ul>
                     </div>
                 </div>
@@ -220,8 +224,8 @@ if ($mainMenu == false) {
             </div>
             <?php if (Yii::$app->user->isGuest) : ?>
                 <div class="menu-signup-login pull-right">
-                    <?= Html::a(Yii::t('app', 'Login'), Yii::$app->urlManager->createUrl(['//login']), ['class' => 'btn btn-default','rel'=>'nofollow']); ?>
-                    <?= Html::a(Yii::t('app', 'Register'), Yii::$app->urlManager->createUrl(['plan']), ['class' => 'btn btn-primary','rel'=>'nofollow']); ?>
+                    <?= Html::a(Yii::t('app', 'Login'), Yii::$app->urlManager->createUrl(['//login']), ['class' => 'btn btn-default', 'rel' => 'nofollow']); ?>
+                    <?= Html::a(Yii::t('app', 'Register'), Yii::$app->urlManager->createUrl(['plan']), ['class' => 'btn btn-primary', 'rel' => 'nofollow']); ?>
                 </div>
             <?php else :
                 $username = empty(Yii::$app->user->identity->username) ? Yii::$app->user->identity->id : Yii::$app->user->identity->username;
