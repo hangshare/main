@@ -96,8 +96,6 @@ $canonical = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
             /></noscript>
         <!-- End Facebook Pixel Code -->
     <?php endif; ?>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 </head>
 <body>
 <?php foreach (Yii::$app->session->getAllFlashes() as $message):; ?>
