@@ -263,15 +263,15 @@ return [
 
 
     // Homepage
-    'welcome 1' => 'Post Share and make profit',
+    'welcome 1' => 'Post, Share, and make profit',
     'Signup Now' => 'Sign Up Now',
     'how is our work' => 'How the website works?',
     'process' => 'Work',
     'flow' => 'Steps',
     'Write a post' => 'Sign up and add your first post',
-    'Write a post info' => 'You can write articles and post them on Hangshare. those articles should meet the quality standards as the website validates them before they are published.',
+    'Write a post info' => 'You can write articles and post them on Hangshare. those articles should meet the quality <b>standards</b>, and the website validates them before they are published.',
     'Share your post' => 'Share your posts on Social Media',
-    'Share your post info' => 'Share your posts on the social media or any website or blog to generate views on your articles, each view increase your earnings.',
+    'Share your post info' => 'Share your posts on the social media or any website or blog to generate views on your articles, each view <b>increases</b> your earnings.',
     'Gain Profit' => 'Make profit',
     'Gain Profit info' => 'You are eligible to take the profit once they reach $100, the money is to be transferred to you via Paypal, bank, or wire transfer.',
     'Number of Users' => 'Number of users',
