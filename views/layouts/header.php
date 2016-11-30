@@ -161,20 +161,25 @@ if ($mainMenu == false) {
 <?php else : ?>
     <div class="top-menu">
         <div class="container">
-            <div class="menu-logo">
-                <a href="<?= Yii::$app->homeUrl ?>">
-                    <?php if (Yii::$app->language == 'ar') : ?>
-                        <img width="135"
-                             src="https://s3-eu-west-1.amazonaws.com/hangshare-media/hangshare-logo.png"/>
-                    <?php else : ?>
-                        <img width="135"
-                             src="https://s3-eu-west-1.amazonaws.com/hangshare-media/hangshare-logo-en.png"/>
-                    <?php endif; ?>
-                </a>
+            <div class="col-md-2">
+                <div class="menu-logo">
+                    <a href="<?= Yii::$app->homeUrl ?>">
+                        <?php if (Yii::$app->language == 'ar') : ?>
+                            <img width="135"
+                                 src="https://s3-eu-west-1.amazonaws.com/hangshare-media/hangshare-logo.png"/>
+                        <?php else : ?>
+                            <img width="135"
+                                 src="https://s3-eu-west-1.amazonaws.com/hangshare-media/hangshare-logo-en.png"/>
+                        <?php endif; ?>
+                    </a>
+                </div>
             </div>
-            <div class="pull-right">
+            <div class="col-md-5">
+                <?= $this->render('//explore/_search', ['model' => new app\models\Post]) ?>
+            </div>
+            <div class="col-md-5">
                 <div class="row">
-                    <div class="links" style="color: #fff;">
+                    <div class="links" style="color: #fff;margin-top: 2px;">
                         <ul class="list-inline pull-right">
                             <li><?= Html::a(Yii::t('app', 'About Us'), ['//' . Yii::t('app', 'About-Us-url')], ['rel' => 'nofollow']) ?></li>
                             <li class="divider"></li>
@@ -191,22 +196,6 @@ if ($mainMenu == false) {
                             <?php endif; ?>
                         </ul>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="menu-search">
-                        <?= $this->render('//explore/_search', ['model' => new app\models\Post]) ?>
-                    </div>
-                    <ul class="list-inline">
-                        <li class="pull-right"><a class="btn btn-primary" href="https://www.facebook.com/Hangshare"
-                                                  target="_blank"><i
-                                    style="margin: 3px;" class="fa fa-fw fa-facebook"></i></a></li>
-                        <li class="pull-right"><a class="btn" href="https://www.twitter.com/hang_share"
-                                                  target="_blank"
-                                                  style="color: #fff; background-color: #4099ff;"><i
-                                    style="margin: 3px;"
-                                    class="fa fa-twitter"></i></a>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
