@@ -1,5 +1,6 @@
 <?php
-$this->title = 'Hangshare Privacy';
+$this->title = 'Hangshare - Privacy Policy';
+$this->description = 'The terms and conditions of use site hangshare, how we protect the user, and more.';
 ?>
 <div class="container">
     <div class="white-box">
