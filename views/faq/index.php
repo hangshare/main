@@ -8,8 +8,11 @@ use yii\widgets\ListView;
 /* @var $searchModel app\models\FaqSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Faq Title', ['category' => isset($_GET['category']) ? isset($_GET['category']) : '']);
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = Yii::t('app', 'metia.faq.title');
+//Yii::t('app', 'Faq Title', ['category' => isset($_GET['category']) ? isset($_GET['category']) : '']);
+$this->description = Yii::t('app', 'metia.faq.description');
+
+
 ?>
 <div class="container">
     <div class="col-md-12">
