@@ -51,7 +51,7 @@ return [
     //Titles
     'General Page Title' => 'Share and make money :: HangShare.com',
     'Home Title' => 'Share articles and make money for each view',
-    'Password Rest Title' => 'Password Rest Title',
+    'Password Rest Title' => 'Password Rest',
     'Change passowrd title' => 'Change Your Account Password',
     'New Account' => 'New Account',
     'Sitemap title' => 'Sitemap',
