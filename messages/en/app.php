@@ -138,7 +138,7 @@ return [
     'user index' => 'Users',
     'Posts Written by' => 'Posts Written by',
     'Personal Info' => 'Personal Info',
-    'Transfer Methods' => 'Transfer Methods',
+    'Transfer Methods' => 'Withdraw Methods',
     'Edit Password' => 'Edit your password',
     'Edit' => 'Edit',
     'Choose a picture' => 'Choose a picture',
@@ -206,6 +206,7 @@ return [
     'Edit your payment methods' => 'Edit your payment methods',
     'Welcome.message' => 'Make sure you update your personal information and in addition the way that suits you to transfer money to you in case of maturity',
     'Money Transfer Methods' => 'Money Transfer Methods',
+    'Money Transfer' => 'Withdraw Methods',
     'Select transfer method' => 'Please select the transfer method that you would like us to pay you throw.',
     'Cashier' => 'Wistern Union',
     'Bank' => 'Bank',
@@ -289,8 +290,7 @@ return [
     'posts from ' => 'Posts from',
     'our users' => 'our users',
     'go to the blog' => 'Browse posts',
-    'Sign Up Now'=>'Sign up Now',
-
-
+    'Sign Up Now' => 'Sign up Now',
+    'Money Report' => 'Transactions Report',
     //''=>'I signed up in Hangshare and it was a unique experience, and I now generate more than $500 a month by sharing posts on my Facebook pages.',
 ];
