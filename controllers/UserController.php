@@ -295,6 +295,19 @@ class UserController extends Controller
         ]);
     }
 
+    public function actionReport(){
+        $this->layout = 'usermanage';
+
+        $model = $this->view->params['user'] = $this->findModel(Yii::$app->user->identity->id);
+        $query = UserTransactions::find()->where(['userId'=>Yii::$app->user->identity->id])->orderBy('id DESC');
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+        return $this->render('transactions', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
