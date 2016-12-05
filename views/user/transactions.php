@@ -6,8 +6,6 @@ $this->title = Yii::t('app', 'Money Report');
 ?>
 <div class="container">
     <h1><?= Html::encode($this->title) ?></h1>
-
-
     <table class="table">
         <thead>
         <tr>
@@ -24,7 +22,8 @@ $this->title = Yii::t('app', 'Money Report');
             'dataProvider' => $dataProvider,
             'itemView' => '_transactions',
             'layout' => "<ul class='list-unstyled'>{items}\n</ul>{pager}",
-            'emptyText' => '',
+            'emptyText' => false,
+            'emptyTextOptions'=>['class'=>''],
             'options' => [],
             'itemOptions' => [
                 'tag' => false,
