@@ -39,7 +39,7 @@ class FaqController extends Controller
         if (isset($_GET['category'])) {
             $tit = str_replace('-', ' ', $_GET['category']);
         } else {
-            $tit = 'الأسئلة الشائعة';
+            $tit = Yii::t('app','FAQ');
         }
         $categoryId = array_search($tit, Faq::$CategoryStr);
         $dataProvider = $searchModel->search(['categoryId' => $categoryId]);
