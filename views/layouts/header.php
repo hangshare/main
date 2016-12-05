@@ -94,6 +94,11 @@ if ($mainMenu == false) {
                         class="fa fa-fw fa-gear hidden-xs"></i>
                     <?= Yii::t('app', 'Money Transfer') ?>
                 </a></li>
+            <li>
+                <a href="<?= Yii::$app->urlManager->createUrl(['/u/report']); ?>">
+                    <i class="fa fa-fw fa-gear hidden-xs"></i><?= Yii::t('app', 'Money Report') ?>
+                </a>
+            </li>
             <li class="dropdown-header"></li>
             <li class="divider"></li>
             <li><a data-method="post" href="<?= Yii::$app->urlManager->createUrl(['/site/logout']); ?>"><i
@@ -273,6 +278,12 @@ if ($mainMenu == false) {
                                                 class="fa fa-fw fa-gear hidden-xs"></i>
                                             <?= Yii::t('app', 'Money Transfer') ?>
                                         </a></li>
+
+                                    <li>
+                                        <a tabindex="-1" href="<?= Yii::$app->urlManager->createUrl(['/u/report']); ?>">
+                                            <i class="fa fa-fw fa-gear hidden-xs"></i><?= Yii::t('app', 'Money Report') ?>
+                                        </a>
+                                    </li>
                                     <li class="dropdown-header"></li>
                                     <li class="divider"></li>
                                     <li><a tabindex="-1" data-method="post"
