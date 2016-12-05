@@ -257,8 +257,6 @@ if ($mainMenu == false) {
                                 <a style="padding: 9px;" data-toggle="dropdown" href="#" class="dropdown-toggle">
                                     <img width="25" src="<?= $imSm; ?>">
                                     <span class="rela" style="top: 1px;">
-                                       <span
-                                           style=" display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 50px;"><?= Yii::$app->user->identity->name; ?></span>
                                         $<?= number_format(Yii::$app->user->identity->userStats->available_amount, 2) ?>
                                     </span>
                                     <b class="caret"></b></a>
