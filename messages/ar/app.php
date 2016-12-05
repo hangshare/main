@@ -306,4 +306,12 @@ return [
     'Please verify your email' => 'يرجى تفعيل الحساب',
     'In order to add post and use full features of habgshare website' => 'لكي تستطيع نشر مواضيع و استخدام كافة ميزات موقع هانج شير يرجى منك تفعيل البريد الاكتروني الخاص بحسابك.',
     'Verify account' => 'تفعيل الحساب موقع هانج شير',
+    'Money Report' => 'التقرير المالي',
+    'Receipt' => 'وصل الاستلام',
+    'Amount' => 'القيمة المستحقة',
+    'Status' => 'الحالة',
+    'Date' => 'الوقت والتاريخ',
+    'Received' => 'تم ارسال المبلغ',
+    'Processing' => 'تحت المعاينة',
+    'ID' => 'رقم الحوالة',
 ];
