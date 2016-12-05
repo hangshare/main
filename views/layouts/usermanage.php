@@ -21,13 +21,16 @@ $this->endContent();
                         ?>
                         <a class="list-group-item" href=
                         "<?= Yii::$app->urlManager->createUrl(['//user/' . $username]); ?>">
-                            <i class="fa fa-user"></i> <?= Html::img(Yii::$app->imageresize->thump(Yii::$app->user->identity->image, 50, 50, 'crop'), ['width' => 25]); ?> <?php echo $this->params['user']->name; ?>
+                            <i class="fa fa-user m-l-30"></i> <?php echo $this->params['user']->name; ?>
                         </a>
                         <a class="list-group-item" href="<?= Yii::$app->urlManager->createUrl(['//u/manage']); ?>">
-                            <i class="fa fa-info"></i> <?= Yii::t('app', 'Personal Info') ?>
+                            <i class="fa fa-info m-l-30"></i> <?= Yii::t('app', 'Personal Info') ?>
                         </a>
                         <a class="list-group-item" href="<?= Yii::$app->urlManager->createUrl(['//u/transfer']); ?>">
-                            <i class="fa fa-money"></i> <?= Yii::t('app', 'Transfer Methods') ?>
+                            <i class="fa fa-money m-l-30"></i><?= Yii::t('app', 'Transfer Methods') ?>
+                        </a>
+                        <a class="list-group-item" href="<?= Yii::$app->urlManager->createUrl(['//u/report']); ?>">
+                            <i class="fa fa-money m-l-30"></i><?= Yii::t('app', 'Money Report') ?>
                         </a>
                     </div>
                 </div>
