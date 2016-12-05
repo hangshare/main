@@ -3,7 +3,8 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-$this->title = 'About HangShare';
+$this->title = 'Hangshare - Share your Posts and Make Money, Sign in Now!';
+$this->description = 'Hangshare is created for users who are keen to make additional income from home. Hangshare helps people make money using their social pages.';
 ?>
 
 <div class="container">

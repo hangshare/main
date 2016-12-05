@@ -1,5 +1,6 @@
 <?php
 $this->title = Yii::t('app', 'New account hangshare');
+$this->description = Yii::t('app', 'meta.plan.desc');
 
 Use yii\helpers\Html;
 
