@@ -100,6 +100,7 @@ $config = [
                 '<language:en>/u/gold' => 'user/gold',
                 '<language:en>/u/request' => 'user/request',
                 '<language:en>/u/missing' => 'user/missing',
+                '<language:en>/u/report' => 'user/report',
                 '<language:en>/u/suspended' => 'user/suspended',
                 '<language:en>/u/success/<id:\d+>' => 'user/success',
                 '<language:en>/faq' => 'faq/index',
@@ -133,6 +134,7 @@ $config = [
                 'u/suspended' => 'user/suspended',
                 'u/verifyaccount' => 'user/verifyaccount',
                 'u/success/<id:\d+>' => 'user/success',
+                'u/report' => 'user/report',
                 'explore/<id:\d+>' => 'explore/red',
 
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
