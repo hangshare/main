@@ -24,6 +24,7 @@ $this->title = Yii::t('app', 'Money Report');
             'dataProvider' => $dataProvider,
             'itemView' => '_transactions',
             'layout' => "<ul class='list-unstyled'>{items}\n</ul>{pager}",
+            'emptyText' => '',
             'options' => [],
             'itemOptions' => [
                 'tag' => false,
