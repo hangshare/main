@@ -234,7 +234,6 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $this->layout = 'home';
-        $this->description = Yii::t('app', 'meta.homepage.desc');
         if (!\Yii::$app->user->isGuest) {
             if (Yii::$app->language == 'ar')
                 return $this->redirect(['//مواضيع']);
