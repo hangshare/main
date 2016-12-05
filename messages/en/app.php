@@ -50,7 +50,7 @@ return [
     //Models
     //Titles
     'General Page Title' => 'Share and make money :: HangShare.com',
-    'Home Title' => 'Share articles and make money for each view',
+    'Home Title' => 'Hangshare - Share your Posts and Make Money, Sign in Now!',
     'Password Rest Title' => 'Password Rest',
     'Change passowrd title' => 'Change Your Account Password',
     'New Account' => 'New Account',
@@ -241,7 +241,7 @@ return [
     'success.faq' => 'Your question has been added successfully, our team will respond to your inquiry and inform you.',
     'you are not allwoed to access this page' => 'You are not allowed to access this page.',
     'Post has been deleted successfully' => 'Post has been deleted successfully',
-    'meta.homepage.desc' => 'The fastest way to get money through the Internet and Facebook and achieve a quick financial profit',
+    'meta.homepage.desc' => 'Hangshare is created for users who are keen to make additional income from home. Hangshare helps people make money using their social pages',
     'email.used.fb' => 'There is an e-mail is registered on the site using the following e-mail {email}, please sign in using the e-mail mentioned and password.',
     'success.password' => 'Your password has been changed successfully.',
     'error.password.rest' => "We're sorry something wrong happened please contact administrator.",
