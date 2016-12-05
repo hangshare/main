@@ -4,7 +4,8 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
 
-$this->title = Yii::t('app','Contact Us');
+$this->title = Yii::t('app', 'Contact Us');
+$this->description = Yii::t('app', 'meta.contact.description');
 ?>
 <div class="container m-t-25">
     <div class="center per50">
@@ -18,7 +19,7 @@ $this->title = Yii::t('app','Contact Us');
                     <?= $form->field($model, 'subject') ?>
                     <?= $form->field($model, 'body')->textArea(['rows' => 6]) ?>
                     <div class="form-group">
-                        <?= Html::submitButton(Yii::t('app','Send'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                        <?= Html::submitButton(Yii::t('app', 'Send'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                     </div>
                     <?php ActiveForm::end(); ?>
                 </div>
