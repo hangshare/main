@@ -3,7 +3,8 @@ use yii\helpers\Html;
 use yii\widgets\ListView;
 
 $this->title = Yii::t('app', 'Home Title');
-$this->description = Yii::t('app', 'Homepage.Description');
+$this->description = Yii::t('app', 'meta.homepage.desc');
+
 $dif = (time() - 1473885430) / 60 / 3;
 $articlesurl = Yii::t('app', 'articles-url');
 ?>
