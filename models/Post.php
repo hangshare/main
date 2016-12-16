@@ -323,7 +323,7 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'userId'])->select('id,name,image,bio,plan');
+        return $this->hasOne(User::className(), ['id' => 'userId'])->select('id,name,username,image,bio,plan');
     }
 
     /**
