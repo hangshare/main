@@ -422,7 +422,7 @@ $(function () {
 //            popup_url = 'https://www.facebook.com/dialog/feed?app_id=1024611190883720&display=popup&link=' + url + '&redirect_uri=http://www.hangshare.com/';
             popup_url = 'https://www.facebook.com/sharer/sharer.php?u=' + url;
         } else if ($(this).hasClass('js-share-gpuls')) {
-            popup_url = 'https://plus.google.com/share?url="' + url + '"';
+            popup_url = 'https://plus.google.com/share?url='+url;
         }
         var popUp = window.open(popup_url,
             'popupwindow',
