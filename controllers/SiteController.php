@@ -423,7 +423,7 @@ class SiteController extends Controller
                 $login->password = $model->password_hash;
                 $status = $login->login();
 
-                $uuId= empty($model->username) ? $model->id : $model->username;
+                $uuId = empty($model->username) ? $model->id : $model->username;
                 if ($status) {
                     $respomse = ['status' => true, 'url' => Yii::$app->urlManager->createUrl(['/user/view', 'id' => $uuId]), 'msg' => Yii::t('app', 'Login success')];
                 } else {
@@ -739,6 +739,10 @@ class SiteController extends Controller
                 $payment_amount . ' ' .
                 $payment_status . ' ' .
                 $custom);
+
+            if ($custom == 'Error') {
+                die();
+            }
 
             if ($payment_status == 'Completed' && $receiver_email == 'info@hangshare.com') {
                 $custom = json_decode($custom);
