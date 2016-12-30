@@ -94,8 +94,8 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                     ?>
                     <ul class="list-inline res-hidden">
                         <li><b><?= Yii::t('app', 'Author') ?></b> <a
-                                href="<?= Yii::$app->urlManager->createUrl(['//user/view', 'id' => $username]) ?>"
-                                title="<?= $model->user->name; ?>"><?= $model->user->name; ?></a></li>
+                                    href="<?= Yii::$app->urlManager->createUrl(['//user/view', 'id' => $username]) ?>"
+                                    title="<?= $model->user->name; ?>"><?= $model->user->name; ?></a></li>
                         <li class="divider"></li>
                         <li><b><?= Yii::t('app', 'created_at') ?> </b>
                             <span><?php echo date('Y-m-d', strtotime($model->created_at)); ?></span></li>
@@ -122,7 +122,8 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                             }
                             ?>
                             <?php
-                            $bodys = Yii::$app->cache->get('mmpost-body-' . $model->id);
+                            $mo = Yii::$app->helper->isMobile() ? 'mob ' : 'desktop';
+                            $bodys = Yii::$app->cache->get($mo . '-post-body-' . $model->id);
                             if ($bodys == false) {
                                 $bodys = '';
                                 foreach ($model->postBodies as $data) {
@@ -139,7 +140,11 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                     <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     </script></div>');
-                                    Yii::$app->cache->set('post-body-' . $model->id, $bodys, 3000);
+                                    Yii::$app->cache->set($mo . '-post-body-' . $model->id, $bodys, 3000);
+                                } else {
+                                    $bodys = Yii::$app->helper->str_insert($bodys, '</p>', '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6288640194310142" data-ad-slot="9020008518" data-ad-format="auto"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>');
+                                    Yii::$app->cache->set($mo . '-post-body-' . $model->id, $bodys, 3000);
                                 }
                             }
                             $this->description = Yii::$app->helper->metabody($bodys);
@@ -184,7 +189,7 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                                                     <li>
                                                         <?php $ttaUrl = Yii::$app->helper->urlTitle($tags->tags->name); ?>
                                                         <a href="<?= Yii::$app->urlManager->createUrl(["//tags/{$ttaUrl}"]) ?>"><label
-                                                                class="label label-default"><?php echo $tags->tags->name; ?></label></a>
+                                                                    class="label label-default"><?php echo $tags->tags->name; ?></label></a>
                                                     </li>
                                                     <?php
                                                 endif;
@@ -229,7 +234,7 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
+                                    aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title"
                             style="font-weight: bold;"><?= Yii::t('app', 'Share it message 2') ?></h4>
                     </div>
@@ -274,7 +279,7 @@ endif; ?>
         <div class="white text-center" style="height: 150px;">
             <a href="javascript:void(0);" onclick="$(this).parent().parent().hide();" rel="nofollow"
                style="color: #ccc; position: relative; top: -10px"><i
-                    class="glyphicon glyphicon-remove-sign"></i></a>
+                        class="glyphicon glyphicon-remove-sign"></i></a>
             <h4 class="text-center margin-0"><?= Yii::t('app', 'Share Posts and get instant profit') ?></h4>
             <!--            <a onClick="ga('send', {-->
             <!--                                    hitType: 'event',-->
@@ -333,6 +338,10 @@ endif; ?>
     }
   }
 }
+
+
+
+
 
 
 
