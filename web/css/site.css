@@ -2213,7 +2213,7 @@ pre code {
 .post-header {
     font-size: 40px;
     color: #000;
-    line-height: 56px;
+    line-height: 48px;
 }
 
 .centimpost {
@@ -9320,9 +9320,8 @@ and (-webkit-min-device-pixel-ratio: 2)
     }
 
     .post-header {
-        font-size: 28px;
-        line-height: 40px;
-        line-height: 50px;
+        font-size: 25px;
+        line-height: 30px;
     }
 
     .ursprdown {
