@@ -278,7 +278,7 @@ class ExploreController extends Controller
     {
         $pageSize = 10;
         $query = Post::find();
-        $query->orderBy('sort DESC');
+        $query->orderBy('id DESC');
         $query->where("post.deleted=0 AND post.published=1 AND lang = '" . Yii::$app->language . "'");
         $query->andWhere(['<>', 'cover', '']);
         $currentPage = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
