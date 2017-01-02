@@ -154,6 +154,7 @@ $config = [
                 'reset-password' => 'site/resetpassword',
                 'sitemap.xml' => 'site/sitemapxml',
                 '<slug:.*?>' => 'explore/view',
+                'enensite/postback'=>'site/postback'
             ],
         ],
         'request' => [
