@@ -729,7 +729,6 @@ class SiteController extends Controller
             $payment_status = isset($_POST['payment_status']) ? $_POST['payment_status'] : 'fa';
             $custom = isset($_POST['custom']) ? $_POST['custom'] : 'Error';
 
-
             AwsEmail::SendMail('hasania.khaled@gmail.com', 'paypal', 'Status ' .
                 $item_id . ' ' .
                 $payment_currency . ' ' .
@@ -803,8 +802,11 @@ class SiteController extends Controller
         $query['charset'] = 'utf-8';
         $query['business'] = 'info@hangshare.com';
         $query['notify_url'] = Yii::$app->urlManager->createAbsoluteUrl('//site/postback');
+        $query['notify_url'] = str_replace('enen','',$query['notify_url']);
         $query['return'] = Yii::$app->urlManager->createAbsoluteUrl('//site/success');
+        $query['return'] = str_replace('enen','en/',$query['return']);
         $query['cancel_return'] = Yii::$app->urlManager->createAbsoluteUrl('//site/cancel');
+        $query['cancel_return'] = str_replace('enen','en/',$query['cancel_return']);
         $query['amount'] = $option[$plan]['price'];
         $query['currency_code'] = 'USD';
         $query['rm'] = '2';
