@@ -82,7 +82,7 @@ $config = [
             'showScriptName' => false,
             'suffix' => '/',
             'rules' => [
-
+                'enensite/postback'=>'site/postback',
                 '<language:en>/' => '/site/index',
                 '<language:en>/articles' => 'explore/all',
                 '<language:en>/articles/<category:.*?>' => 'explore/category',
@@ -154,7 +154,7 @@ $config = [
                 'reset-password' => 'site/resetpassword',
                 'sitemap.xml' => 'site/sitemapxml',
                 '<slug:.*?>' => 'explore/view',
-                'enensite/postback'=>'site/postback'
+
             ],
         ],
         'request' => [
