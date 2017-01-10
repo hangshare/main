@@ -794,7 +794,7 @@ $(function () {
             shortcutsHint: false,
             toolbarFixed: true,
             mediaManager: false,
-            language: 'ar', // $.Yii.getLang(),
+            language: $.Yii.getLang(),
             imageUploadURL: url_lang + '/explore/upload/',
             minHeight: 200,
             maxHeight: 800
