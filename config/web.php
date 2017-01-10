@@ -103,6 +103,8 @@ $config = [
                 '<language:en>/u/report' => 'user/report',
                 '<language:en>/u/suspended' => 'user/suspended',
                 '<language:en>/u/success/<id:\d+>' => 'user/success',
+                '<language:en>/u/verifyaccount' => 'user/verifyaccount',
+
                 '<language:en>/faq' => 'faq/index',
                 '<language:en>/sitemap' => 'site/sitemap',
                 '<language:en>/contact-us' => 'site/contact',
@@ -110,6 +112,7 @@ $config = [
                 '<language:en>/about-us' => 'site/about',
                 '<language:en>/request-password-reset' => 'site/reset',
                 '<language:en>/reset-password' => 'site/resetpassword',
+
                 '<language:en>/<controller>/<action>' => '<controller>/<action>',
                 '<language:en>/<controller>/<action>/<id:\d+>' => '<controller>/<action>',
                 '<language:en>/<slug:.*?>' => 'explore/view',
