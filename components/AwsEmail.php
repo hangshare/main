@@ -40,7 +40,7 @@ class AwsEmail extends Component
             $params['__user_name__ '] = $name;
             $body = strtr($email->body, $params);
             $body .= "<img src='https://www.hangshare.com/site/email/?id={$key}' width='1' height='1' />";
-            self::SendMail($email_to, $email->subject, $body);
+            self::_SendMail($email_to, $email->subject, $body);
         }
     }
 
@@ -48,6 +48,18 @@ class AwsEmail extends Component
     {
         $domain = substr(strrchr($email, "@"), 1);
         return strtolower($domain);
+    }
+
+    public static function _SendMail($to, $subject, $body, $from = 'info@hangshare.com')
+    {
+        $allowed_domians = ['hotmail.com', 'yahoo.com', 'gmail.com', 'outlook.com', 'live.com', 'hangshare.com'];
+        if (!filter_var($to, FILTER_VALIDATE_EMAIL) || !in_array(self::getDomainFromEmail($to), $allowed_domians)) {
+            return false;
+        }
+        $headers = "MIME-Version: 1.0\r\n";
+        $headers .= "Content-type: text/html; charset=UTF-8\r\n";
+        $headers .= "From: <" . $from . ">";
+        mail($to, $subject, $body, $headers);
     }
 
     public static function SendMail($to, $subject, $body, $from = 'info@hangshare.com')
