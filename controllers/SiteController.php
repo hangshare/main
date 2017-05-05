@@ -567,6 +567,13 @@ class SiteController extends Controller
         $login->username = $login_email;
         $login->password = $user_profile->getId();
         if ($status = $login->login()) {
+
+            $cookies = Yii::$app->response->cookies;
+            $cookies->add(new \yii\web\Cookie([
+                'name' => 'ustme',
+                'value' => '1',
+            ]));
+
             if (isset($model) && ($model->created_at + 300 > time())) {
                 $url = "https://graph.facebook.com/{$user_profile->getId()}/picture?type=large";
                 $imagecontent = file_get_contents($url);
@@ -596,6 +603,15 @@ class SiteController extends Controller
         header("Cache-Control: post-check=0, pre-check=0", false);
         header("Pragma: no-cache");
 
+
+
+        $cookies = Yii::$app->response->cookies;
+
+        $cookies->add(new \yii\web\Cookie([
+            'name' => 'ustme',
+            'value' => '1',
+        ]));
+
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -611,6 +627,10 @@ class SiteController extends Controller
 
     public function actionLogout()
     {
+        $cookies = Yii::$app->response->cookies;
+        $cookies->remove('ustme');
+        unset($cookies['ustme']);
+
         Yii::$app->user->logout();
         return $this->goHome();
     }

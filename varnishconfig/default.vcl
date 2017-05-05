@@ -11,7 +11,7 @@ long b = lrand48();
 long c = lrand48();
 long d = lrand48();
 pthread_mutex_unlock(&lrand_mutex);
-sprintf(buf, "_identity=%08lx%04lx%04lx%04lx%04lx%08lx",
+sprintf(buf, "frontend=%08lx%04lx%04lx%04lx%04lx%08lx",
 a,
 b & 0xffff,
 (b & ((long)0x0fff0000) >> 16) | 0x4000,
@@ -23,27 +23,33 @@ return;
 }
 }C
 import std;
+
 backend default {
 .host = "127.0.0.1";
 .port = "8080";
+.connect_timeout = 10s;
 .first_byte_timeout = 300s;
 .between_bytes_timeout = 300s;
 }
+
 backend admin {
 .host = "127.0.0.1";
 .port = "8080";
+.connect_timeout = 10s;
 .first_byte_timeout = 21600s;
 .between_bytes_timeout = 21600s;
 }
+
 acl crawler_acl {
 "127.0.0.1";
 }
-acl debug_acl {
-}
+
+acl debug_acl {}
+
 sub generate_session {
 if (req.url ~ ".*[&?]SID=([^&]+).*") {
 set req.http.X-Varnish-Faked-Session = regsub(
-req.url, ".*[&?]SID=([^&]+).*", "_identity=\1");
+req.url, ".*[&?]SID=([^&]+).*", "frontend=\1");
 } else {
 C{
 char uuid_buf [50];
@@ -115,45 +121,34 @@ set req.http.X-Normalized-User-Agent = "opera";
 } else {
 set req.http.X-Normalized-User-Agent = "other";
 }
-set req.http.Host = "www.hangshare.com";
-if (!true || req.http.Authorization ||
+
+if (req.http.Authorization ||
 req.request !~ "^(GET|HEAD|OPTIONS)$" ||
-req.http.Cookie ~ "varnish_bypass=1") {
-if (req.url ~ "^(/ae\-en/|/sa\-en/|/ae\-ar/|/sa\-ar/|/skin/|/js/|/)(?:(?:index|litespeed)\.php/)?superuser") {
-set req.backend = admin;
+req.http.Cookie ~ "ustme" ||
+req.url ~ "^/upload") {
+    return (pipe);
 }
-return (pipe);
+
+if (req.url ~ "^/signup" ||
+    req.url ~ "^/plan" ||
+    req.url ~ "^/u/"||
+    req.url ~ "^/reset-password" ||
+    req.url ~ "^/login" ||
+    req.url ~ "^/logout" ||
+    req.url ~ "^/request-password-reset" ||
+    req.url ~ "^/resetpassword") {
+    set req.backend = admin;
+    return (pass);
 }
+
+
 set req.url = regsuball(req.url, "([^:])//+", "\1/");
 if (req.url ~ "^(/ae\-en/|/sa\-en/|/ae\-ar/|/sa\-ar/|/skin/|/js/|/)(?:(?:index|litespeed)\.php/)?") {
 set req.http.X-Turpentine-Secret-Handshake = "1";
-if (req.url ~ "^(/ae\-en/|/sa\-en/|/ae\-ar/|/sa\-ar/|/skin/|/js/|/)(?:(?:index|litespeed)\.php/)?superuser") {
-set req.backend = admin;
-return (pipe);
-}
-if (req.http.Cookie ~ "\bcurrency=") {
-set req.http.X-Varnish-Currency = regsub(
-req.http.Cookie, ".*\bcurrency=([^;]*).*", "\1");
-}
-if (req.http.Cookie ~ "\bstore=") {
-set req.http.X-Varnish-Store = regsub(
-req.http.Cookie, ".*\bstore=([^;]*).*", "\1");
-}
-if (req.url ~ "/turpentine/esi/get(?:Block|FormKey)/") {
-set req.http.X-Varnish-Esi-Method = regsub(
-req.url, ".*/method/(\w+)/.*", "\1");
-set req.http.X-Varnish-Esi-Access = regsub(
-req.url, ".*/access/(\w+)/.*", "\1");
-if (req.http.X-Varnish-Esi-Method == "esi" && req.esi_level == 0 &&
-!(true || client.ip ~ debug_acl)) {
-error 403 "External ESI requests are not allowed";
-}
-}
-
-if (req.http.Cookie !~ "_identity=" && !req.http.X-Varnish-Esi-Method) {
+if (req.http.Cookie !~ "frontend=" && !req.http.X-Varnish-Esi-Method) {
 if (client.ip ~ crawler_acl ||
 req.http.User-Agent ~ "^(?:ApacheBench/.*|.*Googlebot.*|JoeDog/.*Siege.*|magespeedtest\.com|Nexcessnet_Turpentine/.*)$") {
-set req.http.Cookie = "_identity=crawler-session";
+set req.http.Cookie = "frontend=crawler-session";
 } else {
 call generate_session;
 }
@@ -165,14 +160,7 @@ unset req.http.X-Varnish-Faked-Session;
 set req.http.X-Varnish-Static = 1;
 return (lookup);
 }
-if (req.url ~ "^(/ae\-en/|/sa\-en/|/ae\-ar/|/sa\-ar/|/skin/|/js/|/)(?:(?:index|litespeed)\.php/)?(?:superuser|api|cron\.php|checkout/cart|checkout/onepage|customer|checkout|marketplace|onestepcheckout|sales|customer/account/createpost|ajaxcart/catalog/product/view/|ajaxcart/index/add/uenc/aHR0cHM6Ly93d3cueWFsbGFzaG9wcGluZy5jb20vYWUtZW4v|ajaxcart/index/add/uenc/.*|checkout/cart/add/uenc/.*|customer/account/.*|mob/cart/.*|mob/api/test/.*|superuser|index.php/admin/.*|/ae-en/ajaxcart/index/add/uenc/.*|checkout/onepage/.*|payfort/.*)" ||
-req.url ~ "\?.*__from_store=") {
-return (pipe);
-}
-if (true &&
-req.url ~ "(?:[?&](?:__SID|XDEBUG_PROFILE)(?=[&=]|$))") {
-return (pass);
-}
+
 if (true && req.url ~ "[?&](utm_source|utm_medium|utm_campaign|utm_content|utm_term|gclid|cx|ie|cof|siteurl)=") {
 set req.url = regsuball(req.url, "(?:(\?)?|&)(?:utm_source|utm_medium|utm_campaign|utm_content|utm_term|gclid|cx|ie|cof|siteurl)=[^&]+", "\1");
 set req.url = regsuball(req.url, "(?:(\?)&|\?$)", "\1");
@@ -218,8 +206,8 @@ if (req.http.X-Varnish-Store || req.http.X-Varnish-Currency) {
 hash_data("s=" + req.http.X-Varnish-Store + "&c=" + req.http.X-Varnish-Currency);
 }
 if (req.http.X-Varnish-Esi-Access == "private" &&
-req.http.Cookie ~ "_identity=") {
-hash_data(regsub(req.http.Cookie, "^.*?_identity=([^;]*);*.*$", "\1"));
+req.http.Cookie ~ "frontend=") {
+hash_data(regsub(req.http.Cookie, "^.*?frontend=([^;]*);*.*$", "\1"));
 hash_data(client.ip);
 hash_data(req.http.Via);
 hash_data(req.http.X-Forwarded-For);
@@ -252,9 +240,9 @@ unset beresp.http.Expires;
 unset beresp.http.Pragma;
 unset beresp.http.Cache;
 unset beresp.http.Age;
-if (beresp.http.X-Turpentine-Esi == "1") {
-set beresp.do_esi = true;
-}
+
+    set beresp.do_esi = true;
+
 if (beresp.http.X-Turpentine-Cache == "0") {
 set beresp.ttl = 15s;
 return (hit_for_pass);
@@ -265,9 +253,9 @@ set beresp.ttl = 28800s;
 set beresp.http.Cache-Control = "max-age=28800";
 } elseif (req.http.X-Varnish-Esi-Method) {
 if (req.http.X-Varnish-Esi-Access == "private" &&
-req.http.Cookie ~ "_identity=") {
+req.http.Cookie ~ "frontend=") {
 set beresp.http.X-Varnish-Session = regsub(req.http.Cookie,
-"^.*?_identity=([^;]*);*.*$", "\1");
+"^.*?frontend=([^;]*);*.*$", "\1");
 }
 if (req.http.X-Varnish-Esi-Method == "ajax" &&
 req.http.X-Varnish-Esi-Access == "public") {
@@ -302,7 +290,7 @@ set resp.http.Set-Cookie = resp.http.Set-Cookie +
 } else {
 if(req.http.Host ~ "[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)") {
 set resp.http.Set-Cookie = resp.http.Set-Cookie +
-"; domain=www.hangshare.com";
+"; domain=www.tasmeemme.com";
 } else {
 set resp.http.Set-Cookie = resp.http.Set-Cookie +
 "; domain=" + regsub(req.http.Host, ":\d+$", "");
