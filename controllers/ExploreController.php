@@ -327,8 +327,8 @@ class ExploreController extends Controller
         $s3Bucket = 'hangshare-media';
         $region = 'eu-west-1';
         $acl = 'public-read';
-        $awsKey = 'AKIAIXXCGXOS77W753RQ';
-        $awsSecret = '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';
+        $awsKey = 'AKIAJRPDRPENTPSXRUGQ';
+        $awsSecret = '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';
         $algorithm = "AWS4-HMAC-SHA256";
         $service = "s3";
         $date = gmdate("Ymd\THis\Z");
