@@ -17,8 +17,8 @@ require Yii::$app->vendorPath . '/autoload.php';
 
 class Customs3 extends Component
 {
-    private $__accessKey = 'AKIAJ3JZA2TENDIDQTBQ';
-    private $__secretKey = '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';
+    private $__accessKey = 'AKIAJRPDRPENTPSXRUGQ';
+    private $__secretKey = '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';
     private $__client;
 
 
