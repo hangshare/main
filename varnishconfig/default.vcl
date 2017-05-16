@@ -132,16 +132,10 @@ req.url ~ "^/upload") {
 
 if (req.url ~ "^/signup" ||
     req.url ~ "^/auth" ||
-    req.url ~ "^/updatestats"||
-    req.url ~ "^/ajax" ||
     req.url ~ "^/login" ||
     req.url ~ "^/logout" ||
-    req.url ~ "^/payment" ||
-    req.url ~ "^/payfort" ||
-    req.url ~ "^/feedback" ||
-    req.url ~ "^/notification" ||
-    req.url ~ "^/forgotpassword" ||
-    req.url ~ "^/resetpassword") {
+    req.url ~ "^/request-password-reset" ||
+    req.url ~ "^/reset-password") {
     set req.backend = admin;
     return (pass);
 }
@@ -295,7 +289,7 @@ set resp.http.Set-Cookie = resp.http.Set-Cookie +
 } else {
 if(req.http.Host ~ "[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)") {
 set resp.http.Set-Cookie = resp.http.Set-Cookie +
-"; domain=www.tasmeemme.com";
+"; domain=www.hangshare.com";
 } else {
 set resp.http.Set-Cookie = resp.http.Set-Cookie +
 "; domain=" + regsub(req.http.Host, ":\d+$", "");
