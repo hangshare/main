@@ -96,6 +96,8 @@ $canonical = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
             /></noscript>
         <!-- End Facebook Pixel Code -->
     <?php endif; ?>
+
+    <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=591b8d9274c4010012f8d16d&product=sticky-share-buttons"></script>
 </head>
 <body>
 <?php foreach (Yii::$app->session->getAllFlashes() as $message):; ?>
