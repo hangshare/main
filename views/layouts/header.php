@@ -238,20 +238,6 @@ if ($mainMenu == false) {
                             <li class="add-post">
                                 <?= Html::a('<i class="fa fa-plus"></i> ' . Yii::t('app', 'Add a post'), Yii::$app->urlManager->createUrl(['//explore/post']), ['class' => '']); ?>
                             </li>
-                            <li>
-                                <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->plan) : ?>
-                                    <a style="color: #edc400;"
-                                       href="<?= Yii::$app->urlManager->createUrl(['//u/gold']); ?>"><span><i
-                                                class="glyphicon glyphicon-star"></i></span>
-                                        <?= Yii::t('app', 'Gold Status') ?>
-                                    </a>
-                                <?php else: ?>
-                                    <a href="<?= Yii::$app->urlManager->createUrl(['plan']); ?>"><span><i
-                                                class="glyphicon glyphicon-star"></i></span>
-                                        <?= Yii::t('app', 'Go Premium') ?>
-                                    </a>
-                                <?php endif; ?>
-                            </li>
                             <li class="dropdown">
                                 <a style="padding: 9px;" data-toggle="dropdown" href="#" class="dropdown-toggle">
                                     <img width="25" src="<?= $imSm; ?>">
