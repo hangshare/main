@@ -295,7 +295,7 @@ set resp.http.Set-Cookie = resp.http.Set-Cookie +
 } else {
 if(req.http.Host ~ "[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)") {
 set resp.http.Set-Cookie = resp.http.Set-Cookie +
-"; domain=www.tasmeemme.com";
+"; domain=www.hangshare.com";
 } else {
 set resp.http.Set-Cookie = resp.http.Set-Cookie +
 "; domain=" + regsub(req.http.Host, ":\d+$", "");
