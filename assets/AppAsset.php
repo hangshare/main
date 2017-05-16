@@ -52,22 +52,22 @@ class AppAsset extends AssetBundle
             //old
 
 
-            $this->js[] = 'medium/js/jquery.ui.widget.js';
-            $this->js[] = 'medium/js/jquery.iframe-transport.js';
-            $this->js[] = 'medium/js/jquery.fileupload.js';
-            $this->js[] = 'medium/js/medium-editor.js';
-            $this->js[] = 'medium/js/medium-editor-handsontable.js';
-            $this->js[] = 'medium/js/handlebars.runtime.min.js';
-            $this->js[] = 'medium/js/jquery-sortable-min.js';
-            $this->js[] = 'medium/js/jquery.cycle2.min.js';
-            $this->js[] = 'medium/js/jquery.cycle2.center.min.js';
-
-
-            $this->js[] = 'medium/js/medium-editor-insert-plugin.js';
-
-            $this->css [] = "medium/css/medium-editor.css";
-            $this->css [] = "medium/css/themes/default.min.css";
-            $this->css [] = "medium/css/medium-editor-insert-plugin.min.css";
+//            $this->js[] = 'medium/js/jquery.ui.widget.js';
+//            $this->js[] = 'medium/js/jquery.iframe-transport.js';
+//            $this->js[] = 'medium/js/jquery.fileupload.js';
+//            $this->js[] = 'medium/js/medium-editor.js';
+//            $this->js[] = 'medium/js/medium-editor-handsontable.js';
+//            $this->js[] = 'medium/js/handlebars.runtime.min.js';
+//            $this->js[] = 'medium/js/jquery-sortable-min.js';
+//            $this->js[] = 'medium/js/jquery.cycle2.min.js';
+//            $this->js[] = 'medium/js/jquery.cycle2.center.min.js';
+//
+//
+//            $this->js[] = 'medium/js/medium-editor-insert-plugin.js';
+//
+//            $this->css [] = "medium/css/medium-editor.css";
+//            $this->css [] = "medium/css/themes/default.min.css";
+//            $this->css [] = "medium/css/medium-editor-insert-plugin.min.css";
 
 
 //            $this->js[] = 'css/editor/js/froala_editor.min.js';
@@ -92,15 +92,15 @@ class AppAsset extends AssetBundle
 
         $this->js[] = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js';
         $this->css [] = 'css/font-awesome/css/font-awesome.min.css';
-        $this->js[] = "js/jquery.viewportchecker.js";
-        $this->js[] = "flot/jquery.flot.js";
-        $this->js[] = "flot/jquery.flot.pie.js";
-        $this->js[] = 'js/jq-ui.js';
+        $this->js[] = "js/jquery.viewportchecker.min.js";
+        $this->js[] = "flot/jquery.flot.min.js";
+        $this->js[] = "flot/jquery.flot.pie.min.js";
+        $this->js[] = 'js/jq-ui.min.js';
         $this->css [] = "css/animate.min.css";
-        $this->js[] = "Volar_files/wow.js";
-        $this->css [] = "owl/owl.carousel.css";
-        $this->css [] = "owl/owl.theme.css";
-        $this->js[] = "owl/owl.carousel.js";
+        $this->js[] = "Volar_files/wow.min.js";
+        $this->css [] = "owl/owl.carousel.min.css";
+        $this->css [] = "owl/owl.theme.min.css";
+        $this->js[] = "owl/owl.carousel.min.js";
         $this->js[] = YII_DEBUG ? 'js/main.js' : '/js/main.1.2.min.js';
 
         $this->js[] = 'https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js';
