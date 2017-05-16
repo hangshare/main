@@ -96,7 +96,7 @@ class AppAsset extends AssetBundle
         $this->js[] = "flot/jquery.flot.js";
         $this->js[] = "flot/jquery.flot.pie.js";
         $this->js[] = 'js/jq-ui.js';
-        $this->css [] = "css/animate.css";
+        $this->css [] = "css/animate.min.css";
         $this->js[] = "Volar_files/wow.js";
         $this->css [] = "owl/owl.carousel.css";
         $this->css [] = "owl/owl.theme.css";
