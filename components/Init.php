@@ -14,11 +14,24 @@ class Init extends Component
     {
         header('X-Frame-Options: DENY');
 
+
+
         if (!Yii::$app->user->isGuest) {
             if (Yii::$app->user->identity->deleted) {
                 if (strpos(Yii::$app->request->url, 'u/suspended') === false)
                     Yii::$app->getResponse()->redirect(['//u/suspended']);
             }
+
+
+            if(!isset($cookies['ustme'])){
+                $cookies = Yii::$app->response->cookies;
+                $cookies->add(new \yii\web\Cookie([
+                    'name' => 'ustme',
+                    'value' => '1',
+                ]));
+            }
+
+
         }
 
         if (strpos(Yii::$app->request->url, 'tag=') !== false) {
