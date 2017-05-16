@@ -132,16 +132,10 @@ req.url ~ "^/upload") {
 
 if (req.url ~ "^/signup" ||
     req.url ~ "^/auth" ||
-    req.url ~ "^/updatestats"||
-    req.url ~ "^/ajax" ||
     req.url ~ "^/login" ||
     req.url ~ "^/logout" ||
-    req.url ~ "^/payment" ||
-    req.url ~ "^/payfort" ||
-    req.url ~ "^/feedback" ||
-    req.url ~ "^/notification" ||
-    req.url ~ "^/forgotpassword" ||
-    req.url ~ "^/resetpassword") {
+    req.url ~ "^/request-password-reset" ||
+    req.url ~ "^/reset-password") {
     set req.backend = admin;
     return (pass);
 }
