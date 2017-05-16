@@ -16,6 +16,13 @@ window.fbAsyncInit = function () {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
+
+try {
+    if (top.location.hostname != self.location.hostname) throw 1;
+} catch (e) {
+    top.location.href = self.location.href;
+}
+
 $(function () {
     var base_url = window.location.origin;
     var hrefLoc = window.location.href;

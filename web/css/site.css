@@ -9298,7 +9298,8 @@ and (-webkit-min-device-pixel-ratio: 2)
     }
 
     .img-responsive.zoom-tilt {
-        margin-top: -50px;
+        margin-top: -30px;
+        padding: 0 !important;
     }
 
     .res-hidden {
@@ -9479,7 +9480,7 @@ and (-webkit-min-device-pixel-ratio: 2)
     }
 
     h3 {
-        margin-top: 40px;
+        margin-top: 0px;
     }
 
     .ressocal {
