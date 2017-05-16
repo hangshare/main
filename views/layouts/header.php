@@ -227,7 +227,6 @@ if ($mainMenu == false) {
             <?php if (Yii::$app->user->isGuest) : ?>
                 <div class="menu-signup-login pull-right">
                     <?= Html::a(Yii::t('app', 'Login'), Yii::$app->urlManager->createUrl(['//login']), ['class' => 'btn btn-default', 'rel' => 'nofollow']); ?>
-                    <?= Html::a(Yii::t('app', 'Register'), Yii::$app->urlManager->createUrl(['plan']), ['class' => 'btn btn-primary', 'rel' => 'nofollow']); ?>
                 </div>
             <?php else :
                 $username = empty(Yii::$app->user->identity->username) ? Yii::$app->user->identity->id : Yii::$app->user->identity->username;
