@@ -47,7 +47,9 @@ $this->description = Yii::t('app', 'metia.faq.description');
                 </div>
             </div>
             <div class="col-md-9">
-                <h1><?= $tit ?></h1>
+                <?php if (isset($tit)) : ?>
+                    <h1><?= $tit ?></h1>
+                <?php endif; ?>
 
                 <div style="padding: 20px;">
                     <div class="row">
