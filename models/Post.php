@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\components\WordValidator;
 use Yii;
 use yii\base\Exception;
 use yii\db\Expression;
@@ -104,7 +105,7 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'body'], 'required'],
-            [['title'], 'words'],
+            [['title'], WordValidator::className()],
             [['urlTitle'], 'unique'],
             [['cover_file', 'ylink'], 'either'],
             ['ylink', 'match', 'pattern' => '/^https?:\/\/(?:.*?)\.?(youtube|vimeo)\.com\/(watch\?[^#]*v=([\w-]+)|(\d+)).*$/'],
@@ -120,17 +121,6 @@ class Post extends \yii\db\ActiveRecord
         ];
     }
 
-
-    public function words($attribute, $params)
-    {
-        $total_words = str_word_count($this->$attribute);
-        if ($total_words > 20) {
-            $this->addError($attribute, Yii::t('app','wordsvalidations-max'));
-        }
-        if ($total_words < 5) {
-            $this->addError($attribute, Yii::t('app','wordsvalidations-min'));
-        }
-    }
 
     public function either($attribute_name, $params)
     {
