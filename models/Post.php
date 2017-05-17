@@ -124,7 +124,7 @@ class Post extends \yii\db\ActiveRecord
     public function validateWordLength($attribute, $params)
     {
         $total_words = str_word_count($this->$attribute);
-        if ($total_words > 40) {
+        if ($total_words > 20) {
             $this->addError($attribute, Yii::t('app','wordsvalidations-max'));
         }
         if ($total_words < 5) {
