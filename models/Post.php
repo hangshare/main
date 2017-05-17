@@ -104,7 +104,7 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'body'], 'required'],
-          //  [['title'], 'words'],
+            [['title'], 'words'],
             [['urlTitle'], 'unique'],
             [['cover_file', 'ylink'], 'either'],
             ['ylink', 'match', 'pattern' => '/^https?:\/\/(?:.*?)\.?(youtube|vimeo)\.com\/(watch\?[^#]*v=([\w-]+)|(\d+)).*$/'],
@@ -121,7 +121,7 @@ class Post extends \yii\db\ActiveRecord
     }
 
 
-    public function validateWordLength($attribute, $params)
+    public function words($attribute, $params)
     {
         $total_words = str_word_count($this->$attribute);
         if ($total_words > 20) {
