@@ -424,7 +424,7 @@ class ExploreController extends Controller
     public function actionPost($id = '')
     {
         $user_setting = UserSettings::findOne(['userId' => Yii::$app->user->identity->id]);
-        if(!$user_setting->verified_email){
+        if (!$user_setting->verified_email) {
             $lang = Yii::$app->language == 'en' ? 'en/' : '';
             return $this->redirect(["//{$lang}u/verifyaccount"]);
         }
@@ -447,6 +447,10 @@ class ExploreController extends Controller
             }
             $model->saveExternal();
             if (!$model->save()) {
+                return $this->render('post', [
+                    'model' => $model,
+                ]);
+                Yii::$app->end();
             }
             $lang = Yii::$app->language == 'en' ? 'en/' : '';
             return $this->redirect(["//{$lang}{$model->urlTitle}"]);
