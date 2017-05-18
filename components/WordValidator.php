@@ -18,7 +18,7 @@ class WordValidator extends Validator
     {
         $total_words = count(preg_split('/\s+/',$model->$attribute));
 
-        if ($total_words > 20) {
+        if ($total_words > 40) {
             $this->addError($model, $attribute, Yii::t('app', 'wordsvalidations-max'));
         }
         if ($total_words < 5) {
