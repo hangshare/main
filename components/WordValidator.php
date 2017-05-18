@@ -16,7 +16,7 @@ class WordValidator extends Validator
 {
     public function validateAttribute($model, $attribute)
     {
-        $total_words = str_word_count($model->$attribute);
+        $total_words = count(preg_split('/\s+/',$model->$attribute));
 
         if ($total_words > 20) {
             $this->addError($model, $attribute, Yii::t('app', 'wordsvalidations-max'));
@@ -25,4 +25,6 @@ class WordValidator extends Validator
             $this->addError($model, $attribute, Yii::t('app', 'wordsvalidations-min'));
         }
     }
+
+
 }
