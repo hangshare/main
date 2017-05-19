@@ -317,4 +317,5 @@ return [
     'FAQ' => 'الأسئلة الشائعة',
     'wordsvalidations-max'=>'أكبر عدد مسموح به من الكلمات هو 20',
     'wordsvalidations-min'=>'يرجى كتابة 5 كلمات على الأقل',
+    'Become a Writer' => 'انضم الى الكاتبين',
 ];

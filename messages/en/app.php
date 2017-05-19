@@ -299,6 +299,7 @@ return [
     'metia.faq.title' => 'Hangshare -Go through the frequent questions or ask your own',
     'metia.faq.description' => 'How to use the site? How to ensure the success of the subject or the article in the site? And More..',
     'FAQ' => 'Frequently asked questions',
-    'wordsvalidations-max'=>'Maximum number of words allowed in title is 20',
-    'wordsvalidations-min'=>'Please add at least 5 words as a title.',
+    'wordsvalidations-max' => 'Maximum number of words allowed in title is 20',
+    'wordsvalidations-min' => 'Please add at least 5 words as a title.',
+    'Become a Writer' => 'Become a Writer',
 ];
