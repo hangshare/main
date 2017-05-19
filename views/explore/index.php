@@ -54,7 +54,7 @@ $this->ogImage = 'http://assets.boredpanda.com/blog/wp-content/themes/boredpanda
     <div class="col-md-9">
         <?php if (isset($cat)) : //bug ?>
             <div class="row">
-                <h1 class="normal"><?= $cat['title'] ?></h1>
+                <h1 class="normal"><?= empty($cat['title'])?  Yii::t('app','articles-url') : $cat['title'] ?></h1>
             </div>
         <?php endif; ?>
         <hr class="nomargin m-b-20">
