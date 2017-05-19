@@ -29,7 +29,7 @@ if ($mainMenu == false) {
 ?>
 <?php $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
 <header>
-
+<?php if(!(Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index')) : ?>
     <div style="
             width: 100%;
             height: auto;
@@ -53,6 +53,7 @@ if ($mainMenu == false) {
             </div>
         </div>
     </div>
+<?php endif; ?>
     <?php if (Yii::$app->helper->isMobile()): ?>
         <ul id="main-menu" class="mainmenu">
             <?php foreach ($mainMenu as $mData) : ?>
