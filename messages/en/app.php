@@ -301,7 +301,7 @@ return [
     'FAQ' => 'Frequently asked questions',
     'wordsvalidations-max' => 'Maximum number of words allowed in title is 20',
     'wordsvalidations-min' => 'Please add at least 5 words as a title.',
-    'Become a Writer' => 'Become a Writer',
+    'Become a Writer' => 'Login / Register',
     'Signup using social networks'=>'Use social networks',
     'Free Registrations'=>'Sign up',
 ];
