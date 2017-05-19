@@ -14,9 +14,24 @@ if (isset($cat)) {
         $this->description = $tags;
     }
 }
+
+
+if (Yii::$app->language == 'en') {
+    $ua = '/en/articles';
+} else {
+    $ua = '//مواضيع';
+}
+
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('app', 'articles-url'),
+    'url' => Yii::$app->urlManager->createUrl($ua),
+];
+
 if (empty($this->title)) {
     $this->title = Yii::t('app', 'post.header.title');
     $this->description = Yii::t('app', 'post.header.description');
+} else {
+    $this->params['breadcrumbs'][] = $cat['title'];
 }
 ?>
 <div class="container m-t-25">
@@ -32,18 +47,6 @@ if (empty($this->title)) {
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
-        <?php else : ?>
-            <div style="margin: 0 auto; display: table;">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- Leaderboard - Category Upper -->
-                <ins class="adsbygoogle"
-                     style="display:inline-block;width:728px;height:90px"
-                     data-ad-client="ca-pub-6288640194310142"
-                     data-ad-slot="6969174910"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
         <?php endif ?>
     </div>
     <div class="col-md-9">
