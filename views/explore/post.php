@@ -5,6 +5,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\Category;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Post */
 /* @var $form yii\widgets\ActiveForm */
@@ -13,6 +14,18 @@ $thump = Yii::$app->imageresize->thump($model->cover, 150, 100, 'crop');
 foreach ($model->postBodies as $data) {
     $model->body .= $data->body;
 }
+
+if (Yii::$app->language == 'en') {
+    $ua = '/en/articles';
+} else {
+    $ua = '//مواضيع';
+}
+
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('app', 'articles-url'),
+    'url' => Yii::$app->urlManager->createUrl($ua),
+];
+$this->params['breadcrumbs'][] = Yii::t('app', 'Add Article');
 ?>
 <div class="container m-t-25">
     <div class="post-form col-md-9">
@@ -73,7 +86,7 @@ foreach ($model->postBodies as $data) {
             }
             $catData = [];
             foreach ($menu as $menuData) {
-                if (!$menuData->parent) {
+                if (!$menuData->parent && isset($mainMenu[$menuData->id])) {
                     $catData[$menuData->title] = $mainMenu[$menuData->id];
                 }
             }
@@ -93,13 +106,13 @@ foreach ($model->postBodies as $data) {
             foreach ($model->postTags as $post_tag) {
                 $tags[] = $post_tag->tag;
             }
-            $tags_string = implode(',',$tags);
+            $tags_string = implode(',', $tags);
             ?>
             <?= $form->field($model, 'body')->textarea(['class' => 'froala-edit']) ?>
             <label><?= Yii::t('app', 'Tags') ?></label>
             <?php
             $tags_sql = '';
-            if($tags_string){
+            if ($tags_string) {
                 $tags_sql = "OR id IN ({$tags_string})";
             }
             echo Select2::widget([
@@ -138,6 +151,12 @@ foreach ($model->postBodies as $data) {
                     'onclick' => $event
                 ])
                 ?>
+                <?php if (!$model->isNewRecord): ?>
+                    <?= Html::a(Yii::t('app', 'Delete Post'), ['//explore/delete', 'id' => $model->id], [
+                        'data' => ['method' => 'post'],
+                        'style' => 'color:red;',
+                        'class' => 'pull-right']); ?>
+                <?php endif; ?>
             </div>
             <?php ActiveForm::end(); ?>
         </div>
