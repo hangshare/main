@@ -3,18 +3,6 @@ use yii\helpers\Html;
 
 $this->title = $model->title;
 $this->ogImage = Yii::$app->imageresize->thump($model->cover, 500, 500, 'resize');
-if (Yii::$app->user->isGuest && session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-$fb = new Facebook\Facebook([
-    'app_id' => '1024611190883720',
-    'app_secret' => '0df74c464dc8e58424481fb4cb3bb13c',
-    'default_graph_version' => 'v2.4',
-    'persistent_data_handler' => 'session'
-]);
-$helper = $fb->getRedirectLoginHelper();
-$params = ['scope' => 'email,user_about_me'];
-$fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params);
 
 if (Yii::$app->language == 'en') {
     $ua = '/en/articles';
@@ -114,7 +102,7 @@ $this->params['breadcrumbs'][] = [
                                 </script>
                             <?php endif; ?>
                             <div class="clearfix"></div>
-                            <div id="related-posts" data-id="<?= $model->id; ?>">
+                            <div id="related-posts" style="margin-top: 40px;" data-id="<?= $model->id; ?>">
                                 <h3 class="underlined"><?= Yii::t('app', 'Related Posts') ?></h3>
                             </div>
 
@@ -215,43 +203,7 @@ $this->params['breadcrumbs'][] = [
         <?php
     endif;
 endif; ?>
-<?php if (Yii::$app->user->isGuest) : ?>
-    <div id="slide-signup"
-         style="
-          margin-right: 7%;
-           position: fixed;
-            bottom:-250px;
-             transition: bottom 2s;
-              z-index: 1000; border: 3px solid #3d8eb9;
-               border-bottom: 0;
-">
-        <div class="white text-center" style="height: 150px;">
-            <a href="javascript:void(0);" onclick="$(this).parent().parent().hide();" rel="nofollow"
-               style="color: #ccc; position: relative; top: -10px"><i
-                        class="glyphicon glyphicon-remove-sign"></i></a>
-            <h4 class="text-center margin-0"><?= Yii::t('app', 'Share Posts and get instant profit') ?></h4>
-            <!--            <a onClick="ga('send', {-->
-            <!--                                    hitType: 'event',-->
-            <!--                                    eventCategory: 'Sign Up',-->
-            <!--                                    eventAction: 'Facebook',-->
-            <!--                                    eventLabel: 'Sign Up Page'-->
-            <!--                                });" href="-->
-            <? //= $fUrl; ?><!--" class="btn btn-primary" style="background-color: #3b5998;height: 30px; margin: 15px auto;-->
-            <!--    width: 50%;">-->
-            <!--                <i class="fa fa-fw fa-facebook pull-left signup-slide-fb"></i>-->
-            <!--                <span>-->
-            <? //= Yii::t('app', 'Sign up NOW! Using your Facebook Account') ?><!--</span>-->
-            <!--            </a>-->
 
-            <a onClick="ga('send', {hitType: 'event',eventCategory: 'Sign Up',eventAction: 'Facebook',eventLabel: 'Blog View'});"
-               href="javascript:void(0);" rel="nofollow" class="btn btn-primary fb-login"
-               style="background-color: #3b5998;height: 30px; margin: 15px auto;width: 50%;">
-                <i class="fa fa-fw fa-facebook pull-left signup-slide-fb"></i>
-                <span><?= Yii::t('app', 'Sign up NOW! Using your Facebook Account') ?></span>
-            </a>
-        </div>
-    </div>
-<?php endif; ?>
 <?php $img = Yii::$app->imageresize->original($model->cover); ?>
 <script type="application/ld+json">
 {
@@ -287,6 +239,7 @@ endif; ?>
     }
   }
 }
+
 
 
 
