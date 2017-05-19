@@ -203,7 +203,7 @@ if ($mainMenu == false) {
                     <li><?= Html::a('English', 'javascript:void(0);', ['data-url' => '/en/', 'rel' => 'nofollow', 'id' => 'changeLang']) ?></li>
                 <?php endif; ?>
             </ul>
-            <div class="pull-right" style="width: 225px;">
+            <div class="pull-right" style="width: 235px;">
                 <?= Html::a('<i class="fa fa-plus"></i> ' . Yii::t('app', 'Add a post'), ['//explore/post'], [
                     'class' => 'btn btn-primary pull-left',
                     'style' => 'margin-top:13px'
