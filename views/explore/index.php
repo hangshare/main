@@ -52,11 +52,9 @@ $this->ogImage = 'http://assets.boredpanda.com/blog/wp-content/themes/boredpanda
         <?php endif ?>
     </div>
     <div class="col-md-9">
-        <?php if (isset($cat)) : //bug ?>
-            <div class="row">
-                <h1 class="normal"><?= empty($cat['title'])?  Yii::t('app','articles-url') : $cat['title'] ?></h1>
-            </div>
-        <?php endif; ?>
+        <div class="row">
+            <h1 class="normal"><?= !isset($cat) || empty($cat['title']) ? ucfirst(Yii::t('app', 'articles-url')) : $cat['title'] ?></h1>
+        </div>
         <hr class="nomargin m-b-20">
         <div class="row">
             <div class="col-md-12">
