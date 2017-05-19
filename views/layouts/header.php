@@ -33,7 +33,7 @@ if ($mainMenu == false) {
         <div style="
                 width: 100%;
                 height: auto;
-                min-height: 200px;
+                min-height: 270px;
                 background-size: cover;
                 background: url(<?= $this->ogImage ?>);
                 background-position: center center;
