@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = [
                                 }
                                 $bodys = Yii::$app->helper->replaceLinks($bodys);
                                 if (!Yii::$app->helper->isMobile()) {
-                                    $bodys = '<div style="float: left; margin: 0 20px 20px 0;"> <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                    $bodys = '<div class="pull-left" style="margin: 0 20px 20px 0;"> <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <!-- MPU - Post page right Upper  -->
                     <ins class="adsbygoogle"
                          style="display:inline-block;width:300px;height:250px; text-align: left;"
