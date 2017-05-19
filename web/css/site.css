@@ -32,21 +32,6 @@ summary {
     width: 35px;
 }
 
-.supdropdown {
-    background-color: #FEFEFE;
-    border: 1px solid #f0f0f0;
-    height: 280px;
-    position: absolute;
-    top: 43px;
-    width: 500px;
-    z-index: 100;
-    padding: 0;
-    box-shadow: 1px 4px 4px 0px rgba(0, 0, 0, .09);
-    opacity: 0;
-    transition: 0.3s opacity;
-    display: none;
-}
-
 .submenu-active {
     opacity: 1;
     display: block;
@@ -56,14 +41,6 @@ summary {
     width: 450px;
 }
 
-.supdropdown li {
-    display: block;
-}
-
-.supdropdown li a {
-    color: #444;
-    font-size: 15px;
-}
 
 .underlined {
     font-size: 20px;
@@ -139,7 +116,7 @@ iframe {
 }
 
 #q {
-    width: 88%;
+    width: 60%;
 }
 
 .glyphicon-minus {
@@ -157,10 +134,29 @@ iframe {
 
 .top-menu {
     padding: 10px;
-    height: 50px;
-    background-color: #41608b;
-    border-bottom: 1px solid #445c71;
+    height: 2.5em;
+    background-color: #353535;
 }
+.brcr {
+    margin: 0;
+    padding: 0;
+}
+
+.brcr li a {
+    color: #bfbfbf;
+    font-weight: 500;
+    padding: .9em 14px .9em 0;
+    font-size: .875em;
+}
+.brcr li {
+    background: #353535;
+    list-style-type: disc;
+    color: #868686;
+    margin-left: 14px;
+    display: block;
+    float: right;
+}
+
 
 .menu-category li {
     list-style: none;
@@ -168,28 +164,25 @@ iframe {
     position: relative;
 }
 
-.menu-category li a {
-    padding: 10.5px 6px;
+.menu-category li a:not(.btn):not(.dropdown-toggle):not(.nota) {
+    border: none;
+    color: #353535;
+    font-weight: bold;
+    margin: .4em 1.2em .6em .65em;
+    padding: 0 0 12px;
     display: block;
     text-decoration: none;
 }
+
 
 .menu-category li a:focus {
     text-decoration: none;
 }
 
-.menu-category li a:hover {
-    background-color: #ddd;
-    text-decoration: none;
-    color: #333;
-}
-
 .bottom-menu {
-    background: #eceef0 none repeat scroll 0 0;
-    border-bottom: 1px solid #b8bcc0;
-    height: 44px;
+    background: #FFFFFF none repeat scroll 0 0;
+    height: 60px;
 }
-
 .links .list-inline a {
     color: #f2f2f2;
     font-size: 13px;
@@ -1077,6 +1070,14 @@ a:hover {
 
 .scroll-header .navbar-brand {
     padding: 8px 100px 8px 30px;
+}
+
+.nav>li>a>img{
+    border-radius: 50px;
+}
+
+.nav > li > a:focus, .nav > li > a:hover, .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+    background-color: rgba(66, 139, 202, 0.73);
 }
 
 img {
@@ -4682,14 +4683,31 @@ input[type="button"].btn-block {
 }
 
 .supdropdown {
-    background-color: #fff;
-    border: 1px solid #eee;
-    color: #000;
-    height: 286px;
+    background: #353535;
+    display: none;
     position: absolute;
-    top: 43px;
-    width: 500px;
-    z-index: 100;
+    min-width: 200px;
+    padding: 15px;
+    z-index: 10;
+    border: 1px solid #555;
+}
+
+.supdropdown li {
+    display: block;
+}
+
+.supdropdown li a {
+    color: #e9e9e9;
+    font-size: 15px;
+    display: block;
+}
+
+.supdropdown li a:hover {
+    color: #fff;
+}
+.submenu-active {
+    opacity: 1;
+    display: block;
 }
 
 .add-post > a {
@@ -5363,11 +5381,6 @@ nav {
     padding: 10px 0px;
 }
 
-.nav > li > a:hover,
-.nav > li > a:focus {
-    text-decoration: none;
-    background-color: #eeeeee;
-}
 
 .nav > li.disabled > a {
     color: #999999;
@@ -5919,8 +5932,8 @@ nav {
     }
 
     .navbar-nav > li > a {
-        padding-bottom: 11px;
-        padding-top: 11px;
+        padding-bottom: 18px;
+        padding-top: 18px;
 
     }
 }
@@ -9084,6 +9097,12 @@ and (-webkit-min-device-pixel-ratio: 2)
         line-height: 30px;
         margin-bottom: 20px;
     }
+    .container > h1{
+        margin: 20px 0;
+    }
+    p{
+        font-size: 16px;
+    }
 
     .home-section {
         margin-top: 40px;
@@ -9535,7 +9554,7 @@ and (-webkit-min-device-pixel-ratio: 2)
     }
 
     #q {
-        width: 88%;
+        width: 60%;
     }
 
     .zoom-tilt {
