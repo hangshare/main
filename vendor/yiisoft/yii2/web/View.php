@@ -103,7 +103,7 @@ class View extends \yii\base\View
      */
     public $metaTags;
     public $description;
-    public $ogImage;
+    public $ogImage = 'http://assets.boredpanda.com/blog/wp-content/themes/boredpanda/images/header-background-blurred.jpg';
     /**
      * @var array the registered link tags.
      * @see registerLinkTag()
