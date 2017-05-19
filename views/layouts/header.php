@@ -39,7 +39,8 @@ if ($mainMenu == false) {
             background-position: center center;
             ">
         <div class="container">
-            <div style="padding:20px; z-index: 10000;height: 200px;">
+            <div class="adshead"
+                 style="<?php if (Yii::$app->helper->isMobile()): ?> padding:50px 20px 20px; <?php else : ?> padding:20px; <?php endif; ?> z-index: 10000;height: 200px;">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <ins class="adsbygoogle"
                      style="display:block"
