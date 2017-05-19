@@ -593,7 +593,9 @@ a {
     transform: translateY(-50%);
     width: 20px;
 }
-
+.w-280{
+    width: 280px;
+}
 .pricing-footer::after {
     bottom: auto;
     content: "";
@@ -617,7 +619,9 @@ a {
     margin: 0 10px;
     width: 35px;
 }
-
+margin-right-5{
+    margin-left: 5px;
+}
 .section-title-heading span {
     font-weight: 700;
 }

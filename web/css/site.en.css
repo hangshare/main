@@ -1574,7 +1574,9 @@ pre code {
     color: #fff;
     font-size: 22px;
 }
-
+.w-280{
+    width: 270px;
+}
 .topnav-localicons:hover, .topnav-localicons:focus {
     color: #fff;
 }
@@ -1596,7 +1598,9 @@ pre code {
     border: 1px solid #f9f9f9;
     transition: .2s box-shadow ease-in-out;
 }
-
+margin-right-5{
+    margin-right: 5px;
+}
 .user-post.down.text-center {
     margin: 15px 0 0;
     border: 1px solid #eee;
