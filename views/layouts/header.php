@@ -29,31 +29,31 @@ if ($mainMenu == false) {
 ?>
 <?php $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
 <header>
-<?php if(!(Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index')) : ?>
-    <div style="
-            width: 100%;
-            height: auto;
-            min-height: 200px;
-            background-size: cover;
-            background: url(<?= $this->ogImage ?>);
-            background-position: center center;
-            ">
-        <div class="container">
-            <div class="adshead"
-                 style="<?php if (Yii::$app->helper->isMobile()): ?> padding:50px 20px 20px; <?php else : ?> padding:20px; <?php endif; ?> z-index: 10000;height: 200px;">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-6288640194310142"
-                     data-ad-slot="6189074110"
-                     data-ad-format="auto"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+    <?php if (!(Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index')) : ?>
+        <div style="
+                width: 100%;
+                height: auto;
+                min-height: 200px;
+                background-size: cover;
+                background: url(<?= $this->ogImage ?>);
+                background-position: center center;
+                ">
+            <div class="container">
+                <div class="adshead"
+                     style="<?php if (Yii::$app->helper->isMobile()): ?> padding:50px 20px 20px; <?php else : ?> padding:20px; <?php endif; ?> z-index: 10000;height: 200px;">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-6288640194310142"
+                         data-ad-slot="6189074110"
+                         data-ad-format="auto"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
             </div>
         </div>
-    </div>
-<?php endif; ?>
+    <?php endif; ?>
     <?php if (Yii::$app->helper->isMobile()): ?>
         <ul id="main-menu" class="mainmenu">
             <?php foreach ($mainMenu as $mData) : ?>
@@ -265,24 +265,26 @@ if ($mainMenu == false) {
             <div class="clearfix"></div>
         </div>
     </div>
-    <div class="top-menu">
-        <div class="container">
-            <?php
-            echo Breadcrumbs::widget([
-                'itemTemplate' => "<li>{link}</li>\n",
-                'options' => ['class' => 'brcr'],
-                'homeLink' => [
-                    'label' => Yii::t('yii', 'Home'),
-                    'url' => Yii::$app->homeUrl,
-                ],
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []
-            ]);
-            ?>
-            <div class="pull-right" style="margin-top: -5px;">
-                <?= $this->render('//explore/_search', ['model' => new app\models\Post]) ?>
+    <?php if (!(Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index')) : ?>
+        <div class="top-menu">
+            <div class="container">
+                <?php
+                echo Breadcrumbs::widget([
+                    'itemTemplate' => "<li>{link}</li>\n",
+                    'options' => ['class' => 'brcr'],
+                    'homeLink' => [
+                        'label' => Yii::t('yii', 'Home'),
+                        'url' => Yii::$app->homeUrl,
+                    ],
+                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []
+                ]);
+                ?>
+                <div class="pull-right" style="margin-top: -5px;">
+                    <?= $this->render('//explore/_search', ['model' => new app\models\Post]) ?>
+                </div>
             </div>
         </div>
-    </div>
+    <?php endif; ?>
 </header>
 <?php if (isset($this->params['prev'])) : ?>
     <div class="scroll-header">
