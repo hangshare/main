@@ -33,6 +33,8 @@ if (empty($this->title)) {
 } else {
     $this->params['breadcrumbs'][] = $cat['title'];
 }
+$this->ogImage = 'http://assets.boredpanda.com/blog/wp-content/themes/boredpanda/images/header-background-blurred.jpg';
+
 ?>
 <div class="container m-t-25">
     <div class="row">
