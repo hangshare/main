@@ -15,80 +15,25 @@ $fb = new Facebook\Facebook([
 $helper = $fb->getRedirectLoginHelper();
 $params = ['scope' => 'email,user_about_me'];
 $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params);
+
+if (Yii::$app->language == 'en') {
+    $ua = '/en/articles';
+} else {
+    $ua = '//مواضيع';
+}
+
+$this->params['breadcrumbs'][] = [
+    'label' => Yii::t('app', 'articles-url'),
+    'url' => Yii::$app->urlManager->createUrl($ua),
+];
 ?>
-<?php if (Yii::$app->helper->isMobile()) : ?>
-    <div class="container">
-        <div style="margin-top: 50px; max-width: 100%;">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- responsive - new mobile upper post -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-6288640194310142"
-                 data-ad-slot="9020008518"
-                 data-ad-format="auto"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-    </div>
-<?php endif; ?>
 <div <?php if (!Yii::$app->helper->isMobile()) : ?> class="row" <?php endif; ?>>
     <div class="col-md-12 res-nopadding">
         <div class="col-md-9" style="background-color: #fff;">
-            <?php if (!Yii::$app->helper->isMobile()) : ?>
-                <div class="ads1">
-                    <script async
-                            src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- Leaderboard - Post Upper -->
-                    <ins class="adsbygoogle"
-                         style="display:inline-block;width:728px;height:90px"
-                         data-ad-client="ca-pub-6288640194310142"
-                         data-ad-slot="1011333310"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-            <?php endif; ?>
             <article data-id="<?= $model->id; ?>" data-userId="<?= $model->userId ?>"
                      data-plan="<?= $model->user->plan; ?>" style="margin-bottom: 100px;">
                 <div class="container res-nopadding">
-                    <?php if (!Yii::$app->helper->isMobile()) : ?>
-                        <span class="pull-left"
-                              style="font-weight: bold; color: #999; font-size: 18px; margin-top: 3px;"><?= Yii::t('app', 'Share this Article') ?></span>
-                        <div class="pull-left" style="margin: 0 15px;">
-                            <ul class="list-inline shareer">
-                                <li><a class="btn btn-primary js-share js-share-fasebook" href="javascript:void(0);"
-                                       post-url="<?= $model->url; ?>">
-                                        <i style="margin: 3px;" class="fa fa-fw fa-facebook"></i>
-                                        <?= Yii::t('app', 'Facebook') ?>
-                                    </a>
-                                <li><a class="btn js-share js-share-twitter" post-url="<?= $model->url; ?>"
-                                       href="javascript:void(0);" style="color: #fff; background-color: #4099ff;">
-                                        <i style="margin: 3px;" class="fa fa-twitter"></i>
-                                        <?= Yii::t('app', 'twitter') ?>
-                                    </a></li>
-                                <li>
-                                    <a class="btn js-share js-share-gpuls" post-url="<?= $model->url; ?>"
-                                       href="javascript:void(0);" style="color: #fff; background-color: #e51717;">
-                                        <i style="margin: 3px;" class="fa fa-google-plus"></i>
-                                        <?= Yii::t('app', 'Google+') ?>
-                                    </a>
-                                </li>
-                                <?php if (Yii::$app->helper->isMobile()) : ?>
-                                    <li>
-                                        <a class="btn" href="whatsapp://send?text=<?= $model->url; ?>"
-                                           style="color: #fff; background-color: #34af23;"
-                                           data-action="share/whatsapp/share">
-                                            <i style="margin: 3px;" class="fa fa-whatsapp"></i>
-                                            <?= Yii::t('app', 'Whatsapp') ?> </a>
-                                    </li>
-                                <?php endif; ?>
-                            </ul>
-                        </div>
-                        <div class="clearfix"></div>
-                    <?php endif; ?>
-
-                    <h1 class="post-header" style="margin: 10px 0 0px 0"><?= Html::encode($this->title) ?></h1>
+                    <h1 class="post-header"><?= Html::encode($this->title) ?></h1>
                     <?php
                     $username = empty($model->user->username) ? $model->user->id : $model->user->username;
                     ?>
@@ -108,10 +53,6 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                         if (!Yii::$app->user->isGuest && (Yii::$app->user->identity->id == $model->userId || Yii::$app->user->identity->type == 1)) : ?>
                             <li class="divider"></li>
                             <li><?= Html::a(Yii::t('app', 'Edit Post'), ['//explore/post', 'id' => $model->id]); ?></li>
-                            <li class="divider"></li>
-                            <li><?= Html::a(Yii::t('app', 'Delete Post'), ['//explore/delete', 'id' => $model->id], [
-                                    'data' => ['method' => 'post'],
-                                    'style' => 'color:red;']); ?></li>
                         <?php endif; ?>
                     </ul>
                     <div class="post-body">
@@ -131,7 +72,7 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                                 }
                                 $bodys = Yii::$app->helper->replaceLinks($bodys);
                                 if (!Yii::$app->helper->isMobile()) {
-                                    $bodys = Yii::$app->helper->str_insert($bodys, '</p>', '<div style="float: left; margin: 0 20px 20px 0;"> <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                    $bodys = '<div style="float: left; margin: 0 20px 20px 0;"> <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <!-- MPU - Post page right Upper  -->
                     <ins class="adsbygoogle"
                          style="display:inline-block;width:300px;height:250px; text-align: left;"
@@ -139,7 +80,7 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                          data-ad-slot="1962272113"></ins>
                     <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script></div>');
+                    </script></div>' . $bodys;
                                     Yii::$app->cache->set($mo . '-post-body-' . $model->id, $bodys, 3000);
                                 } else {
                                     $bodys = Yii::$app->helper->str_insert($bodys, '</p>', '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -153,6 +94,14 @@ $fUrl = $helper->getLoginUrl('https://www.hangshare.com/site/facebook/', $params
                             }
                             echo $bodys;
                             ?>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <span style="font-weight: bold; font-size: 18px; margin-top: 30px; display: block"><?= Yii::t('app', 'Share this Article') ?></span>
+                                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                                    <div class="addthis_inline_share_toolbox"></div>
+                                </div>
+                            </div>
+
                             <?php if (Yii::$app->helper->isMobile()): ?>
                                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                                 <!-- MPU - Post page right Upper  -->
@@ -338,6 +287,10 @@ endif; ?>
     }
   }
 }
+
+
+
+
 
 
 
