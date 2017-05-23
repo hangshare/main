@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Add Article');
                 <?php //echo $form->field($model, 'ylink')->textInput(['maxlength' => true, 'placeholder' => Yii::t('app', 'youtube ex')]) ?>
                 <!--                </div>-->
             </div>
-            <input id="cover_input" name="cover" type="hidden" value=""/>
+            <input id="cover_input" name="cover" type="hidden" value="<?= $model->cover ?>"/>
             <br>
             <?php
             $arr = [];
@@ -132,17 +132,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Add Article');
             ?>
             <div class="form-group m-t-25">
                 <?php
-                $event = $model->isNewRecord ? "ga('send', {
-                            hitType: 'event',
-                            eventCategory: 'Post',
-                            eventAction: 'Add',
-                            eventLabel: 'Add Post'
-                        });" : "ga('send', {
-                            hitType: 'event',
-                            eventCategory: 'Post',
-                            eventAction: 'Edit',
-                            eventLabel: 'Update Post'
-                        });";
+                $event = $model->isNewRecord ? "ga('send', {hitType: 'event',eventCategory: 'Post',eventAction: 'Add',eventLabel: 'Add Post'});" : "ga('send', {hitType: 'event',eventCategory: 'Post',eventAction: 'Edit',eventLabel: 'Update Post'});";
                 ?>
                 <?=
                 Html::submitButton($model->isNewRecord ? Yii::t('app', 'Post') : Yii::t('app', 'Save'), [
