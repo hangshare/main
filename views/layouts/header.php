@@ -210,7 +210,7 @@ if ($mainMenu == false) {
                     'style' => 'margin-top:13px'
                 ]); ?>
                 <?php if (Yii::$app->user->isGuest) : ?>
-                    <div class="menu-signup-login pull-left" style="margin: 13px; ">
+                    <div class="menu-signup-login pull-left" style="margin: 13px 6px; ">
                         <?= Html::a(Yii::t('app', 'Become a Writer'), Yii::$app->urlManager->createUrl(['//login']), ['class' => 'btn btn-default', 'rel' => 'nofollow']); ?>
                     </div>
                 <?php else :
