@@ -596,6 +596,9 @@ a {
 .w-280{
     width: 299px;
 }
+.adsmargin{
+    margin: 0 0px 20px 20px;
+}
 .pricing-footer::after {
     bottom: auto;
     content: "";

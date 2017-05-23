@@ -1601,6 +1601,9 @@ pre code {
 margin-right-5{
     margin-right: 5px;
 }
+.adsmargin{
+    margin: 0 0px 20px 20px;
+}
 .user-post.down.text-center {
     margin: 15px 0 0;
     border: 1px solid #eee;
