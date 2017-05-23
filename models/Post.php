@@ -29,6 +29,7 @@ class Post extends \yii\db\ActiveRecord
 
     public $body, $tags, $cover_file, $q, $keywords, $categories, $ylink, $vidId, $vidType, $url;
 
+
     /**
      * @inheritdoc
      */
@@ -36,6 +37,31 @@ class Post extends \yii\db\ActiveRecord
     {
         return 'post';
     }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['title', 'body'], 'required'],
+            [['title'], WordValidator::className()],
+            [['urlTitle'], 'unique'],
+            [['cover_file', 'ylink'], 'either'],
+            ['ylink', 'match', 'pattern' => '/^https?:\/\/(?:.*?)\.?(youtube|vimeo)\.com\/(watch\?[^#]*v=([\w-]+)|(\d+)).*$/'],
+            [['cover_file'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'gif', 'jpeg'],
+                'maxSize' => 1024 * 1024 * 4],
+            [['userId', 'type', 'deleted', 'score'], 'integer'],
+            [['created_at', 'body', 'featured', 'score', 'deleted', 'tags', 'keywords', 'cover_file', 'q', 'type', 'ylink', 'vidId', 'vidType', 'published'], 'safe'],
+            [['cover'], 'string', 'max' => 500],
+            [['urlTitle'], 'string', 'max' => 200],
+            [['title'], 'string', 'max' => 100],
+            [['body'], 'string', 'min' => 100],
+            [['lang'], 'string', 'max' => 2],
+        ];
+    }
+
 
     public static function related($id, $limit = 8)
     {
@@ -96,29 +122,6 @@ class Post extends \yii\db\ActiveRecord
             Yii::$app->cache->set('mostViewed', $most, 300);
         }
         return $most;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['title', 'body'], 'required'],
-            [['title'], WordValidator::className()],
-            [['urlTitle'], 'unique'],
-            [['cover_file', 'ylink'], 'either'],
-            ['ylink', 'match', 'pattern' => '/^https?:\/\/(?:.*?)\.?(youtube|vimeo)\.com\/(watch\?[^#]*v=([\w-]+)|(\d+)).*$/'],
-            [['cover_file'], 'file', 'skipOnEmpty' => true, 'extensions' => ['png', 'jpg', 'gif', 'jpeg'],
-                'maxSize' => 1024 * 1024 * 4],
-            [['userId', 'type', 'deleted', 'score'], 'integer'],
-            [['created_at', 'body', 'featured', 'score', 'deleted', 'tags', 'keywords', 'cover_file', 'q', 'type', 'ylink', 'vidId', 'vidType', 'published'], 'safe'],
-            [['cover'], 'string', 'max' => 500],
-            [['urlTitle'], 'string', 'max' => 200],
-            [['title'], 'string', 'max' => 100],
-            [['body'], 'string', 'min' => 100],
-            [['lang'], 'string', 'max' => 2],
-        ];
     }
 
 
