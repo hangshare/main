@@ -24,7 +24,7 @@ $articlesurl = Yii::t('app', 'articles-url');
                     </h3>
                 </div>
                 <div class="clearfix"></div>
-                <?= Html::a(Yii::t('app', 'Signup Now'), Yii::$app->urlManager->createUrl(['plan']), ['class' => 'btn btn-primary btn-lg']); ?>
+                <?= Html::a(Yii::t('app', 'Signup Now'), Yii::$app->urlManager->createUrl(['register']), ['class' => 'btn btn-primary btn-lg']); ?>
             </div>
             <?php if (!Yii::$app->helper->isMobile()): ?>
                 <div class="fullscreen-bg">
