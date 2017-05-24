@@ -319,4 +319,5 @@ return [
     'wordsvalidations-min' => 'يرجى كتابة 5 كلمات على الأقل',
     'Become a Writer' => 'تسجيل / انشىء حساب',
     'Sign in to your account' => 'تسجيل الدخول',
+    'Article is too short'=>'المقالة قصيرة جدا',
 ];
