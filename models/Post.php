@@ -182,15 +182,7 @@ class Post extends \yii\db\ActiveRecord
                 var_dump($this->cover);
                 $json = json_decode($json,true);
                 var_dump($json);
-
-
-                $this->cover = json_encode([
-                    'type' => 's3',
-                    'image' => $json->key,
-                    'bucket' => $json->bucket,
-                    'width' => $json->width,
-                    'height' => $json->height
-                ]);
+                $this->cover = json_encode($json);
                 var_dump($this->cover);
                 die();
             }
