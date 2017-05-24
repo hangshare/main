@@ -178,6 +178,9 @@ class Post extends \yii\db\ActiveRecord
         $this->type = 0;
         if (isset($_POST['cover']) && $json = $_POST['cover']) {
             if (!empty($json)) {
+
+                var_dump($json);die();
+
                 $json = json_decode($json);
                 $this->cover = json_encode([
                     'type' => 's3',
