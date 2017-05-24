@@ -57,7 +57,7 @@ class Post extends \yii\db\ActiveRecord
             [['cover'], 'string', 'max' => 500],
             [['urlTitle'], 'string', 'max' => 200],
             [['title'], 'string', 'max' => 100],
-            [['body'], 'string', 'min' => 100],
+            [['body'], 'string', 'min' => 500, 'message'=>Yii::t('app','Article is too short')],
             [['lang'], 'string', 'max' => 2],
         ];
     }
