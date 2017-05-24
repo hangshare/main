@@ -179,7 +179,10 @@ class Post extends \yii\db\ActiveRecord
         if (isset($_POST['cover']) && $json = $_POST['cover']) {
             if (!empty($json)) {
 
+                var_dump($this->cover);
                 $json = json_decode($json);
+                var_dump($json);
+                die();
 
                 $this->cover = json_encode([
                     'type' => 's3',
@@ -189,7 +192,7 @@ class Post extends \yii\db\ActiveRecord
                     'height' => $json->height
                 ]);
 
-                var_dump($this->cover);die();
+
             }
         }
     }
