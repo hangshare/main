@@ -178,13 +178,8 @@ class Post extends \yii\db\ActiveRecord
         $this->type = 0;
         if (isset($_POST['cover']) && $json = $_POST['cover']) {
             if (!empty($json)) {
-
-                var_dump($this->cover);
                 $json = json_decode($json,true);
-                var_dump($json);
                 $this->cover = json_encode($json);
-                var_dump($this->cover);
-                die();
             }
         }
     }
