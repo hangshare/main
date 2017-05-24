@@ -369,7 +369,7 @@ $(function () {
 
     $(document).on('click', '#main-post', function (e) {
         $('#cover_error').hide();
-        if ($("#cover_input").val() === "" || $("#covercheck").val() === "") {
+        if ($("#cover_input").val() === "") {
             e.preventDefault();
             var body = $("html, body");
             body.stop().animate({scrollTop: 0}, '500', 'swing', function () {
