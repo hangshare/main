@@ -180,7 +180,7 @@ class Post extends \yii\db\ActiveRecord
             if (!empty($json)) {
 
                 $json = json_decode($json);
-                var_dump($json);die();
+
                 $this->cover = json_encode([
                     'type' => 's3',
                     'image' => $json->key,
@@ -188,6 +188,8 @@ class Post extends \yii\db\ActiveRecord
                     'width' => $json->width,
                     'height' => $json->height
                 ]);
+
+                var_dump($this->cover);die();
             }
         }
     }
