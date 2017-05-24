@@ -180,7 +180,7 @@ class Post extends \yii\db\ActiveRecord
             if (!empty($json)) {
 
                 var_dump($this->cover);
-                $json = json_decode($json);
+                $json = json_decode($json,true);
                 var_dump($json);
                 die();
 
