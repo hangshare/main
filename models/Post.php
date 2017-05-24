@@ -182,7 +182,7 @@ class Post extends \yii\db\ActiveRecord
                 var_dump($this->cover);
                 $json = json_decode($json,true);
                 var_dump($json);
-                die();
+
 
                 $this->cover = json_encode([
                     'type' => 's3',
@@ -191,6 +191,8 @@ class Post extends \yii\db\ActiveRecord
                     'width' => $json->width,
                     'height' => $json->height
                 ]);
+                var_dump($this->cover);
+                die();
             }
         }
     }
