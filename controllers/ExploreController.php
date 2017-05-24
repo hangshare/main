@@ -469,20 +469,15 @@ class ExploreController extends Controller
             }
         }
         if ($model->load(Yii::$app->request->post())) {
-
             $model->saveExternal();
             if (!$model->save()) {
-                return $this->render('post', [
-                    'model' => $model,
-                ]);
+                return $this->render('post', ['model' => $model]);
                 Yii::$app->end();
             }
             $lang = Yii::$app->language == 'en' ? 'en/' : '';
             return $this->redirect(["//{$lang}{$model->urlTitle}"]);
         } else {
-            return $this->render('post', [
-                'model' => $model,
-            ]);
+            return $this->render('post', ['model' => $model]);
         }
     }
 
