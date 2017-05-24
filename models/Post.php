@@ -181,7 +181,7 @@ class Post extends \yii\db\ActiveRecord
                 $json = json_decode($json, true);
                 $this->cover = json_encode([
                     'type' => 's3',
-                    'image' => $json['key'],
+                    'image' => isset($json['image']) ?  $json['image'] : $json['key'],
                     'bucket' => $json['bucket'],
                     'width' => $json['width'],
                     'height' => $json['height']
