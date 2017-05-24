@@ -191,8 +191,6 @@ class Post extends \yii\db\ActiveRecord
                     'width' => $json->width,
                     'height' => $json->height
                 ]);
-
-
             }
         }
     }
