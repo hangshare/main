@@ -469,9 +469,7 @@ class ExploreController extends Controller
             }
         }
         if ($model->load(Yii::$app->request->post())) {
-            if (!empty($model->ylink)) {
-                //$model->type = 1;
-            }
+
             $model->saveExternal();
             if (!$model->save()) {
                 return $this->render('post', [
