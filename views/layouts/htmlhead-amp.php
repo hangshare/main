@@ -33,6 +33,11 @@ $canonical = str_replace('amp/', '', "https://{$host}{$uri}");
         }
         <?php endif; ?>
         p,a,span{font-size: 16px}
+
+
+
+
+
     </style>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
