@@ -8,7 +8,7 @@
         <amp-fit-text>
             <h1><?= $model->title ?></h1>
             <?php
-            $mo = 'mob-amp' . time();
+            $mo = 'mob-amp';
             $bodys = Yii::$app->cache->get($mo . '-post-body-' . $model->id);
             if ($bodys == false) {
                 $bodys = '';
