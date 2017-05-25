@@ -13,7 +13,8 @@ $canonical = str_replace('amp/', '', "https://{$host}{$uri}");
 <html amp lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
-    <link rel="canonical" href="__CANONICAL_URL__">
+    <link rel="canonical" href="<?= $canonical ?>">
+    <link rel="amphtml" href="<?= "https://{$host}{$uri}" ?>">
     <meta name="viewport"
           content="width=device-width,minimum-scale=1,initial-scale=1">
     <style>body {
