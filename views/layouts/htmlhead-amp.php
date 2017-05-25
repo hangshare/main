@@ -14,28 +14,29 @@ $canonical = str_replace('amp/', '', "https://{$host}{$uri}");
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <link rel="canonical" href="<?= $canonical ?>">
-    <link rel="amphtml" href="<?= "https://{$host}{$uri}" ?>">
     <meta name="viewport"
           content="width=device-width,minimum-scale=1,initial-scale=1">
-    <style>body {
+    <style>
+        body {
             opacity: 0
         }</style>
     <noscript>
         <style>body {
                 opacity: 1
-            }</style>
+            }
+        </style>
     </noscript>
     <style amp-custom>
         <?php if(Yii::$app->language == 'ar') : ?>
-        h1,h2,h3,h4,h5,o,a,span{
+        h1, h2, h3, h4, h5, o, a, span {
             text-align: right;
             direction: rtl;
         }
+
         <?php endif; ?>
-        p,a,span{font-size: 16px}
-
-
-
+        p, a, span {
+            font-size: 18px
+        }
 
 
     </style>
