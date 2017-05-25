@@ -116,6 +116,7 @@ $config = [
                 '<language:en>/<controller>/<action>' => '<controller>/<action>',
                 '<language:en>/<controller>/<action>/<id:\d+>' => '<controller>/<action>',
                 '<language:en>/<slug:.*?>' => 'explore/view',
+                '<language:en>/amp/<slug:.*?>' => 'amp/view',
 
                 '/' => 'site/index',
                 'مواضيع' => 'explore/all',
@@ -156,7 +157,9 @@ $config = [
                 'request-password-reset' => 'site/reset',
                 'reset-password' => 'site/resetpassword',
                 'sitemap.xml' => 'site/sitemapxml',
+                'amp/<slug:.*?>' => 'amp/view',
                 '<slug:.*?>' => 'explore/view',
+
 
             ],
         ],
