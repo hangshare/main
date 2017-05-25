@@ -23,6 +23,9 @@ $canonical = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="<?= $this->description ?>"/>
+
+    <?php if ($this->amp) : ?>
+        <link rel="amphtml" href="<?= $this->amp ?>" /> <?php endif; ?>
     <?= Html::csrfMetaTags() ?>
     <!-- Facebook meta tags -->
     <meta property="og:title" content="<?= Html::encode($this->title) ?>"/>
