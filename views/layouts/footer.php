@@ -43,5 +43,14 @@ use yii\helpers\Html;
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-591e3640803701e5"></script>
 <?php endif; ?>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6288640194310142",
+        enable_page_level_ads: true
+    });
+</script>
+
 </body>
 </html>
