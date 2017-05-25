@@ -5,18 +5,20 @@ use app\models\Tags;
 use yii\helpers\Html;
 use yii\widgets\ListView;
 
-$this->title = $model->title;
-$bodys = '';
-foreach ($model->postBodies as $data) {
-    $bodys .= $data->body;
-}
-$this->description = Yii::$app->helper->metabody($bodys);
-if (empty($this->description)) {
-    $this->description = $this->title;
-}
+if (isset($model)) {
+    $this->title = $model->title;
+    $bodys = '';
+    foreach ($model->postBodies as $data) {
+        $bodys .= $data->body;
+    }
 
-$this->description = Yii::t('app', 'description.deleted');
+    $this->description = Yii::$app->helper->metabody($bodys);
+    if (empty($this->description)) {
+        $this->description = $this->title;
+    }
 
+    $this->description = Yii::t('app', 'description.deleted');
+}
 ?>
 <div class="container m-t-25">
     <div class="row">

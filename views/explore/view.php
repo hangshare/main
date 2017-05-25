@@ -9,6 +9,12 @@ if (Yii::$app->language == 'en') {
 } else {
     $ua = '//مواضيع';
 }
+$lang = Yii::$app->language == 'en' ? 'en/' : '';
+$host = $_SERVER['HTTP_HOST'];
+$uri = $_SERVER['REQUEST_URI'];
+
+
+$this->amp = "https://www.hangshare.com/{$lang}amp/{$model->urlTitle}/";
 
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('app', 'articles-url'),
@@ -107,6 +113,16 @@ $this->params['breadcrumbs'][] = [
                             </div>
 
                             <div class="row">
+                                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                <ins class="adsbygoogle"
+                                     style="display:block"
+                                     data-ad-format="autorelaxed"
+                                     data-ad-client="ca-pub-6288640194310142"
+                                     data-ad-slot="7444834517"></ins>
+                                <script>
+                                    (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+
                                 <div class="col-md-12 m-t-25">
                                     <h3 class="underlined"><?= Yii::t('app', 'Comments') ?></h3>
                                     <?php echo $this->render('//explore/_commentform', ['id' => $model->id]); ?>
@@ -239,6 +255,8 @@ endif; ?>
     }
   }
 }
+
+
 
 
 
