@@ -5,29 +5,25 @@
             data-ad-slot="6189074110">
     </amp-ad>
     <article>
-        <amp-fit-text>
-            <h1><?= $model->title ?></h1>
-            <?php
-            $mo = 'mob-amp';
-            $bodys = Yii::$app->cache->get($mo . '-post-body-' . $model->id);
-            if ($bodys == false) {
-                $bodys = '';
-                foreach ($model->postBodies as $data) {
-                    $bodys .= $data->body;
-                }
-                $bodys = Yii::$app->helper->replaceLinks($bodys);
-
-                $bodys = ampify($bodys);
-
-
-                Yii::$app->cache->set($mo . '-post-body-' . $model->id, $bodys, 3000);
+        <h1><?= $model->title ?></h1>
+        <?php
+        $mo = 'mob-amp';
+        $bodys = Yii::$app->cache->get($mo . '-post-body-' . $model->id);
+        if ($bodys == false) {
+            $bodys = '';
+            foreach ($model->postBodies as $data) {
+                $bodys .= $data->body;
             }
-            echo $bodys;
-            ?>
-        </amp-fit-text>
+            $bodys = Yii::$app->helper->replaceLinks($bodys);
+
+            $bodys = ampify($bodys);
+
+
+            Yii::$app->cache->set($mo . '-post-body-' . $model->id, $bodys, 3000);
+        }
+        echo $bodys;
+        ?>
     </article>
-
-
 <?php
 
 function ampify($html = '')
