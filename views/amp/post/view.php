@@ -13,13 +13,21 @@ if ($bodys == false) {
         $bodys .= $data->body;
     }
     $bodys = Yii::$app->helper->replaceLinks($bodys);
-
+    $bodys = strip_tags($bodys);
     $bodys = ampify($bodys);
-
-
     Yii::$app->cache->set($mo . '-post-body-' . $model->id, $bodys, 3000);
 }
 echo $bodys;
+
+
+//<amp-youtube width="480"
+//  height="270"
+//  layout="responsive"
+//  data-videoid="lBTCB7yLs8Y"
+//  autoplay>
+//</amp-youtube>
+
+
 ?>
 
 <?php
