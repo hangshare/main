@@ -13,7 +13,7 @@ if ($bodys == false) {
         $bodys .= $data->body;
     }
     $bodys = Yii::$app->helper->replaceLinks($bodys);
-    $bodys = strip_tags($bodys);
+    $bodys = preg_replace("/<([a-z][a-z0-9]*)(?:[^>]*(\ssrc=['\"][^'\"]*['\"]))?[^>]*?(\/?)>/i",'<$1$2$3>', $bodys);
     $bodys = ampify($bodys);
     Yii::$app->cache->set($mo . '-post-body-' . $model->id, $bodys, 3000);
 }
