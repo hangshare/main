@@ -5,7 +5,7 @@
 </amp-ad>
 <h1><?= $model->title ?></h1>
 <?php
-$mo = 'mob-amp';
+$mo = 'mob-amp' . time();
 $bodys = Yii::$app->cache->get($mo . '-post-body-' . $model->id);
 if ($bodys == false) {
     $bodys = '';
