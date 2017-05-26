@@ -16,16 +16,6 @@ $canonical = str_replace('amp/', '', "https://{$host}{$uri}");
     <link rel="canonical" href="<?= $canonical ?>">
     <meta name="viewport"
           content="width=device-width,minimum-scale=1,initial-scale=1">
-    <style>
-        body {
-            opacity: 0
-        }</style>
-    <noscript>
-        <style>body {
-                opacity: 1
-            }
-        </style>
-    </noscript>
     <style amp-custom>
         <?php if(Yii::$app->language == 'ar') : ?>
         h1, h2, h3, h4, h5, o, a, span {
