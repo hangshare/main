@@ -36,4 +36,4 @@ $canonical = str_replace('amp/', '', "https://{$host}{$uri}");
 <?php foreach (Yii::$app->session->getAllFlashes() as $message):; ?>
     <?php //$message['message']; ?>
 <?php endforeach; ?>
-<?php $this->beginBody() ?>
+<?php //$this->beginBody() ?>
