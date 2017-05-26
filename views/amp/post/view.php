@@ -13,8 +13,7 @@ if ($bodys == false) {
         $bodys .= $data->body;
     }
     $bodys = Yii::$app->helper->replaceLinks($bodys);
-    $bodys = "/(?si)\\s*<img\\b(?>(?!src=).)*?\\/>\\s*/";
-    $result = preg_replace($re, "", $bodys);
+    $bodys = preg_replace('/((\S)+\s*(=)\s*)(\")(\S+(?<!=.))(\")/', '$1$5', $bodys);
     $bodys = ampify($bodys);
     Yii::$app->cache->set($mo . '-post-body-' . $model->id, $bodys, 3000);
 }
