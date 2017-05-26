@@ -4,35 +4,29 @@
         data-ad-slot="6189074110">
 </amp-ad>
 <h1><?= $model->title ?></h1>
+
 <?php
-$mo = 'mobamp';
+
+echo $this->render('//amp/post/_external', ['data' => $model]);
+?>
+<?php
+$mo = 'mobamp' . time();
 $bodys = Yii::$app->cache->get($mo . '-post-body-' . $model->id);
 if ($bodys == false) {
     $bodys = '';
     foreach ($model->postBodies as $data) {
-        $bodys .= $data->body;
+        $bodys = $data->body;
+
     }
     $bodys = Yii::$app->helper->replaceLinks($bodys);
-
-
     $bodys = preg_replace('/(<[^>]*) style=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
     $bodys = preg_replace('/(<[^>]*) rel=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
     $bodys = preg_replace('/(<[^>]*) class=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
     $bodys = preg_replace('/(<[^>]*) target=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
-
     $bodys = ampify($bodys);
     Yii::$app->cache->set($mo . '-post-body-' . $model->id, $bodys, 3000);
 }
 echo $bodys;
-
-
-//<amp-youtube width="480"
-//  height="270"
-//  layout="responsive"
-//  data-videoid="lBTCB7yLs8Y"
-//  autoplay>
-//</amp-youtube>
-
 
 ?>
 
@@ -42,7 +36,7 @@ function ampify($html = '')
     # Replace img, audio, and video elements with amp custom elements
     $html = str_ireplace(
         ['<img', '<video', '/video>', '<audio', '/audio>', '<iframe', '/iframe>'],
-        ['<amp-img', '<amp-video', '/amp-video>', '<amp-audio', '/amp-audio>', '<amp-iframe', '/amp-iframe>'],
+        ['<amp-img', '<amp-video', '/amp-video>', '<amp-audio', '/amp-audio>', '<amp-youtube', '/amp-youtube>'],
         $html
     );
     # Add closing tags to amp-img custom element
