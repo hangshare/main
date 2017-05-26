@@ -1,9 +1,4 @@
-<?php use yii\helpers\Html; ?>
-    <amp-ad width=300 height=200 layout="responsive"
-            type="adsense"
-            data-ad-client="ca-pub-6288640194310142"
-            data-ad-slot="6189074110">
-    </amp-ad>
+
     <article>
         <h1><?= $model->title ?></h1>
         <?php
