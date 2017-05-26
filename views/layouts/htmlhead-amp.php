@@ -38,29 +38,11 @@ $canonical = str_replace('amp/', '', "https://{$host}{$uri}");
             font-size: 18px
         }
 
-
     </style>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
     <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
-
-    <amp-analytics type="googleanalytics">
-        <script type="application/json">
-            {
-                "vars": {
-                    "account": "UA-68983967-1"
-                },
-                "triggers": {
-                    "trackPageview": {
-                        "on": "visible",
-                        "request": "pageview"
-                    }
-                }
-            }
-        </script>
-    </amp-analytics>
-
 </head>
 <body>
 <?php foreach (Yii::$app->session->getAllFlashes() as $message):; ?>
