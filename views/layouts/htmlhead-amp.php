@@ -29,12 +29,8 @@ $canonical = str_replace('amp/', '', "https://{$host}{$uri}");
         }
 
     </style>
-
-    <?php
-    $assests = Yii::$app->assetManager;
-    $assests->assetMap[] = "https://cdn.ampproject.org/v0.js";
-    $assests->assetMap[] = "https://cdn.ampproject.org/v0/amp-ad-0.1.js";
-    ?>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 </head>
 <body>
 <?php foreach (Yii::$app->session->getAllFlashes() as $message):; ?>
