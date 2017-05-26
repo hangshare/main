@@ -5,7 +5,7 @@
 </amp-ad>
 <h1><?= $model->title ?></h1>
 <?php
-$mo = 'mob-amp' . time();
+$mo = 'mobamp';
 $bodys = Yii::$app->cache->get($mo . '-post-body-' . $model->id);
 if ($bodys == false) {
     $bodys = '';
@@ -13,9 +13,12 @@ if ($bodys == false) {
         $bodys .= $data->body;
     }
     $bodys = Yii::$app->helper->replaceLinks($bodys);
-    $bodys = preg_replace('/((\S)+\s*(=)\s*)(\")(\S+(?<!=.))(\")/', '$1$5', $bodys);
 
-    $bodys = preg_replace('#(<[a-z ]*)(style=("|\')(.*?)("|\'))([a-z ]*>)#', '\\1\\6', $bodys);
+
+    $bodys = preg_replace('/(<[^>]*) style=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
+    $bodys = preg_replace('/(<[^>]*) rel=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
+    $bodys = preg_replace('/(<[^>]*) class=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
+    $bodys = preg_replace('/(<[^>]*) target=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
 
     $bodys = ampify($bodys);
     Yii::$app->cache->set($mo . '-post-body-' . $model->id, $bodys, 3000);
