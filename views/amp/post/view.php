@@ -14,6 +14,9 @@ if ($bodys == false) {
     }
     $bodys = Yii::$app->helper->replaceLinks($bodys);
     $bodys = preg_replace('/((\S)+\s*(=)\s*)(\")(\S+(?<!=.))(\")/', '$1$5', $bodys);
+
+    $bodys = preg_replace('/<p style="(.+?)">(.+?)<\/p>/i', "<p>$2</p>", $bodys);
+
     $bodys = ampify($bodys);
     Yii::$app->cache->set($mo . '-post-body-' . $model->id, $bodys, 3000);
 }
