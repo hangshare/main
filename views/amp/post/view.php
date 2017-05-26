@@ -1,26 +1,28 @@
-
-    <article>
-        <h1><?= $model->title ?></h1>
-        <?php
-        $mo = 'mob-amp';
-        $bodys = Yii::$app->cache->get($mo . '-post-body-' . $model->id);
-        if ($bodys == false) {
-            $bodys = '';
-            foreach ($model->postBodies as $data) {
-                $bodys .= $data->body;
-            }
-            $bodys = Yii::$app->helper->replaceLinks($bodys);
-
-            $bodys = ampify($bodys);
-
-
-            Yii::$app->cache->set($mo . '-post-body-' . $model->id, $bodys, 3000);
-        }
-        echo $bodys;
-        ?>
-    </article>
+<amp-ad width=300 height=200 layout="responsive"
+        type="adsense"
+        data-ad-client="ca-pub-6288640194310142"
+        data-ad-slot="6189074110">
+</amp-ad>
+<h1><?= $model->title ?></h1>
 <?php
+$mo = 'mob-amp';
+$bodys = Yii::$app->cache->get($mo . '-post-body-' . $model->id);
+if ($bodys == false) {
+    $bodys = '';
+    foreach ($model->postBodies as $data) {
+        $bodys .= $data->body;
+    }
+    $bodys = Yii::$app->helper->replaceLinks($bodys);
 
+    $bodys = ampify($bodys);
+
+
+    Yii::$app->cache->set($mo . '-post-body-' . $model->id, $bodys, 3000);
+}
+echo $bodys;
+?>
+
+<?php
 function ampify($html = '')
 {
     # Replace img, audio, and video elements with amp custom elements
