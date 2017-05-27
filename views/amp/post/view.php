@@ -23,6 +23,8 @@ if ($bodys == false) {
     $bodys = preg_replace('/(<[^>]*) rel=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
     $bodys = preg_replace('/(<[^>]*) class=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
     $bodys = preg_replace('/(<[^>]*) target=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
+    $bodys = preg_replace('/(<[^>]*) width=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
+    $bodys = preg_replace('/(<[^>]*) height=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
     $bodys = ampify($bodys);
     Yii::$app->cache->set($mo . '-post-body-' . $model->id, $bodys, 3000);
 }
@@ -41,7 +43,7 @@ function ampify($html = '')
     );
     # Add closing tags to amp-img custom element
     $html = preg_replace('/<amp-img(.*?)>/', '<amp-img$1 width="300" height="300" layout="responsive"></amp-img>', $html);
-    $html = preg_replace('/<amp-youtube(.*?)>/', '<amp-youtube$1 layout="responsive"></amp-youtube>', $html);
+    $html = preg_replace('/<amp-youtube(.*?)>/', '<amp-youtube$1 width="300" height="300" layout="responsive"></amp-youtube>', $html);
     $html = str_replace('src="//www.youtube.com/embed/', 'data-videoid="', $html);
     $html = str_replace('allowfullscreen=""', '', $html);
     $html = str_replace('frameborder="0"', '', $html);
