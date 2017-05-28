@@ -39,8 +39,8 @@ function ampify($html = '')
 {
     # Replace img, audio, and video elements with amp custom elements
     $html = str_ireplace(
-        ['<img', '<video', '/video>', '<audio', '/audio>', '<iframe'],
-        ['<amp-img', '<amp-video', '/amp-video>', '<amp-audio', '/amp-audio>', '<amp-youtube'],
+        ['<img', '<audio', '/audio>', '<iframe'],
+        ['<amp-img', '<amp-audio', '/amp-audio>', '<amp-youtube'],
         $html
     );
     # Add closing tags to amp-img custom element
