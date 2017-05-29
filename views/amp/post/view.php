@@ -27,6 +27,8 @@ if ($bodys == false) {
     $bodys = preg_replace('/(<[^>]*) height=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
     $bodys = preg_replace('/(<[^>]*) contenteditable=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
     $bodys = preg_replace('/(<[^>]*) border=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
+    $bodys = preg_replace('/(<[^>]*) layout=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
+    $bodys = preg_replace('/(<[^>]*) size=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
 
     $bodys = ampify($bodys);
     Yii::$app->cache->set($mo . '-post-body-' . $model->id, $bodys, 3000);
