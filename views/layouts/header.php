@@ -40,7 +40,7 @@ if ($mainMenu == false) {
                 ">
             <div class="container">
                 <div class="adshead"
-                     style="<?php if (Yii::$app->helper->isMobile()): ?> padding:50px 20px 20px; <?php else : ?> padding:10px; <?php endif; ?> width:100%; z-index: 10000; height:auto;min-height: 200px;">
+                     style="<?php if (Yii::$app->helper->isMobile()): ?> padding:50px 20px 20px; <?php else : ?> padding:10px 0; <?php endif; ?> width:100%; z-index: 10000; height:auto;min-height: 200px;">
                     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                     <ins class="adsbygoogle"
                          style="display:block"
