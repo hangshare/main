@@ -30,6 +30,8 @@ if ($bodys == false) {
     $bodys = preg_replace('/(<[^>]*) layout=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
     $bodys = preg_replace('/(<[^>]*) size=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
 
+    $bodys = str_replace('=""', '', $bodys);
+
     $bodys = ampify($bodys);
     Yii::$app->cache->set($mo . '-post-body-' . $model->id, $bodys, 3000);
 }
