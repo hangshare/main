@@ -54,5 +54,6 @@ function ampify($html = '')
     $html = str_replace('frameborder="0"', '', $html);
     # Whitelist of HTML tags allowed by AMP
     $html = strip_tags($html, '<h1><h2><h3><h4><h5><h6><a><p><ul><ol><li><blockquote><q><cite><ins><del><strong><em><code><pre><svg><table><thead><tbody><tfoot><th><tr><td><dl><dt><dd><article><section><header><footer><aside><figure><time><abbr><div><span><hr><small><br><amp-img><amp-audio><amp-video><amp-ad><amp-anim><amp-carousel><amp-fit-rext><amp-image-lightbox><amp-instagram><amp-lightbox><amp-twitter><amp-youtube>');
+    $html = preg_replace('/(<[^>]*) target=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $html);
     return $html;
 }
