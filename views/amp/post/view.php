@@ -19,6 +19,7 @@ if ($bodys == false) {
 
     }
     $bodys = Yii::$app->helper->replaceLinks($bodys);
+    $bodys = Yii::$app->helper->clearHtml($bodys);
     $bodys = preg_replace('/(<[^>]*) style=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
     $bodys = preg_replace('/(<[^>]*) rel=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
     $bodys = preg_replace('/(<[^>]*) class=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
