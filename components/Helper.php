@@ -64,13 +64,13 @@ class Helper extends Component
 
     public function metabody($bodyText)
     {
-        $bodyText = preg_replace("/&#?[a-z0-9]+;/i","", $bodyText);
+        $bodyText = preg_replace("/&#?[a-z0-9]+;/i", "", $bodyText);
         $bodyText = strip_tags($bodyText);
-        $bodyText = str_replace('(adsbygoogle = window.adsbygoogle || []).push({});',' ',$bodyText);
+        $bodyText = str_replace('(adsbygoogle = window.adsbygoogle || []).push({});', ' ', $bodyText);
         $bodyText = preg_replace('/\s*\n\s*/', "\n", $bodyText);
         $bodyText = preg_replace('/[    ]+/', ' ', $bodyText);
         $regex = "@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?).*$)@";
-        $bodyText= preg_replace($regex, ' ', $bodyText);
+        $bodyText = preg_replace($regex, ' ', $bodyText);
 
         return trim(substr($bodyText, 0, 200));
     }
@@ -117,6 +117,21 @@ class Helper extends Component
             }
         }
         return $vid_id;
+    }
+
+    public function clearHtml($text)
+    {
+        $content = str_replace('=""', '', $text);
+        $content = preg_replace("/&#?[a-z0-9]{2,8};/i", "", $content);
+
+
+
+
+        $content = str_replace('&nbsp;', '', $content);
+        $content = str_replace('<span></span>', '', $text);
+
+
+        return $content;
     }
 
     public function replaceLinks($text)
