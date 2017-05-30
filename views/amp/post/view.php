@@ -18,18 +18,9 @@ if ($bodys == false) {
         $bodys = $data->body;
 
     }
-    $bodys = Yii::$app->helper->replaceLinks($bodys);
     $bodys = Yii::$app->helper->clearHtml($bodys);
-    $bodys = preg_replace('/(<[^>]*) style=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
-    $bodys = preg_replace('/(<[^>]*) rel=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
-    $bodys = preg_replace('/(<[^>]*) class=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
-    $bodys = preg_replace('/(<[^>]*) target=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
-    $bodys = preg_replace('/(<[^>]*) width=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
-    $bodys = preg_replace('/(<[^>]*) height=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
-    $bodys = preg_replace('/(<[^>]*) contenteditable=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
-    $bodys = preg_replace('/(<[^>]*) border=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
-    $bodys = preg_replace('/(<[^>]*) layout=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
-    $bodys = preg_replace('/(<[^>]*) size=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $bodys);
+    $bodys = Yii::$app->helper->replaceLinks($bodys);
+
 
     $bodys = str_replace('=""', '', $bodys);
 
