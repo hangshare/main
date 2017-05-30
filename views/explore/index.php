@@ -37,20 +37,6 @@ $this->ogImage = 'http://assets.boredpanda.com/blog/wp-content/themes/boredpanda
 
 ?>
 <div class="container m-t-25">
-    <div class="row">
-        <?php if (Yii::$app->helper->isMobile()) : ?>
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- left right responsive categery -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-6288640194310142"
-                 data-ad-slot="8394999319"
-                 data-ad-format="auto"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        <?php endif ?>
-    </div>
     <div class="col-md-9">
         <div class="row">
             <h1 class="normal"><?= !isset($cat) || empty($cat['title']) ? ucfirst(Yii::t('app', 'articles-url')) : $cat['title'] ?></h1>
