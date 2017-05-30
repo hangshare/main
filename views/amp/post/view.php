@@ -28,8 +28,14 @@ if ($bodys == false) {
     Yii::$app->cache->set($mo . '-post-body-' . $model->id, $bodys, 3000);
 }
 echo $bodys;
-
 ?>
+
+<amp-ad width=300 height=200 layout="responsive"
+        type="adsense"
+        data-ad-client="ca-pub-6288640194310142"
+        data-ad-slot="8394999319">
+</amp-ad>
+
 
 <?php
 function ampify($html = '')
