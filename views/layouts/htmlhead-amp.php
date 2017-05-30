@@ -18,7 +18,7 @@ $canonical = str_replace('amp/', '', "https://{$host}{$uri}");
           content="width=device-width,minimum-scale=1,initial-scale=1">
     <style amp-custom>
         <?php if(Yii::$app->language == 'ar') : ?>
-        h1, h2, h3, h4, h5, o, a, span {
+        h1, h2, h3, h4, h5, o, a, span,p {
             text-align: right;
             direction: rtl;
         }
