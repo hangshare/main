@@ -119,18 +119,21 @@ class Helper extends Component
         return $vid_id;
     }
 
-    public function clearHtml($text)
+    public function clearHtml($html)
     {
-        $content = str_replace('=""', '', $text);
-        $content = preg_replace("/&#?[a-z0-9]{2,8};/i", "", $content);
-
-
-
-
+        $dom = new \DOMDocument;
+        $internalErrors = libxml_use_internal_errors(true);
+        $dom->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+        libxml_use_internal_errors($internalErrors);
+        $xpath = new \DOMXPath($dom);
+        $nodes = $xpath->query('//@*');
+        foreach ($nodes as $node) {
+            if ($node->nodeName != 'href')
+                $node->parentNode->removeAttribute($node->nodeName);
+        }
+        $content = $dom->saveHTML();
         $content = str_replace('&nbsp;', '', $content);
-        $content = str_replace('<span></span>', '', $text);
-
-
+        $content = str_replace('<span></span>', '', $content);
         return $content;
     }
 
@@ -142,7 +145,7 @@ class Helper extends Component
 
         for ($mh_count = 0; $mh_count < count($mh_matches[0]); $mh_count++) {
             $mh_old_url = $mh_matches[0][$mh_count];
-            $mh_new_url = str_replace('">', '" target="_blank" rel="nofollow">', $mh_matches[0][$mh_count]);
+            $mh_new_url = str_replace('">', '" target="_blank">', $mh_matches[0][$mh_count]);
             $mh_ignore = array(
                 'hangshare.com/'
             );
