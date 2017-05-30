@@ -128,7 +128,7 @@ class Helper extends Component
         $xpath = new \DOMXPath($dom);
         $nodes = $xpath->query('//@*');
         foreach ($nodes as $node) {
-            if ($node->nodeName != 'href' || $node->nodeName != 'src')
+            if ($node->nodeName != 'href' && $node->nodeName != 'src')
                 $node->parentNode->removeAttribute($node->nodeName);
         }
         $content = $dom->saveHTML();
