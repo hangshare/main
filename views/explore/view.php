@@ -90,6 +90,15 @@ $this->params['breadcrumbs'][] = [
                             ?>
 
 
+
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <span style="font-weight: bold; font-size: 18px; margin-top: 30px; display: block"><?= Yii::t('app', 'Share this Article') ?></span>
+                                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                                    <div class="addthis_inline_share_toolbox"></div>
+                                </div>
+                            </div>
                             <div id="POSTQUARE_WIDGET_111744"></div>
                             <script data-cfasync="false">
                                 (function(P,o,s,t,Q,r,e){P['PostquareObject']=Q;P[Q]=P[Q]||function(){ (P[Q].q=P[Q].q||[]).push(arguments)},P[Q].l=1*new Date();r=o.createElement(s), e=o.getElementsByTagName(s)[0];r.async=1;r.src=t;e.parentNode.insertBefore(r,e) })(window,document,'script','//widget.engageya.com/_pos_loader.js','__posWidget');
@@ -100,15 +109,6 @@ $this->params['breadcrumbs'][] = [
                                 (function(P,o,s,t,Q,r,e){P['PostquareObject']=Q;P[Q]=P[Q]||function(){ (P[Q].q=P[Q].q||[]).push(arguments)},P[Q].l=1*new Date();r=o.createElement(s), e=o.getElementsByTagName(s)[0];r.async=1;r.src=t;e.parentNode.insertBefore(r,e) })(window,document,'script','//widget.engageya.com/_pos_loader.js','__posWidget');
                                 __posWidget('createWidget',{wwei:'POSTQUARE_WIDGET_111941',pubid:170268,webid:162789,wid:111941,on:'postquare'});
                             </script>
-
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <span style="font-weight: bold; font-size: 18px; margin-top: 30px; display: block"><?= Yii::t('app', 'Share this Article') ?></span>
-                                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                                    <div class="addthis_inline_share_toolbox"></div>
-                                </div>
-                            </div>
-
                             <?php if (Yii::$app->helper->isMobile()): ?>
                                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                                 <!-- MPU - Post page right Upper  -->
