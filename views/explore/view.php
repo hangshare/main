@@ -51,6 +51,28 @@ $this->params['breadcrumbs'][] = [
                     </ul>
                     <div class="post-body">
                         <div class="chebody">
+
+                            <div id="POSTQUARE_WIDGET_111941"></div>
+                            <script data-cfasync="false">
+                                (function (P, o, s, t, Q, r, e) {
+                                    P['PostquareObject'] = Q;
+                                    P[Q] = P[Q] || function () {
+                                            (P[Q].q = P[Q].q || []).push(arguments)
+                                        }, P[Q].l = 1 * new Date();
+                                    r = o.createElement(s), e = o.getElementsByTagName(s)[0];
+                                    r.async = 1;
+                                    r.src = t;
+                                    e.parentNode.insertBefore(r, e)
+                                })(window, document, 'script', '//widget.engageya.com/_pos_loader.js', '__posWidget');
+                                __posWidget('createWidget', {
+                                    wwei: 'POSTQUARE_WIDGET_111941',
+                                    pubid: 170268,
+                                    webid: 162789,
+                                    wid: 111941,
+                                    on: 'postquare'
+                                });
+                            </script>
+
                             <?php
                             if ($model->type) {
                                 echo $this->render('//explore/_external', ['data' => $model]);
@@ -88,28 +110,6 @@ $this->params['breadcrumbs'][] = [
                             }
                             echo $bodys;
                             ?>
-
-
-                            <div id="POSTQUARE_WIDGET_111941"></div>
-                            <script data-cfasync="false">
-                                (function (P, o, s, t, Q, r, e) {
-                                    P['PostquareObject'] = Q;
-                                    P[Q] = P[Q] || function () {
-                                            (P[Q].q = P[Q].q || []).push(arguments)
-                                        }, P[Q].l = 1 * new Date();
-                                    r = o.createElement(s), e = o.getElementsByTagName(s)[0];
-                                    r.async = 1;
-                                    r.src = t;
-                                    e.parentNode.insertBefore(r, e)
-                                })(window, document, 'script', '//widget.engageya.com/_pos_loader.js', '__posWidget');
-                                __posWidget('createWidget', {
-                                    wwei: 'POSTQUARE_WIDGET_111941',
-                                    pubid: 170268,
-                                    webid: 162789,
-                                    wid: 111941,
-                                    on: 'postquare'
-                                });
-                            </script>
 
                             <div class="row">
                                 <div class="col-xs-12">
@@ -172,6 +172,7 @@ $this->params['breadcrumbs'][] = [
         </div>
         <?php if (!Yii::$app->helper->isMobile()): ?>
             <div class="col-md-3">
+
                 <div class="m-t-8">
                     <div class="pull-left adsmargin">
                         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -184,6 +185,28 @@ $this->params['breadcrumbs'][] = [
                             (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
                     </div>
+
+                    <div id="POSTQUARE_WIDGET_111941"></div>
+                    <script data-cfasync="false">
+                        (function (P, o, s, t, Q, r, e) {
+                            P['PostquareObject'] = Q;
+                            P[Q] = P[Q] || function () {
+                                    (P[Q].q = P[Q].q || []).push(arguments)
+                                }, P[Q].l = 1 * new Date();
+                            r = o.createElement(s), e = o.getElementsByTagName(s)[0];
+                            r.async = 1;
+                            r.src = t;
+                            e.parentNode.insertBefore(r, e)
+                        })(window, document, 'script', '//widget.engageya.com/_pos_loader.js', '__posWidget');
+                        __posWidget('createWidget', {
+                            wwei: 'POSTQUARE_WIDGET_111941',
+                            pubid: 170268,
+                            webid: 162789,
+                            wid: 111941,
+                            on: 'postquare'
+                        });
+                    </script>
+
                     <div id="hot-posts" data-id="<?= $model->id; ?>">
                         <h3 class="underlined"><?= Yii::t('app', 'Whats Hot') ?></h3>
                     </div>
