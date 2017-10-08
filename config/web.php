@@ -2,7 +2,7 @@
 $params = require(__DIR__ . '/params.php');
 
 $config = [
-    'id' => 'hangshare-live',
+    'id' => 'TheDr-live',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log', 'init'],
     'language' => 'ar',
@@ -169,9 +169,9 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\MemCache',
             'servers' => [
-                ['host' => YII_DEBUG ? 'localhost' : 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com',
+                ['host' => YII_DEBUG ? 'localhost' : 'microcache.jhis0g.cfg.use1.cache.amazonaws.com',
                     'port' => 11211, 'weight' => 60],
-                ['host' => YII_DEBUG ? 'localhost' : 'hangshare.jhis0g.cfg.use1.cache.amazonaws.com',
+                ['host' => YII_DEBUG ? 'localhost' : 'microcache.jhis0g.cfg.use1.cache.amazonaws.com',
                     'port' => 11211, 'weight' => 40],
             ],
         ],
