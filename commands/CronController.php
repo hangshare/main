@@ -73,7 +73,7 @@ class CronController extends Controller
     public function actionCounter()
     {
         $memcached = new \Memcache();
-        $memcached->addserver('hangshare.jhis0g.cfg.use1.cache.amazonaws.com');
+        $memcached->addserver('microcache.jhis0g.cfg.use1.cache.amazonaws.com');
         $results = $memcached->get('hang_mem_views');
         $memcached->delete('hang_mem_views');
         var_dump($results);
