@@ -136,7 +136,7 @@ class Hitcounter extends Component
             return false;
         }
         $memcached = new \Memcache();
-        $memcached->addserver('hangshare.jhis0g.cfg.use1.cache.amazonaws.com');
+        $memcached->addserver('microcache.jhis0g.cfg.use1.cache.amazonaws.com');
         $res = $memcached->get('hang_mem_views');
 
         $res[$id][$hashId] = [
