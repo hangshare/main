@@ -32,8 +32,10 @@ $canonical = str_replace('amp/', '', "https://{$host}{$uri}");
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
     <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
 </head>
 <body>
+<amp-auto-ads type="adsense" data-ad-client="ca-pub-6288640194310142"></amp-auto-ads>
 <?php foreach (Yii::$app->session->getAllFlashes() as $message):; ?>
     <?php //$message['message']; ?>
 <?php endforeach; ?>
