@@ -100,6 +100,14 @@ $canonical = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         <!-- End Facebook Pixel Code -->
     <?php endif; ?>
 
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6288640194310142",
+            enable_page_level_ads: true
+        });
+    </script>
+
 </head>
 <body>
 <?php foreach (Yii::$app->session->getAllFlashes() as $message):; ?>
