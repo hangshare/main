@@ -422,6 +422,8 @@ class ExploreController extends Controller
     {
         $model = $this->findModel($slug, false);
         if (!isset($model) || $model->deleted == 1) {
+            header("HTTP/1.0 404 Not Found");
+
             $pageSize = 8;
             $query = Post::find();
             $query->orderBy('created_at DESC');
