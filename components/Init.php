@@ -14,14 +14,11 @@ class Init extends Component
     {
         header('X-Frame-Options: DENY');
 
-
-
         if (!Yii::$app->user->isGuest) {
             if (Yii::$app->user->identity->deleted) {
                 if (strpos(Yii::$app->request->url, 'u/suspended') === false)
                     Yii::$app->getResponse()->redirect(['//u/suspended']);
             }
-
 
             if(!isset($cookies['ustme'])){
                 $cookies = Yii::$app->response->cookies;
@@ -30,8 +27,6 @@ class Init extends Component
                     'value' => '1',
                 ]));
             }
-
-
         }
 
         if (strpos(Yii::$app->request->url, 'tag=') !== false) {
@@ -49,7 +44,7 @@ class Init extends Component
         }
 
 
-        $this->language();
+//        $this->language();
 
         if (strpos(Yii::$app->request->url, 'explore/') !== false && strpos(Yii::$app->request->url, 'title') !== false) {
             $id = $this->get_string_between(Yii::$app->request->url, 'id=', '&');
