@@ -92,17 +92,17 @@ class AppAsset extends AssetBundle
 
         $this->js[] = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js';
         $this->css [] = 'css/font-awesome/css/font-awesome.min.css';
+
+        $this->js[] = "Volar_files/wow.min.js";
         $this->js[] = "js/jquery.viewportchecker.min.js";
         $this->js[] = "flot/jquery.flot.min.js";
         $this->js[] = "flot/jquery.flot.pie.min.js";
         $this->js[] = 'js/jq-ui.min.js';
         $this->css [] = "css/animate.min.css";
-        $this->js[] = "Volar_files/wow.min.js";
         $this->css [] = "owl/owl.carousel.min.css";
         $this->css [] = "owl/owl.theme.min.css";
         $this->js[] = "owl/owl.carousel.min.js";
         $this->js[] = YII_DEBUG ? 'js/main.js' : '/js/main.1.2.min.js';
-
         $this->js[] = 'https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js';
     }
 }
